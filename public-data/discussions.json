@@ -1,12 +1,114 @@
 {
  "schema": 1,
  "repo": "hongheting/antifouling-coating-simulator",
- "generated_at": "2026-10-20T13:30:00.000Z",
+ "generated_at": "2026-10-20T18:39:59.827Z",
  "categories": [
-  {"slug": "新技术-new-technology", "name": "新技术 New Technology"},
-  {"slug": "新配方-new-formulation", "name": "新配方 New Formulation"},
-  {"slug": "新工艺-new-process", "name": "新工艺 New Process"}
+  {
+   "slug": "新工艺-new-process",
+   "name": "新工艺 New Process"
+  },
+  {
+   "slug": "新技术-new-technology",
+   "name": "新技术 New Technology"
+  },
+  {
+   "slug": "新配方-new-formulation",
+   "name": "新配方 New Formulation"
+  }
  ],
- "discussions": [],
+ "discussions": [
+  {
+   "id": "D_kwDOVQ6zKs4AqS9F",
+   "number": 4,
+   "title": "香香软软",
+   "url": "https://github.com/hongheting/antifouling-coating-simulator/discussions/4",
+   "createdAt": "2026-10-20T14:23:38Z",
+   "updatedAt": "2026-10-20T14:23:38Z",
+   "body": "> ⚠️ **作者自述，未经验证** — 本帖由作者通过「防污涂料配方模拟器」App 发布，内容未经平台验证。\n\n## 简介\n可以使大型游轮的漆面变成香香软软\n\n## 配方 / 工艺要点\n加入足量的面粉\n\n## 关键数据\n数据性质：**厂家标称**\n\n百分之百的香香软软构成的\n\n## 安全提示\n（作者未填写；请注意杀生物剂、溶剂等的安全与法规要求）\n\n---\n<sub>发布自 防污涂料配方模拟器 App · 模拟 ≠ 实测</sub>",
+   "bodyHTML": "<blockquote>\n<p dir=\"auto\"><g-emoji class=\"g-emoji\" alias=\"warning\">⚠️</g-emoji> <strong>作者自述，未经验证</strong> — 本帖由作者通过「防污涂料配方模拟器」App 发布，内容未经平台验证。</p>\n</blockquote>\n<h2 dir=\"auto\">简介</h2>\n<p dir=\"auto\">可以使大型游轮的漆面变成香香软软</p>\n<h2 dir=\"auto\">配方 / 工艺要点</h2>\n<p dir=\"auto\">加入足量的面粉</p>\n<h2 dir=\"auto\">关键数据</h2>\n<p dir=\"auto\">数据性质：<strong>厂家标称</strong></p>\n<p dir=\"auto\">百分之百的香香软软构成的</p>\n<h2 dir=\"auto\">安全提示</h2>\n<p dir=\"auto\">（作者未填写；请注意杀生物剂、溶剂等的安全与法规要求）</p>\n<hr>\n<p dir=\"auto\"><sub>发布自 防污涂料配方模拟器 App · 模拟 ≠ 实测</sub></p>",
+   "bodyText": "⚠️ 作者自述，未经验证 — 本帖由作者通过「防污涂料配方模拟器」App 发布，内容未经平台验证。\n\n简介\n可以使大型游轮的漆面变成香香软软\n配方 / 工艺要点\n加入足量的面粉\n关键数据\n数据性质：厂家标称\n百分之百的香香软软构成的\n安全提示\n（作者未填写；请注意杀生物剂、溶剂等的安全与法规要求）\n\n发布自 防污涂料配方模拟器 App · 模拟 ≠ 实测",
+   "author": {
+    "login": "Matasea99",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/345377119?v=4"
+   },
+   "category": {
+    "slug": "新技术-new-technology",
+    "name": "新技术 New Technology"
+   },
+   "comments": {
+    "totalCount": 0,
+    "nodes": []
+   }
+  },
+  {
+   "id": "D_kwDOVQ6zKs4AqS85",
+   "number": 3,
+   "title": "测试2",
+   "url": "https://github.com/hongheting/antifouling-coating-simulator/discussions/3",
+   "createdAt": "2026-10-20T14:20:38Z",
+   "updatedAt": "2026-10-20T14:20:38Z",
+   "body": "> **游客投稿 · 昵称：瓜瓜 · 作者自述，未经验证**\n\n## 简介\n2\n\n## 配方 / 工艺要点\n1\n\n## 关键数据\n数据性质：**文献**\n\n（未填写）\n\n## 安全提示\n（作者未填写；请注意杀生物剂、溶剂等的安全与法规要求）\n\n---\n<sub>发布自 防污涂料配方模拟器 App · 模拟 ≠ 实测</sub>",
+   "bodyHTML": "<blockquote>\n<p dir=\"auto\"><strong>游客投稿 · 昵称：瓜瓜 · 作者自述，未经验证</strong></p>\n</blockquote>\n<h2 dir=\"auto\">简介</h2>\n<p dir=\"auto\">2</p>\n<h2 dir=\"auto\">配方 / 工艺要点</h2>\n<p dir=\"auto\">1</p>\n<h2 dir=\"auto\">关键数据</h2>\n<p dir=\"auto\">数据性质：<strong>文献</strong></p>\n<p dir=\"auto\">（未填写）</p>\n<h2 dir=\"auto\">安全提示</h2>\n<p dir=\"auto\">（作者未填写；请注意杀生物剂、溶剂等的安全与法规要求）</p>\n<hr>\n<p dir=\"auto\"><sub>发布自 防污涂料配方模拟器 App · 模拟 ≠ 实测</sub></p>",
+   "bodyText": "游客投稿 · 昵称：瓜瓜 · 作者自述，未经验证\n\n简介\n2\n配方 / 工艺要点\n1\n关键数据\n数据性质：文献\n（未填写）\n安全提示\n（作者未填写；请注意杀生物剂、溶剂等的安全与法规要求）\n\n发布自 防污涂料配方模拟器 App · 模拟 ≠ 实测",
+   "author": {
+    "login": "hongheting",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/41506185?u=f85c54ed6bae0f129462db5632dbe69eae3d6fd2&v=4"
+   },
+   "category": {
+    "slug": "新技术-new-technology",
+    "name": "新技术 New Technology"
+   },
+   "comments": {
+    "totalCount": 0,
+    "nodes": []
+   }
+  },
+  {
+   "id": "D_kwDOVQ6zKs4AqS65",
+   "number": 2,
+   "title": "红美妞",
+   "url": "https://github.com/hongheting/antifouling-coating-simulator/discussions/2",
+   "createdAt": "2026-10-20T14:00:57Z",
+   "updatedAt": "2026-10-20T14:00:57Z",
+   "body": "> ⚠️ **作者自述，未经验证** — 本帖由作者通过「防污涂料配方模拟器」App 发布，内容未经平台验证。\n\n## 简介\n红美妞\n\n## 配方 / 工艺要点\n红美妞\n\n## 关键数据\n数据性质：**未注明**\n\n（未填写）\n\n## 安全提示\n（作者未填写；请注意杀生物剂、溶剂等的安全与法规要求）\n\n---\n<sub>发布自 防污涂料配方模拟器 App · 模拟 ≠ 实测</sub>",
+   "bodyHTML": "<blockquote>\n<p dir=\"auto\"><g-emoji class=\"g-emoji\" alias=\"warning\">⚠️</g-emoji> <strong>作者自述，未经验证</strong> — 本帖由作者通过「防污涂料配方模拟器」App 发布，内容未经平台验证。</p>\n</blockquote>\n<h2 dir=\"auto\">简介</h2>\n<p dir=\"auto\">红美妞</p>\n<h2 dir=\"auto\">配方 / 工艺要点</h2>\n<p dir=\"auto\">红美妞</p>\n<h2 dir=\"auto\">关键数据</h2>\n<p dir=\"auto\">数据性质：<strong>未注明</strong></p>\n<p dir=\"auto\">（未填写）</p>\n<h2 dir=\"auto\">安全提示</h2>\n<p dir=\"auto\">（作者未填写；请注意杀生物剂、溶剂等的安全与法规要求）</p>\n<hr>\n<p dir=\"auto\"><sub>发布自 防污涂料配方模拟器 App · 模拟 ≠ 实测</sub></p>",
+   "bodyText": "⚠️ 作者自述，未经验证 — 本帖由作者通过「防污涂料配方模拟器」App 发布，内容未经平台验证。\n\n简介\n红美妞\n配方 / 工艺要点\n红美妞\n关键数据\n数据性质：未注明\n（未填写）\n安全提示\n（作者未填写；请注意杀生物剂、溶剂等的安全与法规要求）\n\n发布自 防污涂料配方模拟器 App · 模拟 ≠ 实测",
+   "author": {
+    "login": "yanxingsheng2021gz-max",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/287231348?v=4"
+   },
+   "category": {
+    "slug": "新技术-new-technology",
+    "name": "新技术 New Technology"
+   },
+   "comments": {
+    "totalCount": 0,
+    "nodes": []
+   }
+  },
+  {
+   "id": "D_kwDOVQ6zKs4AqS4Y",
+   "number": 1,
+   "title": "UVc超声防污",
+   "url": "https://github.com/hongheting/antifouling-coating-simulator/discussions/1",
+   "createdAt": "2026-10-20T13:35:57Z",
+   "updatedAt": "2026-10-20T13:35:57Z",
+   "body": "> ⚠️ **作者自述，未经验证** — 本帖由作者通过「防污涂料配方模拟器」App 发布，内容未经平台验证。\n\n## 简介\n测试\n\n## 配方 / 工艺要点\n测试\n\n## 关键数据\n数据性质：**实测**\n\n（未填写）\n\n## 安全提示\n（作者未填写；请注意杀生物剂、溶剂等的安全与法规要求）\n\n---\n<sub>发布自 防污涂料配方模拟器 App · 模拟 ≠ 实测</sub>",
+   "bodyHTML": "<blockquote>\n<p dir=\"auto\"><g-emoji class=\"g-emoji\" alias=\"warning\">⚠️</g-emoji> <strong>作者自述，未经验证</strong> — 本帖由作者通过「防污涂料配方模拟器」App 发布，内容未经平台验证。</p>\n</blockquote>\n<h2 dir=\"auto\">简介</h2>\n<p dir=\"auto\">测试</p>\n<h2 dir=\"auto\">配方 / 工艺要点</h2>\n<p dir=\"auto\">测试</p>\n<h2 dir=\"auto\">关键数据</h2>\n<p dir=\"auto\">数据性质：<strong>实测</strong></p>\n<p dir=\"auto\">（未填写）</p>\n<h2 dir=\"auto\">安全提示</h2>\n<p dir=\"auto\">（作者未填写；请注意杀生物剂、溶剂等的安全与法规要求）</p>\n<hr>\n<p dir=\"auto\"><sub>发布自 防污涂料配方模拟器 App · 模拟 ≠ 实测</sub></p>",
+   "bodyText": "⚠️ 作者自述，未经验证 — 本帖由作者通过「防污涂料配方模拟器」App 发布，内容未经平台验证。\n\n简介\n测试\n配方 / 工艺要点\n测试\n关键数据\n数据性质：实测\n（未填写）\n安全提示\n（作者未填写；请注意杀生物剂、溶剂等的安全与法规要求）\n\n发布自 防污涂料配方模拟器 App · 模拟 ≠ 实测",
+   "author": {
+    "login": "hongheting",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/41506185?u=f85c54ed6bae0f129462db5632dbe69eae3d6fd2&v=4"
+   },
+   "category": {
+    "slug": "新技术-new-technology",
+    "name": "新技术 New Technology"
+   },
+   "comments": {
+    "totalCount": 0,
+    "nodes": []
+   }
+  }
+ ],
  "note": "作者自述，未经验证 / Self-reported by authors, not verified."
 }
