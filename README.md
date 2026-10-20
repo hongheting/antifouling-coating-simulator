@@ -31,6 +31,8 @@
 5. **商用·技术** — 厂家公开目录与 UV-C/超声技术摘录
 6. **行业动态** — 周报驱动的公开进展时间线
 7. **防污学者排行** — OpenAlex 领域影响力示意
+8. **技术交流**（仅手机 App，0.6.0+）— 基于本仓库 [GitHub Discussions](https://github.com/hongheting/antifouling-coating-simulator/discussions)，分「新技术 / 新配方 / 新工艺」三类，学者可用 GitHub 账号登录发帖、评论；没有 GitHub 账号也可**游客投稿**（经 Cloudflare Worker 中继，立即发布，见 [relay/](relay/README.md)）；所有帖子标注 **「作者自述，未经验证」**。详见 [docs/tech-exchange.md](docs/tech-exchange.md)。
+   *Tech Exchange (mobile 0.6.0+): researchers post new antifouling technologies / formulations / processes as GitHub Discussions and comment in-app (GitHub device-flow login, or guest posting via a Cloudflare Worker relay without an account). Every post is labelled "self-reported, not verified". Report abuse via GitHub's "Report content"; the maintainer moderates on GitHub.*
 
 ## 截图
 
@@ -79,6 +81,10 @@ npm install
 npm run apk        # 生成 debug APK → dist/
 # adb install -r dist/coating-simulator-0.4.0.apk
 ```
+
+### 界面热更新 / Live updates (0.6.0+)
+App 内置自建 OTA：界面和 JS 改动打成签名包放在 `public-data/web/`，已装 App 启动时自动下载、验签（Ed25519 + SHA-256），重启生效，失败自动回滚；不使用 Capgo 云、不上报统计。发布：`cd mobile && npm run ota -- --notes "…"`，详见 [docs/auto-update.md](docs/auto-update.md)。注意：`public-data/web/` 的包含作者真实数据（与发布的 APK 相同）。
+*Self-hosted signed OTA web bundles (Ed25519 + SHA-256, auto-rollback, no telemetry). Note: bundles contain the author's real data, same as the released APK.*
 
 ### iOS（需 macOS + Xcode）
 

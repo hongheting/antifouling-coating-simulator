@@ -1,0 +1,45 @@
+name: discussions-snapshot
+# Dump recent 技术交流 discussions (3 categories) to public-data/discussions.json
+# so the app can show posts to users who are not logged in.
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+  discussion:
+    types: [created, edited, deleted, category_changed]
+  discussion_comment:
+    types: [created, edited, deleted]
+
+permissions:
+  contents: write
+  discussions: read
+
+concurrency:
+  group: discussions-snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Build snapshot
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: node .github/scripts/discussions-snapshot.js public-data/discussions.json
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- public-data/discussions.json && git ls-files --error-unmatch public-data/discussions.json >/dev/null 2>&1; then
+            echo "no change"; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public-data/discussions.json
+          git commit -m "chore: update discussions snapshot [skip ci]"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          git push

@@ -6,10 +6,10 @@
 | 项 | 值 |
 |---|---|
 | 包名 `applicationId` | `com.hongheting.coatingsimulator` |
-| versionName | `0.5.0` |
-| versionCode | `50` |
-| minSdk / targetSdk | 22 / 34 |
-| 产物 | `dist/coating-simulator-0.5.0.apk`（约 4.1 MB，debug 签名，可侧载） |
+| versionName | `0.6.0` |
+| versionCode | `60` |
+| minSdk / targetSdk | 23 / 34 |
+| 产物 | `dist/coating-simulator-0.6.0.apk`（约 4.1 MB，debug 签名，可侧载） |
 
 ## 安装（侧载）
 
@@ -18,10 +18,10 @@
 3. 点开 APK 安装；或用电脑：
 
 ```bash
-adb install -r dist/coating-simulator-0.5.0.apk
+adb install -r dist/coating-simulator-0.6.0.apk
 ```
 
-中文文件名副本：`dist/防污涂料配方模拟器-0.5.0.apk`（内容相同）。
+中文文件名副本：`dist/防污涂料配方模拟器-0.6.0.apk`（内容相同）。
 
 > 本包为 **debug** 签名，不适合上架 Google Play；日常自用侧载足够。
 
@@ -73,7 +73,7 @@ cd android && ./gradlew assembleDebug
 # 产物：android/app/build/outputs/apk/debug/app-debug.apk
 # 或一键：
 cd mobile && npm run apk
-cp android/app/build/outputs/apk/debug/app-debug.apk dist/coating-simulator-0.5.0.apk
+cp android/app/build/outputs/apk/debug/app-debug.apk dist/coating-simulator-0.6.0.apk
 ```
 
 ## 手机端改动（相对桌面 UI）
@@ -93,7 +93,7 @@ cp android/app/build/outputs/apk/debug/app-debug.apk dist/coating-simulator-0.5.
 
 ## 版本对齐
 
-与桌面 Electron `0.5.0` 对齐；`versionCode=32` 便于后续递增安装覆盖。
+与桌面 Electron `0.6.0` 对齐；`versionCode=32` 便于后续递增安装覆盖。
 
 
 ## iOS（macOS + Xcode）
@@ -104,4 +104,12 @@ npm run sync-www && npx cap sync ios
 npx cap open ios
 ```
 
-Bundle ID: `com.hongheting.coatingsimulator` · Display name: 防污涂料配方模拟器 · version 0.5.0 (40).
+Bundle ID: `com.hongheting.coatingsimulator` · Display name: 防污涂料配方模拟器 · version 0.6.0 (40).
+
+## 0.6.0 技术交流 / Tech Exchange
+
+- 代码：`assets/exchange.js`、`assets/exchange.css`（由 `scripts/sync-www.js` 注入，仅手机端；桌面 `ui/` 不变）。
+- 后端：GitHub Discussions；未登录读 `public-data/discussions.json`（Actions 每 30 分钟快照），登录后实时 GraphQL。
+- 登录：GitHub OAuth Device Flow（client_id 公开，**无 client secret**），scope `public_repo`。详见 `../docs/tech-exchange.md`。
+- 游客投稿：`RELAY_URL=https://…workers.dev npm run apk` 注入中继地址（为空则隐藏游客模式），中继见 `../relay/README.md`。
+- 界面热更新：`npm run ota -- --notes "…"`（签名包写入 `public-data/web/`），`npm test` 自检；详见 `../docs/auto-update.md`。minSdk 升到 23（Android 6.0，热更新插件依赖要求）。

@@ -1,0 +1,7 @@
+{
+  "name": "afsim-guest-relay",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test test/", "deploy": "wrangler deploy", "dev": "wrangler dev" },
+  "devDependencies": { "wrangler": "^3.80.0" }
+}

@@ -1,0 +1,16 @@
+name = "afsim-guest-relay"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+[vars]
+REPO = "hongheting/antifouling-coating-simulator"
+# comma-separated IPs that may not post
+GUEST_BANNED_IPS = ""
+# extra blocked words, comma-separated
+BLOCKLIST_EXTRA = ""
+# Turnstile: set secret with `wrangler secret put TURNSTILE_SECRET` to enforce; site key is public
+TURNSTILE_SITEKEY = ""
+
+[[kv_namespaces]]
+binding = "RELAY_KV"
+id = "ce9b04145e3d4c949e0751f8ce9089e6"

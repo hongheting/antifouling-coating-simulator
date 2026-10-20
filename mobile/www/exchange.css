@@ -1,0 +1,36 @@
+/* 0.6.0 技术交流 */
+#panel-exchange .ex-head h2{margin:.2rem 0}
+.ex-muted{color:#8b98a8;font-size:.85rem}
+.ex-row{display:flex;gap:.5rem;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:.5rem 0}
+.ex-btn{background:#1b2533;color:#dbe6f3;border:1px solid #2c3a4d;border-radius:8px;padding:.45rem .8rem;font-size:.9rem}
+.ex-btn.ex-pri{background:#1f6feb;border-color:#1f6feb;color:#fff}
+.ex-btn:disabled{opacity:.6}
+.ex-chips{display:flex;gap:.4rem;overflow-x:auto;padding:.3rem 0}
+.ex-chips button{flex:0 0 auto;background:#141c27;color:#b8c4d3;border:1px solid #2c3a4d;border-radius:999px;padding:.35rem .8rem;font-size:.82rem}
+.ex-chips button.on{background:#1f6feb33;border-color:#1f6feb;color:#fff}
+.ex-card{background:#121a24;border:1px solid #223042;border-radius:12px;padding:.8rem;margin:.6rem 0;cursor:pointer}
+.ex-card h3{margin:.25rem 0;font-size:1rem}
+.ex-snip{margin:.2rem 0 .4rem;color:#a9b6c6;font-size:.86rem;line-height:1.45}
+.ex-cat{font-size:.75rem;color:#58a6ff}
+.ex-meta{display:flex;gap:.6rem;flex-wrap:wrap;font-size:.78rem;color:#8b98a8;align-items:center}
+.ex-unv{background:#5a3b0b;color:#ffd58a;border-color:#7a5212}
+.ex-warn{background:#2a1f0b;border:1px solid #6b4b12;color:#ffd58a;border-radius:8px;padding:.5rem .6rem;font-size:.82rem;margin:.6rem 0}
+#ex-modal{position:fixed;inset:0;background:#000a;z-index:9000;display:flex;align-items:flex-end;justify-content:center}
+#ex-modal[hidden]{display:none}
+.ex-sheet{position:relative;background:#0f1620;color:#dbe6f3;width:100%;max-width:760px;max-height:calc(100vh - var(--sat,0px) - 24px);border-radius:16px 16px 0 0;display:flex;flex-direction:column}
+#ex-modal-body{overflow-y:auto;padding:1rem 1rem calc(1rem + var(--sab,0px))}
+.ex-close{position:absolute;right:.4rem;top:.3rem;background:none;border:0;color:#aab;font-size:1.6rem;z-index:1}
+.ex-body,.ex-cmt .md{line-height:1.55;font-size:.92rem;word-break:break-word}
+.md img{max-width:100%} .md pre{overflow-x:auto;background:#0a0f16;padding:.5rem;border-radius:6px}
+.md table{display:block;overflow-x:auto;border-collapse:collapse} .md td,.md th{border:1px solid #2c3a4d;padding:.2rem .4rem}
+.ex-cmt{border-top:1px solid #223042;padding:.6rem 0}
+.ex-code{font:700 1.8rem/1.2 ui-monospace,monospace;letter-spacing:.15em;text-align:center;background:#141c27;border-radius:10px;padding:.7rem;margin:.5rem 0;user-select:all}
+#ex-modal-body label{display:block;margin:.55rem 0;font-size:.86rem;color:#b8c4d3}
+#ex-modal-body input:not([type=checkbox]),#ex-modal-body select,#ex-modal-body textarea{display:block;width:100%;box-sizing:border-box;margin-top:.25rem;background:#0a0f16;color:#e6edf3;border:1px solid #2c3a4d;border-radius:8px;padding:.5rem;font-size:.95rem}
+#ex-modal-body fieldset{border:1px solid #2c3a4d;border-radius:8px;margin:.55rem 0;font-size:.86rem}
+#ex-modal-body .ex-chk{display:inline-block;margin:.2rem .7rem .2rem 0}
+#ex-modal-body > .ex-btn.ex-pri{width:100%;margin-top:.6rem;padding:.7rem}
+.ex-guest{background:#0b3a2a;color:#7ee2b8;border:1px solid #13603f;font-size:.72rem}
+.ex-hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
+#ex-modal-body label.ex-chk{display:block}
+.ex-err{text-align:center;padding:1rem 0;color:#ffb4a8}

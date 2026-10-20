@@ -7,8 +7,8 @@ android {
         applicationId "com.hongheting.coatingsimulator"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 50
-        versionName "0.5.0"
+        versionCode 60
+        versionName "0.6.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -51,4 +51,9 @@ try {
     }
 } catch(Exception e) {
     logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
+}
+
+// 0.6.0: @capgo/capacitor-updater pulls work-runtime 2.10.x (needs compileSdk 35); pin 2.9.1 for compileSdk 34 / AGP 8.2
+configurations.all {
+    resolutionStrategy.force 'androidx.work:work-runtime:2.9.1'
 }

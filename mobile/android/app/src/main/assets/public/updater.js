@@ -47,7 +47,7 @@
   var current = BUNDLED, source = '内置';
   try {
     var cached = JSON.parse(lsGet(K_FEED) || 'null');
-    if (validFeed(cached) && cached.version > BUNDLED && (cached.min_app || 0) <= 50) {
+    if (validFeed(cached) && cached.version > BUNDLED && (cached.min_app || 0) <= 60) {
       merge(cached); current = cached.version; source = '在线缓存';
     }
   } catch (e) { /* corrupted cache → bundled */ }
@@ -119,7 +119,7 @@
       var L = res.latest, work = [];
       if (L.data_version > current) {
         work.push(fetchT(bust(res.base, L.feed || 'feed.json'), 15000).then(function (f) {
-          if (!validFeed(f) || (f.min_app || 0) > 50) throw new Error('feed invalid');
+          if (!validFeed(f) || (f.min_app || 0) > 60) throw new Error('feed invalid');
           if (!lsSet(K_FEED, JSON.stringify(f))) throw new Error('storage full');
           lsSet(K_TOAST, f.version);
           location.reload();   // re-render all tabs with merged public data
@@ -127,7 +127,7 @@
       } else if (manual) { toast('公开数据已是最新（' + current + '）'); }
       return Promise.all(work).then(function () {
         return appInfo().then(function (info) {
-          var installed = info ? parseInt(info.build, 10) : 50;
+          var installed = info ? parseInt(info.build, 10) : 60;
           if (L.app && L.app.versionCode > installed) appModal(L.app, manual);
           else if (manual && L.data_version <= current) { /* already toasted */ }
         });

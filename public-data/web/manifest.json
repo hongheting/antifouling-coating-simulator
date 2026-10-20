@@ -1,0 +1,11 @@
+{
+  "webVersion": "0.6.0+2",
+  "webBuild": 2,
+  "file": "bundle-0.6.0+2.zip",
+  "sha256": "247f9f5c218c4ec77a78c775c027f34e018a02fc11576a8d9fdf6c1d716bff17",
+  "size": 259252,
+  "minNativeCode": 60,
+  "notes": "修复未登录看不到交流区",
+  "sig": "fJflo6W3ezabKZazumk1s6ikw0zFeJe4zZBKJnnDoKPkGGZeVgQint8EI1N4zYiaIDR0ZURFHsXN4UiMcZhHAA==",
+  "created_at": "2026-10-20T14:25:30.281Z"
+}

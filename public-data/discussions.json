@@ -1,0 +1,12 @@
+{
+ "schema": 1,
+ "repo": "hongheting/antifouling-coating-simulator",
+ "generated_at": "2026-10-20T13:30:00.000Z",
+ "categories": [
+  {"slug": "新技术-new-technology", "name": "新技术 New Technology"},
+  {"slug": "新配方-new-formulation", "name": "新配方 New Formulation"},
+  {"slug": "新工艺-new-process", "name": "新工艺 New Process"}
+ ],
+ "discussions": [],
+ "note": "作者自述，未经验证 / Self-reported by authors, not verified."
+}
