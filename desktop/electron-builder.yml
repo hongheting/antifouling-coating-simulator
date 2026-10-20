@@ -1,0 +1,58 @@
+# Electron Builder — V1 packaging for coating-simulator
+# Local-only UI; no remote updater; ui/ embedded via extraResources.
+
+appId: com.heting.coating-simulator
+productName: 防污涂料配方模拟器
+copyright: Copyright © 2026 Hong Heting
+
+directories:
+  output: dist
+  buildResources: build
+
+files:
+  - main.js
+  - preload.js
+  - package.json
+
+# Ship the static panel next to the binary under resources/ui/
+extraResources:
+  - from: ../ui
+    to: ui
+    filter:
+      - "**/*"
+      - "!**/node_modules/**"
+
+asar: true
+
+# V1: no publish / no auto-update channels
+publish: null
+
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+    - target: portable
+      arch:
+        - x64
+
+mac:
+  target:
+    - target: dmg
+      arch:
+        - x64
+        - arm64
+  category: public.app-category.productivity
+  # Unsigned internal builds: users may need right-click → Open
+
+linux:
+  target:
+    - AppImage
+    - deb
+  category: Science
+  maintainer: Hong Heting <heting@localhost>
+  synopsis: Antifouling coating formulation simulator (simulation ≠ measurement)
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true

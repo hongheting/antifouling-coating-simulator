@@ -1,0 +1,2105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>防污涂料配方模拟器 · V0 面板</title>
+<style>
+  :root {
+    --bg: #0b1017;
+    --bg2: #141c28;
+    --bg3: #1e2a3c;
+    --card: #172233;
+    --border: #2a3b52;
+    --text: #eef3fa;
+    --muted: #8fa0b8;
+    --accent: #4aa3f0;
+    --accent2: #4ecdc4;
+    --warn: #f0b429;
+    --danger: #e85d5d;
+    --ok: #4caf7a;
+    --tag-measured: #4caf7a;
+    --tag-pending: #8b9cb3;
+    --tag-nominal: #4aa3f0;
+    --tag-rough: #f0b429;
+    --tag-scheme: #a78bfa;
+    --tag-lit: #4ecdc4;
+    --tag-rel: #fb923c;
+    --tag-public: #67e8f9;
+    --radius: 14px;
+    --radius-sm: 10px;
+    --shadow: 0 10px 40px rgba(0,0,0,.28);
+    --shadow-sm: 0 2px 12px rgba(0,0,0,.18);
+    --font: "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+    --space: 16px;
+    --space-lg: 22px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: var(--font);
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(74,163,240,.12), transparent 55%),
+      radial-gradient(900px 500px at 90% 0%, rgba(78,205,196,.08), transparent 50%),
+      linear-gradient(165deg, #0a0f16 0%, #121a26 50%, #0c131c 100%);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.55;
+    letter-spacing: .01em;
+    font-size: 15px;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 24px 20px 72px; }
+  @media (max-width: 720px) {
+    .wrap { padding: 16px 12px 56px; }
+    body { font-size: 14px; }
+  }
+
+  /* Header */
+  header.app {
+    display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between;
+    gap: 16px; margin-bottom: 18px;
+  }
+  header.app h1 {
+    font-size: clamp(1.25rem, 2.5vw, 1.55rem); font-weight: 750; letter-spacing: .01em;
+    background: linear-gradient(100deg, #8fd0ff 10%, #4ecdc4 90%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header.app .sub { color: var(--muted); font-size: .84rem; margin-top: 6px; max-width: 42rem; }
+  .badge-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .pill {
+    font-size: .72rem; padding: 4px 10px; border-radius: 999px;
+    background: var(--bg3); border: 1px solid var(--border); color: var(--muted);
+  }
+  .pill.v { color: var(--accent2); border-color: #3a6b64; }
+
+  /* Honesty banner */
+  .honesty {
+    background: linear-gradient(105deg, rgba(240,180,41,.14), rgba(232,93,93,.07) 55%, rgba(74,163,240,.06));
+    border: 1px solid rgba(240,180,41,.4);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    margin-bottom: var(--space-lg);
+    display: flex; gap: 14px; align-items: flex-start;
+    box-shadow: var(--shadow-sm);
+  }
+  .honesty .ico { font-size: 1.25rem; line-height: 1; }
+  .honesty strong { color: var(--warn); }
+  .honesty p { font-size: .88rem; color: var(--text); }
+  .honesty .safety { color: var(--muted); font-size: .8rem; margin-top: 4px; }
+
+  /* Tabs */
+  nav.tabs {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-bottom: 16px;
+    background: var(--bg2);
+    padding: 6px; border-radius: var(--radius);
+    border: 1px solid var(--border);
+  }
+  nav.tabs button {
+    appearance: none; border: none; cursor: pointer;
+    background: transparent; color: var(--muted);
+    padding: 10px 16px; border-radius: 8px;
+    font-size: .9rem; font-weight: 600; font-family: inherit;
+    transition: background .15s, color .15s;
+  }
+  nav.tabs button:hover { color: var(--text); background: rgba(255,255,255,.04); }
+  nav.tabs button.active {
+    background: var(--accent); color: #fff;
+    box-shadow: 0 2px 12px rgba(61,156,240,.35);
+  }
+
+
+  /* Category chips */
+  .chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 4px; }
+  .chip {
+    appearance: none; border: 1px solid var(--border); cursor: pointer;
+    background: rgba(30,42,60,.85); color: var(--muted);
+    padding: 6px 12px; border-radius: 999px;
+    font-size: .72rem; font-weight: 600; font-family: inherit;
+    transition: background .15s, color .15s, border-color .15s, box-shadow .15s;
+  }
+  .chip:hover { color: var(--text); border-color: var(--accent); background: rgba(74,163,240,.1); }
+  .chip.active {
+    background: rgba(74,163,240,.22); color: #b6dcff;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px rgba(74,163,240,.25);
+  }
+  .chip .cnt {
+    opacity: .75; margin-left: 4px; font-weight: 500;
+  }
+  .cat-pill {
+    display: inline-block; font-size: .68rem; padding: 2px 7px;
+    border-radius: 6px; background: rgba(94,196,182,.15);
+    color: var(--accent2); border: 1px solid rgba(94,196,182,.35);
+    white-space: nowrap;
+  }
+
+  .panel { display: none; }
+  .panel.active { display: block; animation: fade .25s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  .card {
+    background: linear-gradient(180deg, rgba(255,255,255,.02), transparent 40%), var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: var(--space);
+  }
+  .card h2 {
+    font-size: 1.08rem; font-weight: 700; margin-bottom: 10px;
+    letter-spacing: .01em;
+  }
+  .card h3 { font-size: .9rem; font-weight: 650; color: var(--accent2); margin: 16px 0 10px; }
+  .muted { color: var(--muted); font-size: .82rem; line-height: 1.5; }
+  .toolbar {
+    display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+    margin-bottom: 14px;
+  }
+  .toolbar label { font-size: .8rem; color: var(--muted); }
+  select, input[type="search"] {
+    background: var(--bg2); color: var(--text);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 12px; font-size: .85rem; font-family: inherit;
+    min-width: 180px;
+  }
+  select:focus, input:focus { outline: 2px solid rgba(61,156,240,.4); border-color: var(--accent); }
+
+  /* Tags */
+  .tag {
+    display: inline-flex; align-items: center; gap: 2px;
+    font-size: .67rem; font-weight: 650;
+    padding: 3px 9px; border-radius: 999px; margin: 2px 3px 2px 0;
+    white-space: nowrap; vertical-align: middle;
+    letter-spacing: .02em;
+    border: 1px solid transparent;
+  }
+  .tag-实测 { background: rgba(76,175,122,.2); color: var(--tag-measured); }
+  .tag-待测 { background: rgba(139,156,179,.2); color: var(--tag-pending); }
+  .tag-厂家标称 { background: rgba(61,156,240,.2); color: var(--tag-nominal); }
+  .tag-粗估观察 { background: rgba(240,180,41,.2); color: var(--tag-rough); }
+  .tag-方案非实测 { background: rgba(155,123,222,.2); color: var(--tag-scheme); }
+  .tag-文献界, .tag-文献点名 { background: rgba(94,196,182,.2); color: var(--tag-lit); }
+  .tag-相对等级, .tag-框架推断 { background: rgba(224,122,61,.2); color: var(--tag-rel); }
+  .tag-插值 { background: rgba(61,156,240,.15); color: #9ec9f5; }
+  .tag-default { background: rgba(139,156,179,.15); color: var(--muted); }
+
+  /* Tables */
+  .table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid var(--border); }
+  table.data {
+    width: 100%; border-collapse: collapse; font-size: .78rem;
+    min-width: 720px;
+  }
+  table.data th {
+    background: var(--bg3); text-align: left; padding: 10px 8px;
+    position: sticky; top: 0; color: var(--muted); font-weight: 600;
+    border-bottom: 1px solid var(--border); white-space: nowrap;
+  }
+  table.data td {
+    padding: 8px; border-bottom: 1px solid rgba(45,63,86,.6);
+    vertical-align: top; max-width: 280px;
+  }
+  table.data tr:hover td { background: rgba(61,156,240,.06); }
+  table.data .id { font-family: ui-monospace, monospace; color: var(--accent); font-size: .75rem; }
+  table.data .empty { color: var(--muted); font-style: italic; }
+
+  /* Route cards grid */
+  .route-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+  }
+  .route-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    cursor: pointer;
+    transition: border-color .15s, transform .15s;
+  }
+  .route-card:hover, .route-card.selected {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+  .route-card.selected { box-shadow: 0 0 0 1px var(--accent); }
+  .route-card .name { font-weight: 700; font-size: .95rem; margin-bottom: 4px; }
+  .route-card .band { font-size: .75rem; color: var(--muted); margin-bottom: 8px; }
+  .press-bar {
+    height: 8px; border-radius: 4px; background: var(--bg3);
+    overflow: hidden; margin: 6px 0;
+  }
+  .press-bar > i {
+    display: block; height: 100%; border-radius: 4px;
+    background: linear-gradient(90deg, #4caf7a, #f0b429, #e85d5d);
+  }
+  .press-label { font-size: .8rem; font-weight: 600; }
+  .route-type {
+    display: inline-block; font-size: .65rem; padding: 2px 6px;
+    border-radius: 4px; background: rgba(94,196,182,.15); color: var(--accent2);
+    margin-top: 6px;
+  }
+
+  /* Legs */
+  .legs { margin-top: 10px; }
+  .leg {
+    display: grid; grid-template-columns: 28px 1fr;
+    gap: 8px; padding: 8px 0;
+    border-bottom: 1px dashed rgba(45,63,86,.8);
+    font-size: .82rem;
+  }
+  .leg .n {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--bg3); color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: .7rem; font-weight: 700;
+  }
+
+  /* Shortlist ranks */
+  .rank-list { display: flex; flex-direction: column; gap: 10px; }
+  .rank-item {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px;
+    display: grid; grid-template-columns: 48px 1fr; gap: 12px;
+  }
+  .rank-num {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 1.1rem;
+  }
+  .rank-1 .rank-num { background: rgba(240,180,41,.25); color: var(--warn); }
+  .rank-2 .rank-num { background: rgba(139,156,179,.25); color: #c0c8d4; }
+  .rank-3 .rank-num { background: rgba(224,122,61,.2); color: #e07a3d; }
+  .rank-4 .rank-num { background: rgba(61,156,240,.15); color: var(--accent); }
+  .rank-item .title { font-weight: 700; font-size: .95rem; }
+  .rank-item .meta { font-size: .75rem; color: var(--muted); margin: 4px 0; }
+  .rank-item .caveat {
+    font-size: .78rem; color: #c9b896; margin-top: 6px;
+    padding: 8px; background: rgba(240,180,41,.06); border-radius: 6px;
+    border-left: 3px solid var(--warn);
+  }
+  .rank-item .note { font-size: .78rem; color: var(--muted); margin-top: 6px; }
+  .type-chip {
+    font-size: .65rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px;
+  }
+  .ext-links { display:flex; flex-wrap:wrap; gap:4px 10px; margin-top:4px; font-size:.75rem; }
+.ext-link { color: var(--accent); text-decoration: none; word-break: break-all; }
+.ext-link:hover { text-decoration: underline; }
+.type-commercial { background: rgba(61,156,240,.2); color: var(--accent); }
+  .type-homemade { background: rgba(94,196,182,.2); color: var(--accent2); }
+
+
+  /* Overview stats */
+  .stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px; margin-bottom: 14px;
+  }
+  .stat {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px; text-align: center;
+  }
+  .stat .n { font-size: 1.6rem; font-weight: 800; color: var(--accent2); }
+  .stat .l { font-size: .75rem; color: var(--muted); margin-top: 2px; }
+
+  footer {
+    margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--border);
+    font-size: .75rem; color: var(--muted); text-align: center;
+  }
+  details.help { margin-top: 8px; font-size: .8rem; color: var(--muted); }
+  details.help summary { cursor: pointer; color: var(--accent); }
+
+  .tag-公开资料 { background: rgba(61,156,240,.15); color: #9ec9f5; }
+  .type-tech-uvc { background: rgba(155,123,222,.25); color: #c4a8f5; }
+  .type-tech-ultrasound { background: rgba(94,196,182,.25); color: var(--accent2); }
+  .brand-block { margin-bottom: 18px; }
+  .brand-block h3 { margin-top: 0; }
+  .principle-list { margin: 8px 0 12px 18px; font-size: .85rem; color: var(--text); }
+  .principle-list li { margin-bottom: 4px; }
+  .safety-box {
+    background: rgba(232,93,93,.08); border: 1px solid rgba(232,93,93,.35);
+    border-radius: 8px; padding: 10px 12px; font-size: .8rem; color: #e8b4b4; margin-top: 10px;
+  }
+  .hybrid-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 10px; margin-top: 8px;
+  }
+  .hybrid-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px; font-size: .8rem;
+  }
+  .hybrid-card strong { color: var(--accent2); display: block; margin-bottom: 4px; }
+  .subtabs {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px;
+  }
+  .subtabs button {
+    appearance: none; border: 1px solid var(--border); cursor: pointer;
+    background: var(--bg2); color: var(--muted);
+    padding: 6px 12px; border-radius: 6px; font-size: .8rem; font-family: inherit; font-weight: 600;
+  }
+  .subtabs button.active { background: rgba(94,196,182,.2); color: var(--accent2); border-color: #3a6b64; }
+
+  /* Responsive polish */
+  @media (max-width: 640px) {
+    nav.tabs { padding: 4px; gap: 4px; }
+    nav.tabs button { padding: 8px 12px; font-size: .82rem; flex: 1 1 auto; text-align: center; }
+    .stats { grid-template-columns: repeat(2, 1fr) !important; }
+    .rank-item { grid-template-columns: 40px 1fr; padding: 12px; }
+    .route-grid { grid-template-columns: 1fr; }
+    .toolbar label { width: 100%; }
+    select, input[type="search"] { width: 100%; min-width: 0; }
+    .honesty { flex-direction: column; gap: 8px; }
+    .card { padding: 14px 14px; }
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+  }
+  .stat {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 12px;
+    text-align: center;
+    transition: border-color .15s;
+  }
+  .stat:hover { border-color: rgba(74,163,240,.45); }
+  .stat .n { font-size: 1.45rem; font-weight: 800; color: var(--accent); letter-spacing: -.02em; }
+  .stat .l { font-size: .72rem; color: var(--muted); margin-top: 4px; }
+  .brand-block {
+    margin-bottom: 18px; padding-bottom: 8px;
+    border-bottom: 1px solid rgba(42,59,82,.7);
+  }
+  .brand-block:last-child { border-bottom: none; }
+  .brand-block h3 { margin-top: 0; }
+  .subtabs {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: 12px; margin-bottom: 4px;
+  }
+  .subtabs button {
+    appearance: none; border: 1px solid var(--border); cursor: pointer;
+    background: var(--bg2); color: var(--muted);
+    padding: 8px 14px; border-radius: 999px;
+    font-size: .8rem; font-weight: 600; font-family: inherit;
+  }
+  .subtabs button.active {
+    background: rgba(78,205,196,.18); color: var(--accent2);
+    border-color: rgba(78,205,196,.45);
+  }
+  .safety-box {
+    margin-top: 14px; padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    background: rgba(232,93,93,.08);
+    border: 1px solid rgba(232,93,93,.3);
+    font-size: .82rem;
+  }
+  .hybrid-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 10px;
+  }
+  .hybrid-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 12px 14px; font-size: .82rem;
+  }
+  footer {
+    margin-top: 28px; padding-top: 16px;
+    border-top: 1px solid var(--border);
+    color: var(--muted); font-size: .75rem; text-align: center;
+  }
+  code { font-family: var(--mono); font-size: .85em; color: #9ec9f5; }
+
+  /* Lab density + basecoat chips (2026-10-10 polish) */
+  .chip-row.lab-chips { margin: 8px 0 10px; gap: 5px; }
+  .chip {
+    padding: 5px 11px;
+    font-size: .7rem;
+    letter-spacing: .01em;
+    backdrop-filter: blur(4px);
+  }
+  .chip .cnt {
+    display: inline-block;
+    min-width: 1.1em;
+    padding: 0 5px;
+    margin-left: 5px;
+    border-radius: 999px;
+    background: rgba(0,0,0,.22);
+    font-size: .65rem;
+    opacity: .9;
+  }
+  .chip.active .cnt { background: rgba(255,255,255,.12); }
+  table.data { font-size: .74rem; }
+  table.data th { padding: 8px 7px; font-size: .72rem; }
+  table.data td { padding: 7px 7px; max-width: 260px; }
+  .disadv {
+    margin-top: 5px; padding: 6px 8px;
+    border-radius: 6px;
+    background: rgba(232,93,93,.07);
+    border-left: 3px solid rgba(232,93,93,.45);
+    color: #e8b4b4; font-size: .72rem; line-height: 1.45;
+  }
+  .lab-meta { font-size: .72rem; color: var(--muted); line-height: 1.4; }
+  .base-pill {
+    display: inline-block; font-size: .65rem; padding: 2px 7px;
+    border-radius: 6px; margin-top: 3px;
+    background: rgba(74,163,240,.12); color: #9ec9f5;
+    border: 1px solid rgba(74,163,240,.28);
+  }
+  .base-pill.acrylic { background: rgba(78,205,196,.12); color: var(--accent2); border-color: rgba(78,205,196,.3); }
+  .base-pill.powder { background: rgba(167,139,250,.12); color: #c4b5fd; border-color: rgba(167,139,250,.3); }
+  .base-pill.other { background: rgba(139,156,179,.12); color: var(--muted); }
+  .wrap { max-width: 1240px; }
+  .stats { gap: 8px; }
+  .stat { padding: 12px 10px; }
+  .stat .n { font-size: 1.35rem; }
+  nav.tabs button { padding: 9px 14px; font-size: .86rem; }
+
+  /* 2026-10-19 polish: consistent tabs + 行业动态 module */
+  nav.tabs { gap: 4px; align-items: center; }
+  nav.tabs button {
+    padding: 9px 14px; font-size: .86rem; line-height: 1.2;
+    border: 1px solid transparent; white-space: nowrap;
+  }
+  nav.tabs button.active { border-color: rgba(255,255,255,.12); }
+  nav.tabs button:focus-visible { outline: 2px solid rgba(74,163,240,.6); outline-offset: 1px; }
+  nav.tabs button .tab-badge {
+    display: inline-block; margin-left: 6px; padding: 0 6px; min-width: 1.4em;
+    border-radius: 999px; font-size: .68rem; font-weight: 700; line-height: 1.5;
+    background: rgba(78,205,196,.18); color: var(--accent2); text-align: center;
+  }
+  nav.tabs button.active .tab-badge { background: rgba(255,255,255,.2); color: #fff; }
+  .chip:focus-visible, .subtabs button:focus-visible { outline: 2px solid rgba(74,163,240,.6); outline-offset: 1px; }
+
+  .ind-banner {
+    position: sticky; top: 0; z-index: 5;
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+    background: rgba(20,28,40,.96);
+    border: 1px solid rgba(103,232,249,.45);
+    border-left: 4px solid var(--tag-public);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px; margin-bottom: 12px;
+    font-size: .86rem; box-shadow: var(--shadow-sm);
+  }
+  .ind-banner strong { color: var(--tag-public); }
+  .ind-banner .muted { font-size: .78rem; }
+  .ind-trend {
+    background: rgba(78,205,196,.07); border: 1px solid rgba(78,205,196,.3);
+    border-radius: var(--radius-sm); padding: 12px 14px; font-size: .86rem; margin-top: 4px;
+  }
+  .ind-trend strong { color: var(--accent2); display: block; margin-bottom: 4px; }
+  .ind-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 12px; }
+  .ind-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 14px 16px;
+    display: flex; flex-direction: column; gap: 6px;
+    transition: border-color .15s;
+  }
+  .ind-card:hover { border-color: rgba(74,163,240,.45); }
+  .ind-card.rel-高 { border-left: 3px solid var(--danger); }
+  .ind-card.rel-中 { border-left: 3px solid var(--warn); }
+  .ind-card.rel-低 { border-left: 3px solid var(--tag-pending); }
+  .ind-card .ind-top { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: .75rem; color: var(--muted); }
+  .ind-card .ind-title { font-weight: 700; font-size: .93rem; line-height: 1.45; }
+  .ind-card .ind-sum { font-size: .82rem; color: var(--text); }
+  .ind-card .ind-rel { font-size: .78rem; color: var(--muted); }
+  .ind-card a.ind-link {
+    font-size: .76rem; color: var(--accent); text-decoration: none; word-break: break-all;
+  }
+  .ind-card a.ind-link:hover { text-decoration: underline; }
+  .cat-badge { display: inline-block; font-size: .68rem; font-weight: 700; padding: 2px 8px; border-radius: 6px; border: 1px solid transparent; }
+  .cat-法规 { background: rgba(167,139,250,.16); color: #c4b5fd; border-color: rgba(167,139,250,.35); }
+  .cat-企业 { background: rgba(74,163,240,.14); color: #9ec9f5; border-color: rgba(74,163,240,.35); }
+  .cat-产品 { background: rgba(78,205,196,.14); color: var(--accent2); border-color: rgba(78,205,196,.35); }
+  .cat-技术 { background: rgba(251,146,60,.14); color: #fdba74; border-color: rgba(251,146,60,.35); }
+  .rel-badge { display: inline-block; font-size: .68rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+  .rel-badge.r-高 { background: rgba(232,93,93,.18); color: #f19a9a; }
+  .rel-badge.r-中 { background: rgba(240,180,41,.18); color: var(--warn); }
+  .rel-badge.r-低 { background: rgba(139,156,179,.18); color: var(--tag-pending); }
+  .ov-ind ul { list-style: none; margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+  .ov-ind li { font-size: .84rem; display: flex; gap: 8px; align-items: baseline; }
+  .ov-ind .ov-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .linkbtn {
+    appearance: none; border: 1px solid var(--border); cursor: pointer; font-family: inherit;
+    background: var(--bg2); color: var(--accent); padding: 6px 12px; border-radius: 8px; font-size: .8rem; font-weight: 600;
+  }
+  .linkbtn:hover { border-color: var(--accent); }
+  @media (max-width: 1300px) {
+    nav.tabs button { padding: 8px 12px; font-size: .84rem; }
+  }
+  /* ===== 2026-10-20 UI v2 · marine antifouling theme (light content, ocean header) ===== */
+  :root {
+    --bg: #eef4f8; --bg2: #f5f9fc; --bg3: #e3edf4; --card: #ffffff;
+    --border: #d5e2ec; --text: #10273a; --muted: #5a7083;
+    --accent: #0a8f9c; --accent2: #0a8f9c; --accent-d: #076b75;
+    --warn: #b7791f; --danger: #c53b3b; --ok: #2f855a;
+    --tag-measured: #2f855a; --tag-pending: #5f7184; --tag-nominal: #1f6fb2;
+    --tag-rough: #a86a12; --tag-scheme: #6b46c1; --tag-lit: #0b7f7a; --tag-rel: #c05621; --tag-public: #0a8f9c;
+    --shadow: 0 6px 24px rgba(16,39,58,.07); --shadow-sm: 0 2px 8px rgba(16,39,58,.06);
+    --ocean1: #06233f; --ocean2: #0b4a6f; --ocean3: #0e8a94;
+  }
+  body { background: linear-gradient(180deg, #e6eff5 0, #f1f6f9 340px, #f4f8fa 100%); color: var(--text); }
+  .wrap { max-width: 1320px; padding: 0 24px 64px; }
+  /* Ocean header */
+  .ocean-head {
+    position: relative; overflow: hidden; margin: 0 -24px 0; padding: 22px 32px 46px;
+    background: linear-gradient(120deg, var(--ocean1) 0%, var(--ocean2) 55%, var(--ocean3) 100%);
+    color: #eaf6fb; border-radius: 0 0 22px 22px; box-shadow: 0 10px 30px rgba(6,35,63,.25);
+  }
+  .ocean-head header.app { position: relative; z-index: 2; margin: 0; align-items: center; }
+  .ocean-head h1 { color: #fff; background: none; -webkit-text-fill-color: #fff; font-size: 1.6rem; display:flex; align-items:center; gap:12px; }
+  .ocean-head .sub { color: rgba(234,246,251,.82); }
+  .ocean-head .pill { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.25); color: #e3f4fa; }
+  .ocean-head .pill.v { color: #9ff3ea; border-color: rgba(159,243,234,.5); }
+  .brand-mark { width: 44px; height: 44px; flex: none; }
+  .waves { position: absolute; left: 0; right: 0; bottom: -2px; height: 46px; z-index: 1; pointer-events: none; }
+  .waves svg { position: absolute; bottom: 0; width: 200%; height: 46px; }
+  .waves .w1 { animation: waveMove 18s linear infinite; opacity: .55; }
+  .waves .w2 { animation: waveMove 28s linear infinite reverse; opacity: .9; }
+  @keyframes waveMove { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .bubbles { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .bubbles i { position: absolute; bottom: -12px; border-radius: 50%; border: 1.5px solid rgba(200,240,255,.55);
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.55), rgba(255,255,255,.05) 60%); animation: rise linear infinite; }
+  .bubbles i:nth-child(1){ left: 58%; width: 10px; height: 10px; animation-duration: 9s; }
+  .bubbles i:nth-child(2){ left: 66%; width: 6px; height: 6px; animation-duration: 7s; animation-delay: 2s; }
+  .bubbles i:nth-child(3){ left: 74%; width: 14px; height: 14px; animation-duration: 12s; animation-delay: 1s; }
+  .bubbles i:nth-child(4){ left: 83%; width: 8px; height: 8px; animation-duration: 8s; animation-delay: 4s; }
+  .bubbles i:nth-child(5){ left: 91%; width: 11px; height: 11px; animation-duration: 10s; animation-delay: 3s; }
+  @keyframes rise { 0% { transform: translateY(0) translateX(0); opacity: 0; } 10% { opacity: 1; } 50% { transform: translateY(-60px) translateX(6px);} 100% { transform: translateY(-130px) translateX(-4px); opacity: 0; } }
+  .sway { transform-origin: 50% 100%; animation: sway 5s ease-in-out infinite; }
+  @keyframes sway { 0%,100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
+  .float { animation: floatY 4.5s ease-in-out infinite; }
+  @keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+  .sheen-rect { animation: sheen 4.5s ease-in-out infinite; }
+  @keyframes sheen { 0% { transform: translateX(-60px); } 60%,100% { transform: translateX(80px); } }
+  .dash-route { stroke-dasharray: 5 5; animation: dashMove 2.4s linear infinite; }
+  @keyframes dashMove { to { stroke-dashoffset: -20; } }
+  .drip { animation: drip 3.2s ease-in infinite; transform-origin: 50% 0; }
+  @keyframes drip { 0%,60% { transform: translateY(0) scale(1); opacity: 1; } 90% { transform: translateY(6px) scale(.85); opacity: .2; } 100% { opacity: 0; } }
+  .spin-slow { transform-origin: 50% 50%; animation: spin 16s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Honesty banner, light */
+  .honesty { position: relative; z-index: 3; margin: -26px 8px 18px; background: #fffaf0; border: 1px solid #f0cf8a;
+    border-left: 5px solid #d69e2e; box-shadow: 0 6px 20px rgba(16,39,58,.10); }
+  .honesty strong { color: #9c5d07; }
+  .honesty p { color: #3d2f12; }
+  .honesty .safety { color: #6b5a3a; }
+  /* Tabs */
+  nav.tabs { background: #fff; border-color: var(--border); box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 20; }
+  nav.tabs button { color: #3e5568; display: inline-flex; align-items: center; gap: 7px; }
+  nav.tabs button svg { width: 17px; height: 17px; flex: none; }
+  nav.tabs button:hover { background: #eef6f8; color: var(--text); }
+  nav.tabs button.active { background: linear-gradient(120deg, var(--ocean2), var(--accent)); color: #fff; box-shadow: 0 3px 12px rgba(10,143,156,.35); }
+  nav.tabs button .tab-badge { background: rgba(10,143,156,.12); color: var(--accent-d); }
+  /* Cards */
+  .card { background: var(--card); border-color: var(--border); box-shadow: var(--shadow); }
+  .card h2 { color: #0b3550; display: flex; align-items: center; gap: 10px; }
+  .card h2 .h-ico { width: 30px; height: 30px; flex: none; }
+  .card h3 { color: var(--accent-d); }
+  select, input[type="search"] { background: #fff; color: var(--text); border-color: #c7d7e3; }
+  select:focus, input:focus { outline: 2px solid rgba(10,143,156,.25); border-color: var(--accent); }
+  code { color: #0b5f86; background: #edf5fa; padding: 0 4px; border-radius: 4px; }
+  .chip { background: #fff; color: #44596b; border-color: #cfdde7; backdrop-filter: none; }
+  .chip:hover { color: var(--text); background: #eef7f8; border-color: var(--accent); }
+  .chip.active { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: none; }
+  .chip .cnt { background: rgba(16,39,58,.08); }
+  .chip.active .cnt { background: rgba(255,255,255,.25); }
+  .cat-pill { background: rgba(10,143,156,.08); color: var(--accent-d); border-color: rgba(10,143,156,.3); }
+  /* Tags readable on light */
+  .tag-实测 { background: #e3f4ea; color: #276749; }
+  .tag-待测 { background: #edf1f5; color: #4a5b6c; }
+  .tag-厂家标称 { background: #e4eefa; color: #1f5f9e; }
+  .tag-粗估观察 { background: #fdf1dc; color: #8a5a0a; }
+  .tag-方案非实测 { background: #efe8fb; color: #5b3aa8; }
+  .tag-文献界, .tag-文献点名 { background: #dff4f2; color: #0b6e69; }
+  .tag-相对等级, .tag-框架推断 { background: #fde9dc; color: #a5461a; }
+  .tag-插值 { background: #e6f0fa; color: #2b6aa6; }
+  .tag-default { background: #eef2f5; color: #55697b; }
+  .tag-公开资料 { background: #e0f3f5; color: #0a6f79; }
+  /* Tables */
+  .table-wrap { border-color: var(--border); background: #fff; }
+  table.data th { background: #eaf2f7; color: #35506a; border-bottom-color: var(--border); }
+  table.data td { border-bottom-color: #e7eef3; }
+  table.data tr:nth-child(even) td { background: #fafcfd; }
+  table.data tr:hover td { background: #eef7f9; }
+  table.data .id { color: var(--accent-d); }
+  .disadv { background: #fdf0f0; color: #8f2d2d; border-left-color: #e08a8a; }
+  .base-pill { background: #e7f0fa; color: #1f5f9e; border-color: #bcd4ec; }
+  .base-pill.acrylic { background: #e0f4f2; color: #0b6e69; border-color: #a8dcd6; }
+  .base-pill.powder { background: #efe8fb; color: #5b3aa8; border-color: #cfc0ef; }
+  .base-pill.other { background: #eef2f5; color: #55697b; border-color: #d6dfe6; }
+  /* Routes */
+  .route-card { background: #fff; border-color: var(--border); box-shadow: var(--shadow-sm); }
+  .route-card:hover, .route-card.selected { border-color: var(--accent); box-shadow: 0 6px 18px rgba(10,143,156,.15); }
+  .route-card .name { color: #0b3550; }
+  .press-bar { background: #e5edf2; }
+  .press-bar > i { background: linear-gradient(90deg, #38a169, #d69e2e, #c53b3b); }
+  .route-type { background: #e0f4f2; color: #0b6e69; }
+  .leg { border-bottom-color: #dbe6ee; }
+  .leg .n { background: #e0f4f2; color: var(--accent-d); }
+  #goto-rec { background: var(--accent) !important; }
+  /* Ranks */
+  .rank-item { background: #fff; border-color: var(--border); box-shadow: var(--shadow-sm); }
+  .rank-1 .rank-num { background: #fdf1dc; color: #a06508; }
+  .rank-2 .rank-num { background: #eceff3; color: #4a5b6c; }
+  .rank-3 .rank-num { background: #fde9dc; color: #b0521f; }
+  .rank-4 .rank-num { background: #e0f4f2; color: var(--accent-d); }
+  .rank-item .caveat { background: #fff8eb; color: #6b4a10; border-left-color: #d69e2e; }
+  .type-commercial { background: #e4eefa; color: #1f5f9e; }
+  .type-homemade { background: #e0f4f2; color: #0b6e69; }
+  .type-tech-uvc { background: #efe8fb; color: #5b3aa8; }
+  .type-tech-ultrasound { background: #e0f4f2; color: #0b6e69; }
+  .ext-link, .ind-card a.ind-link { color: #0b6fa0; }
+  .safety-box { background: #fdf0f0; border-color: #efc1c1; color: #7d2a2a; }
+  .hybrid-card { background: var(--bg2); border-color: var(--border); }
+  .hybrid-card strong { color: var(--accent-d); }
+  .subtabs button { background: #fff; color: #44596b; border-color: #cfdde7; }
+  .subtabs button.active { background: #e0f4f2; color: var(--accent-d); border-color: var(--accent); }
+  .linkbtn { background: #fff; color: var(--accent-d); border-color: #bfd8df; }
+  footer { border-top-color: var(--border); }
+  footer .dev-line { margin-top: 6px; color: var(--text); font-weight: 600; }
+  footer .dev-line a { color: #0b6fa0; text-decoration: none; }
+  /* Hero + stats */
+  .hero { display: grid; grid-template-columns: 1fr auto; gap: 18px; align-items: center;
+    background: linear-gradient(115deg, #ffffff 0%, #eef8f9 60%, #e1f2f4 100%); border: 1px solid #cfe5e9; }
+  .hero h2 { font-size: 1.45rem; margin-bottom: 6px; }
+  .hero .lead { color: #3e5568; font-size: .92rem; max-width: 48rem; }
+  .hero .notice { display: inline-flex; gap: 8px; align-items: center; margin-top: 12px; padding: 7px 14px; border-radius: 999px;
+    background: #fff4dc; border: 1px solid #efc773; color: #7a4a05; font-weight: 700; font-size: .86rem; }
+  .hero-art { width: 210px; height: 130px; }
+  .stats { grid-template-columns: repeat(auto-fit, minmax(138px, 1fr)); gap: 10px; margin-bottom: 16px; }
+  .stat { background: #fff; border: 1px solid var(--border); text-align: left; padding: 12px 12px; display: flex; gap: 12px; align-items: center; box-shadow: var(--shadow-sm); }
+  .stat:hover { border-color: var(--accent); }
+  .stat svg { width: 34px; height: 34px; flex: none; }
+  .stat .n { color: #0b3550; font-size: 1.5rem; line-height: 1.1; }
+  .stat .l { color: var(--muted); margin-top: 2px; }
+  /* Industry v2 */
+  .ind-banner { background: #effafb; border-color: #b8e2e6; border-left-color: var(--accent); top: 52px; }
+  .ind-banner strong { color: var(--accent-d); }
+  .ind-card { background: #fff; border-color: var(--border); box-shadow: var(--shadow-sm); }
+  .ind-card:hover { border-color: var(--accent); }
+  .ind-card.rel-高 { border-left: 4px solid #c53b3b; }
+  .ind-card.rel-中 { border-left: 4px solid #d69e2e; }
+  .ind-card.rel-低 { border-left: 4px solid #9aabbb; }
+  .cat-法规 { background: #efe8fb; color: #5b3aa8; border-color: #d5c7f2; }
+  .cat-企业 { background: #e4eefa; color: #1f5f9e; border-color: #bcd4ec; }
+  .cat-产品 { background: #e0f4f2; color: #0b6e69; border-color: #a8dcd6; }
+  .cat-技术 { background: #fdecdf; color: #a5461a; border-color: #f2c6a6; }
+  .rel-badge.r-高 { background: #fbe4e4; color: #a12d2d; }
+  .rel-badge.r-中 { background: #fdf1dc; color: #8a5a0a; }
+  .rel-badge.r-低 { background: #eef2f5; color: #55697b; }
+  .ind-trend { background: #f0f9fa; border-color: #c4e5e8; }
+  .ind-trend strong { color: var(--accent-d); }
+  .ind-layout { display: grid; grid-template-columns: 250px 1fr; gap: 16px; align-items: start; }
+  .ind-side { position: sticky; top: 110px; max-height: calc(100vh - 130px); overflow: auto; background: #fff;
+    border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; box-shadow: var(--shadow-sm); }
+  .ind-mode { display: flex; gap: 4px; margin-bottom: 10px; background: #eef4f7; padding: 3px; border-radius: 9px; }
+  .ind-mode button { flex: 1; appearance: none; border: 0; background: transparent; padding: 6px 4px; border-radius: 7px;
+    font: inherit; font-size: .8rem; font-weight: 650; color: #44596b; cursor: pointer; }
+  .ind-mode button.active { background: #fff; color: var(--accent-d); box-shadow: 0 1px 4px rgba(16,39,58,.12); }
+  .wk-month { font-size: .72rem; font-weight: 700; color: var(--muted); letter-spacing: .05em; margin: 10px 4px 4px; }
+  .wk-btn { display: flex; width: 100%; justify-content: space-between; align-items: center; gap: 6px; appearance: none;
+    border: 1px solid transparent; background: transparent; padding: 6px 8px 6px 18px; border-radius: 8px; font: inherit;
+    font-size: .8rem; color: var(--text); cursor: pointer; text-align: left; position: relative; }
+  .wk-btn::before { content: ""; position: absolute; left: 6px; top: 50%; width: 6px; height: 6px; margin-top: -3px; border-radius: 50%; background: #b9cfdc; }
+  .wk-btn:hover { background: #f0f7f9; }
+  .wk-btn.active { background: #e0f4f2; border-color: #a8dcd6; color: var(--accent-d); font-weight: 700; }
+  .wk-btn.active::before { background: var(--accent); }
+  .wk-btn .wk-n { font-size: .7rem; color: var(--muted); }
+  .wk-btn .wk-h { color: #a12d2d; font-weight: 700; }
+  .wk-chart { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 12px 4px; margin-bottom: 12px; }
+  .wk-chart svg { width: 100%; height: 96px; display: block; }
+  .wk-chart rect.bar { fill: #9fd4da; cursor: pointer; }
+  .wk-chart rect.bar.hi { fill: #c53b3b; opacity: .8; }
+  .wk-chart rect.bar.sel { fill: var(--accent); }
+  .wk-legend { font-size: .7rem; color: var(--muted); display: flex; gap: 12px; margin: 2px 0 4px; }
+  .wk-legend i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+  .ind-weekhead { font-size: .8rem; font-weight: 700; color: #0b3550; margin: 14px 0 8px; padding-bottom: 4px; border-bottom: 1px dashed #c9dbe5; grid-column: 1 / -1; }
+  @media (max-width: 900px) { .ind-layout { grid-template-columns: 1fr; } .ind-side { position: static; max-height: 260px; } .hero { grid-template-columns: 1fr; } .hero-art { display: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+
+  /* v3: literature stars, scholars, maps */
+  .stars { color: #d69e2e; letter-spacing: 1px; white-space: nowrap; cursor: help; font-size: .9rem; }
+  .stars .off { color: #d5e2ec; }
+  .lit-au { font-size: .74rem; font-weight: 600; color: #0b3550; }
+  td.lit-who { min-width: 170px; } td.lit-sum { min-width: 240px; max-width: 340px; }
+  .map-card { background: #f3f9fb; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px; margin-bottom: 14px; }
+  .map-box svg { width: 100%; height: auto; display: block; border-radius: 8px; background: linear-gradient(180deg, #d9eef3, #c4e3ea); }
+  .map-box .land { fill: #f4f1e8; stroke: #c9c2ad; stroke-width: .15; }
+  .map-box .grat { stroke: #ffffff; stroke-opacity: .5; stroke-width: .12; fill: none; }
+  .map-box .trk { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .map-box .trk.dim { opacity: .55; }
+  .map-box .trk:hover { opacity: 1; stroke-width: 1.4; cursor: pointer; }
+  .map-box .port { fill: #fff; stroke: #06233f; }
+  .map-box .lbl { font-size: 3px; fill: #06233f; paint-order: stroke; stroke: #fff; stroke-width: .6px; font-weight: 700; }
+  .map-box .flow { stroke-dasharray: 1.2 2.4; animation: dashMove 3s linear infinite; stroke: #fff; stroke-opacity: .8; fill: none; }
+  .map-legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: .74rem; color: var(--muted); margin-top: 6px; }
+  .map-legend i { display: inline-block; width: 18px; height: 4px; border-radius: 2px; margin-right: 5px; vertical-align: middle; }
+  .geo-note { font-size: .74rem; color: #7a4a05; background: #fff8eb; border-left: 3px solid #d69e2e; padding: 6px 10px; border-radius: 6px; margin-top: 8px; }
+  .modal-back { position: fixed; inset: 0; background: rgba(6,35,63,.5); z-index: 50; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .modal-back[hidden] { display: none; }
+  .modal { background: #fff; border-radius: 16px; width: min(1100px, 100%); max-height: 94vh; overflow: auto; padding: 16px 20px; box-shadow: 0 20px 60px rgba(0,0,0,.3); }
+  .modal-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .bf-badge { display: inline-block; font-size: .62rem; font-weight: 700; padding: 0 6px; border-radius: 999px; background: #efe8fb; color: #5b3aa8; border: 1px solid #d5c7f2; vertical-align: 1px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="ocean-head">
+    <div class="bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  <header class="app">
+    <div>
+      <h1><svg class="brand-mark float" viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M8 40 L14 18 Q24 8 34 18 L40 40 Z" fill="#d8eef3" stroke="#9ff3ea" stroke-width="1.5"/>
+        <path d="M16 40 L20 22 M24 40 V18 M32 40 L28 22" stroke="#6fb6c4" stroke-width="1.4"/>
+        <path d="M19 16 Q24 11 29 16 L26 19 H22 Z" fill="#0e8a94" stroke="#9ff3ea" stroke-width="1.2"/>
+        <path d="M4 42 H44" stroke="#9ff3ea" stroke-width="2" stroke-linecap="round"/>
+      </svg>防污涂料配方模拟器</h1>
+      <div class="sub">实验室代理表 · 全球航线相对压力 · 证据短名单 · V0 可视化面板 · 海洋防污涂层研究</div>
+    </div>
+    <div class="badge-row">
+      <span class="pill v" id="ver-pill">V0</span>
+      <span class="pill" id="date-pill">—</span>
+      <span class="pill">本地打开 · 无后端</span>
+    </div>
+  </header>
+
+    <div class="waves" aria-hidden="true">
+      <svg class="w1" viewBox="0 0 2880 46" preserveAspectRatio="none" fill="#9fd4da"><path d="M0 26 C 120 6, 240 46, 360 26 S 600 6, 720 26 S 960 46, 1080 26 S 1320 6, 1440 26 C 1560 6, 1680 46, 1800 26 S 2040 6, 2160 26 S 2400 46, 2520 26 S 2760 6, 2880 26 V46 H0Z"/></svg>
+      <svg class="w2" viewBox="0 0 2880 46" preserveAspectRatio="none" fill="#e6eff5" style="transform-origin:0 0;"><path d="M0 26 C 120 6, 240 46, 360 26 S 600 6, 720 26 S 960 46, 1080 26 S 1320 6, 1440 26 C 1560 6, 1680 46, 1800 26 S 2040 6, 2160 26 S 2400 46, 2520 26 S 2760 6, 2880 26 V46 H0Z"/></svg>
+    </div>
+  </div>
+  <div class="honesty" role="status">
+    <div class="ico">⚠️</div>
+    <div>
+      <p><strong>诚实边界：模拟 ≠ 实测。</strong>
+        <span id="honesty-text">输出是带标签的区间、相对等级与证据短名单，不是实验室报告值或航次污损率。禁止把厂家标称或粗估观察当成功能化样板真值。</span>
+      </p>
+      <p class="safety" id="safety-text"></p>
+    </div>
+  </div>
+
+  <nav class="tabs" role="tablist">
+    <button type="button" class="active" data-tab="overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><span>总览</span></button>
+    <button type="button" data-tab="lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3"/><path d="M7.5 15h9"/></svg><span>轨 A · 实验室表</span></button>
+    <button type="button" data-tab="routes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 15h18l-2.5 4.5h-13z"/><path d="M6 15V10h9l2 5"/><path d="M9 10V7h3"/></svg><span>轨 B · 航线剖面</span></button>
+    <button type="button" data-tab="rec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg><span>轨 C · 短名单</span></button>
+    <button type="button" data-tab="lit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M9 8h6"/></svg><span>文献界</span></button>
+    <button type="button" data-tab="tech"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M3 11h18M8 7V5h8v2"/></svg><span>商用·技术</span></button>
+    <button type="button" data-tab="industry"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h13v14H6a2 2 0 0 1-2-2z"/><path d="M17 9h3v8a2 2 0 0 1-2 2"/><path d="M7 9h7M7 13h7M7 16h4"/></svg><span>行业动态</span><span class="tab-badge" id="ind-tab-badge"></span></button>
+    <button type="button" data-tab="scholars"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg><span>防污学者排行</span></button>
+  </nav>
+
+  <!-- Overview -->
+  <section id="panel-overview" class="panel active">
+    <div class="card hero">
+      <div>
+        <h2>防污涂料配方模拟器</h2>
+        <p class="lead">面向海洋防污涂层研究的三轨证据面板：轨 A 实验室剂量—代理性能、轨 B 全球航线相对污损压力、轨 C 证据短名单，并汇集文献界、商用技术与行业动态。</p>
+        <div class="notice">⚠ 模拟 ≠ 实测 · 所有数值均带证据标签，非实验室报告值或航次污损率</div>
+      </div>
+      <svg class="hero-art" viewBox="0 0 210 130" aria-hidden="true">
+        <defs>
+          <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe6ea"/><stop offset="1" stop-color="#5fb3bf"/></linearGradient>
+          <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+          <clipPath id="shieldClip"><path d="M105 14 l34 13 v24 c0 22-15 38-34 46 c-19-8-34-24-34-46 V27z"/></clipPath>
+        </defs>
+        <rect x="0" y="96" width="210" height="34" rx="8" fill="url(#sea)" opacity=".55"/>
+        <g clip-path="url(#shieldClip)">
+          <rect x="60" y="10" width="90" height="100" fill="#0b4a6f"/>
+          <rect x="60" y="56" width="90" height="16" fill="#0e8a94"/>
+          <rect x="60" y="72" width="90" height="12" fill="#5fb3bf"/>
+          <rect x="60" y="84" width="90" height="30" fill="#bfe6ea"/>
+          <rect class="sheen-rect" x="80" y="0" width="22" height="120" fill="url(#shine)" transform="skewX(-20)"/>
+        </g>
+        <path d="M105 14 l34 13 v24 c0 22-15 38-34 46 c-19-8-34-24-34-46 V27z" fill="none" stroke="#06233f" stroke-width="2"/>
+        <path d="M92 40 l9 9 17-18" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <g class="sway" style="transform-box:fill-box"><path d="M30 126 C24 108 36 98 28 80 M30 126 C38 112 30 104 40 92" fill="none" stroke="#2f855a" stroke-width="3" stroke-linecap="round"/></g>
+        <g class="sway" style="transform-box:fill-box;animation-delay:-2.5s"><path d="M178 126 C172 112 184 102 176 86" fill="none" stroke="#38a169" stroke-width="3" stroke-linecap="round"/></g>
+        <path d="M160 126 l6-14 h10 l6 14z" fill="#e3edf4" stroke="#5a7083" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <div class="stats" id="stats"></div>
+    <div class="card ov-ind" id="ov-industry">
+      <div class="ov-head">
+        <h2 style="margin-bottom:0;">行业动态 · 本周</h2>
+        <button type="button" class="linkbtn" id="ov-ind-goto">查看全部行业动态 →</button>
+      </div>
+      <p class="muted" id="ov-ind-meta" style="margin-top:6px;"></p>
+      <ul id="ov-ind-high"></ul>
+    </div>
+    <div class="card">
+      <h2>怎么用（一页流程）</h2>
+      <ol style="margin:8px 0 0 18px; font-size:.9rem; color:var(--text);">
+        <li>打开<strong>轨 A</strong>：按路线芯片浏览示例配方行；性能空格为待测。公开仓库轨 A 为<strong>示例数据</strong>（见 docs/example-data.md）。</li>
+        <li>打开<strong>轨 B</strong>：点选全球走廊或冷端桩，看相对污损压力（1–5）与策略提示。</li>
+        <li>打开<strong>轨 C</strong>：按航线筛选短名单 — 排序是工况拟合，<em>不是</em>魔法最优分。</li>
+        <li>打开<strong>文献界</strong>：按技术分类筛选（金属熔覆/喷涂、硅改性、FRC、SPC 铜、水凝胶、UV-C、超声、天然杀生剂等；DOI 可溯源）。</li>
+        <li>打开<strong>商用·技术</strong>：主流市售产品线 + UV-C/超声辅助技术 + 全球目录候选。</li>
+        <li>打开<strong>行业动态</strong>：按周查看法规/企业/产品/技术动态（来自「防污行业周报」，公开资料，非性能数据）。</li>
+        <li>任何数值旁看标签颜色：实测 / 待测 / 厂家标称 / 粗估观察 / 文献界 / 相对等级 …</li>
+      </ol>
+      <details class="help">
+        <summary>标签图例</summary>
+        <div style="margin-top:8px;">
+          <span class="tag tag-实测">实测</span>
+          <span class="tag tag-厂家标称">厂家标称</span>
+          <span class="tag tag-待测">待测</span>
+          <span class="tag tag-粗估观察">粗估观察</span>
+          <span class="tag tag-方案非实测">方案非实测</span>
+          <span class="tag tag-相对等级">相对等级</span>
+          <span class="tag tag-框架推断">框架推断</span>
+          <span class="tag tag-文献界">文献界</span>
+          <span class="tag tag-文献点名">文献点名</span>
+          <span class="tag tag-公开资料">公开资料</span>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Lab -->
+  <section id="panel-lab" class="panel">
+    <div class="card">
+      <h2><svg class="h-ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="9" cy="10" r="3.2" fill="#0e8a94"/><circle cx="21" cy="7" r="2.6" fill="#0b4a6f"/><circle cx="17" cy="16" r="3" fill="#5fb3bf"/><path d="M9 10 L17 16 L21 7" stroke="#5a7083" stroke-width="1.4" fill="none"/><path class="drip" d="M17 21 c-2.2 3-3 4.6-3 6a3 3 0 0 0 6 0c0-1.4-.8-3-3-6z" fill="#0a8f9c"/></svg>轨 A · 剂量 → 代理性能表</h2>
+      <p class="muted">数据来自 <code>data/lab-proxy-table.csv</code>（公开仓库为示例数据，见 docs/example-data.md）。空性能格 = 尚无点。<strong>未编造</strong>拉拔/EIS/HPLC 实测数；劣势见各行 disadvantage_notes，标签诚实。</p>
+      <div class="chip-row lab-chips" id="lab-base-chips" aria-label="基漆/路线筛选"></div>
+      <div class="toolbar">
+        <label>筛选标签
+          <select id="lab-tag-filter">
+            <option value="">全部标签</option>
+            <option>厂家标称</option>
+            <option>待测</option>
+            <option>粗估观察</option>
+            <option>方案非实测</option>
+          </select>
+        </label>
+        <label>搜索
+          <input type="search" id="lab-search" placeholder="ID / 基漆 / 劣势 / 备注…" />
+        </label>
+      </div>
+      <div class="table-wrap">
+        <table class="data" id="lab-table">
+          <thead>
+            <tr>
+              <th>ID / 路线</th>
+              <th>填料%</th>
+              <th>分散剂%</th>
+              <th>拉拔 MPa</th>
+              <th>EIS</th>
+              <th>HPLC</th>
+              <th>微宇宙 / 表征</th>
+              <th>备注 · 劣势</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Routes -->
+  <section id="panel-routes" class="panel">
+    <div class="card">
+      <h2><svg class="h-ico" viewBox="0 0 32 32" aria-hidden="true"><path class="dash-route" d="M2 28 C10 22 22 30 30 24" stroke="#0a8f9c" stroke-width="1.6" fill="none"/><g class="float"><path d="M5 17 h22 l-3 5 H8z" fill="#0b4a6f"/><path d="M9 17 v-5 h10 l3 5" fill="#5fb3bf"/><rect x="12" y="8" width="3" height="4" fill="#c53b3b"/></g></svg>轨 B · 全球航线相对污损压力</h2>
+      <p class="muted">全部为 GCB 框架<strong>相对等级</strong>（非现场实测污损率）。点选查看航段；可联动轨 C。</p>
+      <div class="toolbar">
+        <label>类型
+          <select id="route-type-filter">
+            <option value="">全部走廊 / 桩</option>
+          </select>
+        </label>
+      </div>
+      <div class="map-card">
+        <div id="ov-map" class="map-box"></div>
+        <div class="map-legend" id="ov-legend"></div>
+        <p class="geo-note" id="ov-geo-note"></p>
+      </div>
+      <div class="route-grid" id="route-grid"></div>
+    </div>
+    <div class="card" id="route-detail" style="display:none;">
+      <h2 id="route-detail-title">航段明细</h2>
+      <p class="muted" id="route-detail-meta"></p>
+      <div class="legs" id="route-legs"></div>
+      <p style="margin-top:12px;">
+        <button type="button" id="goto-rec" style="
+          appearance:none;border:none;cursor:pointer;font-family:inherit;
+          background:var(--accent);color:#fff;padding:8px 14px;border-radius:8px;font-weight:600;
+        ">查看该航线短名单 →</button>
+      </p>
+    </div>
+  </section>
+
+  <!-- Recommendations -->
+  <section id="panel-rec" class="panel">
+    <div class="card">
+      <h2>轨 C · 推荐短名单（按航线）</h2>
+      <p class="muted">同产品集四候选；排序 = 工况相对拟合 + 证据标签。<strong>无单一最优分。</strong></p>
+      <div class="toolbar">
+        <label>航线剖面
+          <select id="rec-profile"></select>
+        </label>
+      </div>
+      <div class="rank-list" id="rank-list"></div>
+    </div>
+  </section>
+
+
+  <!-- Literature bounds -->
+  <section id="panel-lit" class="panel">
+    <div class="card">
+      <h2>文献界 · 公开数据上下界</h2>
+      <p class="muted">来自 <code>data/literature-bounds.csv</code> + <code>literature-taxonomy.md</code>；作者/机构/概要/被引来自 OpenAlex（<code>data/literature-enrichment.csv</code>，2026-10-20 获取）；「重要度评估（主观）」为透明规则打分，悬停查看依据，<strong>非实测</strong>。全部 tag=<span class="tag tag-文献界">文献界</span> — <strong>≠</strong> 示例配方实测，≠ 航次污损率。</p>
+      <div class="chip-row" id="lit-cat-chips" aria-label="技术分类"></div>
+      <div class="toolbar">
+        <label>指标关键词
+          <input type="search" id="lit-search" placeholder="Cu / barnacle / UV / laser / hydrogel…" />
+        </label>
+        <label>技术分类
+          <select id="lit-cat-filter">
+            <option value="">全部分类</option>
+          </select>
+        </label>
+        <label>次级工艺
+          <select id="lit-sub-filter">
+            <option value="">全部工艺</option>
+          </select>
+        </label>
+      </div>
+      <div class="table-wrap">
+        <table class="data" id="lit-table">
+          <thead>
+            <tr>
+              <th>研究者 · 机构</th>
+              <th>分类</th>
+              <th>论文概要（中文）</th>
+              <th>年份</th>
+              <th title="重要度评估（主观，非实测）：基础 1 星；+ 年均被引（OpenAlex cited_by_count ÷ 发表至今年数）≥4 得 1、≥15 得 2、≥50 得 3；+ 期刊在本面板列出的防污/涂层/材料主流期刊清单内得 1；+ 题名直接涉及 antifouling/fouling 得 1；封顶 5 星。数据获取于 2026-10-20。">重要度评估（主观）ⓘ</th>
+              <th>标签</th>
+              <th>来源 / 备注</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Commercial + tech -->
+  <section id="panel-tech" class="panel">
+    <div class="card">
+      <h2>商用涂料 · 辅助技术 · 全球目录</h2>
+      <p class="muted">厂家标称 / 公开资料 / 文献界。禁止与示例短名单或示例实验室表混读为实测。分类见 <code>commercial-taxonomy.md</code>。</p>
+      <div class="chip-row" id="comm-cat-chips"></div>
+      <div class="toolbar" style="margin-top:8px;">
+        <label>技术分类
+          <select id="comm-cat-filter"><option value="">全部分类</option></select>
+        </label>
+      </div>
+      <div class="subtabs" id="tech-subtabs">
+        <button type="button" class="active" data-sub="catalog">全球目录短名单</button>
+        <button type="button" data-sub="brands">商用产品线</button>
+        <button type="button" data-sub="aux">UV-C · 超声 · 混合</button>
+      </div>
+    </div>
+    <div id="tech-sub-catalog" class="tech-sub">
+      <div class="card">
+        <h2>CATALOG-GLOBAL-V0</h2>
+        <p class="muted">目录序 ≠ 航线魔法最优分；作扩展对照。可用上方分类芯片筛选。</p>
+        <div class="rank-list" id="catalog-list"></div>
+      </div>
+    </div>
+    <div id="tech-sub-brands" class="tech-sub" style="display:none;">
+      <div class="card">
+        <div class="toolbar">
+          <label>品牌
+            <select id="brand-filter"><option value="">全部品牌</option></select>
+          </label>
+          <label>搜索
+            <input type="search" id="brand-search" placeholder="产品线 / SPC / FRC…" />
+          </label>
+        </div>
+        <div id="brand-blocks"></div>
+        <h3>技术类型速查（框架提示）</h3>
+        <div class="table-wrap">
+          <table class="data" id="type-lookup-table">
+            <thead><tr><th>类型</th><th>代表产品</th><th>对轨 B 定性提示</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div id="tech-sub-aux" class="tech-sub" style="display:none;">
+      <div class="card">
+        <h2>UV-C</h2>
+        <ul class="principle-list" id="uvc-principles"></ul>
+        <h3>文献 / 试点摘录</h3>
+        <div class="table-wrap">
+          <table class="data" id="uvc-table">
+            <thead><tr><th>条目</th><th>要点</th><th>引用</th><th>标签</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <h2>超声 / 导波</h2>
+        <ul class="principle-list" id="us-principles"></ul>
+        <h3>文献 / 现场摘录</h3>
+        <div class="table-wrap">
+          <table class="data" id="us-table">
+            <thead><tr><th>条目</th><th>要点</th><th>引用</th><th>标签</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <h2>混合主动体系（框架）</h2>
+        <div class="hybrid-grid" id="hybrid-grid"></div>
+        <div class="safety-box" id="tech-safety"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry news -->
+  <section id="panel-industry" class="panel">
+    <div class="ind-banner" role="note">
+      <span>📰</span>
+      <span><strong>行业动态/公开资料，非性能数据</strong></span>
+      <span class="muted">条目来自「防污行业周报」，不进入轨 A/B/C 的数值或排序；引用前请回到原始来源核对。</span>
+    </div>
+    <div class="card">
+      <h2><svg class="h-ico spin-slow" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12" fill="#e0f4f2" stroke="#0a8f9c" stroke-width="1.6"/><circle cx="16" cy="16" r="5" fill="none" stroke="#0a8f9c" stroke-width="1.4"/><path d="M16 4v7M16 21v7M4 16h7M21 16h7M7.5 7.5l5 5M19.5 19.5l5 5M24.5 7.5l-5 5M12.5 19.5l-5 5" stroke="#0a8f9c" stroke-width="1.1"/></svg>行业动态 · 每周进展</h2>
+      <p class="muted" id="ind-meta">数据来自 <code>data/industry-feed/</code>（每周一份，文件名为当周周一）。</p>
+      <div class="wk-chart" id="ind-chart"></div>
+      <div class="ind-layout">
+        <aside class="ind-side">
+          <div class="ind-mode" id="ind-mode">
+            <button type="button" class="active" data-mode="week">按周</button>
+            <button type="button" data-mode="all">全部周次</button>
+          </div>
+          <div id="ind-weeklist"></div>
+          <select id="ind-week" style="display:none" aria-hidden="true"></select>
+        </aside>
+        <div>
+          <div class="chip-row" id="ind-cat-chips" aria-label="类别筛选"></div>
+          <div class="toolbar" style="margin-top:8px;">
+            <label>相关度
+              <select id="ind-rel">
+                <option value="">全部相关度</option>
+                <option value="高">高</option>
+                <option value="中">中</option>
+                <option value="低">低</option>
+              </select>
+            </label>
+            <label>搜索
+              <input type="search" id="ind-search" placeholder="标题 / 摘要 / 来源 / 理由…" />
+            </label>
+          </div>
+          <p class="muted" id="ind-count" style="margin-bottom:10px;"></p>
+          <div class="ind-grid" id="ind-list"></div>
+          <div class="ind-trend" id="ind-trend" style="margin-top:14px;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Scholars -->
+  <section id="panel-scholars" class="panel">
+    <div class="ind-banner" role="note">
+      <span>🎓</span>
+      <span><strong>排行依赖数据库覆盖与所选指标</strong></span>
+      <span class="muted" id="sch-note"></span>
+    </div>
+    <div class="card">
+      <h2><svg class="h-ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M3 13l13-6 13 6-13 6z" fill="#0b4a6f"/><path d="M8 15.5v6c4 3 12 3 16 0v-6l-8 3.7z" fill="#5fb3bf"/><g class="sway" style="transform-box:fill-box;transform-origin:50% 0"><path d="M27 13.5v7" stroke="#d69e2e" stroke-width="1.6"/><circle cx="27" cy="22" r="1.6" fill="#d69e2e"/></g></svg>防污学者排行 · 影响力</h2>
+      <p class="muted" id="sch-meta"></p>
+      <div class="toolbar" style="margin-top:8px;">
+        <label>搜索 <input type="search" id="sch-search" placeholder="姓名 / 机构 / 国家 / 代表作…" /></label>
+        <label><input type="checkbox" id="sch-inlit" /> 仅看本面板文献界中出现的作者</label>
+      </div>
+      <div class="table-wrap">
+        <table class="data" id="sch-table">
+          <thead><tr><th>#</th><th>学者</th><th>机构 · 国家</th><th title="领域内 = 标题/摘要含 marine antifouling 或 marine biofouling 的作品">领域内 h 指数</th><th>领域内被引</th><th>领域内作品</th><th>全库 h / 被引</th><th>代表作（领域内被引最高）</th><th>主页</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal-back" id="route-modal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rm-title">
+      <div class="modal-head"><h2 id="rm-title">航线示意图</h2><button type="button" class="linkbtn" id="rm-close">关闭 ✕</button></div>
+      <p class="muted" id="rm-meta"></p>
+      <div id="rm-map" class="map-box"></div>
+      <div class="map-legend" id="rm-legend"></div>
+      <p class="geo-note" id="rm-note"></p>
+    </div>
+  </div>
+
+  <footer>
+    数据嵌入自 <code>ui/data-snapshot.js</code>（lab / 航线 / 短名单 / 文献界 / 商用·技术 / 行业动态 CSV·MD）。
+    <div class="dev-line">由洪鹤庭 Jassyhong 开发，有疑问请联系 <a href="tel:17607144929">17607144929</a></div>
+  </footer>
+</div>
+
+<script src="data-snapshot.js"></script>
+<script src="world-land.js"></script>
+<script>
+(function () {
+  const D = window.SIM_DATA;
+  if (!D) {
+    document.body.innerHTML = '<p style="padding:40px;color:#e85d5d;font-family:sans-serif;">未加载 data-snapshot.js。请从 ui/ 目录打开 index.html，或与 data-snapshot.js 放在同一文件夹。</p>';
+    return;
+  }
+
+  document.getElementById('ver-pill').textContent = D.meta.version;
+  document.getElementById('date-pill').textContent = D.meta.updated;
+  document.getElementById('honesty-text').textContent = D.meta.honesty;
+  document.getElementById('safety-text').textContent = '安全常驻：' + D.meta.safety;
+
+  /* Tabs */
+  document.querySelectorAll('nav.tabs button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+  /* Deep link: index.html#industry etc. opens that tab (read once on load) */
+  function tabFromHash() {
+    const id = (location.hash || '').replace(/^#/, '');
+    if (id && document.getElementById('panel-' + id)) {
+      const b = document.querySelector('nav.tabs button[data-tab="' + id + '"]');
+      if (b) b.click();
+    }
+  }
+  function goTab(id) {
+    const btn = document.querySelector('nav.tabs button[data-tab="' + id + '"]');
+    if (btn) btn.click();
+  }
+
+  function tagHtml(t) {
+    if (!t) return '';
+    return String(t).split(/[;；,，]/).map(s => s.trim()).filter(Boolean).map(s => {
+      const cls = 'tag-' + s;
+      const known = ['实测','待测','厂家标称','粗估观察','方案非实测','文献界','文献点名','相对等级','框架推断','插值','公开资料'];
+      const c = known.includes(s) ? cls : 'tag-default';
+      return '<span class="tag ' + c + '">' + escapeHtml(s) + '</span>';
+    }).join('');
+  }
+  function linksHtml(links) {
+    const ok = (links || []).filter(l => /^https?:\/\//i.test(l.url || ''));
+    if (!ok.length) return '';
+    return '<div class="ext-links">' + ok.map(l =>
+      '<a class="ext-link" href="' + escapeHtml(l.url) + '" target="_blank" rel="noopener noreferrer" title="' +
+      escapeHtml((l.origin ? '来源：' + l.origin + ' · ' : '') + l.url) + '">↗ ' + escapeHtml(l.label || l.url) + '</a>'
+    ).join('') + '</div>';
+  }
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function cellVal(v, tag) {
+    if (v == null || String(v).trim() === '') {
+      return '<span class="empty">—</span>' + (tag ? ' ' + tagHtml(tag) : '');
+    }
+    return escapeHtml(v) + (tag ? '<br>' + tagHtml(tag) : '');
+  }
+  function pressPct(n) {
+    const x = Math.max(0, Math.min(5, Number(n) || 0));
+    return Math.round((x / 5) * 100);
+  }
+
+
+  function typeLabel(t) {
+    if (t === 'commercial') return '市售';
+    if (t === 'homemade') return '自制/研究';
+    if (t === 'tech-uvc') return 'UV-C 辅助';
+    if (t === 'tech-ultrasound') return '超声辅助';
+    return t || '其他';
+  }
+  function typeChipClass(t) {
+    if (t === 'commercial') return 'type-commercial';
+    if (t === 'homemade') return 'type-homemade';
+    if (t === 'tech-uvc') return 'type-tech-uvc';
+    if (t === 'tech-ultrasound') return 'type-tech-ultrasound';
+    return 'type-commercial';
+  }
+
+  /* Overview stats */
+  const measuredish = D.lab.filter(r =>
+    ['厂家标称','粗估观察','方案非实测'].includes(r.pull_off_tag) ||
+    ['厂家标称','粗估观察','方案非实测'].includes(r.microcosm_tag) ||
+    ['方案非实测'].includes(r.hplc_tag)
+  ).length;
+  const pending = D.lab.filter(r =>
+    r.pull_off_tag === '待测' || r.eis_tag === '待测'
+  ).length;
+  const litN = (D.literature || []).length;
+  const catN = (D.catalog || []).length;
+  const brandN = ((D.commercial_products || {}).brands || []).reduce((n,b) => n + (b.items||[]).length, 0);
+  const MC = (D.meta && D.meta.counts) || {};
+  const SI = {
+    lab: '<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="9" fill="#e0f4f2"/><path d="M14 8h6M15 8v7l-5 9h14l-5-9V8" fill="none" stroke="#0a8f9c" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+    route: '<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="9" fill="#e4eefa"/><path d="M7 21h20l-3 5H10z" fill="#1f5f9e"/><path d="M11 21v-5h9l3 5" fill="#7fb2df"/></svg>',
+    rec: '<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="9" fill="#fdf1dc"/><path d="M12 11h12M12 17h12M12 23h12" stroke="#a06508" stroke-width="2" stroke-linecap="round"/><circle cx="8.5" cy="11" r="1.4" fill="#a06508"/><circle cx="8.5" cy="17" r="1.4" fill="#a06508"/><circle cx="8.5" cy="23" r="1.4" fill="#a06508"/></svg>',
+    lit: '<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="9" fill="#dff4f2"/><path d="M9 10a2 2 0 0 1 2-2h14v17H11a2 2 0 0 0-2 2z" fill="none" stroke="#0b6e69" stroke-width="1.8"/></svg>',
+    cat: '<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="9" fill="#efe8fb"/><path d="M17 8l8 3v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10v-6z" fill="none" stroke="#5b3aa8" stroke-width="1.8"/></svg>',
+    prod: '<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="9" fill="#e4eefa"/><rect x="11" y="12" width="12" height="14" rx="2" fill="none" stroke="#1f5f9e" stroke-width="1.8"/><path d="M13 12V9h8v3" stroke="#1f5f9e" stroke-width="1.8" fill="none"/></svg>',
+    ind: '<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="9" fill="#e0f3f5"/><path d="M9 10h13v15H11a2 2 0 0 1-2-2zM22 14h3v9a2 2 0 0 1-2 2M12 14h7M12 18h7" fill="none" stroke="#0a6f79" stroke-width="1.7"/></svg>',
+    pend: '<svg viewBox="0 0 34 34"><rect width="34" height="34" rx="9" fill="#edf1f5"/><circle cx="17" cy="17" r="8" fill="none" stroke="#4a5b6c" stroke-width="1.8"/><path d="M17 12v5l3 2" stroke="#4a5b6c" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>',
+  };
+  const mv = (k, fb) => (MC[k] != null ? MC[k] : fb);
+  document.getElementById('stats').innerHTML = [
+    ['实验室行', mv('lab', D.lab.length), SI.lab],
+    ['航线剖面', mv('routes', D.routes.length), SI.route],
+    ['短名单行', mv('recommendations', D.recommendations.length), SI.rec],
+    ['文献界', mv('literature', litN), SI.lit],
+    ['目录候选', mv('catalog', catN), SI.cat],
+    ['商用产品线', mv('products', brandN), SI.prod],
+    ['行业动态（' + ((D.meta && D.meta.industry_weeks) || 0) + ' 周）', (D.meta && D.meta.industry_entries) || 0, SI.ind],
+    ['待测槽（约）', pending, SI.pend],
+  ].map(([l,n,svg]) => '<div class="stat">' + svg + '<div><div class="n">' + n + '</div><div class="l">' + escapeHtml(l) + '</div></div></div>').join('');
+
+  /* Lab table + basecoat chips */
+  let labBaseActive = '';
+  function labBaseKey(basecoat) {
+    const b = (basecoat || '');
+    if (b.includes('示例双组分环氧') || b.startsWith('示例双组分环氧')) return 'jf602';
+    if (b.includes('丙烯酸') || b.includes('松香')) return 'acrylic';
+    if (b.includes('粉体') || b.includes('填料') || b.includes('EIS') || b.includes('释放几何')) return 'powder';
+    if (b.includes('UV-C') || b.includes('超声') || b.includes('主动')) return 'active';
+    return 'other';
+  }
+  function labBasePill(basecoat) {
+    const k = labBaseKey(basecoat);
+    const cls = k === 'acrylic' ? 'acrylic' : k === 'powder' ? 'powder' : k === 'jf602' ? '' : 'other';
+    return '<span class="base-pill ' + cls + '">' + escapeHtml(basecoat || '—') + '</span>';
+  }
+  function buildLabBaseChips() {
+    const chips = document.getElementById('lab-base-chips');
+    if (!chips) return;
+    const groups = [
+      { key: '', zh: '全部路线' },
+      { key: 'jf602', zh: '示例双组分环氧' },
+      { key: 'acrylic', zh: '自配丙烯酸' },
+      { key: 'powder', zh: '示例功能填料粉体' },
+      { key: 'active', zh: 'UV-C/超声' },
+      { key: 'other', zh: '对照/其他' },
+    ];
+    const counts = {};
+    (D.lab || []).forEach(r => {
+      const k = labBaseKey(r.basecoat);
+      counts[k] = (counts[k] || 0) + 1;
+    });
+    chips.innerHTML = groups.map(g => {
+      const n = g.key === '' ? (D.lab || []).length : (counts[g.key] || 0);
+      const active = (labBaseActive === g.key) ? ' active' : '';
+      return '<button type="button" class="chip' + active + '" data-key="' + g.key + '">' +
+        escapeHtml(g.zh) + '<span class="cnt">' + n + '</span></button>';
+    }).join('');
+    chips.onclick = (e) => {
+      const btn = e.target.closest('.chip');
+      if (!btn) return;
+      labBaseActive = btn.dataset.key || '';
+      chips.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === btn));
+      renderLab();
+    };
+  }
+  function renderLab() {
+    const tagF = document.getElementById('lab-tag-filter').value;
+    const q = document.getElementById('lab-search').value.trim().toLowerCase();
+    const tbody = document.querySelector('#lab-table tbody');
+    const rows = D.lab.filter(r => {
+      if (labBaseActive && labBaseKey(r.basecoat) !== labBaseActive) return false;
+      const tags = [r.pull_off_tag, r.eis_tag, r.hplc_tag, r.microcosm_tag].join(' ');
+      if (tagF && !tags.includes(tagF)) return false;
+      if (q) {
+        const hay = [r.formulation_id, r.basecoat, r.note, r.uncertainty, r.disadvantage_notes, r.safety_flags].join(' ').toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    });
+    tbody.innerHTML = rows.map(r => {
+      const disadv = (r.disadvantage_notes || '').trim();
+      const meta = [(r.uncertainty || ''), (r.note || '')].filter(Boolean).join(' · ');
+      return `<tr>
+      <td><div class="id">${escapeHtml(r.formulation_id)}</div>${labBasePill(r.basecoat)}</td>
+      <td>${escapeHtml(r.filler_wt_pct||'—')}</td>
+      <td>${escapeHtml(r.dispersant_rel_pct||'—')}</td>
+      <td>${cellVal(r.pull_off_MPa, r.pull_off_tag)}</td>
+      <td>${cellVal(r.eis_note, r.eis_tag)}</td>
+      <td>${cellVal(r.hplc_analyte_note, r.hplc_tag)}</td>
+      <td>${cellVal(r.microcosm_relative_fouling, r.microcosm_tag)}</td>
+      <td><div class="lab-meta">${escapeHtml(meta)}</div>
+          ${disadv ? '<div class="disadv"><strong>劣势/边界：</strong>' + escapeHtml(disadv) + '</div>' : ''}
+          ${r.safety_flags ? '<div class="muted" style="margin-top:4px;font-size:.68rem;">安全：' + escapeHtml(r.safety_flags) + '</div>' : ''}
+      </td>
+    </tr>`;
+    }).join('') || '<tr><td colspan="8" class="empty">无匹配行</td></tr>';
+  }
+  buildLabBaseChips();
+  document.getElementById('lab-tag-filter').addEventListener('change', renderLab);
+  document.getElementById('lab-search').addEventListener('input', renderLab);
+  renderLab();
+
+  /* Routes */
+  let selectedRoute = null;
+  const types = [...new Set(D.routes.map(r => r.type))];
+  const typeSel = document.getElementById('route-type-filter');
+  types.forEach(t => {
+    const o = document.createElement('option');
+    o.value = t; o.textContent = t;
+    typeSel.appendChild(o);
+  });
+
+  function renderRoutes() {
+    const tf = typeSel.value;
+    const grid = document.getElementById('route-grid');
+    const list = D.routes.filter(r => !tf || r.type === tf);
+    grid.innerHTML = list.map(r => `
+      <div class="route-card${selectedRoute===r.profile_id?' selected':''}" data-id="${escapeHtml(r.profile_id)}">
+        <div class="name">${escapeHtml(r.name_zh)}</div>
+        <div class="band">${escapeHtml(r.climate_band)}</div>
+        <div class="press-label">相对压力 ${escapeHtml(r.overall_pressure)}</div>
+        <div class="press-bar"><i style="width:${pressPct(r.overall_num)}%"></i></div>
+        <div class="muted" style="font-size:.72rem;">${escapeHtml(r.strategy)}</div>
+        <span class="route-type">${escapeHtml(r.type)}</span>
+      </div>
+    `).join('');
+    grid.querySelectorAll('.route-card').forEach(el => {
+      el.addEventListener('click', () => { selectRoute(el.dataset.id); openRouteModal(el.dataset.id); });
+    });
+  }
+
+  function selectRoute(id) {
+    selectedRoute = id;
+    const r = D.routes.find(x => x.profile_id === id);
+    renderRoutes();
+    const detail = document.getElementById('route-detail');
+    if (!r) { detail.style.display = 'none'; return; }
+    detail.style.display = 'block';
+    document.getElementById('route-detail-title').textContent = r.name_zh + ' · ' + r.profile_id;
+    document.getElementById('route-detail-meta').textContent =
+      '气候带：' + r.climate_band + '　|　全线相对压力：' + r.overall_pressure + '　|　策略：' + r.strategy +
+      '　|　tag：相对等级 + 框架推断';
+    document.getElementById('route-legs').innerHTML = (r.legs || []).map((leg, i) => `
+      <div class="leg">
+        <div class="n">${i+1}</div>
+        <div>
+          <strong>${escapeHtml(leg.segment)}</strong>
+          <div>相对压力：${escapeHtml(leg.pressure)}</div>
+          <div class="muted">${escapeHtml(leg.hint||'')}</div>
+        </div>
+      </div>
+    `).join('');
+    /* sync rec select */
+    const rs = document.getElementById('rec-profile');
+    if ([...rs.options].some(o => o.value === id)) {
+      rs.value = id;
+      renderRec();
+    }
+  }
+
+  document.getElementById('goto-rec').addEventListener('click', () => {
+    goTab('rec');
+    renderRec();
+  });
+  typeSel.addEventListener('change', renderRoutes);
+  renderRoutes();
+
+  /* Recommendations */
+  const recSel = document.getElementById('rec-profile');
+  D.routes.forEach(r => {
+    const o = document.createElement('option');
+    o.value = r.profile_id;
+    o.textContent = r.name_zh + ' (' + r.profile_id + ')';
+    recSel.appendChild(o);
+  });
+  recSel.value = 'ROUTE-SHA-SIN-V0';
+
+  function renderRec() {
+    const pid = recSel.value;
+    const items = D.recommendations
+      .filter(r => r.matched_profile_id === pid)
+      .sort((a,b) => Number(a.rank) - Number(b.rank));
+    const box = document.getElementById('rank-list');
+    if (!items.length) {
+      box.innerHTML = '<p class="empty">该剖面暂无短名单行。</p>';
+      return;
+    }
+    box.innerHTML = items.map(r => `
+      <div class="rank-item rank-${escapeHtml(r.rank)}">
+        <div class="rank-num">${escapeHtml(r.rank)}</div>
+        <div>
+          <div class="title">${escapeHtml(r.name)}
+            <span class="type-chip ${typeChipClass(r.type)}">${escapeHtml(typeLabel(r.type))}</span>
+          </div>
+          <div class="meta">证据标签 ${tagHtml(r.evidence_tag)}
+            ${r.matched_track_A_id ? ' · 关联轨 A：<code>'+escapeHtml(r.matched_track_A_id)+'</code>' : ''}
+          </div>
+          <div class="caveat"><strong>局限：</strong>${escapeHtml(r.caveats||'')}</div>
+          <div class="note">${escapeHtml(r.note||'')}</div>
+          ${linksHtml(r.links)}
+        </div>
+      </div>
+    `).join('');
+  }
+  recSel.addEventListener('change', () => {
+    selectedRoute = recSel.value;
+    renderRoutes();
+    renderRec();
+  });
+  renderRec();
+
+  /* Literature bounds — category taxonomy */
+  const LIT_CAT_ORDER = (D.literature_taxonomy && D.literature_taxonomy.categories) || [
+    {key:'metal_alloy', zh:'金属/合金涂层'},
+    {key:'silicone_mod_organic', zh:'硅改性有机涂层'},
+    {key:'lse_foul_release', zh:'低表面能 / 污损释放（FRC）'},
+    {key:'spc_copper', zh:'SPC / 铜系杀生剂'},
+    {key:'hydrogel_zwitterionic', zh:'水凝胶 / 两性离子'},
+    {key:'uvc_active', zh:'UV-C 主动防污'},
+    {key:'ultrasound', zh:'超声 / 导波'},
+    {key:'hybrid', zh:'混合 / 协同体系'},
+    {key:'natural_biocide_ca', zh:'天然杀生剂 / 介孔载体'},
+    {key:'regulatory_economic', zh:'监管 / 经济影响'}
+  ];
+  let litCatActive = '';
+
+  function litCatCounts() {
+    const lit = D.literature || [];
+    const c = {};
+    lit.forEach(r => { const k = r.category_key || ''; c[k] = (c[k]||0)+1; });
+    return c;
+  }
+
+  function buildLitCatUI() {
+    const counts = litCatCounts();
+    const sel = document.getElementById('lit-cat-filter');
+    const chips = document.getElementById('lit-cat-chips');
+    const subSel = document.getElementById('lit-sub-filter');
+    if (sel && sel.options.length <= 1) {
+      LIT_CAT_ORDER.forEach(cat => {
+        const o = document.createElement('option');
+        o.value = cat.key;
+        o.textContent = cat.zh + ' (' + (counts[cat.key]||0) + ')';
+        sel.appendChild(o);
+      });
+    }
+    if (chips && !chips.dataset.ready) {
+      const allBtn = document.createElement('button');
+      allBtn.type = 'button';
+      allBtn.className = 'chip active';
+      allBtn.dataset.key = '';
+      allBtn.innerHTML = '全部<span class="cnt">' + (D.literature||[]).length + '</span>';
+      chips.appendChild(allBtn);
+      LIT_CAT_ORDER.forEach(cat => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'chip';
+        b.dataset.key = cat.key;
+        b.innerHTML = escapeHtml(cat.zh) + '<span class="cnt">' + (counts[cat.key]||0) + '</span>';
+        chips.appendChild(b);
+      });
+      chips.dataset.ready = '1';
+      chips.addEventListener('click', (e) => {
+        const btn = e.target.closest('.chip');
+        if (!btn) return;
+        litCatActive = btn.dataset.key || '';
+        chips.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === btn));
+        if (sel) sel.value = litCatActive;
+        refreshLitSubOptions();
+        renderLit();
+      });
+    }
+    refreshLitSubOptions();
+  }
+
+  function refreshLitSubOptions() {
+    const subSel = document.getElementById('lit-sub-filter');
+    if (!subSel) return;
+    const lit = D.literature || [];
+    const cat = litCatActive || (document.getElementById('lit-cat-filter')||{}).value || '';
+    const subs = new Set();
+    lit.forEach(r => {
+      if (cat && r.category_key !== cat) return;
+      if (r.subcategory) subs.add(r.subcategory);
+    });
+    const keep = subSel.value;
+    subSel.innerHTML = '<option value="">全部工艺</option>';
+    [...subs].sort().forEach(s => {
+      const o = document.createElement('option');
+      o.value = s; o.textContent = s;
+      subSel.appendChild(o);
+    });
+    if ([...subs].includes(keep)) subSel.value = keep;
+  }
+
+  const LIT_RUBRIC = '重要度评估（主观，非实测）：基础 1 星；+ 年均被引（OpenAlex cited_by_count ÷ 发表至今年数）≥4 得 1、≥15 得 2、≥50 得 3；+ 期刊在本面板列出的防污/涂层/材料主流期刊清单内得 1；+ 题名直接涉及 antifouling/fouling 得 1；封顶 5 星。数据获取于 2026-10-20。';
+  function whoHtml(r) {
+    const e = r.enrich;
+    if (!e || e.authors === '未核实') return '<span class="tag tag-待测">未核实</span>';
+    return '<div class="lit-au">' + escapeHtml(e.authors).replace(/；/g, '<br>') + '</div><div class="muted" style="font-size:.7rem;margin-top:3px;">' +
+      escapeHtml(e.affiliation).replace(/；/g, '<br>') + '</div>';
+  }
+  function starsHtml(r) {
+    const e = r.enrich;
+    const n = e ? parseInt(e.stars, 10) : NaN;
+    if (!e || !n) return '<span class="muted" title="' + escapeHtml(e ? e.star_basis : '无元数据') + '">未评</span>';
+    return '<span class="stars" title="' + escapeHtml(LIT_RUBRIC + '\n本条：' + e.star_basis) + '">' + '★'.repeat(n) + '<span class="off">' + '★'.repeat(5 - n) + '</span></span>' +
+      '<div class="muted" style="font-size:.66rem;">被引 ' + escapeHtml(e.cited_by) + ' · 主观</div>';
+  }
+  function renderLit() {
+    const lit = D.literature || [];
+    const q = (document.getElementById('lit-search').value || '').trim().toLowerCase();
+    const catSel = document.getElementById('lit-cat-filter');
+    const subSel = document.getElementById('lit-sub-filter');
+    const cat = litCatActive || (catSel && catSel.value) || '';
+    const sub = (subSel && subSel.value) || '';
+    const rows = lit.filter(r => {
+      if (cat && r.category_key !== cat) return false;
+      if (sub && r.subcategory !== sub) return false;
+      const hay = [r.bound_id, r.enrich ? [r.enrich.authors, r.enrich.affiliation, r.enrich.summary_zh].join(' ') : '', r.category_key, r.category_zh, r.subcategory, r.metric, r.value_range, r.organism_or_context, r.title, r.note, r.DOI_or_source].join(' ');
+      if (q && !hay.toLowerCase().includes(q)) return false;
+      return true;
+    });
+    const tbody = document.querySelector('#lit-table tbody');
+    tbody.innerHTML = rows.map(r => `<tr>
+      <td class="lit-who">${whoHtml(r)}</td>
+      <td><span class="cat-pill">${escapeHtml(r.category_zh||r.category_key||'')}</span>
+          ${r.subcategory ? '<div class="muted" style="margin-top:3px;font-size:.7rem;">'+escapeHtml(r.subcategory)+'</div>' : ''}</td>
+      <td class="lit-sum">${escapeHtml((r.enrich&&r.enrich.summary_zh)||'未核实')}</td>
+      <td>${escapeHtml(r.year||'')}</td>
+      <td>${starsHtml(r)}</td>
+      <td>${tagHtml(r.tag)}</td>
+      <td><div class="muted">${escapeHtml(r.title||'')}</div>
+          <div class="muted" style="margin-top:4px;">${escapeHtml(r.DOI_or_source||'')}</div>${linksHtml(r.links)}
+          <div class="muted" style="margin-top:3px;font-size:.66rem;">${escapeHtml(r.bound_id||'')}</div>
+          <div style="margin-top:4px;font-size:.75rem;">${escapeHtml(r.note||'')}</div></td>
+    </tr>`).join('') || '<tr><td colspan="9" class="empty">无匹配文献界行</td></tr>';
+  }
+  buildLitCatUI();
+  const litSearch = document.getElementById('lit-search');
+  const litCatFilter = document.getElementById('lit-cat-filter');
+  const litSubFilter = document.getElementById('lit-sub-filter');
+  if (litSearch) litSearch.addEventListener('input', renderLit);
+  if (litCatFilter) litCatFilter.addEventListener('change', () => {
+    litCatActive = litCatFilter.value || '';
+    const chips = document.getElementById('lit-cat-chips');
+    if (chips) chips.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', (c.dataset.key||'') === litCatActive));
+    refreshLitSubOptions();
+    renderLit();
+  });
+  if (litSubFilter) litSubFilter.addEventListener('change', renderLit);
+  renderLit();
+
+  /* Commercial + tech */
+  let commCatActive = '';
+  const CT = D.commercial_taxonomy || { categories: [], counts: {} };
+
+  function buildCommCatUI() {
+    const chips = document.getElementById('comm-cat-chips');
+    const sel = document.getElementById('comm-cat-filter');
+    if (!chips || !sel) return;
+    const cats = CT.categories || [];
+    chips.innerHTML = '<button type="button" class="chip active" data-key="">全部<span class="cnt">' +
+      (CT.total_catalog || (D.catalog||[]).length) + '</span></button>' +
+      cats.map(c => {
+        const n = (CT.counts && CT.counts[c.key]) || 0;
+        return '<button type="button" class="chip" data-key="' + escapeHtml(c.key) + '">' +
+          escapeHtml(c.zh) + '<span class="cnt">' + n + '</span></button>';
+      }).join('');
+    cats.forEach(c => {
+      const o = document.createElement('option');
+      o.value = c.key; o.textContent = c.zh;
+      sel.appendChild(o);
+    });
+    chips.querySelectorAll('.chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        commCatActive = btn.dataset.key || '';
+        chips.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', (c.dataset.key||'') === commCatActive));
+        sel.value = commCatActive;
+        renderCatalog();
+        renderBrands();
+      });
+    });
+    sel.addEventListener('change', () => {
+      commCatActive = sel.value || '';
+      chips.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', (c.dataset.key||'') === commCatActive));
+      renderCatalog();
+      renderBrands();
+    });
+  }
+
+  function renderCatalog() {
+    let items = (D.catalog || []).slice().sort((a,b) => Number(a.rank) - Number(b.rank));
+    if (commCatActive) items = items.filter(r => r.category_key === commCatActive);
+    const box = document.getElementById('catalog-list');
+    if (!box) return;
+    if (!items.length) {
+      box.innerHTML = '<p class="empty">无匹配目录行（试试其他技术分类）。</p>';
+      return;
+    }
+    box.innerHTML = items.map(r => `
+      <div class="rank-item rank-${escapeHtml(String(Math.min(4, Number(r.rank)||4)))}">
+        <div class="rank-num">${escapeHtml(r.rank)}</div>
+        <div>
+          <div class="title">${escapeHtml(r.name)}
+            <span class="type-chip ${typeChipClass(r.type)}">${escapeHtml(typeLabel(r.type))}</span>
+            ${r.category_zh ? '<span class="cat-pill">' + escapeHtml(r.category_zh) + '</span>' : ''}
+          </div>
+          <div class="meta">证据标签 ${tagHtml(r.evidence_tag)}</div>
+          <div class="caveat"><strong>局限：</strong>${escapeHtml(r.caveats||'')}</div>
+          <div class="note">${escapeHtml(r.note||'')}</div>
+          ${linksHtml(r.links)}
+        </div>
+      </div>`).join('');
+  }
+
+  function renderBrands() {
+    const CP = D.commercial_products || { brands: [], type_lookup: [] };
+    const bf = document.getElementById('brand-filter');
+    const q = (document.getElementById('brand-search').value || '').trim().toLowerCase();
+    if (bf && bf.options.length <= 1) {
+      CP.brands.forEach(b => {
+        const o = document.createElement('option');
+        o.value = b.brand; o.textContent = b.brand;
+        bf.appendChild(o);
+      });
+    }
+    const brandF = bf ? bf.value : '';
+    const blocks = document.getElementById('brand-blocks');
+    const list = CP.brands.filter(b => !brandF || b.brand === brandF);
+    blocks.innerHTML = list.map(b => {
+      const items = (b.items||[]).filter(it => {
+        if (commCatActive && it.category_key !== commCatActive) return false;
+        if (!q) return true;
+        const hay = [it.product, it.category_zh, it.tech_type, it.claims, it.source].join(' ').toLowerCase();
+        return hay.includes(q);
+      });
+      if (!items.length) return '';
+      return `<div class="brand-block">
+        <h3>${escapeHtml(b.brand)}</h3>
+        <div class="table-wrap"><table class="data">
+          <thead><tr><th>产品线</th><th>技术分类</th><th>技术类型</th><th>公开宣称（摘录）</th><th>来源</th><th>标签</th></tr></thead>
+          <tbody>${items.map(it => `<tr>
+            <td><strong>${escapeHtml(it.product)}</strong></td>
+            <td>${it.category_zh ? '<span class="cat-pill">' + escapeHtml(it.category_zh) + '</span>' : '—'}</td>
+            <td>${escapeHtml(it.tech_type)}</td>
+            <td>${escapeHtml(it.claims)}</td>
+            <td class="muted">${escapeHtml(it.source)}${linksHtml(it.links)}</td>
+            <td>${tagHtml(it.tag)}</td>
+          </tr>`).join('')}</tbody>
+        </table></div>
+      </div>`;
+    }).join('') || '<p class="empty">无匹配产品线</p>';
+
+    const tl = document.querySelector('#type-lookup-table tbody');
+    if (tl) {
+      tl.innerHTML = (CP.type_lookup||[]).map(r => `<tr>
+        <td>${escapeHtml(r.type)}</td>
+        <td>${escapeHtml(r.products)}</td>
+        <td class="muted">${escapeHtml(r.hint)}</td>
+      </tr>`).join('');
+    }
+  }
+
+  function renderAuxTech() {
+    const T = D.tech_aux || {};
+    const ul = (id, arr) => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = (arr||[]).map(x => '<li>' + escapeHtml(x) + '</li>').join('');
+    };
+    ul('uvc-principles', T.uvc_principles);
+    ul('us-principles', T.us_principles);
+    const fillTech = (tbodySel, kind) => {
+      const tb = document.querySelector(tbodySel + ' tbody');
+      if (!tb) return;
+      const rows = (T.entries||[]).filter(e => e.kind === kind);
+      tb.innerHTML = rows.map(e => `<tr>
+        <td>${escapeHtml(e.entry)}</td>
+        <td>${escapeHtml(e.points)}</td>
+        <td class="muted">${escapeHtml(e.citation)}${linksHtml(e.links)}</td>
+        <td>${tagHtml(e.tag)}</td>
+      </tr>`).join('') || '<tr><td colspan="4" class="empty">暂无条目</td></tr>';
+    };
+    fillTech('#uvc-table', 'uvc');
+    fillTech('#us-table', 'ultrasound');
+    const hg = document.getElementById('hybrid-grid');
+    if (hg) {
+      hg.innerHTML = (T.hybrids||[]).map(h => `<div class="hybrid-card">
+        <strong>${escapeHtml(h.combo)}</strong>
+        <div>${escapeHtml(h.logic)}</div>
+        <div class="muted" style="margin-top:6px;">注意：${escapeHtml(h.caution)}</div>
+      </div>`).join('');
+    }
+    const sf = document.getElementById('tech-safety');
+    if (sf) {
+      sf.innerHTML = '<strong>安全常驻</strong><ul style="margin:6px 0 0 16px;">' +
+        (T.safety||[]).map(s => '<li>' + escapeHtml(s) + '</li>').join('') + '</ul>';
+    }
+  }
+
+  document.querySelectorAll('#tech-subtabs button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#tech-subtabs button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      ['catalog','brands','aux'].forEach(id => {
+        const el = document.getElementById('tech-sub-' + id);
+        if (el) el.style.display = (btn.dataset.sub === id) ? 'block' : 'none';
+      });
+    });
+  });
+  const brandFilter = document.getElementById('brand-filter');
+  const brandSearch = document.getElementById('brand-search');
+  if (brandFilter) brandFilter.addEventListener('change', renderBrands);
+  if (brandSearch) brandSearch.addEventListener('input', renderBrands);
+  buildCommCatUI();
+  renderCatalog();
+  renderBrands();
+  renderAuxTech();
+
+  /* Industry news (行业动态) — public info, never feeds Track A/B/C */
+  const IND = D.industry || { weeks: [], categories: ['法规','企业','产品','技术'] };
+  const IND_WEEKS = IND.weeks || [];
+  const IND_CATS = IND.categories || ['法规','企业','产品','技术'];
+  let indCatActive = '';
+  function safeHttpUrl(u) {
+    try {
+      const x = new URL(String(u || ''));
+      return (x.protocol === 'http:' || x.protocol === 'https:') ? x.href : '';
+    } catch (_) { return ''; }
+  }
+  function relBadge(r) {
+    return r ? '<span class="rel-badge r-' + escapeHtml(r) + '">相关度 ' + escapeHtml(r) + '</span>' : '';
+  }
+  function catBadge(c) {
+    const cls = IND_CATS.includes(c) ? 'cat-' + c : 'tag-default';
+    return '<span class="cat-badge ' + cls + '">' + escapeHtml(c || '未分类') + '</span>';
+  }
+  function linkHtml(e) {
+    const u = safeHttpUrl(e.url);
+    if (!u) return '<span class="muted" style="font-size:.76rem;">来源：' + escapeHtml(e.source_text || '—') + '</span>';
+    let host = u;
+    try { host = new URL(u).hostname.replace(/^www\./, ''); } catch (_) {}
+    return '<a class="ind-link" href="' + escapeHtml(u) + '" target="_blank" rel="noopener noreferrer" title="' +
+      escapeHtml(u) + '">来源：' + escapeHtml(host) + ' ↗</a>';
+  }
+  const indWeekSel = document.getElementById('ind-week');
+  const indRelSel = document.getElementById('ind-rel');
+  const indSearch = document.getElementById('ind-search');
+  let indMode = 'week';
+  IND_WEEKS.forEach((w, i) => {
+    const o = document.createElement('option');
+    o.value = w.week;
+    o.textContent = w.week + ' 周' + (i === 0 ? '（最新）' : '') + ' · ' + (w.entries || []).length + ' 条';
+    indWeekSel.appendChild(o);
+  });
+  function currentIndWeek() {
+    return IND_WEEKS.find(w => w.week === indWeekSel.value) || IND_WEEKS[0] || null;
+  }
+  function scopeEntries() {
+    if (indMode === 'all') return IND_WEEKS.reduce((a, w) => a.concat(w.entries || []), []);
+    const w = currentIndWeek();
+    return (w && w.entries) || [];
+  }
+  function highOf(w) { return (w.entries || []).filter(e => e.relevance === '高').length; }
+  function buildWeekList() {
+    const box = document.getElementById('ind-weeklist');
+    if (!IND_WEEKS.length) { box.innerHTML = '<p class="muted">暂无周报</p>'; return; }
+    let html = '', lastM = '';
+    IND_WEEKS.forEach((w, i) => {
+      const m = (w.week || '').slice(0, 7);
+      if (m !== lastM) {
+        const [y, mm] = m.split('-');
+        html += '<div class="wk-month">' + escapeHtml(y + ' 年 ' + Number(mm) + ' 月') + '</div>';
+        lastM = m;
+      }
+      const act = indMode === 'week' && w.week === (currentIndWeek() || {}).week ? ' active' : '';
+      const h = highOf(w);
+      html += '<button type="button" class="wk-btn' + act + '" data-week="' + escapeHtml(w.week) + '"><span>' +
+        escapeHtml(w.week.slice(5)) + ' 周' + (i === 0 ? '（最新）' : '') + (w.backfill ? ' <span class="bf-badge">回溯补录</span>' : '') + '</span><span class="wk-n">' +
+        (w.entries || []).length + ' 条' + (h ? ' · <span class="wk-h">高 ' + h + '</span>' : '') + '</span></button>';
+    });
+    box.innerHTML = html;
+  }
+  function buildChart() {
+    const box = document.getElementById('ind-chart');
+    if (!IND_WEEKS.length) { box.style.display = 'none'; return; }
+    const ws = IND_WEEKS.slice().reverse();
+    const W = 1000, H = 96, pad = 14, base = H - 16;
+    const max = Math.max(1, ...ws.map(w => (w.entries || []).length));
+    const slot = (W - pad * 2) / ws.length;
+    const bw = Math.min(28, slot * 0.7);
+    const cur = indMode === 'week' ? (currentIndWeek() || {}).week : '';
+    let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" role="img" aria-label="每周条目数">';
+    svg += '<line x1="0" y1="' + base + '" x2="' + W + '" y2="' + base + '" stroke="#d5e2ec"/>';
+    ws.forEach((w, i) => {
+      const n = (w.entries || []).length, h = highOf(w);
+      const x = pad + i * slot + (slot - bw) / 2;
+      const bh = (n / max) * (base - 14), hh = (h / max) * (base - 14);
+      svg += '<g data-week="' + escapeHtml(w.week) + '" style="cursor:pointer"><title>' + escapeHtml(w.week) + ' 周：' + n + ' 条（高相关 ' + h + '）</title>' +
+        '<rect class="bar' + (w.week === cur ? ' sel' : '') + '" x="' + x + '" y="' + (base - bh) + '" width="' + bw + '" height="' + bh + '" rx="3"/>' +
+        (hh ? '<rect class="bar hi" x="' + x + '" y="' + (base - hh) + '" width="' + bw + '" height="' + hh + '" rx="3"/>' : '') +
+        '<text x="' + (x + bw / 2) + '" y="' + (base - bh - 3) + '" font-size="10" text-anchor="middle" fill="#5a7083">' + n + '</text>' +
+        ((ws.length <= 14 || i % 2 === 0) ? '<text x="' + (x + bw / 2) + '" y="' + (H - 3) + '" font-size="9.5" text-anchor="middle" fill="#7a8d9e">' + escapeHtml(w.week.slice(5)) + '</text>' : '') +
+        '</g>';
+    });
+    svg += '</svg>';
+    box.innerHTML = '<div class="wk-legend"><span><i style="background:#9fd4da"></i>每周条目数</span><span><i style="background:#c53b3b;opacity:.8"></i>其中高相关</span><span><i style="background:#0a8f9c"></i>当前选中周</span><span>共 ' +
+      IND_WEEKS.length + ' 周 · 点击柱子切换周次</span></div>' + svg;
+  }
+  function selectWeek(wk) {
+    indWeekSel.value = wk; indMode = 'week';
+    document.querySelectorAll('#ind-mode button').forEach(b => b.classList.toggle('active', b.dataset.mode === 'week'));
+    indCatActive = ''; refreshIndAll();
+  }
+  document.getElementById('ind-weeklist').addEventListener('click', e => {
+    const b = e.target.closest('.wk-btn'); if (b) selectWeek(b.dataset.week);
+  });
+  document.getElementById('ind-chart').addEventListener('click', e => {
+    const g = e.target.closest('g[data-week]'); if (g) selectWeek(g.dataset.week);
+  });
+  document.getElementById('ind-mode').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    indMode = b.dataset.mode;
+    document.querySelectorAll('#ind-mode button').forEach(x => x.classList.toggle('active', x === b));
+    indCatActive = ''; refreshIndAll();
+  });
+  function buildIndChips() {
+    const entries = scopeEntries();
+    const counts = {};
+    entries.forEach(e => { counts[e.category] = (counts[e.category] || 0) + 1; });
+    const chips = document.getElementById('ind-cat-chips');
+    chips.innerHTML = [{ key: '', zh: '全部类别', n: entries.length }]
+      .concat(IND_CATS.map(c => ({ key: c, zh: c, n: counts[c] || 0 })))
+      .map(c => '<button type="button" class="chip' + (indCatActive === c.key ? ' active' : '') +
+        '" data-key="' + escapeHtml(c.key) + '">' + escapeHtml(c.zh) + '<span class="cnt">' + c.n + '</span></button>')
+      .join('');
+  }
+  document.getElementById('ind-cat-chips').addEventListener('click', (e) => {
+    const btn = e.target.closest('.chip');
+    if (!btn) return;
+    indCatActive = btn.dataset.key || '';
+    buildIndChips();
+    renderIndustry();
+  });
+  function cardHtml(e) {
+    return `
+      <article class="ind-card rel-${escapeHtml(e.relevance || '')}">
+        <div class="ind-top">${catBadge(e.category)}<span>${escapeHtml(e.date || '')}</span>${relBadge(e.relevance)}<span class="tag tag-公开资料">公开资料</span></div>
+        <div class="ind-title">${escapeHtml(e.title || '')}</div>
+        <div class="ind-sum">${escapeHtml(e.summary || '')}</div>
+        <div class="ind-rel"><strong>与配方/选型相关度：${escapeHtml(e.relevance || '—')}</strong>${e.relevance_reason ? ' · ' + escapeHtml(e.relevance_reason) : ''}</div>
+        ${e.note ? '<div class="ind-rel" style="color:var(--warn);"><strong>备注：</strong>' + escapeHtml(e.note) + '</div>' : ''}
+        ${linkHtml(e)}
+      </article>`;
+  }
+  function renderIndustry() {
+    const w = currentIndWeek();
+    const meta = document.getElementById('ind-meta');
+    const list = document.getElementById('ind-list');
+    const trend = document.getElementById('ind-trend');
+    const countEl = document.getElementById('ind-count');
+    if (!w) {
+      meta.innerHTML = '数据来自 <code>data/industry-feed/</code>，当前暂无周报。';
+      list.innerHTML = '<p class="empty">暂无行业动态。防污行业周报写入后重新运行 <code>ui/rebuild-snapshot.py</code> 即可。</p>';
+      trend.innerHTML = '<strong>本周趋势小结</strong><span class="muted">—</span>';
+      countEl.textContent = '';
+      return;
+    }
+    const rel = indRelSel.value;
+    const q = (indSearch.value || '').trim().toLowerCase();
+    const match = e => {
+      if (indCatActive && e.category !== indCatActive) return false;
+      if (rel && e.relevance !== rel) return false;
+      if (q) {
+        const hay = [e.title, e.summary, e.url, e.relevance_reason, e.note, e.category, e.date].join(' ').toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    };
+    if (indMode === 'all') {
+      const total = IND_WEEKS.reduce((n, x) => n + (x.entries || []).length, 0);
+      const first = IND_WEEKS[IND_WEEKS.length - 1], last = IND_WEEKS[0];
+      meta.innerHTML = '全部周次：' + IND_WEEKS.length + ' 周（' + escapeHtml(first.coverage_start || first.week) + ' 至 ' +
+        escapeHtml(last.coverage_end || last.week) + '）　|　来源目录：<code>data/industry-feed/</code>';
+      let shown = 0, html = '';
+      IND_WEEKS.forEach(x => {
+        const rows = (x.entries || []).filter(match);
+        if (!rows.length) return;
+        shown += rows.length;
+        html += '<div class="ind-weekhead">' + escapeHtml(x.week) + ' 周' + (x.backfill ? ' <span class="bf-badge">回溯补录</span>' : '') + ' · ' + escapeHtml(x.coverage || '') + ' · ' + rows.length + ' 条</div>' + rows.map(cardHtml).join('');
+      });
+      countEl.textContent = '显示 ' + shown + ' / ' + total + ' 条（跨全部周次，按周由新到旧）';
+      list.innerHTML = html || '<p class="empty">无匹配条目（试试放宽筛选）。</p>';
+      trend.innerHTML = '<strong>趋势小结</strong><span class="muted">请在左侧选择某一周查看该周趋势小结。</span>';
+      return;
+    }
+    meta.innerHTML = (w.backfill ? '<span class="bf-badge">回溯补录</span> ' : '') + '覆盖窗口：' + escapeHtml(w.coverage || (w.coverage_start + ' 至 ' + w.coverage_end)) +
+      '　|　来源文件：<code>' + escapeHtml(w.source_file || '') + '</code>';
+    const rows = (w.entries || []).filter(match);
+    countEl.textContent = '显示 ' + rows.length + ' / ' + (w.entries || []).length + ' 条（按日期由新到旧）';
+    list.innerHTML = rows.map(cardHtml).join('') || '<p class="empty">无匹配条目（试试放宽筛选）。</p>';
+    trend.innerHTML = '<strong>本周趋势小结（' + escapeHtml(w.week) + ' 周）</strong>' +
+      (w.trend_summary ? escapeHtml(w.trend_summary).replace(/\n/g, '<br>') : '<span class="muted">本期未提供趋势小结。</span>');
+  }
+  function refreshIndAll() { buildWeekList(); buildChart(); buildIndChips(); renderIndustry(); }
+  indRelSel.addEventListener('change', renderIndustry);
+  indSearch.addEventListener('input', renderIndustry);
+  refreshIndAll();
+
+  /* Scholars ranking */
+  (function () {
+    const R = D.researchers || [];
+    const tb = document.querySelector('#sch-table tbody');
+    const r0 = R[0] || {};
+    document.getElementById('sch-meta').innerHTML = '共 ' + R.length + ' 位学者 · 排序指标：<strong>领域内 h 指数</strong>（并列时按领域内被引次数）。领域内 = OpenAlex 中标题/摘要含 “marine antifouling” 或 “marine biofouling” 的作品；数据来源 OpenAlex，获取日期 ' + escapeHtml(r0.fetched || '—') + '。文件：<code>data/researcher-ranking.csv</code>';
+    document.getElementById('sch-note').textContent = '仅反映 OpenAlex 收录与作者消歧结果、以及上述检索口径；不同数据库（Scopus/WoS/Google Scholar）或指标下排序会不同。机构为 OpenAlex「最近机构」，可能滞后。主页链接：仅「机构主页」为本次抓取核对；其余为 OpenAlex 记录的 ORCID 或 OpenAlex 作者页。';
+    function render() {
+      const q = (document.getElementById('sch-search').value || '').trim().toLowerCase();
+      const onlyLit = document.getElementById('sch-inlit').checked;
+      const rows = R.filter(r => (!onlyLit || r.in_our_literature) &&
+        (!q || [r.name, r.institution, r.country, r.representative_work].join(' ').toLowerCase().includes(q)));
+      tb.innerHTML = rows.map(r => {
+        const u = safeHttpUrl(r.profile_url);
+        const doi = safeHttpUrl(r.representative_doi);
+        return `<tr>
+        <td><span class="rank-num" style="width:30px;height:30px;font-size:.85rem;background:#e0f4f2;color:var(--accent-d);">${escapeHtml(r.rank)}</span></td>
+        <td><strong>${escapeHtml(r.name)}</strong>${r.in_our_literature ? '<div><span class="cat-pill">本面板文献界作者</span></div>' : ''}</td>
+        <td>${escapeHtml(r.institution || '—')}<div class="muted">${escapeHtml(r.country || '')}</div></td>
+        <td><strong style="font-size:1rem;color:#0b3550;">${escapeHtml(r.field_h_index)}</strong></td>
+        <td>${escapeHtml(r.field_citations)}</td>
+        <td>${escapeHtml(r.field_works)}</td>
+        <td class="muted">${escapeHtml(r.overall_h_index)} / ${escapeHtml(r.overall_citations)}</td>
+        <td style="max-width:300px;">${escapeHtml(r.representative_work)}${doi ? '<div class="ext-links"><a class="ext-link" href="' + escapeHtml(doi) + '" target="_blank" rel="noopener noreferrer">↗ DOI</a></div>' : ''}</td>
+        <td>${u ? '<a class="ext-link" href="' + escapeHtml(u) + '" target="_blank" rel="noopener noreferrer">↗ ' + escapeHtml(r.profile_type) + '</a>' : '—'}<div class="muted" style="font-size:.64rem;">OpenAlex ${escapeHtml(r.openalex_id)} · ${escapeHtml(r.fetched)}</div></td>
+      </tr>`;
+      }).join('') || '<tr><td colspan="9" class="empty">无匹配学者</td></tr>';
+    }
+    document.getElementById('sch-search').addEventListener('input', render);
+    document.getElementById('sch-inlit').addEventListener('change', render);
+    render();
+  })();
+
+  /* Route maps (offline SVG, schematic tracks) */
+  const GEO = D.route_geometry || { routes: {} };
+  const LAND = window.WORLD_LAND_PATH || '';
+  function pNum(s) {
+    const m = String(s || '').match(/(\d+(?:\.\d+)?)\s*(?:[–-]\s*(\d+(?:\.\d+)?))?\s*$/);
+    if (!m) return null;
+    return m[2] ? (Number(m[1]) + Number(m[2])) / 2 : Number(m[1]);
+  }
+  function pColor(v) {
+    if (v == null) return '#7a8d9e';
+    if (v >= 4.25) return '#b42318';
+    if (v >= 3.75) return '#e0592a';
+    if (v >= 3.25) return '#e8a33d';
+    if (v >= 2.5) return '#d6c341';
+    return '#3f9d6a';
+  }
+  const LEGEND = [['低 1–2', '#3f9d6a'], ['中 2–3', '#d6c341'], ['中–高 3–4', '#e8a33d'], ['高 4', '#e0592a'], ['高–很高 4–5', '#b42318']]
+    .map(([l, c]) => '<span><i style="background:' + c + '"></i>' + l + '</span>').join('') + '<span>颜色 = 该航段相对污损压力（取自轨 B 剖面，相对等级）</span>';
+  const xy = ([lon, lat]) => [lon + 180, 90 - lat];
+  function pathD(pts) { return 'M' + pts.map(p => xy(p).map(n => n.toFixed(2)).join(' ')).join('L'); }
+  function grat() {
+    let g = '';
+    for (let lon = -180; lon <= 540; lon += 30) g += '<path class="grat" d="M' + (lon + 180) + ' 0V180"/>';
+    for (let lat = -60; lat <= 60; lat += 30) g += '<path class="grat" d="M0 ' + (90 - lat) + 'H720"/>';
+    return g;
+  }
+  function mapSvg(ids, vb, opts) {
+    opts = opts || {};
+    const sw = opts.sw || 0.8;
+    let body = '<path class="land" d="' + LAND + '"/><path class="land" transform="translate(360 0)" d="' + LAND + '"/>' + grat();
+    ids.forEach(id => {
+      const g = GEO.routes[id]; const r = D.routes.find(x => x.profile_id === id);
+      if (!g || !r) return;
+      const shifts = opts.wrap ? [0, -360] : [0];
+      shifts.forEach(sh => {
+        body += '<g transform="translate(' + sh + ' 0)" data-id="' + escapeHtml(id) + '">';
+        g.legs.forEach((paths, i) => {
+          const leg = (r.legs || [])[i] || {};
+          const c = opts.single ? pColor(pNum(leg.pressure)) : pColor(Number(r.overall_num));
+          paths.forEach(pts => {
+            body += '<path class="trk' + (opts.single ? '' : ' dim') + '" stroke="' + c + '" stroke-width="' + sw + '" d="' + pathD(pts) + '"><title>' +
+              escapeHtml(r.name_zh + ' · ' + (leg.segment || '') + ' · 相对压力 ' + (leg.pressure || r.overall_pressure)) + '</title></path>';
+            if (opts.single) body += '<path class="flow" stroke-width="' + (sw * 0.35) + '" d="' + pathD(pts) + '"/>';
+          });
+        });
+        if (opts.single || opts.ports) (g.ports || []).forEach(pt => {
+          const [x, y] = xy(pt.lonlat[0] < -100 && id === 'ROUTE-TRANSPAC-LA-V0' ? [pt.lonlat[0] + 360, pt.lonlat[1]] : pt.lonlat);
+          body += '<circle class="port" cx="' + x + '" cy="' + y + '" r="' + (opts.single ? sw * 1.1 : 0.9) + '" stroke-width="' + (sw * 0.35) + '"/>';
+          if (opts.single) body += '<text class="lbl" x="' + (x + sw * 1.6) + '" y="' + (y - sw * 1.2) + '" style="font-size:' + (opts.fs || 3) + 'px">' + escapeHtml(pt.name) + '</text>';
+        });
+        body += '</g>';
+      });
+    });
+    return '<svg viewBox="' + vb.join(' ') + '" preserveAspectRatio="xMidYMid meet" role="img" aria-label="航线示意图">' + body + '</svg>';
+  }
+  function boundsOf(id) {
+    const g = GEO.routes[id]; let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+    g.legs.forEach(ps => ps.forEach(pts => pts.forEach(p => { const [x, y] = xy(p); x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); })));
+    let w = x1 - x0, h = y1 - y0; const pad = Math.max(6, Math.max(w, h) * 0.18);
+    x0 -= pad; y0 -= pad; w += pad * 2; h += pad * 2;
+    if (w / h < 2) { const nw = h * 2; x0 -= (nw - w) / 2; w = nw; } else { const nh = w / 2; y0 -= (nh - h) / 2; h = nh; }
+    return [x0, y0, w, h];
+  }
+  const GEO_NOTE = '⚠ ' + (GEO.note || '示意性航迹，非 AIS 实测轨迹。') + ' 底图：' + (GEO.source || 'Natural Earth 110m');
+  document.getElementById('ov-geo-note').textContent = GEO_NOTE;
+  document.getElementById('rm-note').textContent = GEO_NOTE;
+  document.getElementById('ov-legend').innerHTML = LEGEND.replace('该航段', '整条航线全线');
+  document.getElementById('rm-legend').innerHTML = LEGEND;
+  const ovIds = D.routes.map(r => r.profile_id).filter(id => GEO.routes[id]);
+  document.getElementById('ov-map').innerHTML = mapSvg(ovIds, [0, 8, 360, 160], { sw: 0.9, wrap: true, ports: true });
+  document.getElementById('ov-map').addEventListener('click', e => {
+    const g = e.target.closest('g[data-id]'); if (g) { selectRoute(g.dataset.id); openRouteModal(g.dataset.id); }
+  });
+  const modal = document.getElementById('route-modal');
+  function openRouteModal(id) {
+    const r = D.routes.find(x => x.profile_id === id);
+    if (!r || !GEO.routes[id]) return;
+    const vb = boundsOf(id);
+    document.getElementById('rm-title').textContent = r.name_zh + ' · ' + r.profile_id;
+    document.getElementById('rm-meta').textContent = '气候带：' + r.climate_band + '　|　全线相对压力：' + r.overall_pressure + '（相对等级，非现场实测）　|　航段：' +
+      (r.legs || []).map((l, i) => (i + 1) + '. ' + l.segment + '（' + l.pressure + '）').join('；');
+    document.getElementById('rm-map').innerHTML = mapSvg([id], vb, { single: true, sw: vb[2] / 260, fs: vb[2] / 55 });
+    modal.hidden = false;
+  }
+  function closeModal() { modal.hidden = true; }
+  document.getElementById('rm-close').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  /* Overview card: latest week */
+  (function renderOverviewIndustry() {
+    const w = IND_WEEKS[0];
+    const badge = document.getElementById('ind-tab-badge');
+    const metaEl = document.getElementById('ov-ind-meta');
+    const ul = document.getElementById('ov-ind-high');
+    document.getElementById('ov-ind-goto').addEventListener('click', () => goTab('industry'));
+    if (!w) {
+      badge.style.display = 'none';
+      metaEl.textContent = '暂无周报数据（data/industry-feed/ 为空）。';
+      ul.innerHTML = '';
+      return;
+    }
+    const entries = w.entries || [];
+    const high = entries.filter(e => e.relevance === '高');
+    badge.textContent = entries.length;
+    metaEl.innerHTML = escapeHtml(w.week) + ' 周 · 共 <strong>' + entries.length + '</strong> 条 · 高相关 <strong>' +
+      high.length + '</strong> 条 · 覆盖 ' + escapeHtml(w.coverage || '') +
+      '　<span class="tag tag-公开资料">行业动态/公开资料，非性能数据</span>';
+    ul.innerHTML = high.map(e => '<li>' + catBadge(e.category) + '<span>' + escapeHtml(e.title) +
+      ' <span class="muted">（' + escapeHtml(e.date || '') + '）</span></span></li>').join('') ||
+      '<li class="muted">本周无高相关条目。</li>';
+  })();
+
+  tabFromHash();
+})();
+</script>
+</body>
+</html>

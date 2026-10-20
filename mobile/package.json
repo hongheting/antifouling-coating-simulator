@@ -1,0 +1,24 @@
+{
+  "name": "coating-simulator-mobile",
+  "productName": "防污涂料配方模拟器",
+  "version": "0.4.0",
+  "description": "Android wrapper (Capacitor) for antifouling coating formulation simulator. Simulation ≠ measurement.",
+  "private": true,
+  "scripts": {
+    "sync-www": "node scripts/sync-www.js",
+    "build": "npm run sync-www && npx cap sync android",
+    "apk": "npm run build && cd android && ./gradlew assembleDebug && cd .. && mkdir -p dist && cp -f android/app/build/outputs/apk/debug/app-debug.apk dist/coating-simulator-0.4.0.apk && cp -f android/app/build/outputs/apk/debug/app-debug.apk dist/防污涂料配方模拟器-0.4.0.apk && ls -la dist/",
+    "open": "npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/app": "^6.0.2",
+    "@capacitor/browser": "^6.0.4",
+    "@capacitor/core": "^6.2.0",
+    "@capacitor/ios": "^6.2.2",
+    "@capacitor/status-bar": "^6.0.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.2.0"
+  }
+}

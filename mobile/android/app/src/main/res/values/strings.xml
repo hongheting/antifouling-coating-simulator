@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">防污涂料配方模拟器</string>
+    <string name="title_activity_main">防污涂料配方模拟器</string>
+    <string name="package_name">com.hongheting.coatingsimulator</string>
+    <string name="custom_url_scheme">com.hongheting.coatingsimulator</string>
+</resources>

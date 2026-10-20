@@ -1,0 +1,9 @@
+formulation_id,basecoat,mix_ratio,filler_wt_pct,dispersant_rel_pct,DFT_um,substrate,pull_off_MPa,pull_off_tag,eis_note,eis_tag,hplc_analyte_note,hplc_tag,microcosm_relative_fouling,microcosm_tag,uncertainty,source,n,note,safety_flags,disadvantage_notes
+EX-OEM-BOUNDARY,示例双组分环氧（虚构牌号）,5:1（示例）,,,50±10（目标）,碳钢试片,5.0–7.0,厂家标称,,,,,,,示例数据 / example：虚构厂家标称区间，非任何真实课题样板,docs/example-data.md,,仓库演示用原漆边界锚点；不含功能颗粒,溶剂通风；按 SDS 施工,示例标称不可当作改性涂层实测
+EX-BLANK-CTRL,示例双组分环氧（虚构牌号）,5:1（示例）,0,,50±10（目标）,碳钢试片,,待测,,待测,,待测,,待测,示例数据 / example：空白对照槽位，尚无数字,docs/example-data.md,,无功能颗粒对照；性能栏均为待测,溶剂通风；现配现用,空白不能代表功能化样板
+EX-FILLER-1PCT,示例双组分环氧（虚构牌号）,5:1（示例）,1,,50±10（目标）,碳钢试片,,待测,,待测,,待测,,待测,示例数据 / example：1 wt% 功能填料筛选槽,docs/example-data.md,,填料种类与真实口径未指定——仅演示表格结构,溶剂通风；粉体防扬尘,待测；禁止把本行当实测
+EX-FILLER-3PCT,示例双组分环氧（虚构牌号）,5:1（示例）,3,,50±10（目标）,碳钢试片,,待测,,待测,,待测,,待测,示例数据 / example：3 wt% 功能填料筛选槽,docs/example-data.md,,高掺量粗糙/缺陷风险示意,溶剂通风；粉体防扬尘,待测
+EX-FRC-DEMO,示例有机硅污损释放（虚构）,—,,,150±20（目标）,碳钢试片,,待测,,待测,,待测,相对洁净（示意叙述）,相对等级,示例数据 / example：示意污损释放漆；非航次实测,docs/example-data.md,,仅演示轨 A 表结构与标签,按厂家 SDS,相对等级≠绝对防污率
+EX-SPC-DEMO,示例铜系 SPC（虚构牌号）,—,,,100±15（目标）,碳钢试片,,待测,,待测,,待测,相对洁净（示意）,相对等级,示例数据 / example：示意自抛光铜系；非现场数据,docs/example-data.md,,铜系生物杀伤剂法规以当地为准,铜粉与溶剂防护,不可外推为全球最优
+EX-HPLC-GEOM,示例释放几何（通用）,,,,,,,方案非实测,,,几何示意：暴露面积约 20 cm²；V=100 mL；非浓度结果,方案非实测,,,示例数据 / example：仅几何示意，无假浓度,docs/example-data.md,,正式浓度须 tag=实测,避光；容器空白,水相检出≠涂层真实累计释放
+EX-EIS-SLOT,示例 EIS 方法槽,,,,,,,待测,计划：3.5wt%NaCl；OCP+EIS；时间点示意,待测,,,,,示例数据 / example：方法槽位，无阻抗数字,docs/example-data.md,,须与裸板/原漆/功能化并列报告,含盐废水按规定处置,不可用协议描述冒充防腐结论

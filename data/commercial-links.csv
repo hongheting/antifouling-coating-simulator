@@ -1,0 +1,44 @@
+scope,item_key,label,url,link_origin,evidence
+product,Dynamic,Hempel Dynamic 品牌页,https://www.hempel.com/all-products/all-brands/dynamic/explore,已有文件,commercial-products.md §1
+product,Globic,Hempel Globic 品牌页,https://www.hempel.com/all-products/all-brands/globic/explore,已有文件,commercial-products.md §1
+product,Oceanic Protect+ 7395W,Hempel Oceanic/Oceanic+ 系列页（品牌级）,https://www.hempel.com/all-products/all-brands/oceanic/explore,新核验 2026-10-19,curl 200；页面含 Oceanic+ 系列
+product,Hempaguard X7,Hempel Hempaguard 系列页（品牌级，含 X7）,https://www.hempel.com/all-products/all-brands/hempaguard/explore,新核验 2026-10-19,curl 200；页面含 X7
+product,Globic 9000 78900,Hempel Globic 9000 78900 产品页,https://www.hempel.com/all-products/hempels-antifouling-globic-9000-78900-78900,新核验 2026-10-19,curl 200；页面含 Globic 9000
+product,SeaQuantum Plus S,Jotun SeaQuantum Plus S 产品页,https://www.jotun.com/ww-en/products-and-services/products/SeaQuantum-Plus-S,新核验 2026-10-19,curl 200；页面含产品名
+product,SeaQuantum Ultra S,Jotun SeaQuantum Ultra S 产品页,https://www.jotun.com/ww-en/products-and-services/products/SeaQuantum-Ultra-S,已有文件,recommendation-shortlist.csv rank 22
+product,Intersmooth 7200Si SPC,Intersmooth 7200Si SPC 产品页,https://www.international-marine.com/en/products/intersmooth-7200si-spc,已有文件,recommendation-shortlist.csv rank 9
+product,Intersmooth 7465Si SPC,Intersmooth 7465Si SPC 产品页,https://www.international-marine.com/en/products/intersmooth-7465si-spc,新核验 2026-10-19,curl 200；页面含 7465Si
+product,Intersmooth 7476Si SPC,Intersmooth 7476Si SPC 产品页（ME/SEA/N.Asia）,https://www.international-marine.com/en/products/intersmooth-7476si-spc-%E2%80%93-me-sea-n-asia,新核验 2026-10-19,curl 200；页面含 7476
+product,Intercept 7000,Intercept 7000 产品页,https://www.international-marine.com/en/products/intercept-7000,新核验 2026-10-19,curl 200；页面含产品名
+product,Intersleek 1100SR,Intersleek 1100SR 产品页,https://www.international-marine.com/en/products/intersleek-1100sr,新核验 2026-10-19,curl 200；页面含 1100SR
+product,SIGMA ECOFLEET 290,PPG SIGMA ECOFLEET 290 产品页,https://www.ppg.com/en-US/pmc/product/sigma-ecofleet-290/614004M0402,新核验 2026-10-19,curl 200；页面含产品名
+product,SIGMA ECOFLEET 530,PPG SIGMA ECOFLEET 530 产品页,https://www.ppg.com/en-US/pmc/product/sigma-ecofleet-530/614004M0403,新核验 2026-10-19,curl 200；页面含产品名
+product,SIGMA ECOFLEET 690,PPG SIGMA ECOFLEET 690 产品页,https://www.ppg.com/en-US/pmc/product/sigma-ecofleet-690/614004M0408,已有文件,recommendation-shortlist.csv rank 14
+product,SIGMAGLIDE 2390,PPG SIGMAGLIDE 2390 产品页,https://www.ppg.com/en-US/pmc/marine-coatings/ppg-sigmaglide-2390-marine,已有文件,recommendation-shortlist.csv rank 15
+product,SEAJET 039 Platinum Mono,SEAJET 039 Platinum Mono 产品页,https://www.seajetpaint.com/product/seajet-039-platinum-mono/,新核验 2026-10-19,curl 200；页面含 039
+product,TAKATA QUANTUM,Kansai TAKATA QUANTUM 产品页,https://www.kp-marine.co.jp/en/products/pickup/quantum.html,新核验 2026-10-19,curl 200；页面含产品名
+product,X-mile,Kansai X-mile 目录 PDF,https://www.kp-marine.co.jp/en/products/catalog/pdf/x-mile.pdf,新核验 2026-10-19,curl 200；PDF 含 X-mile
+product,A-LF-SEA,Nippon Paint A-LF-SEA 产品页,https://www.nipponpaint-marine.com/products/a-lf-sea/,已有文件,commercial-products.md §6 / shortlist rank 17
+product,SeaVoyage Copper Free Antifoulant,Sherwin-Williams SeaVoyage Copper Free 产品页,https://industrial.sherwin-williams.com/na/us/en/protective-marine/catalog/product/products-by-industry.11543396/seavoyage-copper-free-antifoulant.9752447.html,新核验 2026-10-19,curl 200；页面含 SeaVoyage
+catalog_rank,5,Hempel Dynamic 品牌页,https://www.hempel.com/all-products/all-brands/dynamic/explore,已有文件,commercial-products.md §1
+catalog_rank,6,Hempel Globic 品牌页,https://www.hempel.com/all-products/all-brands/globic/explore,已有文件,commercial-products.md §1
+catalog_rank,7,Hempel Oceanic/Oceanic+ 系列页（品牌级）,https://www.hempel.com/all-products/all-brands/oceanic/explore,新核验 2026-10-19,curl 200；页面含 Oceanic+ 系列
+catalog_rank,8,Jotun SeaQuantum Plus S 产品页,https://www.jotun.com/ww-en/products-and-services/products/SeaQuantum-Plus-S,新核验 2026-10-19,curl 200；页面含产品名
+catalog_rank,9,Intersmooth 7200Si SPC 产品页,https://www.international-marine.com/en/products/intersmooth-7200si-spc,已有文件,recommendation-shortlist.csv rank 9
+catalog_rank,10,Intersmooth 7476Si SPC 产品页（ME/SEA/N.Asia）,https://www.international-marine.com/en/products/intersmooth-7476si-spc-%E2%80%93-me-sea-n-asia,新核验 2026-10-19,curl 200；页面含 7476
+catalog_rank,11,Intercept 7000 产品页,https://www.international-marine.com/en/products/intercept-7000,新核验 2026-10-19,curl 200；页面含产品名
+catalog_rank,12,Intersleek 1100SR 产品页,https://www.international-marine.com/en/products/intersleek-1100sr,新核验 2026-10-19,curl 200；页面含 1100SR
+catalog_rank,13,PPG SIGMA ECOFLEET 290 产品页,https://www.ppg.com/en-US/pmc/product/sigma-ecofleet-290/614004M0402,新核验 2026-10-19,curl 200；页面含产品名
+catalog_rank,14,PPG SIGMA ECOFLEET 690 产品页,https://www.ppg.com/en-US/pmc/product/sigma-ecofleet-690/614004M0408,已有文件,recommendation-shortlist.csv rank 14
+catalog_rank,15,PPG SIGMAGLIDE 2390 产品页,https://www.ppg.com/en-US/pmc/marine-coatings/ppg-sigmaglide-2390-marine,已有文件,recommendation-shortlist.csv rank 15
+catalog_rank,17,Nippon Paint A-LF-SEA 产品页,https://www.nipponpaint-marine.com/products/a-lf-sea/,已有文件,commercial-products.md §6 / shortlist rank 17
+catalog_rank,19,Cathelco USP DragGone™ 产品页（Evac）,https://evac.com/ultrasonic-antifouling/,新核验 2026-10-19,curl 200；页面含 DragGone
+catalog_rank,20,Hempel Hempaguard 系列页（品牌级，含 X7）,https://www.hempel.com/all-products/all-brands/hempaguard/explore,新核验 2026-10-19,curl 200；页面含 X7
+catalog_rank,21,Hempel Globic 9000 78900 产品页,https://www.hempel.com/all-products/hempels-antifouling-globic-9000-78900-78900,新核验 2026-10-19,curl 200；页面含 Globic 9000
+catalog_rank,22,Jotun SeaQuantum Ultra S 产品页,https://www.jotun.com/ww-en/products-and-services/products/SeaQuantum-Ultra-S,已有文件,recommendation-shortlist.csv rank 22
+catalog_rank,23,Kansai TAKATA QUANTUM 产品页,https://www.kp-marine.co.jp/en/products/pickup/quantum.html,新核验 2026-10-19,curl 200；页面含产品名
+catalog_rank,23,Kansai X-mile 目录 PDF,https://www.kp-marine.co.jp/en/products/catalog/pdf/x-mile.pdf,新核验 2026-10-19,curl 200；PDF 含 X-mile
+catalog_rank,24,Sherwin-Williams SeaVoyage Copper Free 产品页,https://industrial.sherwin-williams.com/na/us/en/protective-marine/catalog/product/products-by-industry.11543396/seavoyage-copper-free-antifoulant.9752447.html,新核验 2026-10-19,curl 200；页面含 SeaVoyage
+catalog_rank,25,PPG SIGMA ECOFLEET 530 产品页,https://www.ppg.com/en-US/pmc/product/sigma-ecofleet-530/614004M0403,新核验 2026-10-19,curl 200；页面含产品名
+catalog_rank,27,SEAJET 039 Platinum Mono 产品页,https://www.seajetpaint.com/product/seajet-039-platinum-mono/,新核验 2026-10-19,curl 200；页面含 039
+tech_entry,Cathelco USP DragGone™,Cathelco USP DragGone™ 产品页（Evac）,https://evac.com/ultrasonic-antifouling/,新核验 2026-10-19,curl 200；页面含 DragGone
