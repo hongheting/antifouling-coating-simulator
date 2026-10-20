@@ -1,0 +1,11 @@
+{
+  "data_version": "2026-10-20.2115",
+  "generated_at": "2026-10-20T21:15:48+08:00",
+  "feed": "feed.json",
+  "app": {
+    "versionName": "0.5.0",
+    "versionCode": 50,
+    "apk_url": "https://github.com/hongheting/antifouling-coating-simulator/releases/latest",
+    "notes": "0.5.0：新增在线更新（行业动态/文献/商用/学者等公开板块）；新版本提醒。"
+  }
+}

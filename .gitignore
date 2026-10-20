@@ -22,3 +22,4 @@ desktop/win-unpacked/
 .env.*
 secrets/
 **/secrets/**
+private-terms.txt

@@ -6,10 +6,10 @@
 | 项 | 值 |
 |---|---|
 | 包名 `applicationId` | `com.hongheting.coatingsimulator` |
-| versionName | `0.4.0` |
-| versionCode | `40` |
+| versionName | `0.5.0` |
+| versionCode | `50` |
 | minSdk / targetSdk | 22 / 34 |
-| 产物 | `dist/coating-simulator-0.4.0.apk`（约 4.1 MB，debug 签名，可侧载） |
+| 产物 | `dist/coating-simulator-0.5.0.apk`（约 4.1 MB，debug 签名，可侧载） |
 
 ## 安装（侧载）
 
@@ -18,10 +18,10 @@
 3. 点开 APK 安装；或用电脑：
 
 ```bash
-adb install -r dist/coating-simulator-0.4.0.apk
+adb install -r dist/coating-simulator-0.5.0.apk
 ```
 
-中文文件名副本：`dist/防污涂料配方模拟器-0.4.0.apk`（内容相同）。
+中文文件名副本：`dist/防污涂料配方模拟器-0.5.0.apk`（内容相同）。
 
 > 本包为 **debug** 签名，不适合上架 Google Play；日常自用侧载足够。
 
@@ -73,7 +73,7 @@ cd android && ./gradlew assembleDebug
 # 产物：android/app/build/outputs/apk/debug/app-debug.apk
 # 或一键：
 cd mobile && npm run apk
-cp android/app/build/outputs/apk/debug/app-debug.apk dist/coating-simulator-0.4.0.apk
+cp android/app/build/outputs/apk/debug/app-debug.apk dist/coating-simulator-0.5.0.apk
 ```
 
 ## 手机端改动（相对桌面 UI）
@@ -93,7 +93,7 @@ cp android/app/build/outputs/apk/debug/app-debug.apk dist/coating-simulator-0.4.
 
 ## 版本对齐
 
-与桌面 Electron `0.4.0` 对齐；`versionCode=32` 便于后续递增安装覆盖。
+与桌面 Electron `0.5.0` 对齐；`versionCode=32` 便于后续递增安装覆盖。
 
 
 ## iOS（macOS + Xcode）
@@ -104,4 +104,4 @@ npm run sync-www && npx cap sync ios
 npx cap open ios
 ```
 
-Bundle ID: `com.hongheting.coatingsimulator` · Display name: 防污涂料配方模拟器 · version 0.4.0 (40).
+Bundle ID: `com.hongheting.coatingsimulator` · Display name: 防污涂料配方模拟器 · version 0.5.0 (40).

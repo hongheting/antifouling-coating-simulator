@@ -266,3 +266,14 @@ footer .dev-line a {
     max-width: none !important; background: transparent !important;
   }
 }
+
+/* 0.5.0 updater */
+#upd-line { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; align-items: center; font-size: .74rem; color: #6b7c8f; }
+#upd-btn { appearance: none; border: 1px solid #a8dcd6; background: #e0f4f2; color: #0b6e69; border-radius: 999px; padding: 6px 14px; min-height: 34px; font-weight: 700; font-family: inherit; }
+.upd-back { position: fixed; inset: 0; background: rgba(6,35,63,.45); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.upd-box { background: #fff; border-radius: 18px; padding: 20px; max-width: 360px; width: 100%; box-shadow: 0 20px 50px rgba(0,0,0,.3); }
+.upd-box h3 { font-size: 1.05rem; color: #0b3550; margin-bottom: 8px; }
+.upd-box p { font-size: .88rem; color: #3e5568; white-space: pre-wrap; }
+.upd-row { display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px; }
+.upd-row button { min-height: 42px; padding: 0 18px; border-radius: 12px; font-weight: 700; font-family: inherit; border: 1px solid #cfdde7; background: #fff; color: #44596b; }
+.upd-row .upd-go { background: linear-gradient(120deg, #0b4a6f, #0e8a94); color: #fff; border: none; }

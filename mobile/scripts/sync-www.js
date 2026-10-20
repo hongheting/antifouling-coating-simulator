@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Copy desktop UI into www/ and inject mobile CSS + Capacitor bridge.
- * Source of truth remains ../ui/ — do not invent data.
+ * Source of truth remains /workspace/coating-simulator/ui/ — do not invent data.
  */
 const fs = require('fs');
 const path = require('path');
@@ -34,6 +34,9 @@ const mobileCss = fs.readFileSync(path.join(ROOT, 'assets/mobile.css'), 'utf8');
 const mobileBridge = fs.readFileSync(path.join(ROOT, 'assets/mobile-bridge.js'), 'utf8');
 fs.writeFileSync(path.join(WWW, 'mobile.css'), mobileCss);
 fs.writeFileSync(path.join(WWW, 'mobile-bridge.js'), mobileBridge);
+fs.copyFileSync(path.join(ROOT, 'assets/updater.js'), path.join(WWW, 'updater.js'));
+let bundledVer = '';
+try { bundledVer = JSON.parse(fs.readFileSync(path.resolve(ROOT, '../public-data/latest.json'), 'utf8')).data_version || ''; } catch (e) {}
 
 let html = fs.readFileSync(path.join(WWW, 'index.html'), 'utf8');
 
@@ -76,6 +79,13 @@ html = html.replace(/document\.getElementById\('(honesty-text|safety-text)'\)\.(
 html = html.replace(/<footer>[\s\S]*?<\/footer>/, `<footer>
     <div class="dev-line">由洪鹤庭 Jassyhong 开发，有疑问请联系 <a href="tel:17607144929">17607144929</a></div>
   </footer>`);
+
+// 0.5.0 updater: right after data snapshot, before page script
+if (!html.includes('updater.js')) {
+  html = html.replace('<script src="data-snapshot.js"></script>',
+    '<script src="data-snapshot.js"></script>\n<script>window.BUNDLED_DATA_VERSION=' + JSON.stringify(bundledVer) + ';</script>\n<script src="updater.js"></script>');
+  if (!html.includes('updater.js')) throw new Error('updater injection failed');
+}
 
 // Soften title for mobile
 html = html.replace(
