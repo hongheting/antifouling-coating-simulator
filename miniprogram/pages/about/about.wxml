@@ -1,0 +1,30 @@
+<view class="hero"><view class="t">关于本工具</view><view class="s">防污涂料配方模拟器 · 工具版</view></view>
+<view class="wrap">
+  <view class="card">
+    <view class="h">诚实边界</view>
+    <view class="small" style="margin-top:8rpx">{{meta.honesty}}</view>
+    <view class="small" style="margin-top:8rpx">每个数值都带标签：实测、待测、厂家标称、粗估观察、方案非实测、文献、相对等级、框架推断等。未测的位置显示「待测」，不会编造数值。</view>
+    <view class="warn small" style="margin-top:10rpx">安全：{{meta.safety}}</view>
+  </view>
+  <view class="card">
+    <view class="h">数据</view>
+    <view class="kv"><text class="k">数据版本</text><text class="v">{{source}}</text></view>
+    <view class="kv"><text class="k">网络</text><text class="v">不联网，全部数据随小程序内置</text></view>
+    <view class="kv"><text class="k">登录</text><text class="v">无需登录，不收集个人信息</text></view>
+  </view>
+  <view class="card">
+    <view class="h">隐私</view>
+    <view class="small" style="margin-top:8rpx">本小程序不收集、不上传任何个人信息。仅在你点「复制链接」时把公开网址写入剪贴板（不读取剪贴板）。</view>
+    <view class="btn" bindtap="privacy">查看《用户隐私保护指引》</view>
+  </view>
+  <view class="card">
+    <view class="h">开发者电话（可选联系）</view>
+    <view class="muted small" style="margin-top:8rpx">如有使用问题，可拨打下方号码；非必需，不会自动拨号。</view>
+    <view class="btn" bindtap="callDev">17607144929</view>
+  </view>
+  <view class="card" bindtap="toExchange">
+    <view class="row between"><view class="h">技术交流说明</view><text class="muted">›</text></view>
+    <view class="muted small">本工具版不含发帖；可复制公开讨论区链接查看</view>
+  </view>
+</view>
+<app-footer />

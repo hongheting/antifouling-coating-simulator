@@ -1,0 +1,30 @@
+<view class="wrap">
+  <view class="honest small">{{rubric}}</view>
+  <scroll-view scroll-x class="chips">
+    <view wx:for="{{cats}}" wx:key="key" class="chip {{cat===item.key?'on':''}}" data-key="{{item.key}}" bindtap="pickCat">{{item.zh}}<text class="cnt">{{item.n}}</text></view>
+  </scroll-view>
+  <picker range="{{subs}}" value="{{subIdx}}" bindchange="pickSub"><view class="picker">工艺：{{subs[subIdx]}} ▾</view></picker>
+  <input class="search" placeholder="搜索作者 / 题名 / DOI / 指标" value="{{q}}" bindinput="onQ" />
+  <view class="muted small">共 {{total}} 条</view>
+  <view class="card" wx:for="{{rows}}" wx:key="id">
+    <view><text class="pill">{{item.cat}}</text><text wx:if="{{item.sub}}" class="muted small">{{item.sub}}</text></view>
+    <view class="small" style="margin:8rpx 0">{{item.sum}}</view>
+    <view wx:if="{{item.authors}}" class="muted small">{{item.authors}}</view>
+    <view wx:if="{{item.aff}}" class="muted small">{{item.aff}}</view>
+    <view wx:if="{{!item.authors}}"><tag-list text="待测" /><text class="muted small">作者未核实</text></view>
+    <view class="row" style="margin-top:6rpx">
+      <text class="muted small">{{item.year}}</text>
+      <text wx:if="{{item.on}}" class="stars">{{item.on}}<text class="off">{{item.off}}</text></text>
+      <text wx:else class="muted small">未评</text>
+      <text wx:if="{{item.cited}}" class="muted small">被引 {{item.cited}} · 主观</text>
+    </view>
+    <tag-list text="{{item.tag}}" />
+    <view class="muted small" style="margin-top:6rpx">{{item.title}}</view>
+    <view class="muted small"><text user-select>{{item.doi}}</text></view>
+    <view wx:if="{{item.note}}" class="small">{{item.note}}</view>
+    <view wx:if="{{item.links.length}}"><text wx:for="{{item.links}}" wx:for-item="l" wx:key="url" class="btn" data-url="{{l.url}}" bindtap="copyLink">复制链接：{{l.label}}</text></view>
+  </view>
+  <view wx:if="{{!total}}" class="empty">无匹配文献界行</view>
+  <view wx:elif="{{rows.length < total}}" class="empty small">上滑加载更多（{{rows.length}}/{{total}}）</view>
+</view>
+<app-footer />

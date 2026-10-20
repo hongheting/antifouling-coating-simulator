@@ -1,0 +1,55 @@
+<view class="wrap">
+  <view class="seg">
+    <view class="it {{seg==='catalog'?'on':''}}" data-seg="catalog" bindtap="pickSeg">目录候选</view>
+    <view class="it {{seg==='brands'?'on':''}}" data-seg="brands" bindtap="pickSeg">商用产品线</view>
+    <view class="it {{seg==='aux'?'on':''}}" data-seg="aux" bindtap="pickSeg">UV-C / 超声</view>
+  </view>
+  <scroll-view wx:if="{{seg!=='aux'}}" scroll-x class="chips">
+    <view wx:for="{{cats}}" wx:key="key" class="chip {{cat===item.key?'on':''}}" data-key="{{item.key}}" bindtap="pickCat">{{item.zh}}<text class="cnt">{{item.n}}</text></view>
+  </scroll-view>
+
+  <block wx:if="{{seg==='catalog'}}">
+    <view class="card" wx:for="{{catalog}}" wx:key="rank">
+      <view class="row"><text class="rank">{{item.rank}}</text><view class="h" style="flex:1">{{item.name}}</view></view>
+      <view><text class="pill">{{item.type}}</text><text wx:if="{{item.catZh}}" class="pill">{{item.catZh}}</text><tag-list text="{{item.tag}}" /></view>
+      <view class="warn small" style="margin-top:10rpx">局限：{{item.caveats}}</view>
+      <view class="small" style="margin-top:8rpx">{{item.note}}</view>
+      <view wx:if="{{item.links.length}}"><text wx:for="{{item.links}}" wx:for-item="l" wx:key="url" class="btn" data-url="{{l.url}}" bindtap="copyLink">复制链接：{{l.label}}</text></view>
+    </view>
+    <view wx:if="{{!catalog.length}}" class="empty">无匹配目录行（试试其他技术分类）。</view>
+  </block>
+
+  <block wx:if="{{seg==='brands'}}">
+    <picker range="{{brandNames}}" value="{{brandIdx}}" bindchange="pickBrand"><view class="picker">品牌：{{brandNames[brandIdx]}} ▾</view></picker>
+    <input class="search" placeholder="搜索产品 / 技术 / 宣称" value="{{q}}" bindinput="onQ" />
+    <view class="card" wx:for="{{brands}}" wx:key="brand">
+      <view class="h">{{item.brand}}</view>
+      <view class="it2" wx:for="{{item.items}}" wx:for-item="it" wx:key="product">
+        <view style="font-weight:600">{{it.product}}</view>
+        <view><text wx:if="{{it.catZh}}" class="pill">{{it.catZh}}</text><text class="muted small">{{it.tech}}</text></view>
+        <view class="small">公开宣称（摘录）：{{it.claims}}</view>
+        <view class="muted small">来源：{{it.source}}</view>
+        <tag-list text="{{it.tag}}" />
+        <view wx:if="{{it.links.length}}"><text wx:for="{{it.links}}" wx:for-item="l" wx:key="url" class="btn" data-url="{{l.url}}" bindtap="copyLink">复制链接：{{l.label}}</text></view>
+      </view>
+    </view>
+    <view wx:if="{{!brands.length}}" class="empty">无匹配产品线</view>
+    <view class="card" wx:if="{{typeLookup.length}}">
+      <view class="h">技术类型速查</view>
+      <view class="kv" wx:for="{{typeLookup}}" wx:key="type"><text class="k">{{item.type}}</text><view class="v small">{{item.products}}<view class="muted">{{item.hint}}</view></view></view>
+    </view>
+  </block>
+
+  <block wx:if="{{seg==='aux'}}">
+    <view class="card"><view class="h">UV-C 原理</view><view class="small" wx:for="{{aux.uvcP}}" wx:key="*this">· {{item}}</view></view>
+    <view class="card" wx:for="{{aux.uvc}}" wx:key="entry"><view style="font-weight:600">{{item.entry}}</view><view class="small">{{item.points}}</view><view class="muted small">{{item.citation}}</view><tag-list text="{{item.tag}}" />
+      <view wx:if="{{item.links.length}}"><text wx:for="{{item.links}}" wx:for-item="l" wx:key="url" class="btn" data-url="{{l.url}}" bindtap="copyLink">复制链接：{{l.label}}</text></view></view>
+    <view class="card"><view class="h">超声原理</view><view class="small" wx:for="{{aux.usP}}" wx:key="*this">· {{item}}</view></view>
+    <view class="card" wx:for="{{aux.us}}" wx:key="entry"><view style="font-weight:600">{{item.entry}}</view><view class="small">{{item.points}}</view><view class="muted small">{{item.citation}}</view><tag-list text="{{item.tag}}" />
+      <view wx:if="{{item.links.length}}"><text wx:for="{{item.links}}" wx:for-item="l" wx:key="url" class="btn" data-url="{{l.url}}" bindtap="copyLink">复制链接：{{l.label}}</text></view></view>
+    <view class="card" wx:if="{{aux.hybrids.length}}"><view class="h">混合思路</view>
+      <view class="it2" wx:for="{{aux.hybrids}}" wx:key="combo"><view style="font-weight:600">{{item.combo}}</view><view class="small">{{item.logic}}</view><view class="muted small">注意：{{item.caution}}</view></view></view>
+    <view class="warn"><view style="font-weight:600">安全常驻</view><view wx:for="{{aux.safety}}" wx:key="*this">· {{item}}</view></view>
+  </block>
+</view>
+<app-footer />

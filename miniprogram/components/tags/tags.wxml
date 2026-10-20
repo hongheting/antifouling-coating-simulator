@@ -1,0 +1,1 @@
+<view class="tags"><text wx:for="{{list}}" wx:key="text" class="tag {{item.cls}}">{{item.text}}</text></view>

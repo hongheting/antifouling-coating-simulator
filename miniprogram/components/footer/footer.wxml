@@ -1,0 +1,4 @@
+<view class="foot">
+  <view class="honest small">模拟 ≠ 实测：数值均带证据标签（实测 / 厂家标称 / 文献 / 模型估计等），仅供选型参考，不是实验室报告值。</view>
+  <view class="dev">由洪鹤庭 Jassyhong 开发</view>
+</view>

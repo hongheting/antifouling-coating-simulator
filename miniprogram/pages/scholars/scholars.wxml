@@ -1,0 +1,16 @@
+<view class="wrap">
+  <view class="honest small">共 {{total}} 位 · 排序：领域内 h 指数（并列按领域内被引）。仅反映 OpenAlex 收录与检索口径，换数据库/指标排序会变，非权威排名。</view>
+  <input class="search" placeholder="搜索姓名 / 机构 / 国家 / 代表作" value="{{q}}" bindinput="onQ" />
+  <view class="row" style="margin:6rpx 0"><switch checked="{{onlyLit}}" bindchange="toggle" color="#0a7f8c" /><text class="small">只看本面板文献界作者</text></view>
+  <view class="card" wx:for="{{rows}}" wx:key="name">
+    <view class="row"><text class="rank">{{item.rank}}</text><view style="flex:1"><view class="h">{{item.name}}</view><view class="muted small">{{item.inst}} {{item.country}}</view></view></view>
+    <view wx:if="{{item.inLit}}"><text class="pill">本面板文献界作者</text></view>
+    <view class="kv"><text class="k">领域内 h 指数</text><text class="v" style="font-weight:700;color:#0b3550">{{item.h}}</text></view>
+    <view class="kv"><text class="k">领域内被引 / 作品</text><text class="v">{{item.cit}} / {{item.works}}</text></view>
+    <view class="kv"><text class="k">总 h 指数 / 总被引</text><text class="v">{{item.oh}} / {{item.oc}}</text></view>
+    <view class="small" style="margin-top:8rpx">代表作：{{item.work}}</view>
+    <view><text wx:if="{{item.doi}}" class="btn" data-url="{{item.doi}}" bindtap="copyLink">复制 DOI</text><text wx:if="{{item.url}}" class="btn" data-url="{{item.url}}" bindtap="copyLink">复制{{item.ptype}}</text></view>
+  </view>
+  <view wx:if="{{!rows.length}}" class="empty">无匹配学者</view>
+</view>
+<app-footer />

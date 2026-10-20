@@ -1,0 +1,13 @@
+<view class="wrap">
+  <view class="card">
+    <view class="h">技术交流说明</view>
+    <view class="small" style="margin-top:10rpx">本工具版不含交流发帖功能；公开讨论区链接可复制查看（不引导下载其他 App）。</view>
+    <view class="muted small" style="margin-top:10rpx">讨论区内容均为作者自述、未经验证，仅供参考。</view>
+  </view>
+  <view class="card">
+    <view class="h">公开讨论区</view>
+    <view class="muted small" style="word-break:break-all;margin-top:8rpx"><text user-select>{{links.discussions}}</text></view>
+    <view class="btn" bindtap="copyD">复制讨论区链接</view>
+  </view>
+</view>
+<app-footer />

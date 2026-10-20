@@ -1,0 +1,40 @@
+<view class="wrap">
+  <view class="honest">相对污损压力为相对等级 + 框架推断，不是 AIS 航迹或航次实测污损率。</view>
+
+  <view class="card map-card">
+    <view class="h row between"><text>航线示意总览</text><text class="muted small">点选高亮</text></view>
+    <route-map mode="overview" routes="{{rawRoutes}}" geometry="{{geometry}}" highlightId="{{highlightId}}" animate="{{true}}" height="{{188}}" bindselect="onMapSelect" />
+    <view class="legend row">
+      <text class="lg"><text class="sw" style="background:#3f9d6a"></text>低</text>
+      <text class="lg"><text class="sw" style="background:#d6c341"></text>中</text>
+      <text class="lg"><text class="sw" style="background:#e8a33d"></text>中高</text>
+      <text class="lg"><text class="sw" style="background:#e0592a"></text>高</text>
+      <text class="lg"><text class="sw" style="background:#b42318"></text>很高</text>
+    </view>
+  </view>
+
+  <view wx:if="{{sel}}" class="card sel-card" id="route-detail">
+    <view class="row between"><view class="h">{{sel.name}}</view><text class="btn" bindtap="close">收起</text></view>
+    <view class="muted small">{{sel.id}} · 气候带：{{sel.band}}</view>
+    <view class="muted small">全线相对压力：{{sel.press}} · 策略：{{sel.strategy}}</view>
+    <view><tag-list text="相对等级;框架推断" /></view>
+    <view class="map-single">
+      <route-map mode="single" routeId="{{sel.id}}" routes="{{rawRoutes}}" geometry="{{geometry}}" animate="{{true}}" height="{{200}}" showNote="{{false}}" />
+    </view>
+    <view class="leg" wx:for="{{sel.legs}}" wx:key="i">
+      <view class="dot" style="background:{{item.color}}">{{item.i}}</view>
+      <view class="lb"><view><text style="font-weight:600">{{item.seg}}</text></view><view class="small">相对压力：{{item.press}}</view><view class="muted small">{{item.hint}}</view></view>
+    </view>
+    <view class="btn pri" bindtap="toRec">查看该航线短名单 ›</view>
+  </view>
+
+  <picker range="{{types}}" value="{{typeIdx}}" bindchange="pickType"><view class="picker">类型：{{types[typeIdx]}} ▾</view></picker>
+  <view class="card route-card {{highlightId===item.id?'on':''}}" wx:for="{{list}}" wx:key="id" id="r-{{item.id}}" data-id="{{item.id}}" bindtap="open">
+    <view class="row between"><view class="h">{{item.name}}</view><text class="pill">{{item.type}}</text></view>
+    <view class="muted small">{{item.band}}</view>
+    <view class="small">相对压力 {{item.press}}</view>
+    <view class="bar glow"><view class="i" style="width:{{item.pct}}%"></view></view>
+    <view class="muted small">{{item.strategy}}</view>
+  </view>
+</view>
+<app-footer />

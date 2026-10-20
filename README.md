@@ -65,11 +65,16 @@ DESIGN.md           # 公开版设计要点
 ### 桌面（Electron）
 
 ```bash
+cd mobile && npm i && npm run sync-www && cd ..   # 桌面与手机共用 mobile/www
 cd desktop
 npm install
+npm run sync-ui    # mobile/www → desktop/ui
+npm test           # OTA 签名校验单测
 npm start          # 开发
-npm run dist:win   # Windows 包（需在 Windows 或配置好的 CI）
+npm run dist:win   # NSIS 安装版 + 便携版（Windows，或 Linux + wine/wine32）
 ```
+
+桌面版 0.6.0 与手机 App 同一界面：技术交流、在线数据更新、新版本提醒、界面热更新（主进程 Ed25519 验签 + sha256，未签名一律拒绝）。详见 [desktop/README.md](desktop/README.md)。
 
 ### Android（Capacitor）
 
@@ -123,3 +128,12 @@ python3 ui/rebuild-snapshot.py
 ## Disclaimer
 
 本软件仅供研究浏览与教学演示。不构成施工、采购或合规建议。海洋防污涉及生物杀伤剂法规与船级社要求时，请以当地法规与厂家最新 TDS/SDS 为准。
+
+## 微信小程序（工具版）
+
+`miniprogram/` 是原生微信小程序版本（个人主体可发布的「工具 > 信息查询」类目）：数据内置（本仓库为**示例数据**）、不联网、不登录、无 UGC/广告，外部链接一律「复制链接」。航线页含离线 canvas 示意地图（Natural Earth 110m + route_geometry）。筛选/排序逻辑在 `miniprogram/utils/core.js`，`npm test` 会用 jsdom 跑 `ui/index.html` 逐项对照输出。
+
+```bash
+cd miniprogram && npm i && npm run data && npm test
+```
+用微信开发者工具导入 `miniprogram/`，把 `project.config.json` 的 `touristappid` 换成自己的 AppID。注册、隐私指引（剪切板）、ICP 备案与审核说明见 [miniprogram/README.md](miniprogram/README.md)。

@@ -1,0 +1,21 @@
+.grid { display: flex; flex-wrap: wrap; margin-top: 12rpx; }
+.stat {
+  width: 33.33%; box-sizing: border-box; padding: 16rpx 8rpx; text-align: center;
+}
+.stat .n { font-size: 36rpx; font-weight: 700; color: #7ef0e8; }
+.stat .l { font-size: 20rpx; color: #7aa8b8; margin-top: 4rpx; }
+.pulse-tile { animation: tilePulse 3.2s ease-in-out infinite; }
+.pulse-tile:nth-child(2n) { animation-delay: .4s; }
+.pulse-tile:nth-child(3n) { animation-delay: .8s; }
+@keyframes tilePulse {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-2rpx); opacity: .92; }
+}
+.ico {
+  width: 44rpx; height: 44rpx; border-radius: 12rpx; margin-right: 12rpx;
+  background: linear-gradient(135deg, #0a7f8c, #1f6fa8); color: #fff;
+  font-size: 22rpx; font-weight: 700; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 12rpx rgba(42, 212, 208, .35);
+}
+.nav { transition: border-color .2s; }
+.nav:active { border-color: rgba(64, 220, 220, .55); }

@@ -1,5 +1,5 @@
 # Electron Builder — V1 packaging for coating-simulator
-# Local-only UI; no remote updater; ui/ embedded via extraResources.
+# 0.6.0: UI = mobile/www (synced to desktop/ui). Optional signed OTA UI bundles (verified in main).
 
 appId: com.heting.coating-simulator
 productName: 防污涂料配方模拟器
@@ -12,11 +12,13 @@ directories:
 files:
   - main.js
   - preload.js
+  - ota-core.js
+  - ota-desktop.js
   - package.json
 
 # Ship the static panel next to the binary under resources/ui/
 extraResources:
-  - from: ../ui
+  - from: ui
     to: ui
     filter:
       - "**/*"
@@ -24,10 +26,11 @@ extraResources:
 
 asar: true
 
-# V1: no publish / no auto-update channels
+# No electron-updater channel; UI hot-update is the signed-manifest OTA in ota-desktop.js
 publish: null
 
 win:
+  # Built on Linux with wine (rcedit + NSIS uninstaller). Unsigned build (no code-signing cert).
   target:
     - target: nsis
       arch:
@@ -53,6 +56,10 @@ linux:
   maintainer: Hong Heting <heting@localhost>
   synopsis: Antifouling coating formulation simulator (simulation ≠ measurement)
 
+artifactName: "${productName}-${version}-${arch}-${target}.${ext}"
+portable:
+  artifactName: "${productName}-${version}-portable-x64.exe"
 nsis:
+  artifactName: "${productName}-${version}-setup-x64.exe"
   oneClick: false
   allowToChangeInstallationDirectory: true

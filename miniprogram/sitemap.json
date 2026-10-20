@@ -1,0 +1,1 @@
+{ "desc": "允许微信索引全部页面", "rules": [{ "action": "allow", "page": "*" }] }

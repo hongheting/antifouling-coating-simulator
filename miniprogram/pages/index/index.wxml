@@ -1,0 +1,23 @@
+<view class="hero wave">
+  <view class="t">防污涂料配方模拟器</view>
+  <view class="s">工具版 · 离线数据 {{source}}</view>
+  <view class="motif"></view>
+</view>
+<view class="wrap">
+  <view class="honest">{{meta.honesty}}</view>
+  <view class="card glass">
+    <view class="h">数据概览</view>
+    <view class="grid">
+      <view class="stat pulse-tile" wx:for="{{stats}}" wx:key="label"><view class="n">{{item.n}}</view><view class="l">{{item.label}}</view></view>
+    </view>
+  </view>
+  <view class="card nav glass" wx:for="{{nav}}" wx:key="url" data-url="{{item.url}}" bindtap="open">
+    <view class="row between">
+      <view class="row"><view class="ico">{{item.icon}}</view><view class="h">{{item.t}}</view></view>
+      <text class="muted">›</text>
+    </view>
+    <view class="muted">{{item.d}}</view>
+  </view>
+  <view class="warn">安全：{{meta.safety}}</view>
+</view>
+<app-footer />

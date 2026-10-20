@@ -1,0 +1,19 @@
+.tags { display: inline; }
+.tag {
+  display: inline-block; font-size: 20rpx; padding: 2rpx 12rpx; border-radius: 8rpx;
+  margin: 4rpx 8rpx 4rpx 0; border: 1rpx solid transparent;
+  animation: tagShimmer 2.8s ease-in-out infinite;
+}
+@keyframes tagShimmer {
+  0%, 100% { filter: brightness(1); box-shadow: 0 0 0 rgba(0,0,0,0); }
+  50% { filter: brightness(1.12); box-shadow: 0 0 10rpx rgba(120, 220, 230, .25); }
+}
+.tag-measured { background: #e3f5ea; color: #1d6b3f; border-color: #b9e2c8; }
+.tag-pending { background: #edf1f5; color: #4a5b6c; border-color: #d5dde5; }
+.tag-vendor { background: #e4eefa; color: #1f5f9e; border-color: #c3d8f0; }
+.tag-estimate { background: #fdf1dc; color: #8a5300; border-color: #f2d6a2; }
+.tag-plan-not-measured { background: #fbe9e7; color: #a33a2b; border-color: #f2c5bd; }
+.tag-lit-bound, .tag-lit-named { background: #dff4f2; color: #0b6e69; border-color: #b6e3df; }
+.tag-relative, .tag-framework, .tag-interp { background: #efe8fb; color: #5b3aa8; border-color: #d9cdf3; }
+.tag-public { background: #e0f3f5; color: #0a6f79; border-color: #b7e0e5; }
+.tag-default { background: #f1f4f7; color: #4a5b6c; border-color: #dde4ea; }

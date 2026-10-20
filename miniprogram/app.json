@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/routes/routes",
+    "pages/lit/lit",
+    "pages/about/about",
+    "pages/lab/lab",
+    "pages/rec/rec",
+    "pages/tech/tech",
+    "pages/industry/industry",
+    "pages/scholars/scholars",
+    "pages/exchange/exchange"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#043644",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "防污涂料配方模拟器",
+    "backgroundColor": "#07141c",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#7aa8b8",
+    "selectedColor": "#2ad4d0",
+    "backgroundColor": "#0a1c24",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "总览"
+      },
+      {
+        "pagePath": "pages/routes/routes",
+        "text": "航线选型"
+      },
+      {
+        "pagePath": "pages/lit/lit",
+        "text": "文献"
+      },
+      {
+        "pagePath": "pages/about/about",
+        "text": "关于"
+      }
+    ]
+  },
+  "usingComponents": {
+    "app-footer": "/components/footer/footer",
+    "tag-list": "/components/tags/tags",
+    "route-map": "/components/route-map/route-map"
+  },
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json"
+}

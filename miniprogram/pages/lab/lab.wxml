@@ -1,0 +1,24 @@
+<view class="wrap">
+  <view class="honest">每个数值都带标签；「待测」= 尚无数据，不是 0。模拟 ≠ 实测。</view>
+  <scroll-view scroll-x class="chips">
+    <view wx:for="{{groups}}" wx:key="key" class="chip {{base===item.key?'on':''}}" data-key="{{item.key}}" bindtap="pickBase">{{item.zh}}<text class="cnt">{{item.n}}</text></view>
+  </scroll-view>
+  <picker range="{{tags}}" value="{{tagIdx}}" bindchange="pickTag"><view class="picker">标签筛选：{{tags[tagIdx]}} ▾</view></picker>
+  <input class="search" placeholder="搜索配方 ID / 基料 / 备注" value="{{q}}" bindinput="onQ" />
+  <view class="muted small">共 {{rows.length}} 行</view>
+  <view class="card" wx:for="{{rows}}" wx:key="id">
+    <view class="h">{{item.id}}</view>
+    <view><text class="pill">{{item.basecoat}}</text></view>
+    <view class="kv"><text class="k">填料 wt%</text><text class="v">{{item.ca}}</text></view>
+    <view class="kv"><text class="k">BYK（相对粒子）%</text><text class="v">{{item.byk}}</text></view>
+    <view class="kv" wx:for="{{item.cells}}" wx:for-item="c" wx:key="k">
+      <text class="k">{{c.k}}</text>
+      <view class="v"><text wx:if="{{c.v}}">{{c.v}}</text><text wx:else class="muted">—</text><view><tag-list text="{{c.tag}}" /></view></view>
+    </view>
+    <view wx:if="{{item.meta}}" class="muted small" style="margin-top:10rpx">{{item.meta}}</view>
+    <view wx:if="{{item.disadv}}" class="warn small" style="margin-top:10rpx">劣势/边界：{{item.disadv}}</view>
+    <view wx:if="{{item.safety}}" class="muted small" style="margin-top:6rpx">安全：{{item.safety}}</view>
+  </view>
+  <view wx:if="{{!rows.length}}" class="empty">无匹配行</view>
+</view>
+<app-footer />

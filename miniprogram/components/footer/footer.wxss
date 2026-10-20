@@ -1,0 +1,2 @@
+.foot { padding: 24rpx 24rpx 48rpx; }
+.dev { text-align: center; color: #7aa8b8; font-size: 24rpx; margin-top: 18rpx; }

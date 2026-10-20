@@ -1,0 +1,92 @@
+page {
+  background: #07141c;
+  color: #d7e8ef;
+  font-size: 28rpx;
+  line-height: 1.55;
+  font-family: -apple-system, "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+}
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #043644 0%, #0a6f79 48%, #0b4f78 100%);
+  color: #fff;
+  padding: 36rpx 32rpx 44rpx;
+  box-shadow: 0 8rpx 28rpx rgba(0, 40, 50, .45);
+}
+.hero .t { font-size: 40rpx; font-weight: 700; letter-spacing: 1rpx; }
+.hero .s { font-size: 24rpx; opacity: .9; margin-top: 8rpx; }
+.hero.wave::after {
+  content: '';
+  position: absolute; left: -10%; right: -10%; bottom: -18rpx; height: 48rpx;
+  background: radial-gradient(ellipse at center, rgba(120, 230, 230, .22), transparent 70%);
+  pointer-events: none;
+}
+.hero .motif {
+  position: absolute; right: 16rpx; top: 20rpx; width: 120rpx; height: 64rpx;
+  border: 2rpx solid rgba(160, 240, 240, .35); border-radius: 40rpx 40rpx 8rpx 8rpx;
+  opacity: .55; transform: rotate(-8deg);
+}
+.hero .motif::before {
+  content: ''; position: absolute; left: 18rpx; right: 18rpx; top: 18rpx; height: 2rpx;
+  background: rgba(160, 240, 240, .5);
+}
+.wrap { padding: 20rpx 24rpx 40rpx; }
+.card {
+  background: rgba(12, 36, 48, .88);
+  border-radius: 20rpx;
+  padding: 24rpx;
+  margin: 18rpx 0;
+  border: 1rpx solid rgba(64, 180, 190, .22);
+  box-shadow: 0 6rpx 24rpx rgba(0, 20, 30, .35), inset 0 1rpx 0 rgba(120, 220, 230, .08);
+}
+.card.glass { backdrop-filter: blur(8px); }
+.card .h { font-size: 30rpx; font-weight: 700; color: #b8f0f4; }
+.muted { color: #7aa8b8; font-size: 24rpx; }
+.small { font-size: 22rpx; }
+.row { display: flex; align-items: center; flex-wrap: wrap; gap: 12rpx; }
+.between { justify-content: space-between; }
+.chips { white-space: nowrap; padding: 8rpx 0; }
+.chip {
+  display: inline-block; padding: 10rpx 22rpx; margin-right: 12rpx; border-radius: 999rpx;
+  background: rgba(10, 40, 52, .9); color: #a8c8d4; border: 2rpx solid rgba(80, 160, 170, .35); font-size: 24rpx;
+}
+.chip.on { background: #0a7f8c; color: #fff; border-color: #2ad4d0; box-shadow: 0 0 16rpx rgba(42, 212, 208, .35); }
+.chip .cnt { margin-left: 8rpx; opacity: .75; }
+.search, .picker {
+  background: rgba(8, 30, 40, .95); border: 2rpx solid rgba(80, 160, 170, .35); border-radius: 14rpx;
+  padding: 14rpx 20rpx; font-size: 26rpx; margin: 10rpx 0; color: #d7e8ef;
+}
+.kv { display: flex; justify-content: space-between; padding: 8rpx 0; border-bottom: 1rpx solid rgba(80, 140, 150, .18); font-size: 26rpx; }
+.kv .k { color: #7aa8b8; flex: 0 0 40%; }
+.kv .v { flex: 1; text-align: right; }
+.pill {
+  display: inline-block; padding: 2rpx 14rpx; border-radius: 8rpx;
+  background: rgba(20, 90, 100, .45); color: #8fe0e4; font-size: 22rpx; margin: 4rpx 8rpx 4rpx 0;
+}
+.warn {
+  background: rgba(80, 50, 10, .45); border: 2rpx solid rgba(232, 163, 61, .45); color: #f0d29a;
+  border-radius: 14rpx; padding: 16rpx 20rpx; font-size: 24rpx;
+}
+.honest {
+  background: rgba(10, 70, 75, .35); border-left: 8rpx solid #2ad4d0;
+  padding: 16rpx 20rpx; border-radius: 10rpx; font-size: 24rpx; color: #c8eef0;
+}
+.empty { text-align: center; color: #6a8a98; padding: 40rpx 0; }
+.btn {
+  display: inline-block; padding: 10rpx 24rpx; border-radius: 12rpx;
+  background: rgba(30, 90, 130, .45); color: #9fd4ff; font-size: 24rpx; margin: 6rpx 10rpx 6rpx 0;
+  border: 1rpx solid rgba(100, 180, 220, .3);
+}
+.btn.pri { background: #0a7f8c; color: #fff; border-color: #2ad4d0; box-shadow: 0 0 14rpx rgba(42, 212, 208, .3); }
+.bar { height: 14rpx; background: rgba(40, 70, 85, .8); border-radius: 999rpx; overflow: hidden; margin: 10rpx 0; }
+.bar .i { height: 100%; background: linear-gradient(90deg, #3f9d6a, #e8a33d, #b42318); border-radius: 999rpx; }
+.rank {
+  display: inline-flex; width: 52rpx; height: 52rpx; border-radius: 50%;
+  background: #0a7f8c; color: #fff; align-items: center; justify-content: center; font-weight: 700; margin-right: 14rpx;
+  box-shadow: 0 0 12rpx rgba(42, 212, 208, .35);
+}
+.stars { color: #e8a33d; letter-spacing: 2rpx; }
+.stars .off { color: #3a5560; }
+.seg { display: flex; background: rgba(20, 50, 60, .9); border-radius: 14rpx; padding: 6rpx; margin: 10rpx 0; }
+.seg .it { flex: 1; text-align: center; padding: 12rpx 0; border-radius: 10rpx; font-size: 26rpx; color: #8aaebc; }
+.seg .it.on { background: rgba(10, 127, 140, .85); color: #fff; font-weight: 700; }

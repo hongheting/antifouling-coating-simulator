@@ -1,0 +1,13 @@
+{
+  "name": "coating-simulator-miniprogram",
+  "private": true,
+  "description": "防污涂料配方模拟器 · 工具版（微信小程序，原生）",
+  "scripts": {
+    "data": "node scripts/build-data.js",
+    "test": "node --test test/"
+  },
+  "devDependencies": {
+    "htmlparser2": "^9.1.0",
+    "jsdom": "^24.1.3"
+  }
+}

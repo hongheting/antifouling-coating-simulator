@@ -1,0 +1,14 @@
+<view class="wrap">
+  <view class="honest">排序 = 工况相对拟合，不是“最优分”。产品规格以厂家最新 TDS/SDS 为准。</view>
+  <picker range="{{names}}" value="{{idx}}" bindchange="pick"><view class="picker">航线：{{names[idx]}} ▾</view></picker>
+  <view class="card" wx:for="{{items}}" wx:key="rank">
+    <view class="row"><text class="rank">{{item.rank}}</text><view class="h" style="flex:1">{{item.name}}</view></view>
+    <view><text class="pill">{{item.type}}</text><tag-list text="{{item.tag}}" /></view>
+    <view wx:if="{{item.trackA}}" class="muted small">关联轨 A：{{item.trackA}}</view>
+    <view class="warn small" style="margin-top:10rpx">局限：{{item.caveats}}</view>
+    <view class="small" style="margin-top:10rpx">{{item.note}}</view>
+    <view wx:if="{{item.links.length}}" style="margin-top:10rpx"><text wx:for="{{item.links}}" wx:for-item="l" wx:key="url" class="btn" data-url="{{l.url}}" bindtap="copyLink">复制链接：{{l.label}}</text></view>
+  </view>
+  <view wx:if="{{!items.length}}" class="empty">该剖面暂无短名单行。</view>
+</view>
+<app-footer />

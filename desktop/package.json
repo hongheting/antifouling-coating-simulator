@@ -1,19 +1,21 @@
 {
   "name": "coating-simulator",
   "productName": "防污涂料配方模拟器",
-  "version": "0.3.0",
-  "description": "Antifouling coating formulation simulator panel (simulation ≠ measurement). Local-only UI; no remote code.",
+  "version": "0.6.0",
+  "description": "Antifouling coating formulation simulator (desktop, same UI as mobile 0.6.0). Simulation ≠ measurement. Signed (Ed25519) OTA UI updates only.",
   "main": "main.js",
   "author": "Hong Heting <heting@localhost>",
-  "homepage": "https://localhost/coating-simulator",
+  "homepage": "https://github.com/hongheting/antifouling-coating-simulator",
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "dist:win": "electron-builder --win --x64",
-    "dist:linux": "electron-builder --linux"
+    "dist:win": "npm run sync-ui && electron-builder --win --x64",
+    "dist:linux": "electron-builder --linux",
+    "sync-ui": "node scripts/sync-ui.js",
+    "test": "node --test test/"
   },
   "devDependencies": {
     "electron": "^33.2.0",

@@ -1,0 +1,4 @@
+<view class="rmap">
+  <canvas type="2d" id="c" class="cv" style="width:{{cssW}}px;height:{{cssH}}px;" bindtap="onTap"></canvas>
+  <view wx:if="{{note}}" class="note">{{note}}</view>
+</view>

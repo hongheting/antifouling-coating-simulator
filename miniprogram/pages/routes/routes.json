@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "航线选型",
+  "usingComponents": {
+    "route-map": "/components/route-map/route-map"
+  }
+}

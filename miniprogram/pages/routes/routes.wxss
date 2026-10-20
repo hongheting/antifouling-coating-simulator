@@ -1,0 +1,12 @@
+.map-card { padding-bottom: 16rpx; }
+.map-single { margin: 16rpx 0; }
+.legend { margin-top: 12rpx; gap: 16rpx; }
+.lg { font-size: 20rpx; color: #7aa8b8; display: inline-flex; align-items: center; }
+.sw { display: inline-block; width: 18rpx; height: 18rpx; border-radius: 4rpx; margin-right: 6rpx; }
+.leg { display: flex; gap: 16rpx; margin: 14rpx 0; align-items: flex-start; }
+.dot { width: 44rpx; height: 44rpx; border-radius: 50%; color: #fff; font-size: 22rpx; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.lb { flex: 1; }
+.route-card.on { border-color: rgba(64, 220, 220, .55); box-shadow: 0 0 20rpx rgba(40, 180, 200, .25); }
+.bar.glow .i { box-shadow: 0 0 12rpx rgba(232, 163, 61, .45); }
+.sel-card { border-color: rgba(64, 220, 220, .4); }

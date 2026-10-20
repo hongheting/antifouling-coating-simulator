@@ -1,0 +1,29 @@
+<view class="wrap">
+  <view class="honest small">公开资料整理，仅供参考；不进入轨 A/B/C 的任何计算。{{honesty}}</view>
+  <view class="seg">
+    <view class="it {{mode==='week'?'on':''}}" data-mode="week" bindtap="pickMode">按周</view>
+    <view class="it {{mode==='all'?'on':''}}" data-mode="all" bindtap="pickMode">全部周次</view>
+  </view>
+  <picker wx:if="{{mode==='week'}}" range="{{weekNames}}" value="{{weekIdx}}" bindchange="pickWeek"><view class="picker">{{weekNames[weekIdx]}} ▾</view></picker>
+  <scroll-view scroll-x class="chips">
+    <view wx:for="{{cats}}" wx:key="key" class="chip {{cat===item.key?'on':''}}" data-key="{{item.key}}" bindtap="pickCat">{{item.zh}}<text class="cnt">{{item.n}}</text></view>
+  </scroll-view>
+  <picker range="{{rels}}" value="{{relIdx}}" bindchange="pickRel"><view class="picker">相关度：{{rels[relIdx]}} ▾</view></picker>
+  <input class="search" placeholder="搜索标题 / 摘要 / 来源" value="{{q}}" bindinput="onQ" />
+  <view class="muted small">{{count}}</view>
+  <block wx:for="{{groups}}" wx:for-item="g" wx:key="week">
+    <view class="wk">{{g.week}} 周<text wx:if="{{g.backfill}}" class="pill">回溯补录</text> <text class="muted small">{{g.coverage}}</text></view>
+    <view class="card" wx:for="{{g.entries}}" wx:key="k">
+      <view class="row"><text class="pill">{{item.cat}}</text><text class="muted small">{{item.date}}</text><text wx:if="{{item.rel}}" class="pill rel">相关度 {{item.rel}}</text><tag-list text="公开资料" /></view>
+      <view style="font-weight:600;margin:8rpx 0">{{item.title}}</view>
+      <view class="small">{{item.summary}}</view>
+      <view class="muted small" style="margin-top:6rpx">与配方/选型相关度：{{item.rel ? item.rel : '—'}}<text wx:if="{{item.reason}}"> · {{item.reason}}</text></view>
+      <view wx:if="{{item.note}}" class="warn small" style="margin-top:6rpx">备注：{{item.note}}</view>
+      <text wx:if="{{item.url}}" class="btn" data-url="{{item.url}}" bindtap="copyLink">复制来源链接</text>
+      <view wx:else class="muted small">来源：{{item.src ? item.src : '—'}}</view>
+    </view>
+    <view wx:if="{{mode==='week'}}" class="card"><view class="h">本周趋势小结</view><view class="small"><text>{{g.trend ? g.trend : '本期未提供趋势小结。'}}</text></view></view>
+  </block>
+  <view wx:if="{{none}}" class="empty">无匹配条目（试试放宽筛选）。</view>
+</view>
+<app-footer />
