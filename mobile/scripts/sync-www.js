@@ -129,6 +129,10 @@ html = html.replace(
   '<title>防污涂料配方模拟器 · V0 面板</title>',
   '<title>防污涂料配方模拟器</title>'
 );
+html = html.replace(
+  '<title>MarineCoatSim · 防污涂料配方模拟器 | Open Antifouling Coating Simulator & Evidence Benchmark</title>',
+  '<title>防污涂料配方模拟器</title>'
+);
 
 fs.writeFileSync(path.join(WWW, 'index.html'), html);
 console.log('patched index.html with mobile.css + mobile-bridge.js');

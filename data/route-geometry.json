@@ -10,14 +10,16 @@
      "lonlat": [
       121.8,
       31.2
-     ]
+     ],
+     "name_en": "Shanghai"
     },
     {
      "name": "新加坡",
      "lonlat": [
       103.85,
       1.25
-     ]
+     ],
+     "name_en": "Singapore"
     }
    ],
    "legs": [
@@ -106,21 +108,24 @@
      "lonlat": [
       121.8,
       31.2
-     ]
+     ],
+     "name_en": "Shanghai"
     },
     {
      "name": "釜山",
      "lonlat": [
       129.05,
       35.08
-     ]
+     ],
+     "name_en": "Busan"
     },
     {
      "name": "仁川",
      "lonlat": [
       126.6,
       37.45
-     ]
+     ],
+     "name_en": "Incheon"
     }
    ],
    "legs": [
@@ -205,28 +210,32 @@
      "lonlat": [
       121.8,
       31.2
-     ]
+     ],
+     "name_en": "Shanghai"
     },
     {
      "name": "新加坡",
      "lonlat": [
       103.85,
       1.25
-     ]
+     ],
+     "name_en": "Singapore"
     },
     {
      "name": "苏伊士 / 塞得港",
      "lonlat": [
       32.3,
       31.25
-     ]
+     ],
+     "name_en": "Suez / Port Said"
     },
     {
      "name": "鹿特丹",
      "lonlat": [
       4.1,
       51.95
-     ]
+     ],
+     "name_en": "Rotterdam"
     }
    ],
    "legs": [
@@ -423,21 +432,24 @@
      "lonlat": [
       103.85,
       1.25
-     ]
+     ],
+     "name_en": "Singapore"
     },
     {
      "name": "好望角",
      "lonlat": [
       18.47,
       -34.36
-     ]
+     ],
+     "name_en": "Cape of Good Hope"
     },
     {
      "name": "鹿特丹",
      "lonlat": [
       4.1,
       51.95
-     ]
+     ],
+     "name_en": "Rotterdam"
     }
    ],
    "legs": [
@@ -558,14 +570,16 @@
      "lonlat": [
       -79.55,
       8.9
-     ]
+     ],
+     "name_en": "Balboa (Pacific)"
     },
     {
      "name": "科隆（大西洋侧）",
      "lonlat": [
       -79.9,
       9.36
-     ]
+     ],
+     "name_en": "Colón (Atlantic)"
     }
    ],
    "legs": [
@@ -626,14 +640,16 @@
      "lonlat": [
       43.4,
       12.6
-     ]
+     ],
+     "name_en": "Bab el-Mandeb"
     },
     {
      "name": "苏伊士 / 塞得港",
      "lonlat": [
       32.3,
       31.25
-     ]
+     ],
+     "name_en": "Suez / Port Said"
     }
    ],
    "legs": [
@@ -714,35 +730,40 @@
      "lonlat": [
       114.15,
       22.25
-     ]
+     ],
+     "name_en": "Hong Kong / Shenzhen"
     },
     {
      "name": "三亚",
      "lonlat": [
       109.5,
       18.2
-     ]
+     ],
+     "name_en": "Sanya"
     },
     {
      "name": "厦门",
      "lonlat": [
       118.1,
       24.4
-     ]
+     ],
+     "name_en": "Xiamen"
     },
     {
      "name": "釜山",
      "lonlat": [
       129.05,
       35.08
-     ]
+     ],
+     "name_en": "Busan"
     },
     {
      "name": "横滨 / 东京湾",
      "lonlat": [
       139.65,
       35.45
-     ]
+     ],
+     "name_en": "Yokohama / Tokyo Bay"
     }
    ],
    "legs": [
@@ -877,14 +898,16 @@
      "lonlat": [
       121.8,
       31.2
-     ]
+     ],
+     "name_en": "Shanghai"
     },
     {
      "name": "洛杉矶 – 长滩",
      "lonlat": [
       -118.25,
       33.73
-     ]
+     ],
+     "name_en": "LA – Long Beach"
     }
    ],
    "legs": [
@@ -969,14 +992,16 @@
      "lonlat": [
       151.25,
       -33.85
-     ]
+     ],
+     "name_en": "Sydney"
     },
     {
      "name": "奥克兰",
      "lonlat": [
       174.77,
       -36.84
-     ]
+     ],
+     "name_en": "Auckland"
     }
    ],
    "legs": [
@@ -1045,14 +1070,16 @@
      "lonlat": [
       -46.3,
       -23.98
-     ]
+     ],
+     "name_en": "Santos"
     },
     {
      "name": "里约热内卢（沿海方向示意）",
      "lonlat": [
       -43.15,
       -22.95
-     ]
+     ],
+     "name_en": "Rio de Janeiro"
     }
    ],
    "legs": [
@@ -1109,14 +1136,16 @@
      "lonlat": [
       -68.5,
       63.75
-     ]
+     ],
+     "name_en": "Iqaluit"
     },
     {
      "name": "雷索卢特",
      "lonlat": [
       -94.85,
       74.7
-     ]
+     ],
+     "name_en": "Resolute"
     }
    ],
    "legs": [
@@ -1161,14 +1190,16 @@
      "lonlat": [
       147.33,
       -42.88
-     ]
+     ],
+     "name_en": "Hobart"
     },
     {
      "name": "迪蒙·迪维尔站（东南极）",
      "lonlat": [
       140.0,
       -66.66
-     ]
+     ],
+     "name_en": "Dumont d'Urville"
     }
    ],
    "legs": [

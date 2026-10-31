@@ -57,7 +57,7 @@ coating-simulator/
 
 1. 维护者改 `data/*.csv`（或说明 md）。  
 2. 在仓库根执行：`python3 ui/rebuild-snapshot.py` → 更新 `ui/data-snapshot.js` / `.json`。  
-3. 本地验证：浏览器打开 `ui/index.html` 或 `npm start`（Electron）。  
+3. 本地验证：浏览器打开 `ui/index.html` 或 `npm start`（Electron）。已部署的公开网页面板在 <https://simulator.jassyhong.top>（镜像 `coating-simulator-web:0.6.1`，见 `web/`）。  
 4. `npm run dist` 打出安装包；安装包**内嵌**当时的 `ui/`，不联网拉数据。
 
 用户日常：安装后双击应用 → 只读面板。改表/重打包是维护者流程，不是运行时联网。

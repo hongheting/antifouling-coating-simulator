@@ -9,7 +9,13 @@ const D = require('../data/data.js');
 function loadWeb() {
   return new Promise((res, rej) => {
     const html = fs.readFileSync(path.join(UI, 'index.html'), 'utf8');
-    const dom = new JSDOM(html, { url: 'file://' + UI + '/index.html', runScripts: 'dangerously', resources: 'usable', pretendToBeVisual: true });
+    const dom = new JSDOM(html, {
+      // ?lang=zh pins the bilingual panel so labels match utils/core.js.
+      url: 'file://' + UI + '/index.html?lang=zh',
+      runScripts: 'dangerously',
+      resources: 'usable',
+      pretendToBeVisual: true,
+    });
     dom.window.addEventListener('load', () => setTimeout(() => res(dom.window), 50));
     setTimeout(() => rej(new Error('load timeout')), 20000);
   });

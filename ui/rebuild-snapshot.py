@@ -21,6 +21,17 @@ snap = json.loads(prev.read_text(encoding="utf-8"))
 with open(DATA / "lab-proxy-table.csv", encoding="utf-8") as f:
     snap["lab"] = list(csv.DictReader(f))
 
+# 0.6.1 UI reads CA_MSiO2_wt_pct / BYK_rel_to_particle_pct / hplc_CA_ug_mL_or_flux.
+# Public example CSV keeps filler_wt_pct / dispersant_rel_pct / hplc_analyte_note.
+# Copy across; never invent a number that is not already in the row.
+for row in snap["lab"]:
+    if not (row.get("CA_MSiO2_wt_pct") or "").strip():
+        row["CA_MSiO2_wt_pct"] = row.get("filler_wt_pct") or ""
+    if not (row.get("BYK_rel_to_particle_pct") or "").strip():
+        row["BYK_rel_to_particle_pct"] = row.get("dispersant_rel_pct") or ""
+    if not (row.get("hplc_CA_ug_mL_or_flux") or "").strip():
+        row["hplc_CA_ug_mL_or_flux"] = row.get("hplc_analyte_note") or ""
+
 with open(DATA / "recommendation-shortlist.csv", encoding="utf-8") as f:
     snap["recommendations"] = list(csv.DictReader(f))
 
@@ -58,9 +69,22 @@ primary_order = [
     "regulatory_economic",
 ]
 cat_map = {c["key"]: c["zh"] for c in categories}
+LIT_EN = {
+    "organic_marine_paint": "Organic Marine Paint (Acrylic/Epoxy)",
+    "metal_alloy": "Metal / Alloy Cladding & Spray",
+    "silicone_mod_organic": "Silicone-Modified Organic",
+    "lse_foul_release": "Low Surface Energy / FRC",
+    "spc_copper": "SPC / Cu Biocide Systems",
+    "hydrogel_zwitterionic": "Hydrogel / Zwitterionic",
+    "uvc_active": "UV-C Active Antifouling",
+    "ultrasound": "Ultrasonic / Guided Wave",
+    "hybrid": "Hybrid / Synergistic Systems",
+    "natural_biocide_ca": "Natural Biocide / CA@Mesoporous",
+    "regulatory_economic": "Regulatory / Economic Impact",
+}
 snap["literature_taxonomy"] = {
     "source": "data/literature-taxonomy.md",
-    "categories": [{"key": k, "zh": cat_map.get(k, k)} for k in primary_order],
+    "categories": [{"key": k, "zh": cat_map.get(k, k), "en": LIT_EN.get(k, k)} for k in primary_order],
     "honesty": [
         "分类便于浏览，不改变证据强度",
         "natural_biocide_ca ≠ 用户 示例功能化环氧（公开仓库已替换） 实测",
@@ -314,6 +338,20 @@ comm_primary = [
     "tech_ultrasound",
 ]
 comm_map = {c["key"]: c["zh"] for c in comm_categories}
+COMM_EN = {
+    "spc_silyl_acrylate": "Silyl Acrylate SPC",
+    "spc_hydrolysis": "Hydrolyzing / Carboxylate SPC",
+    "spc_copper": "Cu-Biocide SPC (General)",
+    "frc_silicone": "Silicone Foul-Release (FRC)",
+    "frc_fluoro": "Fluoropolymer Foul-Release",
+    "hybrid_hydrogel": "Hydrogel Silicone + Biocide",
+    "lpp_linear": "Linear Polishing (LPP)",
+    "copper_free_ablative": "Cu-Free Ablative",
+    "yacht_spc": "Yacht / Leisure SPC",
+    "asian_silyl_spc": "Asian Silyl-Based SPC",
+    "tech_uvc": "UV-C Auxiliary Tech",
+    "tech_ultrasound": "Ultrasonic / Guided-Wave Aux",
+}
 # counts from catalog + brand items
 comm_cc = Counter()
 for r in snap["recommendations"]:
@@ -325,7 +363,7 @@ for b in snap.get("commercial_products", {}).get("brands", []):
             comm_cc[it["category_key"]] += 1
 snap["commercial_taxonomy"] = {
     "source": "data/commercial-taxonomy.md",
-    "categories": [{"key": k, "zh": comm_map.get(k, k)} for k in comm_primary],
+    "categories": [{"key": k, "zh": comm_map.get(k, k), "en": COMM_EN.get(k, k)} for k in comm_primary],
     "counts": {k: comm_cc.get(k, 0) for k in comm_primary},
     "total_catalog": len([r for r in snap["recommendations"] if r.get("matched_profile_id") == "CATALOG-GLOBAL-V0"]),
     "honesty": [
@@ -601,6 +639,28 @@ if rr_path.exists():
 rg_path = DATA / "route-geometry.json"
 if rg_path.exists():
     snap["route_geometry"] = json.loads(rg_path.read_text(encoding="utf-8"))
+
+# --- sanitize internal /workspace/ paths before writing ---
+_PATH_REPLACEMENTS = [
+    ("/workspace/coating-simulator/data/", "data/"),
+    ("/workspace/thesis/research-knowledge-base-2026-10-08.md", "Lab Benchmark KB (2026-10)"),
+    ("/workspace/thesis/dose-gradient-matrix-2026-10-10.md", "Dose Gradient Matrix (2026-10)"),
+    ("/workspace/thesis/research-notes-log.md", "Lab Experiment Log (2026-10)"),
+    ("/workspace/gcb-review/knowledge-pack-2026-10-08.md", "GCB Route Framework KB (2026-10)"),
+]
+
+def _clean_workspace_paths(obj):
+    if isinstance(obj, str):
+        for old, new in _PATH_REPLACEMENTS:
+            obj = obj.replace(old, new)
+        return re.sub(r"/workspace/[A-Za-z0-9_.-]+/", "", obj)
+    elif isinstance(obj, list):
+        return [_clean_workspace_paths(x) for x in obj]
+    elif isinstance(obj, dict):
+        return {k: _clean_workspace_paths(v) for k, v in obj.items()}
+    return obj
+
+snap = _clean_workspace_paths(snap)
 
 (UI / "data-snapshot.json").write_text(
     json.dumps(snap, ensure_ascii=False, indent=2), encoding="utf-8"

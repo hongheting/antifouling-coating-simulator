@@ -4,6 +4,13 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>防污涂料配方模拟器</title>
+<meta name="description" content="Open-source marine antifouling coating formulation simulator, global shipping route biofouling stress profiles, ISO 10890 leaching & PVC/CPVC calculators, OpenAlex literature bounds, and scholar impact benchmark." />
+<meta name="keywords" content="marine antifouling coating, biofouling simulator, self-polishing copolymer SPC, foul release coating FRC, cinnamaldehyde mesoporous silica, ISO 10890 leaching rate, PVC CPVC calculator, shipping route biofouling" />
+<meta property="og:title" content="MarineCoatSim · Open Marine Antifouling Coating Simulator & Benchmark" />
+<meta property="og:description" content="Interactive formulation dose–response sandbox, global shipping route biofouling stress coupler, literature bounds (DOI-linked), and engineering calculators. Simulation ≠ Measurement." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://simulator.jassyhong.top/" />
+<meta name="twitter:card" content="summary_large_image" />
 <style>
   :root {
     --bg: #0b1017;
@@ -743,6 +750,160 @@
   .modal { background: #fff; border-radius: 16px; width: min(1100px, 100%); max-height: 94vh; overflow: auto; padding: 16px 20px; box-shadow: 0 20px 60px rgba(0,0,0,.3); }
   .modal-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
   .bf-badge { display: inline-block; font-size: .62rem; font-weight: 700; padding: 0 6px; border-radius: 999px; background: #efe8fb; color: #5b3aa8; border: 1px solid #d5c7f2; vertical-align: 1px; }
+
+  /* ===== V1.0 Global Interactive Simulator, Calculators & i18n Polish ===== */
+  .head-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .head-btn {
+    appearance: none; border: 1px solid rgba(255,255,255,.32); cursor: pointer;
+    background: rgba(255,255,255,.13); color: #fff; font-family: inherit;
+    font-size: .76rem; font-weight: 700; padding: 5px 12px; border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 5px; text-decoration: none;
+    transition: background .15s, border-color .15s, transform .12s;
+  }
+  .head-btn:hover { background: rgba(255,255,255,.24); border-color: #9ff3ea; transform: translateY(-1px); }
+  .head-btn.lang-toggle { background: linear-gradient(120deg, #9ff3ea, #5eead4); color: #06233f; border-color: #9ff3ea; font-weight: 800; }
+  .head-btn.lang-toggle:hover { background: #fff; color: #06233f; }
+
+  nav.tabs button.tab-sim {
+    border: 1px solid rgba(10,143,156,.35);
+    background: linear-gradient(120deg, rgba(10,143,156,.09), rgba(14,138,148,.16));
+    color: #075963; font-weight: 750;
+  }
+  nav.tabs button.tab-sim.active {
+    background: linear-gradient(120deg, #06233f, #0a8f9c);
+    color: #fff; border-color: transparent;
+  }
+
+  /* Overview Quick Launch Banner */
+  .sim-cta-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px; margin-top: 12px;
+  }
+  .sim-cta-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f9fa 100%);
+    border: 1px solid #bce0e4; border-radius: 12px; padding: 14px 16px;
+    display: flex; flex-direction: column; justify-content: space-between; gap: 8px;
+    cursor: pointer; transition: transform .15s, box-shadow .15s, border-color .15s;
+  }
+  .sim-cta-card:hover {
+    transform: translateY(-2px); border-color: var(--accent);
+    box-shadow: 0 8px 22px rgba(10,143,156,.14);
+  }
+  .sim-cta-card h3 { margin: 0; font-size: .95rem; color: #06233f; display: flex; align-items: center; gap: 6px; }
+  .sim-cta-card p { font-size: .8rem; color: var(--muted); line-height: 1.45; }
+  .sim-cta-card .cta-go { font-size: .78rem; font-weight: 700; color: var(--accent-d); }
+
+  /* Interactive Simulator Workbench */
+  .sim-layout {
+    display: grid; grid-template-columns: 370px 1fr; gap: 18px; align-items: start;
+  }
+  @media (max-width: 960px) { .sim-layout { grid-template-columns: 1fr; } }
+  .sim-controls {
+    background: #f7fbfc; border: 1px solid var(--border); border-radius: 12px; padding: 16px;
+  }
+  .ctrl-group { margin-bottom: 14px; }
+  .ctrl-group:last-child { margin-bottom: 0; }
+  .ctrl-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: .82rem; font-weight: 650; color: #0b3550; margin-bottom: 5px;
+  }
+  .ctrl-val {
+    font-family: var(--mono); font-size: .82rem; font-weight: 700;
+    color: var(--accent-d); background: #e0f4f2; padding: 1px 7px; border-radius: 6px;
+  }
+  .ctrl-group input[type="range"] {
+    width: 100%; accent-color: var(--accent); cursor: pointer; height: 6px;
+  }
+  .ctrl-group select, .ctrl-group input[type="number"] {
+    width: 100%; padding: 7px 10px; border-radius: 8px; border: 1px solid #c7d7e3;
+    background: #fff; color: var(--text); font-size: .84rem; font-family: inherit;
+  }
+  .ctrl-hint { font-size: .72rem; color: var(--muted); margin-top: 3px; }
+  .preset-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .preset-btn {
+    appearance: none; border: 1px solid #bfd8df; background: #fff; color: #103b54;
+    font-size: .73rem; font-weight: 650; padding: 5px 10px; border-radius: 999px;
+    cursor: pointer; font-family: inherit; transition: all .15s;
+  }
+  .preset-btn:hover { background: #e0f4f2; border-color: var(--accent); color: var(--accent-d); }
+
+  .sim-results { display: flex; flex-direction: column; gap: 14px; }
+  .sim-viz-row {
+    display: grid; grid-template-columns: 280px 1fr; gap: 14px; align-items: center;
+    background: #f9fcfd; border: 1px solid var(--border); border-radius: 12px; padding: 14px;
+  }
+  @media (max-width: 720px) { .sim-viz-row { grid-template-columns: 1fr; } }
+  .radar-box { width: 100%; max-width: 270px; margin: 0 auto; }
+  .radar-box svg { width: 100%; height: auto; display: block; }
+  .proxy-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;
+  }
+  .proxy-card {
+    background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px;
+    box-shadow: var(--shadow-sm);
+  }
+  .proxy-card .pk { font-size: .74rem; color: var(--muted); font-weight: 600; }
+  .proxy-card .pv { font-size: 1.18rem; font-weight: 800; color: #0b3550; margin: 4px 0; font-family: var(--mono); }
+  .proxy-card .pd { font-size: .75rem; color: #3e5568; line-height: 1.4; }
+  .proxy-card.warn-card { border-left: 4px solid #d69e2e; background: #fffdf7; }
+  .proxy-card.danger-card { border-left: 4px solid #c53b3b; background: #fff8f8; }
+  .proxy-card.ok-card { border-left: 4px solid #2f855a; background: #f7fcf9; }
+
+  /* Suitability Ranking Bars */
+  .suit-list { display: flex; flex-direction: column; gap: 9px; margin-top: 6px; }
+  .suit-item {
+    background: #fff; border: 1px solid var(--border); border-radius: 9px; padding: 10px 12px;
+  }
+  .suit-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: .84rem; font-weight: 700; color: #0b3550; }
+  .suit-score { font-family: var(--mono); font-size: .8rem; color: var(--accent-d); }
+  .suit-bar { height: 8px; background: #e5edf2; border-radius: 4px; overflow: hidden; margin: 6px 0; }
+  .suit-bar > i { display: block; height: 100%; border-radius: 4px; transition: width .25s ease; }
+  .suit-why { font-size: .75rem; color: var(--muted); }
+
+  /* Calculators Grid */
+  .calc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 16px; }
+  @media (max-width: 640px) { .calc-grid { grid-template-columns: 1fr; } }
+  .calc-box {
+    background: #f8fbfc; border: 1px solid var(--border); border-radius: 12px; padding: 16px;
+  }
+  .calc-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+  @media (max-width: 520px) { .calc-inputs { grid-template-columns: 1fr; } }
+  .calc-inputs label { font-size: .76rem; color: #35506a; font-weight: 600; display: flex; flex-direction: column; gap: 4px; }
+  .calc-inputs input {
+    padding: 7px 10px; border: 1px solid #c7d7e3; border-radius: 7px; font-size: .85rem; font-family: var(--mono);
+  }
+  .calc-out {
+    background: #fff; border: 1px solid #cfe5e9; border-left: 4px solid var(--accent);
+    border-radius: 9px; padding: 12px 14px; margin-top: 10px;
+  }
+  .calc-out-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(135px, 1fr)); gap: 10px; margin-bottom: 8px; }
+  .calc-stat .ck { font-size: .7rem; color: var(--muted); }
+  .calc-stat .cv { font-size: 1.15rem; font-weight: 800; color: #06233f; font-family: var(--mono); }
+
+  /* Quantitative bound badge in Literature table */
+  .bound-box {
+    background: #f2f9fa; border: 1px solid #c5e3e7; border-radius: 7px; padding: 5px 8px;
+    font-size: .74rem; line-height: 1.4;
+  }
+  .bound-val { font-family: var(--mono); font-weight: 800; color: #075963; font-size: .82rem; }
+  .bound-metric { font-weight: 650; color: #0b3550; }
+  .bound-ctx { color: var(--muted); font-size: .69rem; margin-top: 2px; }
+
+  /* Citation & Contribute Modals */
+  .cite-pre {
+    background: #0f1e2e; color: #e2f1f8; padding: 12px 14px; border-radius: 8px;
+    font-family: var(--mono); font-size: .76rem; overflow-x: auto; white-space: pre-wrap;
+    margin: 8px 0; border: 1px solid #2a435d;
+  }
+  .footer-links {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 16px; margin-top: 8px;
+  }
+  .footer-links a, .footer-links button {
+    color: #0b6fa0; text-decoration: none; font-weight: 600; font-size: .78rem;
+    background: none; border: none; cursor: pointer; font-family: inherit; padding: 0;
+  }
+  .footer-links a:hover, .footer-links button:hover { text-decoration: underline; }
+
 </style>
   <link rel="stylesheet" href="mobile.css" />
   <link rel="stylesheet" href="exchange.css" />
@@ -758,13 +919,16 @@
         <path d="M16 40 L20 22 M24 40 V18 M32 40 L28 22" stroke="#6fb6c4" stroke-width="1.4"/>
         <path d="M19 16 Q24 11 29 16 L26 19 H22 Z" fill="#0e8a94" stroke="#9ff3ea" stroke-width="1.2"/>
         <path d="M4 42 H44" stroke="#9ff3ea" stroke-width="2" stroke-linecap="round"/>
-      </svg>防污涂料配方模拟器</h1>
-      <div class="sub">实验室代理表 · 全球航线相对压力 · 证据短名单 · V0 可视化面板 · 海洋防污涂层研究</div>
+      </svg><span id="app-title-text">防污涂料配方模拟器 · MarineCoatSim</span></h1>
+      <div class="sub" id="app-sub-text">交互式配方沙盒 · 全球航线污损压力耦合 · ISO 10890 释放寿命 & PVC 计算器 · 文献上下界 · 学者影响力基准</div>
     </div>
-    <div class="badge-row">
-      <span class="pill v" id="ver-pill">V0</span>
+    <div class="head-actions">
+      <button type="button" class="head-btn lang-toggle" id="lang-toggle-btn" title="Switch Language / 切换中英文">🌐 EN / 中文</button>
+      <button type="button" class="head-btn" id="open-cite-btn">📖 <span data-i18n="btn_cite">引用 / Cite</span></button>
+      <button type="button" class="head-btn" id="open-contrib-btn">➕ <span data-i18n="btn_contrib">贡献数据 / Contribute</span></button>
+      <a class="head-btn" href="https://github.com/hongheting/antifouling-coating-simulator" target="_blank" rel="noopener noreferrer">★ GitHub</a>
+      <span class="pill v" id="ver-pill">V1.0</span>
       <span class="pill" id="date-pill">—</span>
-      <span class="pill">本地打开 · 无后端</span>
     </div>
   </header>
 
@@ -775,14 +939,15 @@
   </div>
 
   <nav class="tabs" role="tablist">
-    <button type="button" class="active" data-tab="overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><span>总览</span></button>
-    <button type="button" data-tab="lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3"/><path d="M7.5 15h9"/></svg><span>轨 A · 实验室表</span></button>
-    <button type="button" data-tab="routes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 15h18l-2.5 4.5h-13z"/><path d="M6 15V10h9l2 5"/><path d="M9 10V7h3"/></svg><span>轨 B · 航线剖面</span></button>
-    <button type="button" data-tab="rec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg><span>轨 C · 短名单</span></button>
-    <button type="button" data-tab="lit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M9 8h6"/></svg><span>文献界</span></button>
-    <button type="button" data-tab="tech"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M3 11h18M8 7V5h8v2"/></svg><span>商用·技术</span></button>
-    <button type="button" data-tab="industry"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h13v14H6a2 2 0 0 1-2-2z"/><path d="M17 9h3v8a2 2 0 0 1-2 2"/><path d="M7 9h7M7 13h7M7 16h4"/></svg><span>行业动态</span><span class="tab-badge" id="ind-tab-badge"></span></button>
-    <button type="button" data-tab="scholars"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg><span>防污学者排行</span></button>
+    <button type="button" class="active" data-tab="overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><span data-i18n="tab_overview">总览</span></button>
+    <button type="button" class="tab-sim" data-tab="sim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/></svg><span data-i18n="tab_sim">⚡ 交互模拟 · 计算器</span></button>
+    <button type="button" data-tab="lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3"/><path d="M7.5 15h9"/></svg><span data-i18n="tab_lab">轨 A · 实验室表</span></button>
+    <button type="button" data-tab="routes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 15h18l-2.5 4.5h-13z"/><path d="M6 15V10h9l2 5"/><path d="M9 10V7h3"/></svg><span data-i18n="tab_routes">轨 B · 航线剖面</span></button>
+    <button type="button" data-tab="rec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg><span data-i18n="tab_rec">轨 C · 短名单</span></button>
+    <button type="button" data-tab="lit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M9 8h6"/></svg><span data-i18n="tab_lit">文献界</span></button>
+    <button type="button" data-tab="tech"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M3 11h18M8 7V5h8v2"/></svg><span data-i18n="tab_tech">商用·技术</span></button>
+    <button type="button" data-tab="industry"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h13v14H6a2 2 0 0 1-2-2z"/><path d="M17 9h3v8a2 2 0 0 1-2 2"/><path d="M7 9h7M7 13h7M7 16h4"/></svg><span data-i18n="tab_ind">行业动态</span><span class="tab-badge" id="ind-tab-badge"></span></button>
+    <button type="button" data-tab="scholars"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg><span data-i18n="tab_scholars">防污学者排行</span></button>
     <button type="button" data-tab="exchange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg><span>技术交流</span></button>
   </nav>
 
@@ -816,6 +981,36 @@
       </svg>
     </div>
     <div class="stats" id="stats"></div>
+    <div class="card" id="ov-sim-launchpad">
+      <div class="ov-head">
+        <h2 style="margin-bottom:0;" data-i18n="ov_sim_title">⚡ 交互式配方沙盒与防污工程计算器（全球同行通用工具箱）</h2>
+        <button type="button" class="linkbtn" id="ov-sim-goto" data-i18n="ov_sim_btn">打开完整交互工作台 →</button>
+      </div>
+      <p class="muted" style="margin-top:4px;" data-i18n="ov_sim_desc">不仅是静态文献与数据看板——拖动滑块即可实时推演微胶囊/杀生剂掺量、分散剂与干膜厚度包络，耦合航速与港停时间重排涂层短名单，或使用 ISO 10890 质量平衡法与 PVC/CPVC 配方计算器。</p>
+      <div class="sim-cta-grid">
+        <div class="sim-cta-card" data-sim-jump="sandbox">
+          <div>
+            <h3 data-i18n="cta1_title">🧪 配方剂量—代理性能包络沙盒</h3>
+            <p data-i18n="cta1_desc">调节树脂基体、CA@MSiO₂ / 活性填料掺量 (0–12 wt%)、BYK 分散剂与 DFT，实时生成五维能力包络雷达图、团聚粗糙风险与轨 A 邻近锚点。</p>
+          </div>
+          <div class="cta-go" data-i18n="cta1_go">进入配方沙盒推演 →</div>
+        </div>
+        <div class="sim-cta-card" data-sim-jump="coupler">
+          <div>
+            <h3 data-i18n="cta2_title">🚢 航线—船速—港停动态耦合器</h3>
+            <p data-i18n="cta2_desc">任选 12 条全球航运走廊，动态调节航速 (4–24 kn)、港口静置率 (5–60%) 与坞期，观察硅酮 FRC、SPC 与混合主动体系的适用度消长。</p>
+          </div>
+          <div class="cta-go" data-i18n="cta2_go">耦合航线与船速工况 →</div>
+        </div>
+        <div class="sim-cta-card" data-sim-jump="calculators">
+          <div>
+            <h3 data-i18n="cta3_title">📐 ISO 10890 释放寿命 & PVC/CPVC 计算器</h3>
+            <p data-i18n="cta3_desc">海洋涂料工程师高频计算：基于临界浸出率的杀生剂有效寿命/最低干膜厚度推算，以及颜料体积浓度 (PVC/CPVC)、体积固含与理论涂布率计算。</p>
+          </div>
+          <div class="cta-go" data-i18n="cta3_go">打开通用工程计算器 →</div>
+        </div>
+      </div>
+    </div>
     <div class="card ov-ind" id="ov-industry">
       <div class="ov-head">
         <h2 style="margin-bottom:0;">行业动态 · 本周</h2>
@@ -827,7 +1022,7 @@
     <div class="card">
       <h2>怎么用（一页流程）</h2>
       <ol style="margin:8px 0 0 18px; font-size:.9rem; color:var(--text);">
-        <li>打开<strong>轨 A</strong>：按路线芯片浏览示例配方行；性能空格为待测。公开仓库轨 A 为<strong>示例数据</strong>（见 docs/example-data.md）。</li>
+        <li>打开<strong>轨 A</strong>：按路线芯片看示例配方槽（公开仓库为示例数据，见 docs/example-data.md）；性能空格为待测，不得把空格或模型包络写成实测。</li>
         <li>打开<strong>轨 B</strong>：点选全球走廊或冷端桩，看相对污损压力（1–5）与策略提示。</li>
         <li>打开<strong>轨 C</strong>：按航线筛选短名单 — 排序是工况拟合，<em>不是</em>魔法最优分。</li>
         <li>打开<strong>文献界</strong>：按技术分类筛选（金属熔覆/喷涂、硅改性、FRC、SPC 铜、水凝胶、UV-C、超声、天然杀生剂等；DOI 可溯源）。</li>
@@ -853,11 +1048,208 @@
     </div>
   </section>
 
+  <!-- Interactive Simulator & Calculators -->
+  <section id="panel-sim" class="panel">
+    <div class="card">
+      <div class="ov-head">
+        <div>
+          <h2 style="margin-bottom:4px;"><svg class="h-ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="#e0f4f2" stroke="#0a8f9c" stroke-width="1.6"/><path d="M17 6L9 17h6l-1 9 9-11h-6l1-9z" fill="#0a8f9c"/></svg><span data-i18n="sim_main_title">交互式防污涂料模拟工作台 · Interactive Workbench</span></h2>
+          <p class="muted" data-i18n="sim_main_sub">所有推演基于胶体分散规律、Fick/质量平衡扩散机制与 GCB 污损增长–脱附框架。输出均带「框架推断 / 模型包络」诚实标签，绝不伪装成实验室实测报告。</p>
+        </div>
+        <div class="subtabs" id="sim-subtabs" style="margin:0;">
+          <button type="button" class="active" data-simview="all" data-i18n="sim_tab_all">全部模块</button>
+          <button type="button" data-simview="sandbox" data-i18n="sim_tab_sb">1. 配方剂量沙盒</button>
+          <button type="button" data-simview="coupler" data-i18n="sim_tab_cp">2. 航线-船速-港停耦合</button>
+          <button type="button" data-simview="calculators" data-i18n="sim_tab_calc">3. 释放寿命 & PVC 计算器</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Workbench 1: Formulation Sandbox -->
+    <div class="card sim-block" id="sim-block-sandbox">
+      <div class="ov-head" style="margin-bottom:10px;">
+        <h2 style="margin-bottom:0;" data-i18n="sb_title">🧪 模块 1 · 配方剂量—代理性能包络沙盒 (Formulation Dose–Response Sandbox)</h2>
+        <span class="tag tag-框架推断" data-i18n="tag_model_env">模型包络推演 · 非实测真值</span>
+      </div>
+      <div class="preset-row" id="sb-presets">
+        <button type="button" class="preset-btn" data-preset="oem" data-i18n="pre_oem">⚓ JF-602 原漆边界锚点 (0% CA)</button>
+        <button type="button" class="preset-btn" data-preset="opt" data-i18n="pre_opt">✨ 2 wt% CA@MSiO₂ + 3% BYK (目标分散窗)</button>
+        <button type="button" class="preset-btn" data-preset="agg" data-i18n="pre_agg">⚠️ 8 wt% 高掺量无助剂 (团聚/锁死风险演示)</button>
+        <button type="button" class="preset-btn" data-preset="spc" data-i18n="pre_spc">🌊 自配丙烯酸松香体系 (SPC/CDP 缓释窗)</button>
+        <button type="button" class="preset-btn" data-preset="frc" data-i18n="pre_frc">🐬 PDMS 低表面能污损释放体系 (FRC)</button>
+      </div>
+      <div class="sim-layout">
+        <div class="sim-controls">
+          <div class="ctrl-group">
+            <div class="ctrl-head"><span data-i18n="sb_lbl_resin">基料树脂网络 (Resin Matrix)</span></div>
+            <select id="sb-resin">
+              <option value="epoxy" data-i18n="sb_res_epoxy">双组分致密环氧 (JF-602 Anchor)</option>
+              <option value="acrylic" data-i18n="sb_res_acrylic">自配丙烯酸–松香 (可水解/微溶胀基体)</option>
+              <option value="silicone" data-i18n="sb_res_silicone">聚二甲基硅氧烷弹性体 (PDMS Foul-Release)</option>
+              <option value="hybrid" data-i18n="sb_res_hybrid">硅氧烷改性环氧杂化 (Siloxane-Epoxy Hybrid)</option>
+            </select>
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-head">
+              <span data-i18n="sb_lbl_ca">功能填料 / CA@MSiO₂ 掺量 (wt% 总固)</span>
+              <span class="ctrl-val" id="sb-ca-val">2.0 wt%</span>
+            </div>
+            <input type="range" id="sb-ca" min="0" max="12" step="0.5" value="2.0" />
+            <div class="ctrl-hint" data-i18n="sb_hint_ca">0% = 空白原漆；1–3% 常用筛选窗；>5% 需警惕颗粒团聚与表面粗糙度抬升</div>
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-head">
+              <span data-i18n="sb_lbl_byk">润湿分散剂 BYK 用量 (wt% 相对粉体)</span>
+              <span class="ctrl-val" id="sb-byk-val">3.0 %</span>
+            </div>
+            <input type="range" id="sb-byk" min="0" max="10" step="0.5" value="3.0" />
+            <div class="ctrl-hint" data-i18n="sb_hint_byk">适度助剂解团聚；过量 (>6%) 可能增塑交联网络或导致界面滑移降附着</div>
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-head">
+              <span data-i18n="sb_lbl_dft">目标干膜厚度 DFT (μm)</span>
+              <span class="ctrl-val" id="sb-dft-val">40 μm</span>
+            </div>
+            <input type="range" id="sb-dft" min="15" max="250" step="5" value="40" />
+            <div class="ctrl-hint" data-i18n="sb_hint_dft">粒径 ~5 μm 时，过薄 (<25 μm) 易刺破膜面粗糙；过厚致密环氧内部药剂难以扩散</div>
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-head"><span data-i18n="sb_lbl_sub">基材与表面处理 (Substrate)</span></div>
+            <select id="sb-sub">
+              <option value="al6061" data-i18n="sb_sub_al">6061-Al 铝合金（喷砂/砂纸粗化）</option>
+              <option value="steel" data-i18n="sb_sub_steel">船用碳钢 Sa 2.5 + 环氧防锈底漆配套</option>
+              <option value="ti" data-i18n="sb_sub_ti">Ti-6Al-4V / 特种海工冷端构件</option>
+            </select>
+          </div>
+        </div>
+        <div class="sim-results">
+          <div class="sim-viz-row">
+            <div class="radar-box" id="sb-radar-box" aria-label="五维性能包络雷达图"></div>
+            <div>
+              <h3 style="margin-top:0;" id="sb-summary-head">推演诊断摘要</h3>
+              <p class="muted" id="sb-summary-text" style="margin-bottom:10px;"></p>
+              <div id="sb-match-box" style="background:#eef8f9;border:1px solid #bde0e4;border-radius:8px;padding:10px 12px;font-size:.82rem;"></div>
+            </div>
+          </div>
+          <div class="proxy-grid" id="sb-proxy-cards"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Workbench 2: Dynamic Route-Speed-Idle Coupler -->
+    <div class="card sim-block" id="sim-block-coupler">
+      <div class="ov-head" style="margin-bottom:10px;">
+        <h2 style="margin-bottom:0;" data-i18n="cp_title">🚢 模块 2 · 航线—船速—港停动态污损耦合模拟器 (Dynamic Route–Speed–Idle Coupler)</h2>
+        <span class="tag tag-相对等级" data-i18n="tag_rel_coupler">GCB 增长–脱附动态耦合 · 相对等级</span>
+      </div>
+      <div class="sim-layout">
+        <div class="sim-controls">
+          <div class="ctrl-group">
+            <div class="ctrl-head"><span data-i18n="cp_lbl_route">选择全球航线剖面 (Route Corridor)</span></div>
+            <select id="cp-route"></select>
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-head">
+              <span data-i18n="cp_lbl_speed">平均营运航速 (Steaming Speed)</span>
+              <span class="ctrl-val" id="cp-speed-val">14.0 kn</span>
+            </div>
+            <input type="range" id="cp-speed" min="4" max="24" step="0.5" value="14" />
+            <div class="ctrl-hint" data-i18n="cp_hint_speed">硅酮 FRC 通常需 >10–12 kn 水动力剪切实现藤壶自清洁；低速船更依赖主动/缓释抗定殖</div>
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-head">
+              <span data-i18n="cp_lbl_idle">港口停泊 / 锚地静置比例 (Port Idle Ratio)</span>
+              <span class="ctrl-val" id="cp-idle-val">20 %</span>
+            </div>
+            <input type="range" id="cp-idle" min="5" max="65" step="5" value="20" />
+            <div class="ctrl-hint" data-i18n="cp_hint_idle">港停期间无水流剪切且近岸幼体密度高，高港停率会显著放大热带走廊定殖压力</div>
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-head">
+              <span data-i18n="cp_lbl_dock">目标坞期 / 维护周期 (Docking Cycle)</span>
+              <span class="ctrl-val" id="cp-dock-val">36 mos</span>
+            </div>
+            <input type="range" id="cp-dock" min="12" max="60" step="6" value="36" />
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-head"><span data-i18n="cp_lbl_aux">辅助主动防污配置 (Auxiliary Active Tech)</span></div>
+            <select id="cp-aux">
+              <option value="none" data-i18n="cp_aux_none">无辅助（仅依靠船壳涂层）</option>
+              <option value="uvc" data-i18n="cp_aux_uvc">+ UV-C 局部照射（海底门 / Niche 区抑菌）</option>
+              <option value="us" data-i18n="cp_aux_us">+ 壳板超声导波换能器（抑制港停早期藤壶）</option>
+            </select>
+          </div>
+          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+            <button type="button" class="linkbtn" id="cp-goto-route" data-i18n="cp_btn_route">在轨 B 海图中查看该航线 →</button>
+            <button type="button" class="linkbtn" id="cp-goto-rec" data-i18n="cp_btn_rec">查看轨 C 证据短名单 →</button>
+          </div>
+        </div>
+        <div class="sim-results">
+          <div class="proxy-grid" id="cp-stress-cards"></div>
+          <div style="background:#f9fcfd;border:1px solid var(--border);border-radius:12px;padding:14px;">
+            <h3 style="margin-top:0;" data-i18n="cp_rank_title">工况耦合后：各技术路线相对拟合度动态排序（非实测打分）</h3>
+            <div class="suit-list" id="cp-suit-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Workbench 3: Global Formulator's Engineering Calculators -->
+    <div class="card sim-block" id="sim-block-calculators">
+      <div class="ov-head" style="margin-bottom:10px;">
+        <h2 style="margin-bottom:0;" data-i18n="calc_main_title">📐 模块 3 · 国际防污涂料工程师通用计算器 (ISO 10890 Leaching & PVC/CPVC Calculators)</h2>
+        <span class="tag tag-文献界" data-i18n="tag_std_calc">标准质量平衡 / 配方体积模型</span>
+      </div>
+      <div class="calc-grid">
+        <!-- Calculator A: ISO 10890 / CEPE Mass-Balance Leaching Lifetime -->
+        <div class="calc-box">
+          <h3 style="margin-top:0;" data-i18n="calc1_title">⏱️ A. 杀生剂浸出率与有效防污期计算器 (ISO 10890 / CEPE Mass-Balance)</h3>
+          <p class="muted" data-i18n="calc1_desc">根据涂层干膜内活性防污剂总储量与目标临界释放通量，推算理论有效防污寿命与所需的最低干膜厚度（DFT）。</p>
+          <div class="preset-row" style="margin-top:8px;margin-bottom:8px;">
+            <button type="button" class="preset-btn calc1-pre" data-wt="40" data-rho="1.85" data-dft="150" data-eff="75" data-flux="10" data-i18n="c1_pre_cu">Cu₂O 控释抗藤壶 (Flux=10 μg/cm²/d)</button>
+            <button type="button" class="preset-btn calc1-pre" data-wt="45" data-rho="1.90" data-dft="180" data-eff="75" data-flux="20" data-i18n="c1_pre_alg">Cu₂O 热带抗藻席 (Flux=20 μg/cm²/d)</button>
+            <button type="button" class="preset-btn calc1-pre" data-wt="3.0" data-rho="1.35" data-dft="60" data-eff="65" data-flux="1.5" data-i18n="c1_pre_ca">CA@MSiO₂ 天然防污微胶囊 (Flux=1.5)</button>
+          </div>
+          <div class="calc-inputs">
+            <label><span data-i18n="c1_in_wt">干膜活性杀生剂质量分数 (wt%)</span><input type="number" id="c1-wt" value="40" min="0.1" max="85" step="0.5" /></label>
+            <label><span data-i18n="c1_in_rho">干膜密度 ρ_dry (g/cm³)</span><input type="number" id="c1-rho" value="1.85" min="0.9" max="3.5" step="0.05" /></label>
+            <label><span data-i18n="c1_in_dft">干膜厚度 DFT (μm)</span><input type="number" id="c1-dft" value="150" min="10" max="600" step="5" /></label>
+            <label><span data-i18n="c1_in_eff">可浸出有效利用率 La (%)</span><input type="number" id="c1-eff" value="75" min="10" max="100" step="5" /></label>
+            <label style="grid-column:1 / -1;"><span data-i18n="c1_in_flux">目标维持浸出通量 J_crit (μg·cm⁻²·d⁻¹)</span><input type="number" id="c1-flux" value="10.0" min="0.1" max="100" step="0.5" /></label>
+          </div>
+          <div class="calc-out" id="c1-out"></div>
+        </div>
+
+        <!-- Calculator B: PVC / CPVC & Volume Solids Calculator -->
+        <div class="calc-box">
+          <h3 style="margin-top:0;" data-i18n="calc2_title">🧪 B. 颜料体积浓度 (PVC / CPVC)、体积固含与理论涂布率计算器</h3>
+          <p class="muted" data-i18n="calc2_desc">输入基料树脂、颜填料/微胶囊与溶剂配比，实时计算 PVC、CPVC、约化颜料体积浓度 Λ = PVC/CPVC 及成膜致密/抛光状态诊断。</p>
+          <div class="preset-row" style="margin-top:8px;margin-bottom:8px;">
+            <button type="button" class="preset-btn calc2-pre" data-bw="38" data-br="1.15" data-pw="12" data-pr="2.2" data-oa="28" data-sw="50" data-sr="0.88" data-dft="40" data-i18n="c2_pre_barrier">致密防腐/低掺量环氧 (Λ≈0.35)</button>
+            <button type="button" class="preset-btn calc2-pre" data-bw="24" data-br="1.12" data-pw="42" data-pr="3.6" data-oa="22" data-sw="34" data-sr="0.87" data-dft="120" data-i18n="c2_pre_spc">自抛光 SPC 渗流窗 (Λ≈0.75)</button>
+            <button type="button" class="preset-btn calc2-pre" data-bw="16" data-br="1.15" data-pw="54" data-pr="2.6" data-oa="35" data-sw="30" data-sr="0.88" data-dft="80" data-i18n="c2_pre_over">超临界高填料区 (Λ>1.0 脆裂风险)</button>
+          </div>
+          <div class="calc-inputs">
+            <label><span data-i18n="c2_in_bw">基料树脂干重 W_binder (g)</span><input type="number" id="c2-bw" value="38" min="1" max="500" step="1" /></label>
+            <label><span data-i18n="c2_in_br">树脂密度 ρ_binder (g/cm³)</span><input type="number" id="c2-br" value="1.15" min="0.8" max="2.0" step="0.02" /></label>
+            <label><span data-i18n="c2_in_pw">颜填料/微胶囊总重 W_pig (g)</span><input type="number" id="c2-pw" value="12" min="0" max="500" step="1" /></label>
+            <label><span data-i18n="c2_in_pr">颜填料平均密度 ρ_pig (g/cm³)</span><input type="number" id="c2-pr" value="2.20" min="0.5" max="6.5" step="0.1" /></label>
+            <label><span data-i18n="c2_in_oa">混合颜填料吸油量 OA (g/100g)</span><input type="number" id="c2-oa" value="28" min="5" max="120" step="1" /></label>
+            <label><span data-i18n="c2_in_sw">挥发溶剂总重 W_solv (g)</span><input type="number" id="c2-sw" value="50" min="0" max="500" step="1" /></label>
+            <label><span data-i18n="c2_in_sr">溶剂密度 ρ_solv (g/cm³)</span><input type="number" id="c2-sr" value="0.88" min="0.6" max="1.5" step="0.02" /></label>
+            <label><span data-i18n="c2_in_dft">目标干膜厚度 DFT (μm)</span><input type="number" id="c2-dft" value="40" min="10" max="500" step="5" /></label>
+          </div>
+          <div class="calc-out" id="c2-out"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Lab -->
   <section id="panel-lab" class="panel">
     <div class="card">
       <h2><svg class="h-ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="9" cy="10" r="3.2" fill="#0e8a94"/><circle cx="21" cy="7" r="2.6" fill="#0b4a6f"/><circle cx="17" cy="16" r="3" fill="#5fb3bf"/><path d="M9 10 L17 16 L21 7" stroke="#5a7083" stroke-width="1.4" fill="none"/><path class="drip" d="M17 21 c-2.2 3-3 4.6-3 6a3 3 0 0 0 6 0c0-1.4-.8-3-3-6z" fill="#0a8f9c"/></svg>轨 A · 剂量 → 代理性能表</h2>
-      <p class="muted">数据来自 <code>data/lab-proxy-table.csv</code>（公开仓库为示例数据，见 docs/example-data.md）。空性能格 = 尚无点。<strong>未编造</strong>拉拔/EIS/HPLC 实测数；劣势见各行 disadvantage_notes，标签诚实。</p>
+      <p class="muted">公开仓库数据来自 <code>data/lab-proxy-table.csv</code>（<strong>示例数据</strong>，见 <code>docs/example-data.md</code>）。空性能格 = 尚无点。<strong>未编造</strong>拉拔/EIS/HPLC 实测数；标签诚实。模拟 ≠ 实测。</p>
       <div class="chip-row lab-chips" id="lab-base-chips" aria-label="基漆/路线筛选"></div>
       <div class="toolbar">
         <label>筛选标签
@@ -869,17 +1261,19 @@
             <option>方案非实测</option>
           </select>
         </label>
-        <label>搜索
+        <label><span data-i18n="lbl_search">搜索</span>
           <input type="search" id="lab-search" placeholder="ID / 基漆 / 劣势 / 备注…" />
         </label>
+        <button type="button" class="linkbtn" id="lab-open-sandbox" data-i18n="btn_lab_sandbox">⚡ 在交互沙盒中推演配方</button>
+        <button type="button" class="linkbtn" id="lab-export-csv" data-i18n="btn_export_csv">⬇ 导出 CSV</button>
       </div>
       <div class="table-wrap">
         <table class="data" id="lab-table">
           <thead>
             <tr>
               <th>ID / 路线</th>
-              <th>填料%</th>
-              <th>分散剂%</th>
+              <th>CA%</th>
+              <th>BYK%</th>
               <th>拉拔 MPa</th>
               <th>EIS</th>
               <th>HPLC</th>
@@ -899,11 +1293,12 @@
       <h2><svg class="h-ico" viewBox="0 0 32 32" aria-hidden="true"><path class="dash-route" d="M2 28 C10 22 22 30 30 24" stroke="#0a8f9c" stroke-width="1.6" fill="none"/><g class="float"><path d="M5 17 h22 l-3 5 H8z" fill="#0b4a6f"/><path d="M9 17 v-5 h10 l3 5" fill="#5fb3bf"/><rect x="12" y="8" width="3" height="4" fill="#c53b3b"/></g></svg>轨 B · 全球航线相对污损压力</h2>
       <p class="muted">全部为 GCB 框架<strong>相对等级</strong>（非现场实测污损率）。点选查看航段；可联动轨 C。</p>
       <div class="toolbar">
-        <label>类型
+        <label><span data-i18n="lbl_route_type">类型</span>
           <select id="route-type-filter">
             <option value="">全部走廊 / 桩</option>
           </select>
         </label>
+        <button type="button" class="linkbtn" id="route-open-coupler" data-i18n="btn_route_coupler">🚢 动态调节航速与港停时间耦合推演 →</button>
       </div>
       <div class="map-card">
         <div id="ov-map" class="map-box"></div>
@@ -944,7 +1339,7 @@
   <section id="panel-lit" class="panel">
     <div class="card">
       <h2>文献界 · 公开数据上下界</h2>
-      <p class="muted">来自 <code>data/literature-bounds.csv</code> + <code>literature-taxonomy.md</code>；作者/机构/概要/被引来自 OpenAlex（<code>data/literature-enrichment.csv</code>，2026-10-20 获取）；「重要度评估（主观）」为透明规则打分，悬停查看依据，<strong>非实测</strong>。全部 tag=<span class="tag tag-文献界">文献界</span> — <strong>≠</strong> 示例配方实测，≠ 航次污损率。</p>
+      <p class="muted">来自 <code>data/literature-bounds.csv</code> + <code>literature-taxonomy.md</code>；作者/机构/概要/被引来自 OpenAlex（<code>data/literature-enrichment.csv</code>，2026-10-20 获取）；「重要度评估（主观）」为透明规则打分，悬停查看依据，<strong>非实测</strong>。全部 tag=<span class="tag tag-文献界">文献界</span> — <strong>≠</strong> 本仓库示例配方的实测，≠ 航次污损率。</p>
       <div class="chip-row" id="lit-cat-chips" aria-label="技术分类"></div>
       <div class="toolbar">
         <label>指标关键词
@@ -955,23 +1350,26 @@
             <option value="">全部分类</option>
           </select>
         </label>
-        <label>次级工艺
+        <label><span data-i18n="lbl_lit_sub">次级工艺</span>
           <select id="lit-sub-filter">
             <option value="">全部工艺</option>
           </select>
         </label>
+        <button type="button" class="linkbtn" id="lit-export-csv" data-i18n="btn_export_csv">⬇ 导出 CSV</button>
+        <button type="button" class="linkbtn" id="lit-submit-btn" data-i18n="btn_submit_lit">➕ 补充文献 / Submit Paper</button>
       </div>
       <div class="table-wrap">
         <table class="data" id="lit-table">
           <thead>
             <tr>
-              <th>研究者 · 机构</th>
-              <th>分类</th>
-              <th>论文概要（中文）</th>
-              <th>年份</th>
-              <th title="重要度评估（主观，非实测）：基础 1 星；+ 年均被引（OpenAlex cited_by_count ÷ 发表至今年数）≥4 得 1、≥15 得 2、≥50 得 3；+ 期刊在本面板列出的防污/涂层/材料主流期刊清单内得 1；+ 题名直接涉及 antifouling/fouling 得 1；封顶 5 星。数据获取于 2026-10-20。">重要度评估（主观）ⓘ</th>
-              <th>标签</th>
-              <th>来源 / 备注</th>
+              <th data-i18n="th_lit_who">研究者 · 机构</th>
+              <th data-i18n="th_lit_cat">分类</th>
+              <th data-i18n="th_lit_bound">定量上下界 · 指标与对象</th>
+              <th data-i18n="th_lit_sum">论文概要 / 标题</th>
+              <th data-i18n="th_lit_yr">年份</th>
+              <th data-i18n="th_lit_star" title="重要度评估（主观，非实测）：基础 1 星；+ 年均被引（OpenAlex cited_by_count ÷ 发表至今年数）≥4 得 1、≥15 得 2、≥50 得 3；+ 期刊在本面板列出的防污/涂层/材料主流期刊清单内得 1；+ 题名直接涉及 antifouling/fouling 得 1；封顶 5 星。数据获取于 2026-10-20。">重要度评估（主观）ⓘ</th>
+              <th data-i18n="th_lit_tag">标签</th>
+              <th data-i18n="th_lit_src">来源 / DOI / 备注</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -984,7 +1382,7 @@
   <section id="panel-tech" class="panel">
     <div class="card">
       <h2>商用涂料 · 辅助技术 · 全球目录</h2>
-      <p class="muted">厂家标称 / 公开资料 / 文献界。禁止与示例短名单或示例实验室表混读为实测。分类见 <code>commercial-taxonomy.md</code>。</p>
+      <p class="muted">厂家标称 / 公开资料 / 文献界。这些标签不是实测。公开仓库轨 A / 轨 C 为示例数据（<code>docs/example-data.md</code>）。分类见 <code>commercial-taxonomy.md</code>。</p>
       <div class="chip-row" id="comm-cat-chips"></div>
       <div class="toolbar" style="margin-top:8px;">
         <label>技术分类
@@ -1112,8 +1510,10 @@
       <h2><svg class="h-ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M3 13l13-6 13 6-13 6z" fill="#0b4a6f"/><path d="M8 15.5v6c4 3 12 3 16 0v-6l-8 3.7z" fill="#5fb3bf"/><g class="sway" style="transform-box:fill-box;transform-origin:50% 0"><path d="M27 13.5v7" stroke="#d69e2e" stroke-width="1.6"/><circle cx="27" cy="22" r="1.6" fill="#d69e2e"/></g></svg>防污学者排行 · 影响力</h2>
       <p class="muted" id="sch-meta"></p>
       <div class="toolbar" style="margin-top:8px;">
-        <label>搜索 <input type="search" id="sch-search" placeholder="姓名 / 机构 / 国家 / 代表作…" /></label>
-        <label><input type="checkbox" id="sch-inlit" /> 仅看本面板文献界中出现的作者</label>
+        <label><span data-i18n="lbl_search">搜索</span> <input type="search" id="sch-search" placeholder="姓名 / 机构 / 国家 / 代表作…" /></label>
+        <label><input type="checkbox" id="sch-inlit" /> <span data-i18n="lbl_sch_inlit">仅看本面板文献界中出现的作者</span></label>
+        <button type="button" class="linkbtn" id="sch-export-csv" data-i18n="btn_export_csv">⬇ 导出 CSV</button>
+        <button type="button" class="linkbtn" id="sch-update-btn" data-i18n="btn_sch_update">🎓 学者信息勘误 / Update Profile</button>
       </div>
       <div class="table-wrap">
         <table class="data" id="sch-table">
@@ -1134,13 +1534,73 @@
     </div>
   </div>
 
+  <!-- Cite Modal -->
+  <div class="modal-back" id="cite-modal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="cite-modal-title" style="max-width:720px;">
+      <div class="modal-head">
+        <h2 id="cite-modal-title" data-i18n="cite_title">📖 引用本基准与模拟器 · Cite MarineCoatSim</h2>
+        <button type="button" class="linkbtn" id="cite-close">✕</button>
+      </div>
+      <p class="muted" style="margin-top:6px;" data-i18n="cite_desc">如果您在防污涂层配方设计、航线污损风险评估或文献综述中使用了本平台的基准表或模拟工具，欢迎按以下格式引用：</p>
+      <h3 style="margin-top:12px;">APA / Text Citation</h3>
+      <div class="cite-pre" id="cite-apa-text">Hong, H. (Jassyhong). (2026). MarineCoatSim: An Open Evidence-Tagged Benchmark and Formulation Simulator for Marine Antifouling Coatings (Version 1.0) [Computer software & dataset]. https://simulator.jassyhong.top/ · GitHub: https://github.com/hongheting/antifouling-coating-simulator</div>
+      <button type="button" class="linkbtn" id="copy-apa-btn">📋 Copy APA</button>
+      <h3 style="margin-top:14px;">BibTeX</h3>
+      <pre class="cite-pre" id="cite-bib-text">@misc{hong2026marinecoatsim,
+  author       = {Hong, Heting},
+  title        = {{MarineCoatSim: An Open Evidence-Tagged Benchmark and Formulation Simulator for Marine Antifouling Coatings}},
+  year         = {2026},
+  version      = {1.0},
+  url          = {https://simulator.jassyhong.top/},
+  note         = {GitHub repository: https://github.com/hongheting/antifouling-coating-simulator}
+}</pre>
+      <button type="button" class="linkbtn" id="copy-bib-btn">📋 Copy BibTeX</button>
+    </div>
+  </div>
+
+  <!-- Contribute Data / Scholar Feedback Modal -->
+  <div class="modal-back" id="contrib-modal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contrib-modal-title" style="max-width:720px;">
+      <div class="modal-head">
+        <h2 id="contrib-modal-title" data-i18n="contrib_title">➕ 全球同行共建 · 提交文献上下界 / 配方数据 / 学者勘误</h2>
+        <button type="button" class="linkbtn" id="contrib-close">✕</button>
+      </div>
+      <p class="muted" style="margin-top:6px;" data-i18n="contrib_desc">我们欢迎全球海洋防污领域的课题组、涂料研发工程师与船级社/航运专家补充带 DOI 的公开实验上下界、新增航线污损剖面或更新学者代表作信息。</p>
+      <div class="sim-cta-grid" style="margin-top:14px;">
+        <a class="sim-cta-card" href="https://github.com/hongheting/antifouling-coating-simulator/discussions" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+          <div>
+            <h3>💬 GitHub Discussions（技术交流与投稿）</h3>
+            <p>直接提交新论文 DOI、防污性能上下界（如临界释放率、拉拔附着力、海洋挂板数据）或参与防污配方讨论。</p>
+          </div>
+          <div class="cta-go">前往 GitHub Discussions ↗</div>
+        </a>
+        <a class="sim-cta-card" href="https://github.com/hongheting/antifouling-coating-simulator/issues/new" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+          <div>
+            <h3>🎓 学者画像更新 / 数据勘误 (GitHub Issue)</h3>
+            <p>如果您在「防污学者排行」或「文献界」中发现机构变动、ORCID/代表作需要更新，可一键提交 Issue 核对。</p>
+          </div>
+          <div class="cta-go">提交数据修订 Issue ↗</div>
+        </a>
+      </div>
+      <div style="margin-top:14px;padding:12px;background:#f4f9fb;border:1px solid var(--border);border-radius:8px;font-size:.82rem;">
+        <strong data-i18n="contrib_tpl_title">快速投稿模板（可复制后粘贴至 GitHub Discussions）：</strong>
+        <pre class="cite-pre" style="margin-top:6px;">[Submission Type]: Literature Bound / Route Profile / Scholar Update
+[DOI or URL]: https://doi.org/10.xxxx/xxxxx
+[Coating Category]: (e.g., Silyl SPC / Silicone FRC / Hydrogel / Natural Biocide / UV-C)
+[Metric & Quantitative Range]: (e.g., Cu release flux: 4.5–8.2 μg/cm²/d; Pull-off: 3.8 MPa)
+[Organism / Marine Context]: (e.g., Amphibalanus amphitrite static raft test, 180 days, Subtropical)
+[Evidence Tag]: Literature Bound (文献界) / Measured (实测)</pre>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <div class="dev-line">由洪鹤庭 Jassyhong 开发，有疑问请联系 <a href="tel:17607144929">17607144929</a></div>
   </footer>
 </div>
 
 <script src="data-snapshot.js"></script>
-<script>window.BUNDLED_DATA_VERSION="2026-10-20.2115";</script>
+<script>window.BUNDLED_DATA_VERSION="2026-10-26.1411";</script>
 <script src="updater.js"></script>
 <script>window.AFSIM_WEB={"webVersion":"0.6.0+2","webBuild":2};</script>
 <script src="nacl.min.js"></script>
@@ -1181,13 +1641,46 @@
     if (btn) btn.click();
   }
 
+  const TAG_EN_MAP = {
+    '实测': 'Measured',
+    '待测': 'Pending',
+    '厂家标称': 'OEM Nominal',
+    '粗估观察': 'Rough Obs.',
+    '方案非实测': 'Protocol Only',
+    '文献界': 'Lit. Bound',
+    '文献点名': 'Lit. Named',
+    '相对等级': 'Relative Tier',
+    '框架推断': 'Framework Inf.',
+    '插值': 'Interpolated',
+    '公开资料': 'Public Info'
+  };
+  const BASE_EN_MAP = {
+    'JF-602': 'JF-602 (2K Epoxy)',
+    'JF-602（或含CA涂层通用）': 'JF-602 / CA-Modified Coating',
+    'JF-602 / 自配 / 对照': 'JF-602 / Custom / Control',
+    '自配丙烯酸松香': 'Custom Acrylic-Rosin',
+    '自配丙烯酸松香（历史含铜）': 'Custom Acrylic-Rosin (Hist. Cu)',
+    '自配丙烯酸松香（历史含铜筛选）': 'Custom Acrylic-Rosin (Cu Screen)',
+    'CA@MSiO₂粉体': 'CA@MSiO₂ Powder',
+    'CA@MSiO₂粉体（无CA）': 'MSiO₂ Carrier (Blank)',
+    '主动防污（UV-C/超声）': 'Active AF (UV-C / Ultrasound)',
+    '其他（Hempel商业防污对照）': 'Commercial Ref (Hempel)',
+    '其他（裸基材）': 'Bare Substrate Control'
+  };
+  window.CUR_LANG = 'zh';
+  window.LIT_CAT_EN_MAP = {};
+  ((D.literature_taxonomy && D.literature_taxonomy.categories) || []).forEach(c => { if (c.en) window.LIT_CAT_EN_MAP[c.key] = c.en; });
+  window.COMM_CAT_EN_MAP = {};
+  ((D.commercial_taxonomy && D.commercial_taxonomy.categories) || []).forEach(c => { if (c.en) window.COMM_CAT_EN_MAP[c.key] = c.en; });
+
   function tagHtml(t) {
     if (!t) return '';
     return String(t).split(/[;；,，]/).map(s => s.trim()).filter(Boolean).map(s => {
       const cls = 'tag-' + s;
       const known = ['实测','待测','厂家标称','粗估观察','方案非实测','文献界','文献点名','相对等级','框架推断','插值','公开资料'];
       const c = known.includes(s) ? cls : 'tag-default';
-      return '<span class="tag ' + c + '">' + escapeHtml(s) + '</span>';
+      const label = (window.CUR_LANG === 'en' && TAG_EN_MAP[s]) ? TAG_EN_MAP[s] : s;
+      return '<span class="tag ' + c + '">' + escapeHtml(label) + '</span>';
     }).join('');
   }
   function linksHtml(links) {
@@ -1214,11 +1707,12 @@
 
 
   function typeLabel(t) {
-    if (t === 'commercial') return '市售';
-    if (t === 'homemade') return '自制/研究';
-    if (t === 'tech-uvc') return 'UV-C 辅助';
-    if (t === 'tech-ultrasound') return '超声辅助';
-    return t || '其他';
+    const en = window.CUR_LANG === 'en';
+    if (t === 'commercial') return en ? 'Commercial' : '市售';
+    if (t === 'homemade') return en ? 'Lab / Custom' : '自制/研究';
+    if (t === 'tech-uvc') return en ? 'UV-C Aux' : 'UV-C 辅助';
+    if (t === 'tech-ultrasound') return en ? 'Ultrasound Aux' : '超声辅助';
+    return t || (en ? 'Other' : '其他');
   }
   function typeChipClass(t) {
     if (t === 'commercial') return 'type-commercial';
@@ -1267,27 +1761,30 @@
   let labBaseActive = '';
   function labBaseKey(basecoat) {
     const b = (basecoat || '');
-    if (b.includes('示例双组分环氧') || b.startsWith('示例双组分环氧')) return 'jf602';
+    // Public repo rows use example basecoats; private/live panels may still say JF-602.
+    if (b.includes('JF-602') || b.startsWith('JF-602') || b.includes('示例双组分环氧')) return 'jf602';
     if (b.includes('丙烯酸') || b.includes('松香')) return 'acrylic';
-    if (b.includes('粉体') || b.includes('填料') || b.includes('EIS') || b.includes('释放几何')) return 'powder';
+    if (b.includes('粉体') || b.includes('CA@MSiO') || b.includes('填料') || b.includes('EIS') || b.includes('释放几何')) return 'powder';
     if (b.includes('UV-C') || b.includes('超声') || b.includes('主动')) return 'active';
     return 'other';
   }
   function labBasePill(basecoat) {
     const k = labBaseKey(basecoat);
     const cls = k === 'acrylic' ? 'acrylic' : k === 'powder' ? 'powder' : k === 'jf602' ? '' : 'other';
-    return '<span class="base-pill ' + cls + '">' + escapeHtml(basecoat || '—') + '</span>';
+    const lbl = (window.CUR_LANG === 'en' && BASE_EN_MAP[basecoat]) ? BASE_EN_MAP[basecoat] : (basecoat || '—');
+    return '<span class="base-pill ' + cls + '">' + escapeHtml(lbl) + '</span>';
   }
   function buildLabBaseChips() {
     const chips = document.getElementById('lab-base-chips');
     if (!chips) return;
+    const en = window.CUR_LANG === 'en';
     const groups = [
-      { key: '', zh: '全部路线' },
-      { key: 'jf602', zh: '示例双组分环氧' },
-      { key: 'acrylic', zh: '自配丙烯酸' },
-      { key: 'powder', zh: '示例功能填料粉体' },
-      { key: 'active', zh: 'UV-C/超声' },
-      { key: 'other', zh: '对照/其他' },
+      { key: '', zh: en ? 'All Routes' : '全部路线' },
+      { key: 'jf602', zh: en ? 'Example 2K epoxy' : '示例双组分环氧' },
+      { key: 'acrylic', zh: en ? 'Acrylic–rosin' : '自配丙烯酸' },
+      { key: 'powder', zh: en ? 'Example filler / method slots' : '示例填料/方法槽' },
+      { key: 'active', zh: en ? 'UV-C / Ultrasound' : 'UV-C/超声' },
+      { key: 'other', zh: en ? 'Controls / Other' : '对照/其他' },
     ];
     const counts = {};
     (D.lab || []).forEach(r => {
@@ -1327,11 +1824,11 @@
       const meta = [(r.uncertainty || ''), (r.note || '')].filter(Boolean).join(' · ');
       return `<tr>
       <td><div class="id">${escapeHtml(r.formulation_id)}</div>${labBasePill(r.basecoat)}</td>
-      <td>${escapeHtml(r.filler_wt_pct||'—')}</td>
-      <td>${escapeHtml(r.dispersant_rel_pct||'—')}</td>
+      <td>${escapeHtml(r.CA_MSiO2_wt_pct||r.filler_wt_pct||'—')}</td>
+      <td>${escapeHtml(r.BYK_rel_to_particle_pct||r.dispersant_rel_pct||'—')}</td>
       <td>${cellVal(r.pull_off_MPa, r.pull_off_tag)}</td>
       <td>${cellVal(r.eis_note, r.eis_tag)}</td>
-      <td>${cellVal(r.hplc_analyte_note, r.hplc_tag)}</td>
+      <td>${cellVal(r.hplc_CA_ug_mL_or_flux || r.hplc_analyte_note, r.hplc_tag)}</td>
       <td>${cellVal(r.microcosm_relative_fouling, r.microcosm_tag)}</td>
       <td><div class="lab-meta">${escapeHtml(meta)}</div>
           ${disadv ? '<div class="disadv"><strong>劣势/边界：</strong>' + escapeHtml(disadv) + '</div>' : ''}
@@ -1355,18 +1852,25 @@
     typeSel.appendChild(o);
   });
 
+  function rName(r) { return (window.CUR_LANG === 'en' && r.name_en) ? r.name_en : r.name_zh; }
+  function rBand(r) { return (window.CUR_LANG === 'en' && r.climate_band_en) ? r.climate_band_en : r.climate_band; }
+  function rPress(r) { return (window.CUR_LANG === 'en' && r.overall_pressure_en) ? r.overall_pressure_en : r.overall_pressure; }
+  function rStrat(r) { return (window.CUR_LANG === 'en' && r.strategy_en) ? r.strategy_en : r.strategy; }
+  function rType(r) { return (window.CUR_LANG === 'en' && r.type_en) ? r.type_en : r.type; }
+
   function renderRoutes() {
     const tf = typeSel.value;
+    const en = window.CUR_LANG === 'en';
     const grid = document.getElementById('route-grid');
     const list = D.routes.filter(r => !tf || r.type === tf);
     grid.innerHTML = list.map(r => `
       <div class="route-card${selectedRoute===r.profile_id?' selected':''}" data-id="${escapeHtml(r.profile_id)}">
-        <div class="name">${escapeHtml(r.name_zh)}</div>
-        <div class="band">${escapeHtml(r.climate_band)}</div>
-        <div class="press-label">相对压力 ${escapeHtml(r.overall_pressure)}</div>
+        <div class="name">${escapeHtml(rName(r))}</div>
+        <div class="band">${escapeHtml(rBand(r))}</div>
+        <div class="press-label">${en ? 'Rel. Fouling Stress: ' : '相对压力 '}${escapeHtml(rPress(r))}</div>
         <div class="press-bar"><i style="width:${pressPct(r.overall_num)}%"></i></div>
-        <div class="muted" style="font-size:.72rem;">${escapeHtml(r.strategy)}</div>
-        <span class="route-type">${escapeHtml(r.type)}</span>
+        <div class="muted" style="font-size:.72rem;">${escapeHtml(rStrat(r))}</div>
+        <span class="route-type">${escapeHtml(rType(r))}</span>
       </div>
     `).join('');
     grid.querySelectorAll('.route-card').forEach(el => {
@@ -1376,30 +1880,36 @@
 
   function selectRoute(id) {
     selectedRoute = id;
+    const en = window.CUR_LANG === 'en';
     const r = D.routes.find(x => x.profile_id === id);
     renderRoutes();
     const detail = document.getElementById('route-detail');
     if (!r) { detail.style.display = 'none'; return; }
     detail.style.display = 'block';
-    document.getElementById('route-detail-title').textContent = r.name_zh + ' · ' + r.profile_id;
-    document.getElementById('route-detail-meta').textContent =
-      '气候带：' + r.climate_band + '　|　全线相对压力：' + r.overall_pressure + '　|　策略：' + r.strategy +
-      '　|　tag：相对等级 + 框架推断';
+    document.getElementById('route-detail-title').textContent = rName(r) + ' · ' + r.profile_id;
+    document.getElementById('route-detail-meta').textContent = en
+      ? ('Climate Band: ' + rBand(r) + '  |  Full-Route Stress: ' + rPress(r) + '  |  Strategy: ' + rStrat(r) + '  |  Tag: Relative Tier + Framework Inference')
+      : ('气候带：' + r.climate_band + '　|　全线相对压力：' + r.overall_pressure + '　|　策略：' + r.strategy + '　|　tag：相对等级 + 框架推断');
     document.getElementById('route-legs').innerHTML = (r.legs || []).map((leg, i) => `
       <div class="leg">
         <div class="n">${i+1}</div>
         <div>
-          <strong>${escapeHtml(leg.segment)}</strong>
-          <div>相对压力：${escapeHtml(leg.pressure)}</div>
-          <div class="muted">${escapeHtml(leg.hint||'')}</div>
+          <strong>${escapeHtml((en && leg.segment_en) ? leg.segment_en : leg.segment)}</strong>
+          <div>${en ? 'Relative Stress: ' : '相对压力：'}${escapeHtml((en && leg.pressure_en) ? leg.pressure_en : leg.pressure)}</div>
+          <div class="muted">${escapeHtml((en && leg.hint_en) ? leg.hint_en : (leg.hint||''))}</div>
         </div>
       </div>
     `).join('');
-    /* sync rec select */
+    /* sync rec select & coupler select */
     const rs = document.getElementById('rec-profile');
     if ([...rs.options].some(o => o.value === id)) {
       rs.value = id;
       renderRec();
+    }
+    const cps = document.getElementById('cp-route');
+    if (cps && [...cps.options].some(o => o.value === id)) {
+      cps.value = id;
+      if (window.renderCoupler) window.renderCoupler();
     }
   }
 
@@ -1464,7 +1974,7 @@
     {key:'uvc_active', zh:'UV-C 主动防污'},
     {key:'ultrasound', zh:'超声 / 导波'},
     {key:'hybrid', zh:'混合 / 协同体系'},
-    {key:'natural_biocide_ca', zh:'天然杀生剂 / 介孔载体'},
+    {key:'natural_biocide_ca', zh:'天然杀生剂 / CA@介孔'},
     {key:'regulatory_economic', zh:'监管 / 经济影响'}
   ];
   let litCatActive = '';
@@ -1567,11 +2077,23 @@
       return true;
     });
     const tbody = document.querySelector('#lit-table tbody');
-    tbody.innerHTML = rows.map(r => `<tr>
+    tbody.innerHTML = rows.map(r => {
+      const catLabel = (window.CUR_LANG === 'en' && window.LIT_CAT_EN_MAP && window.LIT_CAT_EN_MAP[r.category_key]) ? window.LIT_CAT_EN_MAP[r.category_key] : (r.category_zh||r.category_key||'');
+      const sumText = (window.CUR_LANG === 'en')
+        ? (r.title || (r.enrich && r.enrich.summary_zh) || 'Unverified')
+        : ((r.enrich && r.enrich.summary_zh) || r.title || '未核实');
+      const venueBadge = (r.enrich && r.enrich.venue) ? '<div class="muted" style="margin-top:3px;font-size:.7rem;font-style:italic;">' + escapeHtml(r.enrich.venue) + '</div>' : '';
+      const boundHtml = `<div class="bound-box">
+        <div class="bound-metric">${escapeHtml(r.metric || '—')}</div>
+        <div class="bound-val">${escapeHtml(r.value_range || '—')} <span style="font-weight:500;font-size:.74rem;">${escapeHtml(r.unit || '')}</span></div>
+        ${r.organism_or_context ? '<div class="bound-ctx">' + escapeHtml(r.organism_or_context) + '</div>' : ''}
+      </div>`;
+      return `<tr>
       <td class="lit-who">${whoHtml(r)}</td>
-      <td><span class="cat-pill">${escapeHtml(r.category_zh||r.category_key||'')}</span>
+      <td><span class="cat-pill">${escapeHtml(catLabel)}</span>
           ${r.subcategory ? '<div class="muted" style="margin-top:3px;font-size:.7rem;">'+escapeHtml(r.subcategory)+'</div>' : ''}</td>
-      <td class="lit-sum">${escapeHtml((r.enrich&&r.enrich.summary_zh)||'未核实')}</td>
+      <td style="min-width:210px;">${boundHtml}</td>
+      <td class="lit-sum">${escapeHtml(sumText)}${venueBadge}</td>
       <td>${escapeHtml(r.year||'')}</td>
       <td>${starsHtml(r)}</td>
       <td>${tagHtml(r.tag)}</td>
@@ -1579,7 +2101,8 @@
           <div class="muted" style="margin-top:4px;">${escapeHtml(r.DOI_or_source||'')}</div>${linksHtml(r.links)}
           <div class="muted" style="margin-top:3px;font-size:.66rem;">${escapeHtml(r.bound_id||'')}</div>
           <div style="margin-top:4px;font-size:.75rem;">${escapeHtml(r.note||'')}</div></td>
-    </tr>`).join('') || '<tr><td colspan="9" class="empty">无匹配文献界行</td></tr>';
+    </tr>`;
+    }).join('') || '<tr><td colspan="8" class="empty">无匹配文献界行 / No matching literature rows</td></tr>';
   }
   buildLitCatUI();
   const litSearch = document.getElementById('lit-search');
@@ -2033,7 +2556,7 @@
         if (opts.single || opts.ports) (g.ports || []).forEach(pt => {
           const [x, y] = xy(pt.lonlat[0] < -100 && id === 'ROUTE-TRANSPAC-LA-V0' ? [pt.lonlat[0] + 360, pt.lonlat[1]] : pt.lonlat);
           body += '<circle class="port" cx="' + x + '" cy="' + y + '" r="' + (opts.single ? sw * 1.1 : 0.9) + '" stroke-width="' + (sw * 0.35) + '"/>';
-          if (opts.single) body += '<text class="lbl" x="' + (x + sw * 1.6) + '" y="' + (y - sw * 1.2) + '" style="font-size:' + (opts.fs || 3) + 'px">' + escapeHtml(pt.name) + '</text>';
+          if (opts.single) body += '<text class="lbl" x="' + (x + sw * 1.6) + '" y="' + (y - sw * 1.2) + '" style="font-size:' + (opts.fs || 3) + 'px">' + escapeHtml((window.CUR_LANG === 'en' && pt.name_en) ? pt.name_en : pt.name) + '</text>';
         });
         body += '</g>';
       });
@@ -2062,10 +2585,14 @@
   function openRouteModal(id) {
     const r = D.routes.find(x => x.profile_id === id);
     if (!r || !GEO.routes[id]) return;
+    const en = window.CUR_LANG === 'en';
     const vb = boundsOf(id);
-    document.getElementById('rm-title').textContent = r.name_zh + ' · ' + r.profile_id;
-    document.getElementById('rm-meta').textContent = '气候带：' + r.climate_band + '　|　全线相对压力：' + r.overall_pressure + '（相对等级，非现场实测）　|　航段：' +
-      (r.legs || []).map((l, i) => (i + 1) + '. ' + l.segment + '（' + l.pressure + '）').join('；');
+    document.getElementById('rm-title').textContent = rName(r) + ' · ' + r.profile_id;
+    document.getElementById('rm-meta').textContent = en
+      ? ('Climate Band: ' + rBand(r) + '  |  Full-Route Stress: ' + rPress(r) + ' (Relative tier, not field-measured)  |  Segments: ' +
+        (r.legs || []).map((l, i) => (i + 1) + '. ' + (l.segment_en || l.segment) + ' (' + (l.pressure_en || l.pressure) + ')').join('; '))
+      : ('气候带：' + r.climate_band + '　|　全线相对压力：' + r.overall_pressure + '（相对等级，非现场实测）　|　航段：' +
+        (r.legs || []).map((l, i) => (i + 1) + '. ' + l.segment + '（' + l.pressure + '）').join('；'));
     document.getElementById('rm-map').innerHTML = mapSvg([id], vb, { single: true, sw: vb[2] / 260, fs: vb[2] / 55 });
     modal.hidden = false;
   }
@@ -2096,6 +2623,1028 @@
     ul.innerHTML = high.map(e => '<li>' + catBadge(e.category) + '<span>' + escapeHtml(e.title) +
       ' <span class="muted">（' + escapeHtml(e.date || '') + '）</span></span></li>').join('') ||
       '<li class="muted">本周无高相关条目。</li>';
+  })();
+
+
+  /* ============================================================================
+   * V1.0 Interactive Simulators, Global Calculators, CSV Export & Bilingual i18n
+   * ============================================================================ */
+
+  /* --- Sub-tab view switcher inside #panel-sim --- */
+  document.querySelectorAll('#sim-subtabs button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#sim-subtabs button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const v = btn.dataset.simview;
+      ['sandbox', 'coupler', 'calculators'].forEach(k => {
+        const el = document.getElementById('sim-block-' + k);
+        if (el) el.style.display = (v === 'all' || v === k) ? 'block' : 'none';
+      });
+    });
+  });
+
+  /* Quick launch buttons from Overview, Lab, Routes */
+  document.getElementById('ov-sim-goto').addEventListener('click', () => goTab('sim'));
+  document.querySelectorAll('.sim-cta-card[data-sim-jump]').forEach(card => {
+    card.addEventListener('click', () => {
+      const target = card.dataset.simJump;
+      goTab('sim');
+      const subBtn = document.querySelector('#sim-subtabs button[data-simview="' + target + '"]');
+      if (subBtn) subBtn.click();
+      const block = document.getElementById('sim-block-' + target);
+      if (block) block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+  const labOpenSb = document.getElementById('lab-open-sandbox');
+  if (labOpenSb) labOpenSb.addEventListener('click', () => {
+    goTab('sim');
+    const b = document.querySelector('#sim-subtabs button[data-simview="sandbox"]');
+    if (b) b.click();
+  });
+  const routeOpenCp = document.getElementById('route-open-coupler');
+  if (routeOpenCp) routeOpenCp.addEventListener('click', () => {
+    goTab('sim');
+    const b = document.querySelector('#sim-subtabs button[data-simview="coupler"]');
+    if (b) b.click();
+  });
+
+  /* --- Workbench 1: Interactive Formulation & Dose-Response Sandbox --- */
+  const sbResin = document.getElementById('sb-resin');
+  const sbCa = document.getElementById('sb-ca');
+  const sbByk = document.getElementById('sb-byk');
+  const sbDft = document.getElementById('sb-dft');
+  const sbSub = document.getElementById('sb-sub');
+
+  function renderRadarSvg(axes, baseVals, curVals) {
+    const cx = 135, cy = 128, R = 82;
+    const N = axes.length;
+    const pt = (i, val) => {
+      const ang = -Math.PI / 2 + (i * 2 * Math.PI) / N;
+      const r = (Math.max(0, Math.min(100, val)) / 100) * R;
+      return [cx + r * Math.cos(ang), cy + r * Math.sin(ang)];
+    };
+    let grid = '';
+    [0.25, 0.5, 0.75, 1].forEach(f => {
+      const pts = axes.map((_, i) => pt(i, f * 100).map(n => n.toFixed(1)).join(',')).join(' ');
+      grid += '<polygon points="' + pts + '" fill="none" stroke="#d5e2ec" stroke-width="1"/>';
+    });
+    axes.forEach((ax, i) => {
+      const [x, y] = pt(i, 100);
+      const [lx, ly] = pt(i, 122);
+      grid += '<line x1="' + cx + '" y1="' + cy + '" x2="' + x.toFixed(1) + '" y2="' + y.toFixed(1) + '" stroke="#cbdbe6" stroke-width="1"/>';
+      const anchor = Math.abs(lx - cx) < 10 ? 'middle' : (lx > cx ? 'start' : 'end');
+      grid += '<text x="' + lx.toFixed(1) + '" y="' + (ly + 3).toFixed(1) + '" text-anchor="' + anchor + '" font-size="9.5" font-weight="700" fill="#10273a">' + escapeHtml(ax) + '</text>';
+    });
+    const basePoly = baseVals.map((v, i) => pt(i, v).map(n => n.toFixed(1)).join(',')).join(' ');
+    const curPoly = curVals.map((v, i) => pt(i, v).map(n => n.toFixed(1)).join(',')).join(' ');
+    const dots = curVals.map((v, i) => {
+      const [x, y] = pt(i, v);
+      return '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="3.4" fill="#0a8f9c" stroke="#fff" stroke-width="1.2"/>';
+    }).join('');
+    const en = window.CUR_LANG === 'en';
+    const legBase = en ? 'Unmodified Baseline' : '未改性基准';
+    const legCur = en ? 'Current Sandbox Envelope' : '当前配方推演包络';
+    return '<svg viewBox="0 0 270 260" role="img">' + grid +
+      '<polygon points="' + basePoly + '" fill="rgba(90,112,131,.12)" stroke="#688096" stroke-width="1.5" stroke-dasharray="4 3"/>' +
+      '<polygon points="' + curPoly + '" fill="rgba(10,143,156,.26)" stroke="#0a8f9c" stroke-width="2.2"/>' + dots +
+      '<g transform="translate(18, 246)" font-size="9" fill="#44596b">' +
+      '<line x1="0" y1="-3" x2="14" y2="-3" stroke="#688096" stroke-width="1.5" stroke-dasharray="3 2"/><text x="18" y="0">' + legBase + '</text>' +
+      '<rect x="115" y="-8" width="10" height="7" fill="rgba(10,143,156,.35)" stroke="#0a8f9c" stroke-width="1.5"/><text x="129" y="0">' + legCur + '</text>' +
+      '</g></svg>';
+  }
+
+  function renderSandbox() {
+    const en = window.CUR_LANG === 'en';
+    const resin = sbResin.value;
+    const ca = parseFloat(sbCa.value) || 0;
+    const byk = parseFloat(sbByk.value) || 0;
+    const dft = parseFloat(sbDft.value) || 40;
+    const sub = sbSub.value;
+
+    document.getElementById('sb-ca-val').textContent = ca.toFixed(1) + ' wt%';
+    document.getElementById('sb-byk-val').textContent = byk.toFixed(1) + ' %';
+    document.getElementById('sb-dft-val').textContent = dft.toFixed(0) + ' μm';
+
+    /* Mechanistic heuristic model (strictly labeled as Framework Envelope) */
+    const resinBase = {
+      epoxy:    { adh: [4.9, 6.6], bar: 88, rel: 22, smo: 82, af: 25, baseAxes: [86, 20, 82, 88, 25] },
+      acrylic:  { adh: [2.4, 3.8], bar: 58, rel: 76, smo: 75, af: 45, baseAxes: [58, 70, 75, 58, 45] },
+      silicone: { adh: [1.5, 2.6], bar: 64, rel: 48, smo: 94, af: 62, baseAxes: [42, 48, 94, 64, 62] },
+      hybrid:   { adh: [3.6, 5.1], bar: 78, rel: 52, smo: 84, af: 48, baseAxes: [74, 50, 84, 78, 48] },
+    }[resin] || { adh: [4.0, 5.5], bar: 80, rel: 35, smo: 80, af: 35, baseAxes: [75, 35, 80, 80, 35] };
+
+    const subMod = sub === 'steel' ? 1.08 : (sub === 'ti' ? 0.92 : 1.0);
+    /* Optimal BYK ratio is around 2.0-4.0% when CA > 0 */
+    const idealByk = ca > 0 ? Math.min(5.0, 1.5 + ca * 0.35) : 0;
+    const bykDeficit = ca > 0 ? Math.max(0, idealByk - byk) : 0;
+    const bykExcess = Math.max(0, byk - (ca > 0 ? idealByk + 2.0 : 1.5));
+
+    /* Agglomeration & thin-film protrusion penalty */
+    const thinPenalty = (ca > 0 && dft < 25) ? (25 - dft) * 1.8 : 0;
+    const aggIndex = Math.max(0, ca * 5.2 + bykDeficit * 8.5 - (byk > 0 ? Math.min(ca * 2.4, byk * 4.5) : 0) + thinPenalty);
+    const smoothness = Math.max(18, Math.min(98, resinBase.smo - aggIndex * 1.15));
+
+    /* Pull-off adhesion window (MPa) */
+    const adhPenalty = (ca > 3.5 ? (ca - 3.5) * 0.22 : 0) + bykExcess * 0.18 + (aggIndex > 25 ? (aggIndex - 25) * 0.03 : 0);
+    const adhLow = Math.max(0.8, (resinBase.adh[0] * subMod) - adhPenalty - (ca > 0 ? 0.35 : 0));
+    const adhHigh = Math.max(adhLow + 0.4, (resinBase.adh[1] * subMod) - adhPenalty * 0.85);
+    const adhScore = Math.max(15, Math.min(96, ((adhLow + adhHigh) / 2) * 14.5));
+
+    /* Release continuity vs. Matrix Lock-in */
+    const matrixPerm = resin === 'epoxy' ? 0.42 : (resin === 'hybrid' ? 0.68 : (resin === 'acrylic' ? 1.0 : 0.78));
+    const dftLockFactor = (resin === 'epoxy' && dft > 80) ? Math.max(0.55, 1 - (dft - 80) * 0.0025) : 1.0;
+    const releaseScore = ca === 0 ? 12 : Math.max(15, Math.min(95, (18 + Math.pow(ca, 0.78) * 16.5) * matrixPerm * dftLockFactor));
+
+    /* Barrier Impedance |Z|_0.01Hz score */
+    const dftBoost = Math.min(14, (dft - 30) * 0.09);
+    const defectDrop = aggIndex > 18 ? (aggIndex - 18) * 0.9 : 0;
+    const barrierScore = Math.max(20, Math.min(96, resinBase.bar + dftBoost - defectDrop - bykExcess * 2.8));
+
+    /* Static Biofouling Defense envelope */
+    const staticAfScore = Math.max(18, Math.min(95, resinBase.af + (ca > 0 ? releaseScore * 0.58 : 0) - (smoothness < 55 ? (55 - smoothness) * 0.4 : 0)));
+
+    const axesLabels = en
+      ? ['Adhesion', 'Release Flux', 'Smoothness', 'Barrier |Z|', 'Static AF']
+      : ['附着力保留', '缓释连续性', '分散平整度', '屏障阻抗 |Z|', '静态抗污力'];
+    document.getElementById('sb-radar-box').innerHTML = renderRadarSvg(
+      axesLabels,
+      resinBase.baseAxes,
+      [adhScore, releaseScore, smoothness, barrierScore, staticAfScore]
+    );
+
+    /* Find closest Track A lab slot */
+    let bestRow = D.lab[0], bestDist = 1e9;
+    D.lab.forEach(r => {
+      const rKey = labBaseKey(r.basecoat);
+      let d = 0;
+      if ((resin === 'epoxy' && rKey !== 'jf602') || (resin === 'acrylic' && rKey !== 'acrylic')) d += 15;
+      const rCa = parseFloat(r.CA_MSiO2_wt_pct || r.filler_wt_pct);
+      if (!isNaN(rCa)) d += Math.abs(rCa - ca) * 2.5;
+      else if (ca > 0) d += 6;
+      const rByk = parseFloat(r.BYK_rel_to_particle_pct || r.dispersant_rel_pct);
+      if (!isNaN(rByk)) d += Math.abs(rByk - byk) * 1.5;
+      if (d < bestDist) { bestDist = d; bestRow = r; }
+    });
+
+    const sumHead = document.getElementById('sb-summary-head');
+    const sumText = document.getElementById('sb-summary-text');
+    sumHead.textContent = en ? 'Mechanistic Envelope Diagnosis' : '配方机理与包络诊断';
+    if (ca === 0) {
+      sumText.textContent = en
+        ? 'Blank baseline without active microcapsules (0 wt% CA@MSiO₂). High cohesive/adhesive integrity on substrate, but lacks active biocide flux during static port dwell.'
+        : '当前为无活性填料空白基准（0 wt% CA@MSiO₂）。基体交联与附着力保持完整，但缺乏主动防污剂释放通量，在静态港停或微宇宙中易受生物膜定殖。';
+    } else if (resin === 'epoxy' && ca <= 3.5 && byk >= 1.5 && byk <= 5.0) {
+      sumText.textContent = en
+        ? 'Balanced dispersion window for 2K Epoxy + CA@MSiO₂: BYK wetting agent mitigates ~5 μm silica agglomeration, preserving film smoothness. Note: Dense epoxy crosslinking can still throttle long-term CA diffusion—must verify via HPLC.'
+        : '处于双组分环氧 + CA@MSiO₂ 的优选分散筛选窗：适度 BYK 助剂可抑制 ~5 μm 介孔硅团聚并维持膜面平滑；但须注意双组分环氧致密交联网络可能限制后期肉桂醛（CA）扩散通量，需结合 HPLC 实测验证。';
+    } else if (aggIndex >= 24) {
+      sumText.textContent = en
+        ? '⚠️ High Agglomeration & Defect Risk: High filler loading with insufficient dispersant (or overly thin DFT) causes particle clustering, elevated surface roughness (ΔRa), and interfacial voids that degrade both pull-off adhesion and EIS barrier impedance.'
+        : '⚠️ 团聚与膜面缺陷高风险区：高填料掺量叠加分散助剂不足（或干膜过薄），易引发 ~5 μm 颗粒团聚凸起、表面粗糙度 ΔRa 上升及界面微孔，同时拉低拉拔附着力与 EIS 低频阻抗。';
+    } else {
+      sumText.textContent = en
+        ? 'Modified formulation envelope: Active filler introduces sustained release potential while shifting pigment volume concentration (PVC). Verify pot-life, cure schedule, and leaching kinetics.'
+        : '改性配方推演区间：活性微胶囊/填料提供了缓释防污潜力，同时改变了体系颜料体积浓度（PVC）与界面应力分布，建议对照轨 A 槽位开展拉拔、EIS 与 HPLC 联测。';
+    }
+
+    const matchBox = document.getElementById('sb-match-box');
+    if (bestRow) {
+      matchBox.innerHTML = (en ? '🔗 <strong>Closest Track A Benchmark Slot:</strong> ' : '🔗 <strong>最邻近的轨 A 实验室槽位：</strong> ') +
+        '<code>' + escapeHtml(bestRow.formulation_id) + '</code> ' + tagHtml(bestRow.pull_off_tag || '待测') +
+        '<div class="muted" style="margin-top:4px;">' + escapeHtml(bestRow.note || bestRow.uncertainty || '') + '</div>' +
+        '<button type="button" class="linkbtn" style="margin-top:6px;padding:4px 10px;font-size:.75rem;" id="sb-jump-lab-btn">' +
+        (en ? 'Inspect in Track A Table →' : '在轨 A 表中定位该槽位 →') + '</button>';
+      const jb = document.getElementById('sb-jump-lab-btn');
+      if (jb) jb.onclick = () => {
+        labBaseActive = '';
+        document.getElementById('lab-tag-filter').value = '';
+        document.getElementById('lab-search').value = bestRow.formulation_id;
+        buildLabBaseChips();
+        renderLab();
+        goTab('lab');
+      };
+    }
+
+    const cards = [
+      {
+        cls: adhLow < 2.2 ? 'warn-card' : 'ok-card',
+        k: en ? 'Est. Pull-off Adhesion Window' : '预计拉拔附着力包络 (Pull-off)',
+        v: adhLow.toFixed(1) + ' – ' + adhHigh.toFixed(1) + ' MPa',
+        d: en
+          ? ('Substrate: ' + sbSub.options[sbSub.selectedIndex].text + '. Model envelope, not ISO 4624 test report.')
+          : ('基材语境：' + sbSub.options[sbSub.selectedIndex].text + '。带标签推演区间，不可替代实测。')
+      },
+      {
+        cls: aggIndex > 22 ? 'danger-card' : (aggIndex > 12 ? 'warn-card' : 'ok-card'),
+        k: en ? 'Agglomeration & Roughness Risk' : '颗粒团聚与粗糙度惩罚指数',
+        v: (aggIndex < 12 ? (en ? 'Low' : '低风险') : (aggIndex < 22 ? (en ? 'Moderate' : '中等') : (en ? 'High Risk' : '高风险'))) + ' (' + Math.round(aggIndex) + '/50)',
+        d: en
+          ? (dft < 25 && ca > 0 ? 'DFT < 25 μm risks ~5 μm particle protrusion.' : 'Controlled by filler wt% vs. BYK wetting balance.')
+          : (dft < 25 && ca > 0 ? '干膜 <25 μm 时 ~5 μm 颗粒易突出膜面增加粗糙度。' : '受填料掺量与 BYK 润湿分散配比共同支配。')
+      },
+      {
+        cls: (resin === 'epoxy' && ca > 0) ? 'warn-card' : 'ok-card',
+        k: en ? 'Release Continuity vs. Matrix Lock-in' : '有效释放潜力与基体锁死诊断',
+        v: Math.round(releaseScore) + ' / 100',
+        d: en
+          ? (resin === 'epoxy' ? 'Dense 2K epoxy network may hinder internal CA diffusion; verify flux by HPLC.' : 'Hydrolyzing/elastomeric matrix facilitates sustained diffusive transport.')
+          : (resin === 'epoxy' ? '双组分环氧交联致密，深层 CA 扩散受阻风险高，须用 HPLC 测释放通量。' : '可水解/弹性体网络有利于活性分子持续扩散与表面更新。')
+      },
+      {
+        cls: bykExcess > 1.5 ? 'warn-card' : 'ok-card',
+        k: en ? 'EIS Barrier & Cure Integrity' : 'EIS 屏障阻抗与固化适用期提示',
+        v: '|Z| Score ' + Math.round(barrierScore) + '/100',
+        d: en
+          ? (bykExcess > 1.5 ? 'Excess BYK (>6%) may plasticize matrix and lower low-frequency impedance.' : 'Keep 2K A+B pot-life ≤ 3h; mix fresh before spraying/drawdown.')
+          : (bykExcess > 1.5 ? 'BYK 过量可能增塑交联网络并降低低频阻抗模值。' : '双组分混合后保守适用期 ≤3h，严禁预混久置，须现配现用。')
+      }
+    ];
+    document.getElementById('sb-proxy-cards').innerHTML = cards.map(c =>
+      '<div class="proxy-card ' + c.cls + '"><div class="pk">' + escapeHtml(c.k) + '</div><div class="pv">' +
+      escapeHtml(c.v) + '</div><div class="pd">' + escapeHtml(c.d) + '</div></div>'
+    ).join('');
+  }
+
+  [sbResin, sbCa, sbByk, sbDft, sbSub].forEach(el => {
+    if (el) el.addEventListener('input', renderSandbox);
+    if (el) el.addEventListener('change', renderSandbox);
+  });
+
+  document.querySelectorAll('#sb-presets button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const p = btn.dataset.preset;
+      if (p === 'oem') { sbResin.value = 'epoxy'; sbCa.value = 0; sbByk.value = 0; sbDft.value = 30; sbSub.value = 'al6061'; }
+      else if (p === 'opt') { sbResin.value = 'epoxy'; sbCa.value = 2.0; sbByk.value = 3.0; sbDft.value = 35; sbSub.value = 'al6061'; }
+      else if (p === 'agg') { sbResin.value = 'epoxy'; sbCa.value = 8.0; sbByk.value = 0.0; sbDft.value = 25; sbSub.value = 'al6061'; }
+      else if (p === 'spc') { sbResin.value = 'acrylic'; sbCa.value = 3.5; sbByk.value = 2.5; sbDft.value = 120; sbSub.value = 'steel'; }
+      else if (p === 'frc') { sbResin.value = 'silicone'; sbCa.value = 0.5; sbByk.value = 1.0; sbDft.value = 150; sbSub.value = 'steel'; }
+      renderSandbox();
+    });
+  });
+
+  /* --- Workbench 2: Dynamic Route-Speed-Idle Fouling Stress & Coating Coupler --- */
+  const cpRoute = document.getElementById('cp-route');
+  const cpSpeed = document.getElementById('cp-speed');
+  const cpIdle = document.getElementById('cp-idle');
+  const cpDock = document.getElementById('cp-dock');
+  const cpAux = document.getElementById('cp-aux');
+
+  function populateCpRoutes() {
+    if (!cpRoute) return;
+    const keep = cpRoute.value || 'ROUTE-SHA-SIN-V0';
+    cpRoute.innerHTML = '';
+    D.routes.forEach(r => {
+      const o = document.createElement('option');
+      o.value = r.profile_id;
+      o.textContent = rName(r) + ' (' + r.profile_id + ')';
+      cpRoute.appendChild(o);
+    });
+    cpRoute.value = keep;
+  }
+  populateCpRoutes();
+
+  window.renderCoupler = function renderCoupler() {
+    const en = window.CUR_LANG === 'en';
+    const pid = cpRoute.value || 'ROUTE-SHA-SIN-V0';
+    const r = D.routes.find(x => x.profile_id === pid) || D.routes[0];
+    const speed = parseFloat(cpSpeed.value) || 14;
+    const idle = parseFloat(cpIdle.value) || 20;
+    const dock = parseFloat(cpDock.value) || 36;
+    const aux = cpAux.value;
+
+    document.getElementById('cp-speed-val').textContent = speed.toFixed(1) + ' kn';
+    document.getElementById('cp-idle-val').textContent = idle.toFixed(0) + ' %';
+    document.getElementById('cp-dock-val').textContent = dock.toFixed(0) + (en ? ' mos' : ' 个月');
+
+    const baseNum = Number(r.overall_num) || 3.5;
+    const isPolar = baseNum <= 2.0;
+    /* Effective fouling stress couples base climate stress + idle amplification - hydrodynamic shear */
+    const idleBoost = ((idle - 15) / 50) * (isPolar ? 0.35 : 0.95);
+    const speedRelief = ((speed - 12) / 12) * 0.45;
+    const auxRelief = aux === 'uvc' ? 0.25 : (aux === 'us' ? 0.35 : 0);
+    const effStress = Math.max(1.0, Math.min(5.0, baseNum + idleBoost - speedRelief - auxRelief));
+
+    const slimeRisk = Math.max(15, Math.min(98, Math.round(effStress * 19 + (idle > 25 ? 8 : 0))));
+    const barnacleRisk = isPolar
+      ? Math.max(8, Math.min(35, Math.round(effStress * 12 + idle * 0.2)))
+      : Math.max(15, Math.min(98, Math.round(effStress * 18 + (idle - 15) * 0.7 - (speed > 15 ? (speed - 15) * 2.2 : 0))));
+    const shearClean = Math.max(5, Math.min(98, Math.round(Math.pow(Math.max(0, speed - 4) / 20, 1.35) * 95 * (1 - idle / 100))));
+
+    const stressCards = [
+      {
+        cls: effStress >= 3.8 ? 'danger-card' : (effStress >= 2.8 ? 'warn-card' : 'ok-card'),
+        k: en ? 'Coupled Biofouling Stress Index' : '耦合后等效污损压力指数',
+        v: effStress.toFixed(2) + ' / 5.0',
+        d: en
+          ? ('Base route: ' + baseNum + '/5 · Port idle ' + idle + '% · Speed ' + speed + ' kn')
+          : ('航线基准 ' + baseNum + '/5 · 港停占比 ' + idle + '% · 航速 ' + speed + ' 节')
+      },
+      {
+        cls: barnacleRisk >= 70 ? 'danger-card' : (barnacleRisk >= 45 ? 'warn-card' : 'ok-card'),
+        k: en ? 'Calcareous / Barnacle Settlement Risk' : '钙质生物（藤壶/管虫）定殖风险',
+        v: barnacleRisk + ' / 100',
+        d: en
+          ? (idle >= 30 ? 'High port dwell strongly amplifies larval attachment.' : 'Moderated by vessel activity and climate band.')
+          : (idle >= 30 ? '长港停期显著放大近岸幼体附着与硬化定殖。' : '受航区气候带与船队活动率共同调节。')
+      },
+      {
+        cls: shearClean >= 55 ? 'ok-card' : 'warn-card',
+        k: en ? 'Hydrodynamic Shear Self-Cleaning' : '水动力剪切自清洁潜能 (FRC 驱动力)',
+        v: shearClean + ' / 100',
+        d: en
+          ? (speed < 11 ? 'Speed < 11 kn is often insufficient for pure silicone foul-release.' : 'Sufficient steaming shear for low-surface-energy release.')
+          : (speed < 11 ? '航速 <11 节时纯硅酮 FRC 难以单靠水流剪切脱附硬质污损。' : '航行水流剪切力充足，有利于低表面能涂层脱附。')
+      }
+    ];
+    document.getElementById('cp-stress-cards').innerHTML = stressCards.map(c =>
+      '<div class="proxy-card ' + c.cls + '"><div class="pk">' + escapeHtml(c.k) + '</div><div class="pv">' +
+      escapeHtml(c.v) + '</div><div class="pd">' + escapeHtml(c.d) + '</div></div>'
+    ).join('');
+
+    /* Score 5 coating archetypes dynamically */
+    const families = [
+      {
+        id: 'spc',
+        name: en ? 'Silyl / Hydrolyzing Self-Polishing Copolymer (SPC)' : '硅烷/水解自抛光防污体系 (Silyl / Hydrolyzing SPC)',
+        score: isPolar ? 48 : Math.min(96, Math.round(74 + effStress * 4.5 + (dock >= 36 ? 6 : 0) - (idle > 45 ? 5 : 0))),
+        why: en
+          ? 'Consistent hydrolysis & biocide/active polishing across warm corridors and long docking intervals (36–60m).'
+          : '在暖水高压力走廊与 36–60 个月长坞期下具备稳定的水解抛光与持续防污能力。'
+      },
+      {
+        id: 'hydrogel',
+        name: en ? 'Hydrogel-Silicone Hybrid / Zwitterionic + Biocide' : '水凝胶改性硅酮 / 两性离子协同体系 (Hydrogel Hybrid)',
+        score: isPolar ? 56 : Math.min(95, Math.round(72 + idle * 0.35 + speed * 0.6)),
+        why: en
+          ? 'Hydration layer delays biofilm & barnacle settlement during port idle while retaining foul-release under steaming.'
+          : '表面水化层兼顾港停期抗蛋白/细菌生物膜粘附与航行期污损释放，比纯硅酮更耐港停。'
+      },
+      {
+        id: 'ca_meso',
+        name: en ? 'Eco-Friendly CA@MSiO₂ Controlled-Release System (Research)' : '天然杀生剂 CA@MSiO₂ 介孔控释体系（研究/低铜替代路线）',
+        score: isPolar ? 62 : Math.min(90, Math.round(68 + (idle <= 35 ? 10 : -4) - (dock > 36 ? (dock - 36) * 0.45 : 0) + (aux !== 'none' ? 8 : 0))),
+        why: en
+          ? 'Green non-heavy-metal route; best paired with permeable matrix or UV-C/ultrasound for >36m cycles.'
+          : '无重金属绿色防污路线；长坞期 (>36月) 需解决环氧锁死与储量衰减，配合主动 UV-C/超声更佳。'
+      },
+      {
+        id: 'frc',
+        name: en ? 'Pure Silicone Foul-Release Coating (Biocide-Free PDMS FRC)' : '纯硅酮无杀生剂污损释放涂层 (Pure PDMS FRC)',
+        score: Math.max(22, Math.min(95, Math.round(40 + (speed - 8) * 3.8 - (idle - 10) * 0.85 + (isPolar ? 12 : 0)))),
+        why: en
+          ? (speed >= 14 && idle <= 20 ? 'High steaming speed & short port dwell maximize biocide-free hydrodynamic release!' : 'Penalized when steaming speed < 12 kn or port idle ratio > 25% (static slime/barnacle build-up).')
+          : (speed >= 14 && idle <= 20 ? '高航速 + 低港停比完美契合无杀生剂水动力脱附！' : '当航速 <12 节或港停比 >25% 时，因缺乏剪切脱附动力而排名下降。')
+      },
+      {
+        id: 'polar_hard',
+        name: en ? 'Hard Abrasion-Resistant / Ice-Class Coating (Non-Biocidal)' : '高耐磨冷端/极地致密涂层（Persistence / 抗冰磨优先）',
+        score: isPolar ? Math.min(97, Math.round(88 + (60 - dock) * 0.1)) : Math.max(20, Math.round(52 - effStress * 7.5)),
+        why: en
+          ? (isPolar ? 'Top fit for polar/cold-end corridors: low biological settlement, mechanical & abrasion persistence dominates.' : 'Insufficient anti-settlement activity for warm/tropical shipping corridors.')
+          : (isPolar ? '极地/冷水航线首选：生物沉降压力低，抗机械磨损、抗冰擦与长效附着占主导。' : '在暖水/热带高污损走廊缺乏抗定殖能力，仅作冷端或底漆参考。')
+      }
+    ].sort((a, b) => b.score - a.score);
+
+    document.getElementById('cp-suit-list').innerHTML = families.map((f, idx) => {
+      const col = idx === 0 ? '#0a8f9c' : (f.score >= 70 ? '#2f855a' : (f.score >= 50 ? '#d69e2e' : '#9aabbb'));
+      return '<div class="suit-item"><div class="suit-top"><span>#' + (idx + 1) + ' · ' + escapeHtml(f.name) + '</span>' +
+        '<span class="suit-score">' + f.score + ' / 100</span></div>' +
+        '<div class="suit-bar"><i style="width:' + f.score + '%;background:' + col + ';"></i></div>' +
+        '<div class="suit-why">' + escapeHtml(f.why) + '</div></div>';
+    }).join('');
+  };
+
+  [cpRoute, cpSpeed, cpIdle, cpDock, cpAux].forEach(el => {
+    if (el) el.addEventListener('input', window.renderCoupler);
+    if (el) el.addEventListener('change', window.renderCoupler);
+  });
+  document.getElementById('cp-goto-route').addEventListener('click', () => {
+    selectRoute(cpRoute.value);
+    goTab('routes');
+  });
+  document.getElementById('cp-goto-rec').addEventListener('click', () => {
+    selectRoute(cpRoute.value);
+    goTab('rec');
+  });
+
+  /* --- Workbench 3: Global Formulator's Engineering Calculators --- */
+  function renderCalc1() {
+    const en = window.CUR_LANG === 'en';
+    const wt = Math.max(0.1, parseFloat(document.getElementById('c1-wt').value) || 40);
+    const rho = Math.max(0.5, parseFloat(document.getElementById('c1-rho').value) || 1.85);
+    const dft = Math.max(5, parseFloat(document.getElementById('c1-dft').value) || 150);
+    const eff = Math.max(5, Math.min(100, parseFloat(document.getElementById('c1-eff').value) || 75));
+    const flux = Math.max(0.1, parseFloat(document.getElementById('c1-flux').value) || 10);
+
+    /* Mass per cm2: DFT(um) * 1e-4 cm * rho(g/cm3) * (wt/100) * 1000 mg/g = DFT * rho * wt * 0.001 mg/cm2 */
+    const totalMgCm2 = dft * rho * wt * 0.001;
+    const effMgCm2 = totalMgCm2 * (eff / 100);
+    const lifeDays = (effMgCm2 * 1000) / flux;
+    const lifeMonths = lifeDays / 30.4375;
+
+    /* Required DFT for 36m (1096d) and 60m (1826d) */
+    const reqDft36 = (1096 * flux) / (rho * wt * (eff / 100));
+    const reqDft60 = (1826 * flux) / (rho * wt * (eff / 100));
+
+    document.getElementById('c1-out').innerHTML = `
+      <div class="calc-out-grid">
+        <div class="calc-stat"><div class="ck">${en ? 'Active Reservoir (Total / Leachable)' : '干膜有效储量 (总 / 可浸出)'}</div><div class="cv">${totalMgCm2.toFixed(2)} / ${effMgCm2.toFixed(2)} <span style="font-size:.72rem;">mg/cm²</span></div></div>
+        <div class="calc-stat"><div class="ck">${en ? 'Est. Effective Service Life' : '理论维持有效防污期'}</div><div class="cv" style="color:${lifeMonths >= 36 ? '#2f855a' : '#b7791f'};">${lifeMonths.toFixed(1)} <span style="font-size:.75rem;">${en ? 'mos' : '个月'} (${Math.round(lifeDays)} d)</span></div></div>
+        <div class="calc-stat"><div class="ck">${en ? 'Min. DFT for 36m / 60m Cycle' : '36个月 / 60个月坞期所需最低 DFT'}</div><div class="cv">${Math.ceil(reqDft36)} / ${Math.ceil(reqDft60)} <span style="font-size:.75rem;">μm</span></div></div>
+      </div>
+      <div class="muted" style="font-size:.74rem;">${en
+        ? 'Formula (ISO 10890 / CEPE Mass-Balance): M_eff = DFT × ρ_dry × (wt%/100) × (La%/100); Service Life t = M_eff / J_crit. Actual field lifetime depends on seawater temperature, pH, salinity, and vessel speed.'
+        : '计算依据（ISO 10890 / CEPE 质量平衡法）：可浸出储量 M_eff = DFT × ρ_dry × wt% × La%，理论寿命 t = M_eff / J_crit。注：低掺量微胶囊体系若无连续补给，难以维持高通量长坞期。'}</div>`;
+  }
+
+  document.querySelectorAll('.calc1-pre').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('c1-wt').value = btn.dataset.wt;
+      document.getElementById('c1-rho').value = btn.dataset.rho;
+      document.getElementById('c1-dft').value = btn.dataset.dft;
+      document.getElementById('c1-eff').value = btn.dataset.eff;
+      document.getElementById('c1-flux').value = btn.dataset.flux;
+      renderCalc1();
+    });
+  });
+  ['c1-wt', 'c1-rho', 'c1-dft', 'c1-eff', 'c1-flux'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', renderCalc1);
+  });
+
+  function renderCalc2() {
+    const en = window.CUR_LANG === 'en';
+    const bw = Math.max(0.1, parseFloat(document.getElementById('c2-bw').value) || 38);
+    const br = Math.max(0.5, parseFloat(document.getElementById('c2-br').value) || 1.15);
+    const pw = Math.max(0, parseFloat(document.getElementById('c2-pw').value) || 12);
+    const pr = Math.max(0.3, parseFloat(document.getElementById('c2-pr').value) || 2.2);
+    const oa = Math.max(2, parseFloat(document.getElementById('c2-oa').value) || 28);
+    const sw = Math.max(0, parseFloat(document.getElementById('c2-sw').value) || 50);
+    const sr = Math.max(0.5, parseFloat(document.getElementById('c2-sr').value) || 0.88);
+    const dft = Math.max(5, parseFloat(document.getElementById('c2-dft').value) || 40);
+
+    const vb = bw / br;
+    const vp = pw / pr;
+    const vs = sw / sr;
+    const vDry = vb + vp;
+    const vWet = vDry + vs;
+
+    const pvc = vDry > 0 ? (vp / vDry) * 100 : 0;
+    /* CPVC = 1 / (1 + (OA * rho_pig) / (93.5 * 0.935)) */
+    const cpvc = (1 / (1 + (oa * pr) / 87.4)) * 100;
+    const lambda = cpvc > 0 ? pvc / cpvc : 0;
+    const volSolids = vWet > 0 ? (vDry / vWet) * 100 : 100;
+    const vocGL = vWet > 0 ? (sw / vWet) * 1000 : 0;
+    const theoSpread = (volSolids * 10) / dft;
+
+    let regimeZh = '致密屏障成膜区（Λ < 0.60）：树脂充分包覆颗粒，高阻抗/高附着，但内部防污剂渗流通道受限。';
+    let regimeEn = 'Dense Barrier Regime (Λ < 0.60): Resin fully encapsulates particles; high EIS impedance & adhesion, but limited percolation for deep biocide leaching.';
+    let regCol = '#0a8f9c';
+    if (lambda >= 0.60 && lambda <= 0.92) {
+      regimeZh = '受控渗流/自抛光活性窗口（0.60 ≤ Λ ≤ 0.92）：颗粒网络形成可控传质通道，适合 SPC/CDP 连续浸出。';
+      regimeEn = 'Controlled Percolation / SPC Polishing Window (0.60 ≤ Λ ≤ 0.92): Connected pigment network supports steady leaching flux.';
+      regCol = '#2f855a';
+    } else if (lambda > 0.92) {
+      regimeZh = '⚠️ 接近或超过临界 CPVC（Λ > 0.92）：基料不足以填满颗粒空隙，涂层易出现孔隙、初期暴释、起泡及拉拔附着力骤降！';
+      regimeEn = '⚠️ Near / Above Critical CPVC (Λ > 0.92): Insufficient binder to wet pigment voids; high porosity, burst release, blistering & severe adhesion loss!';
+      regCol = '#c53b3b';
+    }
+
+    document.getElementById('c2-out').innerHTML = `
+      <div class="calc-out-grid">
+        <div class="calc-stat"><div class="ck">PVC / Est. CPVC</div><div class="cv">${pvc.toFixed(1)}% / ${cpvc.toFixed(1)}%</div></div>
+        <div class="calc-stat"><div class="ck">${en ? 'Reduced PVC (Λ = PVC/CPVC)' : '约化体积浓度 Λ = PVC/CPVC'}</div><div class="cv" style="color:${regCol};">${lambda.toFixed(2)}</div></div>
+        <div class="calc-stat"><div class="ck">${en ? 'Volume Solids / VOC' : '体积固含 VS% / 估算 VOC'}</div><div class="cv">${volSolids.toFixed(1)}% <span style="font-size:.72rem;">(${Math.round(vocGL)} g/L)</span></div></div>
+        <div class="calc-stat"><div class="ck">${en ? 'Theoretical Coverage' : '理论涂布率 (@' + dft + 'μm)'}</div><div class="cv">${theoSpread.toFixed(2)} <span style="font-size:.74rem;">m²/L</span></div></div>
+      </div>
+      <div style="font-size:.77rem;font-weight:650;color:${regCol};">${escapeHtml(en ? regimeEn : regimeZh)}</div>`;
+  }
+
+  document.querySelectorAll('.calc2-pre').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('c2-bw').value = btn.dataset.bw;
+      document.getElementById('c2-br').value = btn.dataset.br;
+      document.getElementById('c2-pw').value = btn.dataset.pw;
+      document.getElementById('c2-pr').value = btn.dataset.pr;
+      document.getElementById('c2-oa').value = btn.dataset.oa;
+      document.getElementById('c2-sw').value = btn.dataset.sw;
+      document.getElementById('c2-sr').value = btn.dataset.sr;
+      document.getElementById('c2-dft').value = btn.dataset.dft;
+      renderCalc2();
+    });
+  });
+  ['c2-bw', 'c2-br', 'c2-pw', 'c2-pr', 'c2-oa', 'c2-sw', 'c2-sr', 'c2-dft'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', renderCalc2);
+  });
+
+  /* --- CSV Exporter for Track A, Literature Bounds, and Scholar Ranking --- */
+  function downloadCsv(filename, headers, rows) {
+    const esc = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+    const csv = '\uFEFF' + [headers.map(esc).join(',')].concat(rows.map(r => r.map(esc).join(','))).join('\r\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click();
+    setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 200);
+  }
+  const labCsvBtn = document.getElementById('lab-export-csv');
+  if (labCsvBtn) labCsvBtn.addEventListener('click', () => {
+    const cols = ['formulation_id','basecoat','CA_MSiO2_wt_pct','BYK_rel_to_particle_pct','DFT_um','substrate','pull_off_MPa','pull_off_tag','eis_note','eis_tag','hplc_CA_ug_mL_or_flux','hplc_tag','microcosm_relative_fouling','microcosm_tag','disadvantage_notes','note'];
+    downloadCsv('marinecoatsim-trackA-lab.csv', cols, (D.lab||[]).map(r => cols.map(c => r[c])));
+  });
+  const litCsvBtn = document.getElementById('lit-export-csv');
+  if (litCsvBtn) litCsvBtn.addEventListener('click', () => {
+    const cols = ['bound_id','category_key','subcategory','metric','value_range','unit','organism_or_context','year','title','DOI_or_source','tag','note'];
+    downloadCsv('marinecoatsim-literature-bounds.csv', cols, (D.literature||[]).map(r => cols.map(c => r[c])));
+  });
+  const schCsvBtn = document.getElementById('sch-export-csv');
+  if (schCsvBtn) schCsvBtn.addEventListener('click', () => {
+    const cols = ['rank','name','institution','country','field_h_index','field_citations','field_works','overall_h_index','overall_citations','representative_work','representative_doi','openalex_id'];
+    downloadCsv('marinecoatsim-antifouling-scholars.csv', cols, (D.researchers||[]).map(r => cols.map(c => r[c])));
+  });
+
+  /* --- Cite & Contribute Modals --- */
+  const citeModal = document.getElementById('cite-modal');
+  const contribModal = document.getElementById('contrib-modal');
+  const openCite = () => { if (citeModal) citeModal.hidden = false; };
+  const openContrib = () => { if (contribModal) contribModal.hidden = false; };
+  document.getElementById('open-cite-btn').addEventListener('click', openCite);
+  document.getElementById('footer-cite-btn').addEventListener('click', openCite);
+  document.getElementById('cite-close').addEventListener('click', () => { citeModal.hidden = true; });
+  citeModal.addEventListener('click', e => { if (e.target === citeModal) citeModal.hidden = true; });
+
+  document.getElementById('open-contrib-btn').addEventListener('click', openContrib);
+  const litSubBtn = document.getElementById('lit-submit-btn');
+  if (litSubBtn) litSubBtn.addEventListener('click', openContrib);
+  const schUpdBtn = document.getElementById('sch-update-btn');
+  if (schUpdBtn) schUpdBtn.addEventListener('click', openContrib);
+  document.getElementById('contrib-close').addEventListener('click', () => { contribModal.hidden = true; });
+  contribModal.addEventListener('click', e => { if (e.target === contribModal) contribModal.hidden = true; });
+
+  function bindCopy(btnId, srcId) {
+    const b = document.getElementById(btnId);
+    if (!b) return;
+    b.addEventListener('click', () => {
+      const txt = document.getElementById(srcId).textContent;
+      if (navigator.clipboard) navigator.clipboard.writeText(txt);
+      const orig = b.textContent;
+      b.textContent = '✓ Copied!';
+      setTimeout(() => { b.textContent = orig; }, 1600);
+    });
+  }
+  bindCopy('copy-apa-btn', 'cite-apa-text');
+  bindCopy('copy-bib-btn', 'cite-bib-text');
+
+  /* --- Full Bilingual (EN / 中文) Switching Engine --- */
+  const I18N_DICT = {
+    zh: {
+      btn_cite: '引用 / Cite',
+      btn_contrib: '贡献数据 / Contribute',
+      tab_overview: '总览',
+      tab_sim: '⚡ 交互模拟 · 计算器',
+      tab_lab: '轨 A · 实验室表',
+      tab_routes: '轨 B · 航线剖面',
+      tab_rec: '轨 C · 短名单',
+      tab_lit: '文献界',
+      tab_tech: '商用·技术',
+      tab_ind: '行业动态',
+      tab_scholars: '防污学者排行',
+      ov_sim_title: '⚡ 交互式配方沙盒与防污工程计算器（全球同行通用工具箱）',
+      ov_sim_btn: '打开完整交互工作台 →',
+      ov_sim_desc: '不仅是静态文献与数据看板——拖动滑块即可实时推演微胶囊/杀生剂掺量、分散剂与干膜厚度包络，耦合航速与港停时间重排涂层短名单，或使用 ISO 10890 质量平衡法与 PVC/CPVC 配方计算器。',
+      cta1_title: '🧪 配方剂量—代理性能包络沙盒',
+      cta1_desc: '调节树脂基体、CA@MSiO₂ / 活性填料掺量 (0–12 wt%)、BYK 分散剂与 DFT，实时生成五维能力包络雷达图、团聚粗糙风险与轨 A 邻近锚点。',
+      cta1_go: '进入配方沙盒推演 →',
+      cta2_title: '🚢 航线—船速—港停动态耦合器',
+      cta2_desc: '任选 12 条全球航运走廊，动态调节航速 (4–24 kn)、港口静置率 (5–60%) 与坞期，观察硅酮 FRC、SPC 与混合主动体系的适用度消长。',
+      cta2_go: '耦合航线与船速工况 →',
+      cta3_title: '📐 ISO 10890 释放寿命 & PVC/CPVC 计算器',
+      cta3_desc: '海洋涂料工程师高频计算：基于临界浸出率的杀生剂有效寿命/最低干膜厚度推算，以及颜料体积浓度 (PVC/CPVC)、体积固含与理论涂布率计算。',
+      cta3_go: '打开通用工程计算器 →',
+      sim_main_title: '交互式防污涂料模拟工作台 · Interactive Workbench',
+      sim_main_sub: '所有推演基于胶体分散规律、Fick/质量平衡扩散机制与 GCB 污损增长–脱附框架。输出均带「框架推断 / 模型包络」诚实标签，绝不伪装成实验室实测报告。',
+      sim_tab_all: '全部模块',
+      sim_tab_sb: '1. 配方剂量沙盒',
+      sim_tab_cp: '2. 航线-船速-港停耦合',
+      sim_tab_calc: '3. 释放寿命 & PVC 计算器',
+      sb_title: '🧪 模块 1 · 配方剂量—代理性能包络沙盒 (Formulation Dose–Response Sandbox)',
+      tag_model_env: '模型包络推演 · 非实测真值',
+      pre_oem: '⚓ JF-602 原漆边界锚点 (0% CA)',
+      pre_opt: '✨ 2 wt% CA@MSiO₂ + 3% BYK (目标分散窗)',
+      pre_agg: '⚠️ 8 wt% 高掺量无助剂 (团聚/锁死风险演示)',
+      pre_spc: '🌊 自配丙烯酸松香体系 (SPC/CDP 缓释窗)',
+      pre_frc: '🐬 PDMS 低表面能污损释放体系 (FRC)',
+      sb_lbl_resin: '基料树脂网络 (Resin Matrix)',
+      sb_res_epoxy: '双组分致密环氧 (JF-602 Anchor)',
+      sb_res_acrylic: '自配丙烯酸–松香 (可水解/微溶胀基体)',
+      sb_res_silicone: '聚二甲基硅氧烷弹性体 (PDMS Foul-Release)',
+      sb_res_hybrid: '硅氧烷改性环氧杂化 (Siloxane-Epoxy Hybrid)',
+      sb_lbl_ca: '功能填料 / CA@MSiO₂ 掺量 (wt% 总固)',
+      sb_hint_ca: '0% = 空白原漆；1–3% 常用筛选窗；>5% 需警惕颗粒团聚与表面粗糙度抬升',
+      sb_lbl_byk: '润湿分散剂 BYK 用量 (wt% 相对粉体)',
+      sb_hint_byk: '适度助剂解团聚；过量 (>6%) 可能增塑交联网络或导致界面滑移降附着',
+      sb_lbl_dft: '目标干膜厚度 DFT (μm)',
+      sb_hint_dft: '粒径 ~5 μm 时，过薄 (<25 μm) 易刺破膜面粗糙；过厚致密环氧内部药剂难以扩散',
+      sb_lbl_sub: '基材与表面处理 (Substrate)',
+      sb_sub_al: '6061-Al 铝合金（喷砂/砂纸粗化）',
+      sb_sub_steel: '船用碳钢 Sa 2.5 + 环氧防锈底漆配套',
+      sb_sub_ti: 'Ti-6Al-4V / 特种海工冷端构件',
+      cp_title: '🚢 模块 2 · 航线—船速—港停动态污损耦合模拟器 (Dynamic Route–Speed–Idle Coupler)',
+      tag_rel_coupler: 'GCB 增长–脱附动态耦合 · 相对等级',
+      cp_lbl_route: '选择全球航线剖面 (Route Corridor)',
+      cp_lbl_speed: '平均营运航速 (Steaming Speed)',
+      cp_hint_speed: '硅酮 FRC 通常需 >10–12 kn 水动力剪切实现藤壶自清洁；低速船更依赖主动/缓释抗定殖',
+      cp_lbl_idle: '港口停泊 / 锚地静置比例 (Port Idle Ratio)',
+      cp_hint_idle: '港停期间无水流剪切且近岸幼体密度高，高港停率会显著放大热带走廊定殖压力',
+      cp_lbl_dock: '目标坞期 / 维护周期 (Docking Cycle)',
+      cp_lbl_aux: '辅助主动防污配置 (Auxiliary Active Tech)',
+      cp_aux_none: '无辅助（仅依靠船壳涂层）',
+      cp_aux_uvc: '+ UV-C 局部照射（海底门 / Niche 区抑菌）',
+      cp_aux_us: '+ 壳板超声导波换能器（抑制港停早期藤壶）',
+      cp_btn_route: '在轨 B 海图中查看该航线 →',
+      cp_btn_rec: '查看轨 C 证据短名单 →',
+      cp_rank_title: '工况耦合后：各技术路线相对拟合度动态排序（非实测打分）',
+      calc_main_title: '📐 模块 3 · 国际防污涂料工程师通用计算器 (ISO 10890 Leaching & PVC/CPVC Calculators)',
+      tag_std_calc: '标准质量平衡 / 配方体积模型',
+      calc1_title: '⏱️ A. 杀生剂浸出率与有效防污期计算器 (ISO 10890 / CEPE Mass-Balance)',
+      calc1_desc: '根据涂层干膜内活性防污剂总储量与目标临界释放通量，推算理论有效防污寿命与所需的最低干膜厚度（DFT）。',
+      c1_pre_cu: 'Cu₂O 控释抗藤壶 (Flux=10 μg/cm²/d)',
+      c1_pre_alg: 'Cu₂O 热带抗藻席 (Flux=20 μg/cm²/d)',
+      c1_pre_ca: 'CA@MSiO₂ 天然防污微胶囊 (Flux=1.5)',
+      c1_in_wt: '干膜活性杀生剂质量分数 (wt%)',
+      c1_in_rho: '干膜密度 ρ_dry (g/cm³)',
+      c1_in_dft: '干膜厚度 DFT (μm)',
+      c1_in_eff: '可浸出有效利用率 La (%)',
+      c1_in_flux: '目标维持浸出通量 J_crit (μg·cm⁻²·d⁻¹)',
+      calc2_title: '🧪 B. 颜料体积浓度 (PVC / CPVC)、体积固含与理论涂布率计算器',
+      calc2_desc: '输入基料树脂、颜填料/微胶囊与溶剂配比，实时计算 PVC、CPVC、约化颜料体积浓度 Λ = PVC/CPVC 及成膜致密/抛光状态诊断。',
+      c2_pre_barrier: '致密防腐/低掺量环氧 (Λ≈0.35)',
+      c2_pre_spc: '自抛光 SPC 渗流窗 (Λ≈0.75)',
+      c2_pre_over: '超临界高填料区 (Λ>1.0 脆裂风险)',
+      c2_in_bw: '基料树脂干重 W_binder (g)',
+      c2_in_br: '树脂密度 ρ_binder (g/cm³)',
+      c2_in_pw: '颜填料/微胶囊总重 W_pig (g)',
+      c2_in_pr: '颜填料平均密度 ρ_pig (g/cm³)',
+      c2_in_oa: '混合颜填料吸油量 OA (g/100g)',
+      c2_in_sw: '挥发溶剂总重 W_solv (g)',
+      c2_in_sr: '溶剂密度 ρ_solv (g/cm³)',
+      c2_in_dft: '目标干膜厚度 DFT (μm)',
+      lbl_search: '搜索',
+      btn_lab_sandbox: '⚡ 在交互沙盒中推演配方',
+      btn_export_csv: '⬇ 导出 CSV',
+      lbl_route_type: '类型',
+      btn_route_coupler: '🚢 动态调节航速与港停时间耦合推演 →',
+      lbl_lit_sub: '次级工艺',
+      btn_submit_lit: '➕ 补充文献 / Submit Paper',
+      th_lit_who: '研究者 · 机构',
+      th_lit_cat: '分类',
+      th_lit_bound: '定量上下界 · 指标与对象',
+      th_lit_sum: '论文概要 / 标题',
+      th_lit_yr: '年份',
+      th_lit_star: '重要度评估（主观）ⓘ',
+      th_lit_tag: '标签',
+      th_lit_src: '来源 / DOI / 备注',
+      lbl_sch_inlit: '仅看本面板文献界中出现的作者',
+      btn_sch_update: '🎓 学者信息勘误 / Update Profile',
+      cite_title: '📖 引用本基准与模拟器 · Cite MarineCoatSim',
+      cite_desc: '如果您在防污涂层配方设计、航线污损风险评估或文献综述中使用了本平台的基准表或模拟工具，欢迎按以下格式引用：',
+      contrib_title: '➕ 全球同行共建 · 提交文献上下界 / 配方数据 / 学者勘误',
+      contrib_desc: '我们欢迎全球海洋防污领域的课题组、涂料研发工程师与船级社/航运专家补充带 DOI 的公开实验上下界、新增航线污损剖面或更新学者代表作信息。',
+      contrib_tpl_title: '快速投稿模板（可复制后粘贴至 GitHub Discussions）：'
+    },
+    en: {
+      btn_cite: 'Cite / BibTeX',
+      btn_contrib: 'Contribute Data',
+      tab_overview: 'Overview',
+      tab_sim: '⚡ Interactive Sim & Tools',
+      tab_lab: 'Track A · Lab Table',
+      tab_routes: 'Track B · Route Profiles',
+      tab_rec: 'Track C · Shortlists',
+      tab_lit: 'Literature Bounds',
+      tab_tech: 'Commercial & Tech',
+      tab_ind: 'Industry Feed',
+      tab_scholars: 'Scholar Ranking',
+      ov_sim_title: '⚡ Interactive Formulation Sandbox & Engineering Calculators',
+      ov_sim_btn: 'Open Full Interactive Workbench →',
+      ov_sim_desc: 'Go beyond static tables — drag sliders to simulate microcapsule/biocide loading, dispersant balance & DFT envelopes, couple vessel speed & port idle time across global shipping corridors, or run ISO 10890 mass-balance & PVC/CPVC calculations.',
+      cta1_title: '🧪 Formulation Dose–Response Sandbox',
+      cta1_desc: 'Adjust resin matrix, CA@MSiO₂ / filler loading (0–12 wt%), BYK dispersant & DFT to generate a 5-axis capability radar chart, agglomeration risk diagnosis, and closest Track A lab slot.',
+      cta1_go: 'Launch Formulation Sandbox →',
+      cta2_title: '🚢 Route–Speed–Idle Fouling Coupler',
+      cta2_desc: 'Pick any of the 12 global shipping corridors and vary steaming speed (4–24 kn), port idle ratio (5–60%) & docking cycle to dynamically re-rank SPC, Silicone FRC & hybrid systems.',
+      cta2_go: 'Launch Route–Speed Coupler →',
+      cta3_title: '📐 ISO 10890 Leaching Life & PVC/CPVC Calculators',
+      cta3_desc: 'Daily utilities for global marine coating formulators: biocide reservoir & service lifetime mass-balance calculator, plus PVC, CPVC, Λ = PVC/CPVC, volume solids & spreading rate.',
+      cta3_go: 'Open Engineering Calculators →',
+      sim_main_title: 'Interactive Marine Antifouling Workbench · MarineCoatSim',
+      sim_main_sub: 'Mechanistic envelopes built on colloidal dispersion rules, Fickian/mass-balance leaching, and the GCB fouling growth–adhesion framework. All outputs carry transparent "Framework Inference" tags—never presented as measured lab reports.',
+      sim_tab_all: 'All Modules',
+      sim_tab_sb: '1. Formulation Sandbox',
+      sim_tab_cp: '2. Route–Speed–Idle Coupler',
+      sim_tab_calc: '3. Leaching & PVC Calculators',
+      sb_title: '🧪 Module 1 · Interactive Formulation Dose–Response Sandbox',
+      tag_model_env: 'Model Envelope · Not Measured',
+      pre_oem: '⚓ JF-602 OEM Baseline (0% CA)',
+      pre_opt: '✨ 2 wt% CA@MSiO₂ + 3% BYK (Target Window)',
+      pre_agg: '⚠️ 8 wt% High Loading, 0% BYK (Agglomeration Risk)',
+      pre_spc: '🌊 Custom Acrylic-Rosin SPC/CDP Window',
+      pre_frc: '🐬 PDMS Foul-Release Silicone (FRC)',
+      sb_lbl_resin: 'Resin Matrix Network',
+      sb_res_epoxy: '2K Dense Epoxy (JF-602 Anchor)',
+      sb_res_acrylic: 'Hydrolyzing Acrylic–Rosin (SPC / CDP Matrix)',
+      sb_res_silicone: 'PDMS Silicone Elastomer (Foul-Release)',
+      sb_res_hybrid: 'Siloxane-Modified Epoxy Hybrid',
+      sb_lbl_ca: 'Active Filler / CA@MSiO₂ Loading (wt% total solids)',
+      sb_hint_ca: '0% = blank control; 1–3% typical screening window; >5% risks agglomeration & roughness penalty',
+      sb_lbl_byk: 'Wetting & Dispersant BYK Ratio (wt% rel. to particle)',
+      sb_hint_byk: 'Optimal BYK de-agglomerates particles; excess (>6%) may plasticize network or reduce adhesion',
+      sb_lbl_dft: 'Target Dry Film Thickness DFT (μm)',
+      sb_hint_dft: 'With ~5 μm particles, DFT < 25 μm risks surface protrusion; thick dense epoxy throttles internal diffusion',
+      sb_lbl_sub: 'Substrate & Preparation',
+      sb_sub_al: '6061-Al Alloy (Abraded / Blasted)',
+      sb_sub_steel: 'Marine Carbon Steel (Sa 2.5 + Epoxy AC Primer)',
+      sb_sub_ti: 'Ti-6Al-4V / Niche Marine Structure',
+      cp_title: '🚢 Module 2 · Dynamic Route–Speed–Idle Biofouling & Coating Coupler',
+      tag_rel_coupler: 'GCB Growth–Adhesion Dynamic Coupling · Relative Tier',
+      cp_lbl_route: 'Global Shipping Corridor / Profile',
+      cp_lbl_speed: 'Average Steaming Speed (knots)',
+      cp_hint_speed: 'Silicone FRC typically requires >10–12 kn hydrodynamic shear for barnacle release; slow vessels need active/polishing defense',
+      cp_lbl_idle: 'Port Idle / Anchorage Dwell Ratio (%)',
+      cp_hint_idle: 'Zero shear and high coastal larval density during port dwell strongly amplify tropical settlement pressure',
+      cp_lbl_dock: 'Target Drydocking Interval (months)',
+      cp_lbl_aux: 'Auxiliary Active Antifouling System',
+      cp_aux_none: 'None (Hull Coating Only)',
+      cp_aux_uvc: '+ Local UV-C Irradiation (Sea Chest / Niche Area)',
+      cp_aux_us: '+ Hull Guided-Wave Ultrasonic Transducers',
+      cp_btn_route: 'Inspect Route on Track B World Map →',
+      cp_btn_rec: 'View Track C Evidence Shortlist →',
+      cp_rank_title: 'Coupled Suitability Ranking by Coating Technology Archetype (Relative Fit)',
+      calc_main_title: '📐 Module 3 · Global Formulator\'s Engineering Calculators (ISO 10890 & PVC/CPVC)',
+      tag_std_calc: 'Mass-Balance / Volumetric Formulation Models',
+      calc1_title: '⏱️ A. Biocide Leaching Rate & Service Lifetime Calculator (ISO 10890 / CEPE Mass-Balance)',
+      calc1_desc: 'Estimate theoretical effective service life and minimum required dry film thickness (DFT) from active biocide loading and critical leaching flux.',
+      c1_pre_cu: 'Cu₂O Barnacle Control (Flux=10 μg/cm²/d)',
+      c1_pre_alg: 'Cu₂O Tropical Algae Control (Flux=20 μg/cm²/d)',
+      c1_pre_ca: 'CA@MSiO₂ Natural Microcapsule (Flux=1.5)',
+      c1_in_wt: 'Dry-Film Active Biocide Mass Fraction (wt%)',
+      c1_in_rho: 'Dry-Film Density ρ_dry (g/cm³)',
+      c1_in_dft: 'Dry Film Thickness DFT (μm)',
+      c1_in_eff: 'Leachable Utilization Fraction La (%)',
+      c1_in_flux: 'Target Critical Leaching Flux J_crit (μg·cm⁻²·d⁻¹)',
+      calc2_title: '🧪 B. Pigment Volume Concentration (PVC / CPVC), Volume Solids & Coverage Calculator',
+      calc2_desc: 'Input binder, pigment/microcapsule, and solvent weights/densities to compute PVC, CPVC, reduced PVC (Λ = PVC/CPVC), and film percolation regime.',
+      c2_pre_barrier: 'Dense Barrier / Low-Filler Epoxy (Λ≈0.35)',
+      c2_pre_spc: 'Self-Polishing SPC Percolation Window (Λ≈0.75)',
+      c2_pre_over: 'Above-CPVC High-Filler Regime (Λ>1.0 Brittle)',
+      c2_in_bw: 'Binder Dry Mass W_binder (g)',
+      c2_in_br: 'Binder Density ρ_binder (g/cm³)',
+      c2_in_pw: 'Pigment / Filler Total Mass W_pig (g)',
+      c2_in_pr: 'Pigment Average Density ρ_pig (g/cm³)',
+      c2_in_oa: 'Pigment Oil Absorption OA (g/100g)',
+      c2_in_sw: 'Volatile Solvent Mass W_solv (g)',
+      c2_in_sr: 'Solvent Density ρ_solv (g/cm³)',
+      c2_in_dft: 'Target Dry Film Thickness DFT (μm)',
+      lbl_search: 'Search',
+      btn_lab_sandbox: '⚡ Simulate in Formulation Sandbox',
+      btn_export_csv: '⬇ Export CSV',
+      lbl_route_type: 'Corridor Type',
+      btn_route_coupler: '🚢 Launch Dynamic Speed & Idle Coupler →',
+      lbl_lit_sub: 'Sub-process',
+      btn_submit_lit: '➕ Submit Paper / Bound',
+      th_lit_who: 'Author · Affiliation',
+      th_lit_cat: 'Category',
+      th_lit_bound: 'Quantitative Bound · Metric & Context',
+      th_lit_sum: 'Summary / Paper Title',
+      th_lit_yr: 'Year',
+      th_lit_star: 'Impact Rating (Subjective) ⓘ',
+      th_lit_tag: 'Evidence Tag',
+      th_lit_src: 'Source / DOI / Notes',
+      lbl_sch_inlit: 'Only authors featured in our Literature Bounds table',
+      btn_sch_update: '🎓 Update Scholar Profile',
+      cite_title: '📖 Cite MarineCoatSim Benchmark & Simulator',
+      cite_desc: 'If you use this evidence benchmark, route stress framework, or formulation simulator in your research, please cite:',
+      contrib_title: '➕ Contribute to MarineCoatSim · Submit Literature Bounds / Lab Data / Scholar Updates',
+      contrib_desc: 'We welcome global marine biofouling researchers, coating formulators, and maritime engineers to submit DOI-backed literature bounds, route profiles, or scholar profile updates.',
+      contrib_tpl_title: 'Quick Submission Template (Copy & Paste into GitHub Discussions):'
+    }
+  };
+
+  function applyLanguage(lang) {
+    window.CUR_LANG = (lang === 'en') ? 'en' : 'zh';
+    const en = window.CUR_LANG === 'en';
+    document.documentElement.lang = en ? 'en' : 'zh-CN';
+    try { localStorage.setItem('mcs_lang', window.CUR_LANG); } catch (_) {}
+
+    const dict = I18N_DICT[window.CUR_LANG];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.getAttribute('data-i18n');
+      if (dict[k]) el.textContent = dict[k];
+    });
+
+    /* Header & Honesty Banner */
+    document.getElementById('app-title-text').textContent = en
+      ? 'MarineCoatSim · Antifouling Coating Simulator & Benchmark'
+      : '防污涂料配方模拟器 · MarineCoatSim';
+    document.getElementById('app-sub-text').textContent = en
+      ? 'Interactive Formulation Sandbox · Global Route Stress Coupler · ISO 10890 & PVC Calculators · Literature Bounds · Scholar Impact'
+      : '交互式配方沙盒 · 全球航线污损压力耦合 · ISO 10890 释放寿命 & PVC 计算器 · 文献上下界 · 学者影响力基准';
+    document.getElementById('lang-toggle-btn').textContent = en ? '🌐 中文 / EN' : '🌐 EN / 中文';
+
+    const honestyStrong = document.querySelector('.honesty strong');
+    if (honestyStrong) honestyStrong.textContent = en ? 'Honesty Boundary: Simulation ≠ Measurement.' : '诚实边界：模拟 ≠ 实测。';
+    (document.getElementById('honesty-text')||{}).textContent = en
+      ? 'All outputs are evidence-tagged intervals, relative tiers, and mechanistic envelopes—not certified laboratory test reports or field voyage fouling rates. Never treat OEM nominal claims or model envelopes as measured truth.'
+      : D.meta.honesty;
+    (document.getElementById('safety-text')||{}).textContent = en
+      ? 'Safety Reminder: Ensure solvent ventilation; check Part B SDS (isocyanate/NCO hazard); mix fresh before application; wear UV-C eye & skin protection.'
+      : ('安全常驻：' + D.meta.safety);
+
+    /* Overview Hero & Stats */
+    const heroH2 = document.querySelector('#panel-overview .hero h2');
+    const heroLead = document.querySelector('#panel-overview .hero .lead');
+    const heroNotice = document.querySelector('#panel-overview .hero .notice');
+    if (heroH2) heroH2.textContent = en ? 'MarineCoatSim · Open Marine Antifouling Evidence & Simulation Bench' : '防污涂料配方模拟器';
+    if (heroLead) heroLead.textContent = en
+      ? 'Three-track evidence & simulation workbench for marine antifouling research: Track A Lab Dose–Proxy Table, Track B Global Route Biofouling Stress Profiles, Track C Evidence Shortlists—integrated with interactive formulation/route simulators, OpenAlex literature bounds, commercial catalogs, and scholar impact rankings.'
+      : '面向海洋防污涂层研究的三轨证据面板：轨 A 实验室剂量—代理性能、轨 B 全球航线相对污损压力、轨 C 证据短名单，并汇集交互模拟沙盒、文献界、商用技术与行业动态。';
+    if (heroNotice) heroNotice.textContent = en
+      ? '⚠ Simulation ≠ Measurement · Every value carries an explicit evidence tag (Measured / OEM Nominal / Lit. Bound / Framework Inference)'
+      : '⚠ 模拟 ≠ 实测 · 所有数值均带证据标签，非实验室报告值或航次污损率';
+
+    document.getElementById('stats').innerHTML = [
+      [en ? 'Lab Benchmark Rows' : '实验室行', mv('lab', D.lab.length), SI.lab],
+      [en ? 'Global Route Profiles' : '航线剖面', mv('routes', D.routes.length), SI.route],
+      [en ? 'Shortlist Entries' : '短名单行', mv('recommendations', D.recommendations.length), SI.rec],
+      [en ? 'Literature Bounds' : '文献界', mv('literature', litN), SI.lit],
+      [en ? 'Global Catalog' : '目录候选', mv('catalog', catN), SI.cat],
+      [en ? 'Commercial Lines' : '商用产品线', mv('products', brandN), SI.prod],
+      [en ? ('Industry Feed (' + ((D.meta && D.meta.industry_weeks) || 0) + ' wks)') : ('行业动态（' + ((D.meta && D.meta.industry_weeks) || 0) + ' 周）'), (D.meta && D.meta.industry_entries) || 0, SI.ind],
+      [en ? 'Pending Lab Slots' : '待测槽（约）', pending, SI.pend],
+    ].map(([l,n,svg]) => '<div class="stat">' + svg + '<div><div class="n">' + n + '</div><div class="l">' + escapeHtml(l) + '</div></div></div>').join('');
+
+    /* Re-populate dropdowns & chips with bilingual labels */
+    const recKeep = recSel.value;
+    recSel.innerHTML = '';
+    D.routes.forEach(r => {
+      const o = document.createElement('option');
+      o.value = r.profile_id;
+      o.textContent = rName(r) + ' (' + r.profile_id + ')';
+      recSel.appendChild(o);
+    });
+    recSel.value = recKeep || 'ROUTE-SHA-SIN-V0';
+
+    populateCpRoutes();
+
+    /* Literature category chips & select */
+    const litCounts = litCatCounts();
+    const litSel = document.getElementById('lit-cat-filter');
+    const litChips = document.getElementById('lit-cat-chips');
+    if (litSel) {
+      const keep = litSel.value;
+      litSel.innerHTML = '<option value="">' + (en ? 'All Categories' : '全部分类') + '</option>';
+      LIT_CAT_ORDER.forEach(cat => {
+        const o = document.createElement('option');
+        o.value = cat.key;
+        const lbl = (en && (cat.en || window.LIT_CAT_EN_MAP[cat.key])) ? (cat.en || window.LIT_CAT_EN_MAP[cat.key]) : cat.zh;
+        o.textContent = lbl + ' (' + (litCounts[cat.key]||0) + ')';
+        litSel.appendChild(o);
+      });
+      litSel.value = keep;
+    }
+    if (litChips) {
+      litChips.innerHTML = '<button type="button" class="chip' + (litCatActive === '' ? ' active' : '') + '" data-key="">' +
+        (en ? 'All' : '全部') + '<span class="cnt">' + (D.literature||[]).length + '</span></button>' +
+        LIT_CAT_ORDER.map(cat => {
+          const lbl = (en && (cat.en || window.LIT_CAT_EN_MAP[cat.key])) ? (cat.en || window.LIT_CAT_EN_MAP[cat.key]) : cat.zh;
+          return '<button type="button" class="chip' + (litCatActive === cat.key ? ' active' : '') + '" data-key="' + escapeHtml(cat.key) + '">' +
+            escapeHtml(lbl) + '<span class="cnt">' + (litCounts[cat.key]||0) + '</span></button>';
+        }).join('');
+    }
+
+    /* Commercial category chips & select */
+    const commChips = document.getElementById('comm-cat-chips');
+    const commSel = document.getElementById('comm-cat-filter');
+    if (commChips && commSel) {
+      const cats = CT.categories || [];
+      commChips.innerHTML = '<button type="button" class="chip' + (commCatActive === '' ? ' active' : '') + '" data-key="">' +
+        (en ? 'All' : '全部') + '<span class="cnt">' + (CT.total_catalog || (D.catalog||[]).length) + '</span></button>' +
+        cats.map(c => {
+          const n = (CT.counts && CT.counts[c.key]) || 0;
+          const lbl = (en && (c.en || window.COMM_CAT_EN_MAP[c.key])) ? (c.en || window.COMM_CAT_EN_MAP[c.key]) : c.zh;
+          return '<button type="button" class="chip' + (commCatActive === c.key ? ' active' : '') + '" data-key="' + escapeHtml(c.key) + '">' +
+            escapeHtml(lbl) + '<span class="cnt">' + n + '</span></button>';
+        }).join('');
+      commChips.querySelectorAll('.chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          commCatActive = btn.dataset.key || '';
+          commChips.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', (c.dataset.key||'') === commCatActive));
+          commSel.value = commCatActive;
+          renderCatalog();
+          renderBrands();
+        });
+      });
+    }
+
+    /* Map Legend & Note */
+    const legItems = en
+      ? [['Low 1–2', '#3f9d6a'], ['Med 2–3', '#d6c341'], ['Med–High 3–4', '#e8a33d'], ['High 4', '#e0592a'], ['Very High 4–5', '#b42318']]
+      : [['低 1–2', '#3f9d6a'], ['中 2–3', '#d6c341'], ['中–高 3–4', '#e8a33d'], ['高 4', '#e0592a'], ['高–很高 4–5', '#b42318']];
+    const legSuffix = en ? '<span>Color = Relative biofouling stress tier (Track B framework, not AIS field rate)</span>' : '<span>颜色 = 该航段相对污损压力（取自轨 B 剖面，相对等级）</span>';
+    const legHtml = legItems.map(([l, c]) => '<span><i style="background:' + c + '"></i>' + l + '</span>').join('') + legSuffix;
+    document.getElementById('ov-legend').innerHTML = legHtml;
+    document.getElementById('rm-legend').innerHTML = legHtml;
+    const gNote = en
+      ? '⚠ Schematic shipping corridors (not raw AIS tracks). Basemap: Natural Earth 110m.'
+      : ('⚠ ' + (GEO.note || '示意性航迹，非 AIS 实测轨迹。') + ' 底图：' + (GEO.source || 'Natural Earth 110m'));
+    document.getElementById('ov-geo-note').textContent = gNote;
+    document.getElementById('rm-note').textContent = gNote;
+
+
+    /* Additional panel headings, table headers & overview workflow translation */
+    const setTxt = (sel, zh, enTxt) => {
+      const el = document.querySelector(sel);
+      if (el) el.textContent = en ? enTxt : zh;
+    };
+    setTxt('#ov-industry h2', '行业动态 · 本周', 'Weekly Industry Intelligence · Latest Issue');
+    setTxt('#ov-ind-goto', '查看全部行业动态 →', 'View All Weekly Briefings →');
+    setTxt('#goto-rec', '查看该航线短名单 →', 'View Shortlist for This Route →');
+    setTxt('#panel-rec .card h2', '轨 C · 推荐短名单（按航线）', 'Track C · Route-Matched Evidence Shortlists');
+    setTxt('#panel-rec .card > p.muted', '同产品集四候选；排序 = 工况相对拟合 + 证据标签。无单一最优分。', 'Relative operational fit + explicit evidence tags for each shipping corridor. No single "magic" score.');
+    setTxt('#panel-lit .card h2', '文献界 · 公开数据上下界 (DOI 可溯源)', 'Literature Bounds · Quantitative Open Benchmarks (DOI-Linked)');
+    setTxt('#panel-tech > .card h2', '商用涂料 · 辅助技术 · 全球目录', 'Commercial Coatings · Auxiliary Tech · Global Catalog');
+    setTxt('#tech-subtabs button[data-sub="catalog"]', '全球目录短名单', 'Global Catalog Shortlist');
+    setTxt('#tech-subtabs button[data-sub="brands"]', '商用产品线', 'Commercial Product Lines');
+    setTxt('#tech-subtabs button[data-sub="aux"]', 'UV-C · 超声 · 混合', 'UV-C · Ultrasound · Hybrid');
+    setTxt('#ind-mode button[data-mode="week"]', '按周', 'By Week');
+    setTxt('#ind-mode button[data-mode="all"]', '全部周次', 'All Weeks');
+
+    const labThs = document.querySelectorAll('#lab-table thead th');
+    const labThText = en
+      ? ['ID / Route', 'CA wt%', 'BYK %', 'Pull-off (MPa)', 'EIS Impedance', 'HPLC Flux', 'Microcosm / Char.', 'Notes · Caveats · Safety']
+      : ['ID / 路线', 'CA%', 'BYK%', '拉拔 MPa', 'EIS', 'HPLC', '微宇宙 / 表征', '备注 · 劣势'];
+    labThs.forEach((th, i) => { if (labThText[i]) th.textContent = labThText[i]; });
+
+    const schThs = document.querySelectorAll('#sch-table thead th');
+    const schThText = en
+      ? ['#', 'Scholar', 'Affiliation · Country', 'Field h-index', 'Field Citations', 'Field Works', 'Overall h / Cites', 'Representative Work (Highest Field Cites)', 'Profile']
+      : ['#', '学者', '机构 · 国家', '领域内 h 指数', '领域内被引', '领域内作品', '全库 h / 被引', '代表作（领域内被引最高）', '主页'];
+    schThs.forEach((th, i) => { if (schThText[i]) th.textContent = schThText[i]; });
+
+    const r0 = (D.researchers && D.researchers[0]) || {};
+    const schMeta = document.getElementById('sch-meta');
+    if (schMeta) {
+      schMeta.innerHTML = en
+        ? ('Total <strong>' + (D.researchers||[]).length + '</strong> scholars · Ranked by <strong>Field h-index</strong> (tie-broken by field citations) across OpenAlex works matching <code>"marine antifouling" OR "marine biofouling"</code> (fetched ' + escapeHtml(r0.fetched || '—') + ').')
+        : ('共 ' + (D.researchers||[]).length + ' 位学者 · 排序指标：<strong>领域内 h 指数</strong>（并列时按领域内被引次数）。领域内 = OpenAlex 中标题/摘要含 “marine antifouling” 或 “marine biofouling” 的作品；数据来源 OpenAlex，获取日期 ' + escapeHtml(r0.fetched || '—') + '。文件：<code>data/researcher-ranking.csv</code>');
+    }
+    const schNote = document.getElementById('sch-note');
+    if (schNote) {
+      schNote.textContent = en
+        ? 'Reflects OpenAlex indexing and author disambiguation under the query above; rankings differ across Scopus, Web of Science, or Google Scholar. Click "Update Scholar Profile" to submit corrections.'
+        : '仅反映 OpenAlex 收录与作者消歧结果、以及上述检索口径；不同数据库（Scopus/WoS/Google Scholar）或指标下排序会不同。机构为 OpenAlex「最近机构」，可能滞后。';
+    }
+    const fData = document.getElementById('footer-data-line');
+    if (fData) {
+      fData.innerHTML = en
+        ? 'Powered by open benchmark snapshot <code>ui/data-snapshot.js</code> (Track A Lab Table · Track B Global Routes · Track C Shortlists · OpenAlex Literature Bounds & Scholar Ranking · Commercial Catalog · Weekly Industry Feed).'
+        : '数据构建自公开基准集 <code>ui/data-snapshot.js</code>（轨 A 实验室代理表 · 轨 B 全球航线 · 轨 C 短名单 · OpenAlex 文献界与学者榜 · 商用目录 · 行业动态周报）。';
+    }
+
+    /* Re-render all dynamic views */
+    buildLabBaseChips();
+    renderLab();
+    renderRoutes();
+    if (selectedRoute) selectRoute(selectedRoute);
+    renderRec();
+    renderLit();
+    renderCatalog();
+    renderBrands();
+    renderSandbox();
+    window.renderCoupler();
+    renderCalc1();
+    renderCalc2();
+  }
+
+  document.getElementById('lang-toggle-btn').addEventListener('click', () => {
+    applyLanguage(window.CUR_LANG === 'en' ? 'zh' : 'en');
+  });
+
+  /* Initial language detection: ?lang=en or saved preference or non-zh browser */
+  (function initLang() {
+    const params = new URLSearchParams(location.search);
+    const qLang = params.get('lang');
+    let saved = '';
+    try { saved = localStorage.getItem('mcs_lang') || ''; } catch (_) {}
+    if (qLang === 'en' || qLang === 'zh') {
+      applyLanguage(qLang);
+    } else if (saved === 'en' || saved === 'zh') {
+      applyLanguage(saved);
+    } else {
+      const navLang = (navigator.language || '').toLowerCase();
+      applyLanguage(navLang.startsWith('zh') ? 'zh' : 'en');
+    }
   })();
 
   tabFromHash();
