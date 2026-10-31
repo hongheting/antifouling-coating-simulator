@@ -18,7 +18,7 @@ Built for coating formulators, biofouling researchers, and anyone who has to com
 
 Author: **Hong Heting** (洪鹤庭 / Jassyhong) · MIT · [Discussions](https://github.com/hongheting/antifouling-coating-simulator/discussions)
 
-![Overview](docs/screenshots/overview-home.png)
+![Overview](docs/screenshots/en/overview-home.png)
 
 ---
 
@@ -48,7 +48,9 @@ First-class module on the **Interactive simulator** tab (web panel 0.6.1). Move 
 2. **Route–speed–idle coupler** — pick one of 12 corridors, then vary steaming speed, port-idle share, docking cycle, and optional UV-C or ultrasound. Technology classes are re-ranked as a *relative fit* under the GCB growth–adhesion frame.
 3. **Engineering calculators** — ISO 10890 / CEPE mass-balance leaching life and minimum DFT, plus PVC/CPVC, volume solids, and theoretical spreading rate.
 
-Every sandbox output is tagged **framework inference / model envelope**. It is a screening picture for formulators, not an ISO 4624 pull-off report, an HPLC flux, or a dry-dock inspection. A screenshot of this tab is not in `docs/screenshots/` yet; the shots below are the earlier track, literature, catalogue, and industry views.
+Every sandbox output is tagged **framework inference / model envelope**. It is a screening picture for formulators, not an ISO 4624 pull-off report, an HPLC flux, or a dry-dock inspection. The live panel’s formulation sandbox is shown below.
+
+![Formulation sandbox](docs/screenshots/en/sandbox.png)
 
 ---
 
@@ -66,7 +68,7 @@ Filter by route chip, search an ID or a note, and see which cells already have a
 
 | All routes | Filtered |
 |---|---|
-| ![Track A table](docs/screenshots/trackA-table.png) | ![Track A filter](docs/screenshots/trackA-filter.png) |
+| ![Track A table](docs/screenshots/en/trackA-table.png) | ![Track A filter](docs/screenshots/en/trackA-filter.png) |
 
 ### Track B · Route profiles
 
@@ -74,7 +76,7 @@ Relative pressure from a GCB-style growth–adhesion frame: warm water leans tow
 
 | Corridor map | One route (Shanghai → Singapore) |
 |---|---|
-| ![Track B overview](docs/screenshots/trackB-overview.png) | ![Track B detail](docs/screenshots/trackB-detail.png) |
+| ![Track B overview](docs/screenshots/en/trackB-overview.png) | ![Track B detail](docs/screenshots/en/trackB-detail.png) |
 
 ### Track C · Shortlist
 
@@ -82,7 +84,7 @@ Choose a Track B `matched_profile_id`. Each row carries a source link and a cave
 
 | Warm corridor | Cold-end stub |
 |---|---|
-| ![Track C warm water](docs/screenshots/trackC-list.png) | ![Track C cold end](docs/screenshots/trackC-filtered.png) |
+| ![Track C warm water](docs/screenshots/en/trackC-list.png) | ![Track C cold end](docs/screenshots/en/trackC-filtered.png) |
 
 ---
 
@@ -90,13 +92,13 @@ Choose a Track B `matched_profile_id`. Each row carries a source link and a cave
 
 | Module | Role | Shot |
 |---|---|---|
-| **Literature bounds** | DOI / OpenAlex metadata and a subjective importance mark. A bound from a paper is not this ship’s performance | ![Literature](docs/screenshots/lit-links-1280x800.png) |
-| **Commercial & technology** | Public vendor catalogue plus UV-C / ultrasound notes. Vendor claims stay tagged as OEM nominals | ![Commercial](docs/screenshots/commercial-links-1280x800.png) |
-| **Industry feed** | Weekly public timeline (regulation, company, product, technology) | ![Industry](docs/screenshots/industry-1280x800.png) |
-| **Scholars** | OpenAlex field impact, illustrative ranking only | ![Scholars](docs/screenshots/v3-scholars.png) |
+| **Literature bounds** | DOI / OpenAlex metadata and a subjective importance mark. A bound from a paper is not this ship’s performance | ![Literature](docs/screenshots/en/lit.png) |
+| **Commercial & technology** | Public vendor catalogue plus UV-C / ultrasound notes. Vendor claims stay tagged as OEM nominals | ![Commercial](docs/screenshots/en/commercial.png) |
+| **Industry feed** | Weekly public timeline (regulation, company, product, technology) | ![Industry](docs/screenshots/en/industry.png) |
+| **Scholars** | OpenAlex field impact, illustrative ranking only | ![Scholars](docs/screenshots/en/scholars.png) |
 | **Tech exchange** | [GitHub Discussions](https://github.com/hongheting/antifouling-coating-simulator/discussions) for new technology, formulations, and processes. Posts are author statements, not verified data. Desktop and Android 0.6.0 also include an in-app exchange tab | [docs/tech-exchange.md](docs/tech-exchange.md) |
 
-More images: [`docs/screenshots/`](docs/screenshots/).
+More images: [`docs/screenshots/en/`](docs/screenshots/en/).
 
 ---
 
