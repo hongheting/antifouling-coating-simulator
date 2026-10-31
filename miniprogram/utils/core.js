@@ -43,9 +43,10 @@ function overview(D) {
 // ---- 轨 A 实验室表 ----
 function labBaseKey(b) {
   b = b || '';
-  if (b.indexOf('示例双组分环氧') >= 0) return 'jf602';
+  // Same buckets as ui/index.html. Example rows use 示例双组分环氧; a private panel may say JF-602.
+  if (b.indexOf('JF-602') >= 0 || b.indexOf('示例双组分环氧') >= 0) return 'jf602';
   if (b.indexOf('丙烯酸') >= 0 || b.indexOf('松香') >= 0) return 'acrylic';
-  if (b.indexOf('粉体') >= 0 || b.indexOf('填料') >= 0 || b.indexOf('EIS') >= 0 || b.indexOf('释放几何') >= 0) return 'powder';
+  if (b.indexOf('粉体') >= 0 || b.indexOf('CA@MSiO') >= 0 || b.indexOf('填料') >= 0 || b.indexOf('EIS') >= 0 || b.indexOf('释放几何') >= 0) return 'powder';
   if (b.indexOf('UV-C') >= 0 || b.indexOf('超声') >= 0 || b.indexOf('主动') >= 0) return 'active';
   return 'other';
 }

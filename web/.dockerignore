@@ -1,0 +1,6 @@
+# Prefer building from repo root with -f web/Dockerfile;
+# this file applies if build context is web/ (not recommended).
+*
+!nginx.conf.template
+!entrypoint.sh
+!Dockerfile

@@ -1,15 +1,15 @@
 {
   "meta": {
     "title": "防污涂料配方模拟器",
-    "version": "V0-dashboard",
-    "updated": "2026-10-20",
+    "version": "V1.0-public",
+    "updated": "2026-10-31",
     "honesty": "模拟 ≠ 实测。输出为带标签的区间/相对等级与证据短名单，不是实验室报告值或航次污损率。",
     "safety": "溶剂通风；B 料查 SDS（可能含 NCO）；现配现用；UV-C 护目与皮肤防护。",
-    "industry_weeks": 27,
-    "industry_entries": 89,
-    "industry_latest_week": "2026-10-19",
-    "industry_latest_count": 8,
-    "industry_latest_high": 2,
+    "industry_weeks": 28,
+    "industry_entries": 99,
+    "industry_latest_week": "2026-10-26",
+    "industry_latest_count": 10,
+    "industry_latest_high": 3,
     "counts": {
       "lab": 8,
       "routes": 12,
@@ -42,7 +42,10 @@
       "n": "",
       "note": "仓库演示用原漆边界锚点；不含功能颗粒",
       "safety_flags": "溶剂通风；按 SDS 施工",
-      "disadvantage_notes": "示例标称不可当作改性涂层实测"
+      "disadvantage_notes": "示例标称不可当作改性涂层实测",
+      "CA_MSiO2_wt_pct": "",
+      "BYK_rel_to_particle_pct": "",
+      "hplc_CA_ug_mL_or_flux": ""
     },
     {
       "formulation_id": "EX-BLANK-CTRL",
@@ -65,7 +68,10 @@
       "n": "",
       "note": "无功能颗粒对照；性能栏均为待测",
       "safety_flags": "溶剂通风；现配现用",
-      "disadvantage_notes": "空白不能代表功能化样板"
+      "disadvantage_notes": "空白不能代表功能化样板",
+      "CA_MSiO2_wt_pct": "0",
+      "BYK_rel_to_particle_pct": "",
+      "hplc_CA_ug_mL_or_flux": ""
     },
     {
       "formulation_id": "EX-FILLER-1PCT",
@@ -88,7 +94,10 @@
       "n": "",
       "note": "填料种类与真实口径未指定——仅演示表格结构",
       "safety_flags": "溶剂通风；粉体防扬尘",
-      "disadvantage_notes": "待测；禁止把本行当实测"
+      "disadvantage_notes": "待测；禁止把本行当实测",
+      "CA_MSiO2_wt_pct": "1",
+      "BYK_rel_to_particle_pct": "",
+      "hplc_CA_ug_mL_or_flux": ""
     },
     {
       "formulation_id": "EX-FILLER-3PCT",
@@ -111,7 +120,10 @@
       "n": "",
       "note": "高掺量粗糙/缺陷风险示意",
       "safety_flags": "溶剂通风；粉体防扬尘",
-      "disadvantage_notes": "待测"
+      "disadvantage_notes": "待测",
+      "CA_MSiO2_wt_pct": "3",
+      "BYK_rel_to_particle_pct": "",
+      "hplc_CA_ug_mL_or_flux": ""
     },
     {
       "formulation_id": "EX-FRC-DEMO",
@@ -134,7 +146,10 @@
       "n": "",
       "note": "仅演示轨 A 表结构与标签",
       "safety_flags": "按厂家 SDS",
-      "disadvantage_notes": "相对等级≠绝对防污率"
+      "disadvantage_notes": "相对等级≠绝对防污率",
+      "CA_MSiO2_wt_pct": "",
+      "BYK_rel_to_particle_pct": "",
+      "hplc_CA_ug_mL_or_flux": ""
     },
     {
       "formulation_id": "EX-SPC-DEMO",
@@ -157,7 +172,10 @@
       "n": "",
       "note": "铜系生物杀伤剂法规以当地为准",
       "safety_flags": "铜粉与溶剂防护",
-      "disadvantage_notes": "不可外推为全球最优"
+      "disadvantage_notes": "不可外推为全球最优",
+      "CA_MSiO2_wt_pct": "",
+      "BYK_rel_to_particle_pct": "",
+      "hplc_CA_ug_mL_or_flux": ""
     },
     {
       "formulation_id": "EX-HPLC-GEOM",
@@ -180,7 +198,10 @@
       "n": "",
       "note": "正式浓度须 tag=实测",
       "safety_flags": "避光；容器空白",
-      "disadvantage_notes": "水相检出≠涂层真实累计释放"
+      "disadvantage_notes": "水相检出≠涂层真实累计释放",
+      "CA_MSiO2_wt_pct": "",
+      "BYK_rel_to_particle_pct": "",
+      "hplc_CA_ug_mL_or_flux": "几何示意：暴露面积约 20 cm²；V=100 mL；非浓度结果"
     },
     {
       "formulation_id": "EX-EIS-SLOT",
@@ -203,7 +224,10 @@
       "n": "",
       "note": "须与裸板/原漆/功能化并列报告",
       "safety_flags": "含盐废水按规定处置",
-      "disadvantage_notes": "不可用协议描述冒充防腐结论"
+      "disadvantage_notes": "不可用协议描述冒充防腐结论",
+      "CA_MSiO2_wt_pct": "",
+      "BYK_rel_to_particle_pct": "",
+      "hplc_CA_ug_mL_or_flux": ""
     }
   ],
   "routes": [
@@ -219,24 +243,41 @@
         {
           "segment": "上海港停 / 长江口–东海",
           "pressure": "中–高 / 3–4",
-          "hint": "港停抬升；seasonal opportunists"
+          "hint": "港停抬升；seasonal opportunists",
+          "segment_en": "Shanghai Port / Yangtze Estuary–East China Sea",
+          "pressure_en": "Med–High / 3–4",
+          "hint_en": "Port idle elevation; seasonal opportunists"
         },
         {
           "segment": "台湾海峡接近",
           "pressure": "中–高 / 3–4",
-          "hint": "向暖水 rapid-turnover 过渡"
+          "hint": "向暖水 rapid-turnover 过渡",
+          "segment_en": "Taiwan Strait Approach",
+          "pressure_en": "Med–High / 3–4",
+          "hint_en": "Transition to warm-water rapid-turnover"
         },
         {
           "segment": "南海干线",
           "pressure": "高 / 4",
-          "hint": "热带航行；防再定殖"
+          "hint": "热带航行；防再定殖",
+          "segment_en": "South China Sea Trunk",
+          "pressure_en": "High / 4",
+          "hint_en": "Tropical transit; anti-recolonization"
         },
         {
           "segment": "新加坡海峡 / 港停",
           "pressure": "高–很高 / 4–5",
-          "hint": "赤道枢纽；常为全线峰值"
+          "hint": "赤道枢纽；常为全线峰值",
+          "segment_en": "Singapore Strait / Anchorage & Port Idle",
+          "pressure_en": "High–Very High / 4–5",
+          "hint_en": "Equatorial hub; typically full-route peak"
         }
-      ]
+      ],
+      "name_en": "Shanghai → Singapore",
+      "climate_band_en": "Subtropical → Equatorial Tropical",
+      "overall_pressure_en": "High / 4",
+      "strategy_en": "Rapid-turnover (South leg) + Port idle peak",
+      "type_en": "Warm-Tropical / Cross-Band"
     },
     {
       "profile_id": "ROUTE-SHA-PUS-ICN-V0",
@@ -250,19 +291,33 @@
         {
           "segment": "上海港停 / 长江口–东海",
           "pressure": "中–高 / 3–4",
-          "hint": "港停；季节窗"
+          "hint": "港停；季节窗",
+          "segment_en": "Shanghai Port / Yangtze Estuary–ECS",
+          "pressure_en": "Med–High / 3–4",
+          "hint_en": "Port idle; seasonal settlement window"
         },
         {
           "segment": "黄海 / 东海干线",
           "pressure": "中 / 3",
-          "hint": "温带航行"
+          "hint": "温带航行",
+          "segment_en": "Yellow Sea / East China Sea Transit",
+          "pressure_en": "Medium / 3",
+          "hint_en": "Temperate open-water steaming"
         },
         {
           "segment": "釜山 / 仁川港停",
           "pressure": "中–高 / 3–4",
-          "hint": "季节窗内常为峰值"
+          "hint": "季节窗内常为峰值",
+          "segment_en": "Busan / Incheon Port Call",
+          "pressure_en": "Med–High / 3–4",
+          "hint_en": "Peak pressure during summer/autumn window"
         }
-      ]
+      ],
+      "name_en": "Shanghai → Busan / Incheon",
+      "climate_band_en": "Temperate",
+      "overall_pressure_en": "Medium / 3",
+      "strategy_en": "Seasonal opportunists window",
+      "type_en": "Temperate"
     },
     {
       "profile_id": "ROUTE-ASIA-EU-SUEZ-V0",
@@ -276,34 +331,57 @@
         {
           "segment": "东亚/东南亚枢纽港停",
           "pressure": "中–高 / 3–4",
-          "hint": "亚热带–热带港停"
+          "hint": "亚热带–热带港停",
+          "segment_en": "East / SE Asia Hub Port Calls",
+          "pressure_en": "Med–High / 3–4",
+          "hint_en": "Subtropical–tropical port dwell"
         },
         {
           "segment": "马六甲",
           "pressure": "高 / 4–5",
-          "hint": "赤道咽喉"
+          "hint": "赤道咽喉",
+          "segment_en": "Strait of Malacca",
+          "pressure_en": "High / 4–5",
+          "hint_en": "Equatorial chokepoint"
         },
         {
           "segment": "Bab el-Mandeb / 红海",
           "pressure": "高 / 4",
-          "hint": "暖/低速"
+          "hint": "暖/低速",
+          "segment_en": "Bab el-Mandeb / Red Sea",
+          "pressure_en": "High / 4",
+          "hint_en": "Warm & high-salinity slow transit"
         },
         {
           "segment": "苏伊士",
           "pressure": "高 / 4",
-          "hint": "低速走廊峰值"
+          "hint": "低速走廊峰值",
+          "segment_en": "Suez Canal Transit & Anchorage",
+          "pressure_en": "High / 4",
+          "hint_en": "Low-speed convoy & waiting peak"
         },
         {
           "segment": "直布罗陀 / 地中海出口",
           "pressure": "中 / 3",
-          "hint": "温带–亚热带过渡"
+          "hint": "温带–亚热带过渡",
+          "segment_en": "Gibraltar / Mediterranean Exit",
+          "pressure_en": "Medium / 3",
+          "hint_en": "Subtropical–temperate transition"
         },
         {
           "segment": "鹿特丹 / 北海",
           "pressure": "中 / 3",
-          "hint": "温带欧洲枢纽"
+          "hint": "温带欧洲枢纽",
+          "segment_en": "Rotterdam / North Sea Hub",
+          "pressure_en": "Medium / 3",
+          "hint_en": "Temperate European terminus"
         }
-      ]
+      ],
+      "name_en": "Asia–Europe via Suez Canal",
+      "climate_band_en": "Equatorial → Warm Subtropical → Subtropical → Temperate",
+      "overall_pressure_en": "High / 4 (Warm-leg driven)",
+      "strategy_en": "Multi-zone sequence; warm-leg anti-settlement",
+      "type_en": "Cross-Climate Corridor"
     },
     {
       "profile_id": "ROUTE-ASIA-EU-CAPE-V0",
@@ -317,24 +395,41 @@
         {
           "segment": "马六甲出口",
           "pressure": "高 / 4",
-          "hint": "赤道热带"
+          "hint": "赤道热带",
+          "segment_en": "Malacca Exit",
+          "pressure_en": "High / 4",
+          "hint_en": "Equatorial tropical departure"
         },
         {
           "segment": "印度洋干线",
           "pressure": "中–高 / 3–4",
-          "hint": "暖水航行"
+          "hint": "暖水航行",
+          "segment_en": "Indian Ocean Trunk",
+          "pressure_en": "Med–High / 3–4",
+          "hint_en": "Long-haul warm-water steaming"
         },
         {
           "segment": "好望角",
           "pressure": "中 / 3",
-          "hint": "暖温带绕行"
+          "hint": "暖温带绕行",
+          "segment_en": "Cape of Good Hope Rounding",
+          "pressure_en": "Medium / 3",
+          "hint_en": "Warm-temperate high-energy shear"
         },
         {
           "segment": "大西洋北上 → 欧洲",
           "pressure": "中 / 2–3",
-          "hint": "趋温带"
+          "hint": "趋温带",
+          "segment_en": "Northbound Atlantic → Europe",
+          "pressure_en": "Medium / 2–3",
+          "hint_en": "Cooling toward temperate latitudes"
         }
-      ]
+      ],
+      "name_en": "Asia–Europe via Cape of Good Hope",
+      "climate_band_en": "Equatorial → Warm Temperate → Temperate",
+      "overall_pressure_en": "Med–High / 3–4",
+      "strategy_en": "Bypasses Suez low-speed peak; Malacca exit still elevated",
+      "type_en": "Cross-Climate Corridor"
     },
     {
       "profile_id": "ROUTE-PANAMA-TRANSIT-V0",
@@ -348,19 +443,33 @@
         {
           "segment": "太平洋侧接近 / 锚地",
           "pressure": "高 / 4",
-          "hint": "候潮抬升"
+          "hint": "候潮抬升",
+          "segment_en": "Pacific Approach / Balboa Anchorage",
+          "pressure_en": "High / 4",
+          "hint_en": "Queueing & tidal wait elevation"
         },
         {
           "segment": "巴拿马运河闸区",
           "pressure": "高–很高 / 4–5",
-          "hint": "低速峰值"
+          "hint": "低速峰值",
+          "segment_en": "Panama Canal Locks & Gatun Cut",
+          "pressure_en": "High–Very High / 4–5",
+          "hint_en": "Low-speed & brackish/freshwater transition peak"
         },
         {
           "segment": "大西洋侧出口",
           "pressure": "高 / 4",
-          "hint": "热带跨洋"
+          "hint": "热带跨洋",
+          "segment_en": "Atlantic Exit (Colón / Caribbean)",
+          "pressure_en": "High / 4",
+          "hint_en": "Tropical basin transit"
         }
-      ]
+      ],
+      "name_en": "Trans-Panama Canal Corridor",
+      "climate_band_en": "Tropical",
+      "overall_pressure_en": "High / 4",
+      "strategy_en": "Low-speed lock & anchorage dwell; anti-settlement",
+      "type_en": "Warm-Tropical"
     },
     {
       "profile_id": "ROUTE-REDSEA-MED-V0",
@@ -374,24 +483,41 @@
         {
           "segment": "Bab el-Mandeb",
           "pressure": "高 / 4",
-          "hint": "红海入口"
+          "hint": "红海入口",
+          "segment_en": "Bab el-Mandeb Strait",
+          "pressure_en": "High / 4",
+          "hint_en": "Red Sea southern gateway"
         },
         {
           "segment": "红海航行",
           "pressure": "高 / 4",
-          "hint": "热亚热带"
+          "hint": "热亚热带",
+          "segment_en": "Red Sea Basin Transit",
+          "pressure_en": "High / 4",
+          "hint_en": "High temperature & salinity"
         },
         {
           "segment": "苏伊士",
           "pressure": "高 / 4",
-          "hint": "低速走廊"
+          "hint": "低速走廊",
+          "segment_en": "Suez Canal / Port Said",
+          "pressure_en": "High / 4",
+          "hint_en": "Low-speed canal corridor"
         },
         {
           "segment": "地中海出口",
           "pressure": "中–高 / 3",
-          "hint": "趋亚热带"
+          "hint": "趋亚热带",
+          "segment_en": "Eastern Mediterranean Exit",
+          "pressure_en": "Med–High / 3",
+          "hint_en": "Warm-subtropical oligotrophic basin"
         }
-      ]
+      ],
+      "name_en": "Red Sea – Eastern Mediterranean",
+      "climate_band_en": "Tropical–Subtropical → Subtropical",
+      "overall_pressure_en": "High / 4",
+      "strategy_en": "Bab–Suez warm water & low-speed convoy focus",
+      "type_en": "Warm-Tropical / Cross-Band"
     },
     {
       "profile_id": "ROUTE-NWPAC-HUB-V0",
@@ -405,24 +531,41 @@
         {
           "segment": "港深港停",
           "pressure": "中–高 / 3–4",
-          "hint": "SCS 枢纽"
+          "hint": "SCS 枢纽",
+          "segment_en": "Hong Kong / Shenzhen Hub Dwell",
+          "pressure_en": "Med–High / 3–4",
+          "hint_en": "Pearl River / SCS hub"
         },
         {
           "segment": "厦–三亚 / 台海–南海",
           "pressure": "中–高 / 3–4",
-          "hint": "亚热带–热带"
+          "hint": "亚热带–热带",
+          "segment_en": "Xiamen–Sanya / Taiwan Strait–SCS",
+          "pressure_en": "Med–High / 3–4",
+          "hint_en": "Subtropical–tropical coastal leg"
         },
         {
           "segment": "釜山 / 济州",
           "pressure": "中 / 3",
-          "hint": "温带枢纽"
+          "hint": "温带枢纽",
+          "segment_en": "Busan / Korea Strait",
+          "pressure_en": "Medium / 3",
+          "hint_en": "Temperate transshipment hub"
         },
         {
           "segment": "东京湾 / 横滨",
           "pressure": "中 / 3",
-          "hint": "温带港停"
+          "hint": "温带港停",
+          "segment_en": "Tokyo Bay / Yokohama",
+          "pressure_en": "Medium / 3",
+          "hint_en": "Temperate port dwell"
         }
-      ]
+      ],
+      "name_en": "NW Pacific Hub Chain (HK/SZ–Busan–Tokyo)",
+      "climate_band_en": "Subtropical/Tropical → Temperate",
+      "overall_pressure_en": "Med–High / 3–4",
+      "strategy_en": "Southern hub dwell + Northern seasonal window",
+      "type_en": "Cross-Climate Corridor"
     },
     {
       "profile_id": "ROUTE-TRANSPAC-LA-V0",
@@ -436,19 +579,33 @@
         {
           "segment": "亚洲装货枢纽港停",
           "pressure": "中–高 / 3–4",
-          "hint": "序列起点"
+          "hint": "序列起点",
+          "segment_en": "Asian Loading Hub Port Dwell",
+          "pressure_en": "Med–High / 3–4",
+          "hint_en": "Biofilm/larval inoculation origin"
         },
         {
           "segment": "跨太平洋干线",
           "pressure": "中 / 2–3",
-          "hint": "航行剪切"
+          "hint": "航行剪切",
+          "segment_en": "North Pacific Great-Circle Transit",
+          "pressure_en": "Medium / 2–3",
+          "hint_en": "Sustained hydrodynamic shear"
         },
         {
           "segment": "洛杉矶–长滩港停",
           "pressure": "中–高 / 3–4",
-          "hint": "暖温带东岸枢纽"
+          "hint": "暖温带东岸枢纽",
+          "segment_en": "LA / Long Beach Port & Anchorage",
+          "pressure_en": "Med–High / 3–4",
+          "hint_en": "Warm-temperate Eastern Pacific terminus"
         }
-      ]
+      ],
+      "name_en": "Trans-Pacific → Los Angeles / Long Beach",
+      "climate_band_en": "Subtropical/Tropical → Warm Temperate",
+      "overall_pressure_en": "Med–High / 3–4",
+      "strategy_en": "Terminal port dwells dominate; ocean shear ≠ static protection",
+      "type_en": "Cross-Climate Corridor"
     },
     {
       "profile_id": "ROUTE-SWPAC-V0",
@@ -462,19 +619,33 @@
         {
           "segment": "悉尼港停",
           "pressure": "中 / 3",
-          "hint": "暖温带季节脉冲"
+          "hint": "暖温带季节脉冲",
+          "segment_en": "Port Jackson / Sydney Dwell",
+          "pressure_en": "Medium / 3",
+          "hint_en": "Warm-temperate seasonal pulse"
         },
         {
           "segment": "塔斯曼海航行",
           "pressure": "中 / 2–3",
-          "hint": "航行"
+          "hint": "航行",
+          "segment_en": "Tasman Sea Crossing",
+          "pressure_en": "Medium / 2–3",
+          "hint_en": "Open-ocean steaming"
         },
         {
           "segment": "奥克兰港停",
           "pressure": "中 / 3",
-          "hint": "温带门户"
+          "hint": "温带门户",
+          "segment_en": "Auckland Port Call",
+          "pressure_en": "Medium / 3",
+          "hint_en": "Temperate gateway (strict biofouling rules)"
         }
-      ]
+      ],
+      "name_en": "Sydney ↔ Auckland (Trans-Tasman)",
+      "climate_band_en": "Warm Temperate ↔ Temperate",
+      "overall_pressure_en": "Medium / 3",
+      "strategy_en": "Seasonal pulse + strict biosecurity & durability",
+      "type_en": "Temperate → Cold-Leaning"
     },
     {
       "profile_id": "ROUTE-SATL-SANTOS-V0",
@@ -488,19 +659,33 @@
         {
           "segment": "南大西洋接近",
           "pressure": "中 / 3",
-          "hint": "航行略低"
+          "hint": "航行略低",
+          "segment_en": "South Atlantic Approach",
+          "pressure_en": "Medium / 3",
+          "hint_en": "Offshore transit"
         },
         {
           "segment": "桑托斯港停",
           "pressure": "中–高 / 3–4",
-          "hint": "南大西洋节点峰值"
+          "hint": "南大西洋节点峰值",
+          "segment_en": "Santos Port & Anchorage Dwell",
+          "pressure_en": "Med–High / 3–4",
+          "hint_en": "South Atlantic hub peak"
         },
         {
           "segment": "离港 / 沿海",
           "pressure": "中 / 3",
-          "hint": "亚热带语境"
+          "hint": "亚热带语境",
+          "segment_en": "Coastal Departure (Rio Corridor)",
+          "pressure_en": "Medium / 3",
+          "hint_en": "Subtropical coastal regime"
         }
-      ]
+      ],
+      "name_en": "South Atlantic · Santos Hub",
+      "climate_band_en": "Subtropical",
+      "overall_pressure_en": "Med–High / 3–4",
+      "strategy_en": "Subtropical anchorage & berth queue protection",
+      "type_en": "Warm-Tropical"
     },
     {
       "profile_id": "STUB-CAN-ARCTIC",
@@ -514,9 +699,17 @@
         {
           "segment": "北极航道 / 目的地语境",
           "pressure": "低 / 1–2",
-          "hint": "禁止高污损叙事；文献点名"
+          "hint": "禁止高污损叙事；文献点名",
+          "segment_en": "Arctic Corridor / High-Latitude Context",
+          "pressure_en": "Low / 1–2",
+          "hint_en": "Avoid high-fouling narrative; mechanical integrity first"
         }
-      ]
+      ],
+      "name_en": "Canadian Arctic (Cold-End Stub)",
+      "climate_band_en": "Cold / Polar",
+      "overall_pressure_en": "Low / 1–2",
+      "strategy_en": "Persistence-oriented; mechanical & ice-abrasion durability",
+      "type_en": "Cold / Polar (Lit. Named)"
     },
     {
       "profile_id": "STUB-ANTARCTICA",
@@ -530,9 +723,17 @@
         {
           "segment": "南极 / 东南极语境",
           "pressure": "低 / 1–2",
-          "hint": "禁止高污损叙事；文献点名"
+          "hint": "禁止高污损叙事；文献点名",
+          "segment_en": "Southern Ocean / Antarctic Station Supply",
+          "pressure_en": "Low / 1–2",
+          "hint_en": "Low settlement rate; non-biocidal & abrasion focus"
         }
-      ]
+      ],
+      "name_en": "Antarctica / East Antarctica (Cold-End Stub)",
+      "climate_band_en": "Cold / Polar",
+      "overall_pressure_en": "Low / 1–2",
+      "strategy_en": "Persistence-oriented; mechanical & ice-abrasion durability",
+      "type_en": "Cold / Polar (Lit. Named)"
     }
   ],
   "recommendations": [
@@ -4593,47 +4794,58 @@
     "categories": [
       {
         "key": "organic_marine_paint",
-        "zh": "有机船用油漆（丙烯酸/环氧等）"
+        "zh": "有机船用油漆（丙烯酸/环氧等）",
+        "en": "Organic Marine Paint (Acrylic/Epoxy)"
       },
       {
         "key": "metal_alloy",
-        "zh": "金属/合金涂层"
+        "zh": "金属/合金涂层",
+        "en": "Metal / Alloy Cladding & Spray"
       },
       {
         "key": "silicone_mod_organic",
-        "zh": "硅改性有机涂层"
+        "zh": "硅改性有机涂层",
+        "en": "Silicone-Modified Organic"
       },
       {
         "key": "lse_foul_release",
-        "zh": "低表面能 / 污损释放（FRC）"
+        "zh": "低表面能 / 污损释放（FRC）",
+        "en": "Low Surface Energy / FRC"
       },
       {
         "key": "spc_copper",
-        "zh": "SPC / 铜系杀生剂"
+        "zh": "SPC / 铜系杀生剂",
+        "en": "SPC / Cu Biocide Systems"
       },
       {
         "key": "hydrogel_zwitterionic",
-        "zh": "水凝胶 / 两性离子"
+        "zh": "水凝胶 / 两性离子",
+        "en": "Hydrogel / Zwitterionic"
       },
       {
         "key": "uvc_active",
-        "zh": "UV-C 主动防污"
+        "zh": "UV-C 主动防污",
+        "en": "UV-C Active Antifouling"
       },
       {
         "key": "ultrasound",
-        "zh": "超声 / 导波"
+        "zh": "超声 / 导波",
+        "en": "Ultrasonic / Guided Wave"
       },
       {
         "key": "hybrid",
-        "zh": "混合 / 协同体系"
+        "zh": "混合 / 协同体系",
+        "en": "Hybrid / Synergistic Systems"
       },
       {
         "key": "natural_biocide_ca",
-        "zh": "天然杀生剂 / CA@介孔"
+        "zh": "天然杀生剂 / CA@介孔",
+        "en": "Natural Biocide / CA@Mesoporous"
       },
       {
         "key": "regulatory_economic",
-        "zh": "监管 / 经济影响"
+        "zh": "监管 / 经济影响",
+        "en": "Regulatory / Economic Impact"
       }
     ],
     "honesty": [
@@ -4661,51 +4873,63 @@
     "categories": [
       {
         "key": "spc_silyl_acrylate",
-        "zh": "硅烷丙烯酸 SPC"
+        "zh": "硅烷丙烯酸 SPC",
+        "en": "Silyl Acrylate SPC"
       },
       {
         "key": "spc_hydrolysis",
-        "zh": "水解 / 羧酸盐 SPC"
+        "zh": "水解 / 羧酸盐 SPC",
+        "en": "Hydrolyzing / Carboxylate SPC"
       },
       {
         "key": "spc_copper",
-        "zh": "铜系杀生剂 SPC（总称）"
+        "zh": "铜系杀生剂 SPC（总称）",
+        "en": "Cu-Biocide SPC (General)"
       },
       {
         "key": "frc_silicone",
-        "zh": "硅酮污损释放（FRC）"
+        "zh": "硅酮污损释放（FRC）",
+        "en": "Silicone Foul-Release (FRC)"
       },
       {
         "key": "frc_fluoro",
-        "zh": "氟聚污损释放"
+        "zh": "氟聚污损释放",
+        "en": "Fluoropolymer Foul-Release"
       },
       {
         "key": "hybrid_hydrogel",
-        "zh": "水凝胶硅酮 + 杀生剂"
+        "zh": "水凝胶硅酮 + 杀生剂",
+        "en": "Hydrogel Silicone + Biocide"
       },
       {
         "key": "lpp_linear",
-        "zh": "线性抛光 LPP"
+        "zh": "线性抛光 LPP",
+        "en": "Linear Polishing (LPP)"
       },
       {
         "key": "copper_free_ablative",
-        "zh": "无铜消融"
+        "zh": "无铜消融",
+        "en": "Cu-Free Ablative"
       },
       {
         "key": "yacht_spc",
-        "zh": "游艇 SPC"
+        "zh": "游艇 SPC",
+        "en": "Yacht / Leisure SPC"
       },
       {
         "key": "asian_silyl_spc",
-        "zh": "日系硅基 SPC"
+        "zh": "日系硅基 SPC",
+        "en": "Asian Silyl-Based SPC"
       },
       {
         "key": "tech_uvc",
-        "zh": "UV-C 辅助技术"
+        "zh": "UV-C 辅助技术",
+        "en": "UV-C Auxiliary Tech"
       },
       {
         "key": "tech_ultrasound",
-        "zh": "超声 / 导波辅助"
+        "zh": "超声 / 导波辅助",
+        "en": "Ultrasonic / Guided-Wave Aux"
       }
     ],
     "counts": {
@@ -4744,6 +4968,173 @@
       "低"
     ],
     "weeks": [
+      {
+        "week": "2026-10-26",
+        "source_file": "data/industry-feed/2026-10-26.md",
+        "title": "行业进展｜2026-10-26",
+        "coverage": "2026-10-08 至 2026-10-26（北京时间；近 7 天偏少，窗口放宽）",
+        "coverage_start": "2026-10-08",
+        "coverage_end": "2026-10-26",
+        "nature": "行业动态/公开资料，非性能数据。内容摘自「防污行业周报」，均已在原始来源核对日期与内容。",
+        "trend_summary": "清洗侧继续走向船载、海上预防性机器人，并强调涂料兼容。UVC—涂料协同、水凝胶降铜与 NMR 释放表征同周出现，服务低杀生剂与涂层—主动防污联用。国内新质生产力、船舶防污作业规章与气候年报碳足迹专章并行，美国铜系标签继续收紧——环保配方、中试与碳足迹数据成为下一阶段门槛。",
+        "entries": [
+          {
+            "no": 10,
+            "title": "生态环境部《中国应对气候变化的政策与行动 2026 年度报告》",
+            "date": "2026-10-21",
+            "category": "法规",
+            "summary": "强调全国碳市场扩围与产品碳足迹核算、标识认证及应用场景建设进展。",
+            "url": "https://www.mee.gov.cn/ywgz/ydqhbh/qhbhlf/202610/t20261021_1183474.shtml",
+            "relevance": "中",
+            "relevance_reason": "涂料产品碳足迹与绿色采购场景扩展",
+            "note": "",
+            "source_text": "https://www.mee.gov.cn/ywgz/ydqhbh/qhbhlf/202610/t20261021_1183474.shtml",
+            "week": "2026-10-26",
+            "tag": "公开资料"
+          },
+          {
+            "no": 2,
+            "title": "双瑞涂料完成 4 艘 18500 DWT 油化船涂料配套收官",
+            "date": "2026-10-15",
+            "category": "企业",
+            "summary": "福建船政东南造船洲际船务批次 4 艘油化船由双瑞提供涂料配套并驻场服务，第四艘 DN517-12 下水进入收官；侧重化学品船货舱防腐，未披露防污性能数据。",
+            "url": "https://www.hzeyun.com/detail/2621081",
+            "relevance": "低",
+            "relevance_reason": "国产船舶涂料配套进展，与防污配方选型间接相关",
+            "note": "",
+            "source_text": "https://www.hzeyun.com/detail/2621081",
+            "week": "2026-10-26",
+            "tag": "公开资料"
+          },
+          {
+            "no": 1,
+            "title": "Fleet Robotics 磁吸附步进式船体清洗机器人（海上预防性维护）",
+            "date": "2026-10-14",
+            "category": "技术",
+            "summary": "磁足迈步式清洗机器人可船载常驻、海上自主刷洗并回坞充电，已在 WHOI 实船测试；报道提醒过频清洗可能损伤涂料。",
+            "url": "https://news.northeastern.edu/2026/10/14/ship-hull-cleaning-robot-co-op/",
+            "relevance": "中",
+            "relevance_reason": "影响可清洗型污损释放/硅基涂层在主动清洗航线上的适配与耐磨设计",
+            "note": "",
+            "source_text": "https://news.northeastern.edu/2026/10/14/ship-hull-cleaning-robot-co-op/",
+            "week": "2026-10-26",
+            "tag": "公开资料"
+          },
+          {
+            "no": 4,
+            "title": "POC：黄原胶水凝胶涂层水动力稳定窗与现场降铜",
+            "date": "2026-10-13",
+            "category": "技术",
+            "summary": "OCT+CFD 将转子剪切换算为等效船速；水凝胶在约合 7 节船速下逐渐减薄；粒径 <32 μm 黄原胶可将 Cu₂O 从 10 wt% 降至 6 wt% 且现场防污相当。",
+            "url": "https://doi.org/10.1016/j.porgcoat.2026.110676",
+            "relevance": "高",
+            "relevance_reason": "低铜自抛光配方与水凝胶层在航速窗口下的稳定性",
+            "note": "",
+            "source_text": "https://doi.org/10.1016/j.porgcoat.2026.110676",
+            "week": "2026-10-26",
+            "tag": "公开资料"
+          },
+          {
+            "no": 9,
+            "title": "美国 EPA 批准 Sea Hawk AF33 铜系防污漆标签修订",
+            "date": "2026-10-13",
+            "category": "法规",
+            "summary": "落实铜化合物修订中期登记审议的标签减缓；旧标签 12 个月过渡期后须换新标。",
+            "url": "https://www3.epa.gov/pesticides/chem_search/ppls/044891-00012-20261013.pdf",
+            "relevance": "中",
+            "relevance_reason": "美国铜系游艇防污监管继续收紧，利好低铜/无铜路线",
+            "note": "待复核（铜系 SPC 短名单证据口径（Sea Hawk 未入库，但铜系监管收紧影响短名单口径）；未改评级）",
+            "source_text": "https://www3.epa.gov/pesticides/chem_search/ppls/044891-00012-20261013.pdf",
+            "week": "2026-10-26",
+            "tag": "公开资料"
+          },
+          {
+            "no": 5,
+            "title": "POC：GARField NMR 无损刻画 PDMS 中 CuPy 释放",
+            "date": "2026-10-09",
+            "category": "技术",
+            "summary": "1D ¹H NMR 剖面跟踪不透明防污涂层中 CuPy 扩散控制释放前沿，与 SEM 对照；约 15 wt% 以上可可靠检出，适用于配方筛选。",
+            "url": "https://doi.org/10.1016/j.porgcoat.2026.110674",
+            "relevance": "中",
+            "relevance_reason": "释放动力学表征方法，可借鉴于杀生剂/功能组分释放评估",
+            "note": "",
+            "source_text": "https://doi.org/10.1016/j.porgcoat.2026.110674",
+            "week": "2026-10-26",
+            "tag": "公开资料"
+          },
+          {
+            "no": 7,
+            "title": "中共中央、国务院《关于发展新质生产力的意见》",
+            "date": "2026-10-09",
+            "category": "法规",
+            "summary": "布局中试验证平台，绿色与数智改造船舶等传统产业，实施“人工智能+”，健全产品碳足迹与碳市场，强化成果转化评价。",
+            "url": "https://www.gov.cn/zhengce/202610/content_7082821.htm",
+            "relevance": "高",
+            "relevance_reason": "中试、绿色制造与成果转化政策直接关系项目申报与涂层中试",
+            "note": "",
+            "source_text": "https://www.gov.cn/zhengce/202610/content_7082821.htm",
+            "week": "2026-10-26",
+            "tag": "公开资料"
+          },
+          {
+            "no": 8,
+            "title": "交通运输部《船舶及其有关作业活动污染海洋环境防治管理规定》（2026 年修订）",
+            "date": "2026-10-08",
+            "category": "法规",
+            "summary": "自 2026-11-01 施行；船舶材料须符合防污检验规范，新型燃料供受纳入监管，港区舷外油漆作业须报告。",
+            "url": "https://xxgk.mot.gov.cn/jigou/fgs/202610/t20261008_4225531.html",
+            "relevance": "中",
+            "relevance_reason": "涂装与材料合规口径收紧，影响实船应用与检验对接",
+            "note": "",
+            "source_text": "https://xxgk.mot.gov.cn/jigou/fgs/202610/t20261008_4225531.html",
+            "week": "2026-10-26",
+            "tag": "公开资料"
+          },
+          {
+            "no": 6,
+            "title": "Marine Industry News：区域法规碎片化推高无杀生剂污损释放需求",
+            "date": "2026-10-07",
+            "category": "企业",
+            "summary": "欧盟杀生剂与北美州级铜/VOC 限制导致产品可得性分裂，游艇端加速无杀生剂污损释放与区域定制配方。",
+            "url": "https://marineindustrynews.co.uk/how-shifting-regional-regulations-are-shaping-the-hull-coatings-market/",
+            "relevance": "中",
+            "relevance_reason": "影响跨区域航线无杀生剂产品选型",
+            "note": "待复核（commercial-products.md / 短名单 International Intersleek 等 FRC 条目；未改评级）",
+            "source_text": "https://marineindustrynews.co.uk/how-shifting-regional-regulations-are-shaping-the-hull-coatings-market/",
+            "week": "2026-10-26",
+            "tag": "公开资料"
+          },
+          {
+            "no": 3,
+            "title": "Biofouling：UVC 联用船用涂料的佛罗里达河口/大洋双点实海试验",
+            "date": "2026-10-05",
+            "category": "技术",
+            "summary": "浑浊河口污损更重且浊度衰减 UVC；大洋点 9 个月挂板显示 UVC 可抑制四种涂料上的大型污损；有机硅对 UVC 化学变化最敏感但整体影响有限。",
+            "url": "https://doi.org/10.1080/08927014.2026.2736784",
+            "relevance": "高",
+            "relevance_reason": "直接对应 UV-C 与涂层协同防污、浊度分区与占空比设计",
+            "note": "",
+            "source_text": "https://doi.org/10.1080/08927014.2026.2736784",
+            "week": "2026-10-26",
+            "tag": "公开资料"
+          }
+        ],
+        "backfill": false,
+        "counts": {
+          "total": 10,
+          "by_relevance": {
+            "高": 3,
+            "中": 6,
+            "低": 1
+          },
+          "by_category": {
+            "法规": 4,
+            "企业": 2,
+            "产品": 0,
+            "技术": 4
+          }
+        }
+      },
       {
         "week": "2026-10-19",
         "source_file": "data/industry-feed/2026-10-19.md",
@@ -7312,14 +7703,16 @@
             "lonlat": [
               121.8,
               31.2
-            ]
+            ],
+            "name_en": "Shanghai"
           },
           {
             "name": "新加坡",
             "lonlat": [
               103.85,
               1.25
-            ]
+            ],
+            "name_en": "Singapore"
           }
         ],
         "legs": [
@@ -7408,21 +7801,24 @@
             "lonlat": [
               121.8,
               31.2
-            ]
+            ],
+            "name_en": "Shanghai"
           },
           {
             "name": "釜山",
             "lonlat": [
               129.05,
               35.08
-            ]
+            ],
+            "name_en": "Busan"
           },
           {
             "name": "仁川",
             "lonlat": [
               126.6,
               37.45
-            ]
+            ],
+            "name_en": "Incheon"
           }
         ],
         "legs": [
@@ -7507,28 +7903,32 @@
             "lonlat": [
               121.8,
               31.2
-            ]
+            ],
+            "name_en": "Shanghai"
           },
           {
             "name": "新加坡",
             "lonlat": [
               103.85,
               1.25
-            ]
+            ],
+            "name_en": "Singapore"
           },
           {
             "name": "苏伊士 / 塞得港",
             "lonlat": [
               32.3,
               31.25
-            ]
+            ],
+            "name_en": "Suez / Port Said"
           },
           {
             "name": "鹿特丹",
             "lonlat": [
               4.1,
               51.95
-            ]
+            ],
+            "name_en": "Rotterdam"
           }
         ],
         "legs": [
@@ -7725,21 +8125,24 @@
             "lonlat": [
               103.85,
               1.25
-            ]
+            ],
+            "name_en": "Singapore"
           },
           {
             "name": "好望角",
             "lonlat": [
               18.47,
               -34.36
-            ]
+            ],
+            "name_en": "Cape of Good Hope"
           },
           {
             "name": "鹿特丹",
             "lonlat": [
               4.1,
               51.95
-            ]
+            ],
+            "name_en": "Rotterdam"
           }
         ],
         "legs": [
@@ -7860,14 +8263,16 @@
             "lonlat": [
               -79.55,
               8.9
-            ]
+            ],
+            "name_en": "Balboa (Pacific)"
           },
           {
             "name": "科隆（大西洋侧）",
             "lonlat": [
               -79.9,
               9.36
-            ]
+            ],
+            "name_en": "Colón (Atlantic)"
           }
         ],
         "legs": [
@@ -7928,14 +8333,16 @@
             "lonlat": [
               43.4,
               12.6
-            ]
+            ],
+            "name_en": "Bab el-Mandeb"
           },
           {
             "name": "苏伊士 / 塞得港",
             "lonlat": [
               32.3,
               31.25
-            ]
+            ],
+            "name_en": "Suez / Port Said"
           }
         ],
         "legs": [
@@ -8016,35 +8423,40 @@
             "lonlat": [
               114.15,
               22.25
-            ]
+            ],
+            "name_en": "Hong Kong / Shenzhen"
           },
           {
             "name": "三亚",
             "lonlat": [
               109.5,
               18.2
-            ]
+            ],
+            "name_en": "Sanya"
           },
           {
             "name": "厦门",
             "lonlat": [
               118.1,
               24.4
-            ]
+            ],
+            "name_en": "Xiamen"
           },
           {
             "name": "釜山",
             "lonlat": [
               129.05,
               35.08
-            ]
+            ],
+            "name_en": "Busan"
           },
           {
             "name": "横滨 / 东京湾",
             "lonlat": [
               139.65,
               35.45
-            ]
+            ],
+            "name_en": "Yokohama / Tokyo Bay"
           }
         ],
         "legs": [
@@ -8179,14 +8591,16 @@
             "lonlat": [
               121.8,
               31.2
-            ]
+            ],
+            "name_en": "Shanghai"
           },
           {
             "name": "洛杉矶 – 长滩",
             "lonlat": [
               -118.25,
               33.73
-            ]
+            ],
+            "name_en": "LA – Long Beach"
           }
         ],
         "legs": [
@@ -8271,14 +8685,16 @@
             "lonlat": [
               151.25,
               -33.85
-            ]
+            ],
+            "name_en": "Sydney"
           },
           {
             "name": "奥克兰",
             "lonlat": [
               174.77,
               -36.84
-            ]
+            ],
+            "name_en": "Auckland"
           }
         ],
         "legs": [
@@ -8347,14 +8763,16 @@
             "lonlat": [
               -46.3,
               -23.98
-            ]
+            ],
+            "name_en": "Santos"
           },
           {
             "name": "里约热内卢（沿海方向示意）",
             "lonlat": [
               -43.15,
               -22.95
-            ]
+            ],
+            "name_en": "Rio de Janeiro"
           }
         ],
         "legs": [
@@ -8411,14 +8829,16 @@
             "lonlat": [
               -68.5,
               63.75
-            ]
+            ],
+            "name_en": "Iqaluit"
           },
           {
             "name": "雷索卢特",
             "lonlat": [
               -94.85,
               74.7
-            ]
+            ],
+            "name_en": "Resolute"
           }
         ],
         "legs": [
@@ -8463,14 +8883,16 @@
             "lonlat": [
               147.33,
               -42.88
-            ]
+            ],
+            "name_en": "Hobart"
           },
           {
             "name": "迪蒙·迪维尔站（东南极）",
             "lonlat": [
               140.0,
               -66.66
-            ]
+            ],
+            "name_en": "Dumont d'Urville"
           }
         ],
         "legs": [

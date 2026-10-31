@@ -7,9 +7,9 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 snap = json.loads((ROOT / "ui/data-snapshot.json").read_text(encoding="utf-8"))
 OUT = ROOT / "public-data"; OUT.mkdir(exist_ok=True)
 
-APP = {"versionName": "0.5.0", "versionCode": 50,
+APP = {"versionName": "0.6.0", "versionCode": 60,
        "apk_url": "https://github.com/hongheting/antifouling-coating-simulator/releases/latest",
-       "notes": "0.5.0：新增在线更新（行业动态/文献/商用/学者等公开板块）；新版本提醒。"}
+       "notes": "0.6.0：新增「技术交流」板块（GitHub Discussions：新技术/新配方/新工艺，可发帖、评论，GitHub 登录）；所有帖子标注“作者自述，未经验证”。"}
 PUBLIC_KEYS = ["industry", "literature", "literature_taxonomy", "catalog", "commercial_products",
                "commercial_taxonomy", "tech_aux", "link_stats", "researchers", "route_geometry", "routes"]
 # Private-term blocklist is loaded from a local, untracked file (one regex per line).

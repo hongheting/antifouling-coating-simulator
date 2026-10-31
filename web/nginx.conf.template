@@ -1,0 +1,29 @@
+# PORT is substituted by entrypoint.sh via envsubst '${PORT}' only
+# (do not run bare envsubst — it would break $uri / $host etc.)
+server {
+    listen       ${PORT};
+    server_name  _;
+    root         /usr/share/nginx/html;
+    index        index.html;
+
+    # ACA / probe — unauthenticated
+    location = /health {
+        default_type application/json;
+        add_header Cache-Control "no-store";
+        return 200 '{"ok":true,"service":"coating-simulator-web","version":"0.6.1"}\n';
+    }
+
+    # Static evidence panel (index + snapshot JS)
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Snapshot / map assets: short cache (feed may refresh)
+    location ~* \.(js)$ {
+        add_header Cache-Control "public, max-age=300";
+        try_files $uri =404;
+    }
+
+    # No directory listing
+    autoindex off;
+}
