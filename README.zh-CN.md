@@ -18,7 +18,7 @@
 
 作者：**洪鹤庭** Hong Heting（Jassyhong） · MIT · [讨论区](https://github.com/hongheting/antifouling-coating-simulator/discussions)
 
-![总览](docs/screenshots/overview-home.png)
+![总览](docs/screenshots/zh/overview-home.png)
 
 ---
 
@@ -48,7 +48,9 @@
 2. **航线—船速—港停耦合** — 在 12 条走廊里选一条，再调航速、港停比例、坞期，以及可选的 UV-C 或超声。各技术路线按 GCB 增长–脱附框架做**相对拟合**重排。
 3. **工程计算器** — ISO 10890 / CEPE 质量平衡法估算释放寿命和最低干膜厚度；另有 PVC/CPVC、体积固含和理论涂布率。
 
-沙盒输出一律标为**框架推断 / 模型包络**。它是配方筛选时的示意图，不是 ISO 4624 拉拔报告，不是 HPLC 通量，也不是坞修检查记录。`docs/screenshots/` 里还没有这一页的截图；下面保留的是较早的三轨、文献、商用和行业动态画面。
+沙盒输出一律标为**框架推断 / 模型包络**。它是配方筛选时的示意图，不是 ISO 4624 拉拔报告，不是 HPLC 通量，也不是坞修检查记录。在线面板上的配方沙盒如下。
+
+![配方沙盒](docs/screenshots/zh/sandbox.png)
 
 ---
 
@@ -66,7 +68,7 @@
 
 | 全部路线 | 按芯片筛选 |
 |---|---|
-| ![轨 A 全表](docs/screenshots/trackA-table.png) | ![轨 A 筛选](docs/screenshots/trackA-filter.png) |
+| ![轨 A 全表](docs/screenshots/zh/trackA-table.png) | ![轨 A 筛选](docs/screenshots/zh/trackA-filter.png) |
 
 ### 轨 B · 航线剖面
 
@@ -74,7 +76,7 @@
 
 | 走廊地图 | 单航线（上海 → 新加坡） |
 |---|---|
-| ![轨 B 总览](docs/screenshots/trackB-overview.png) | ![轨 B 详情](docs/screenshots/trackB-detail.png) |
+| ![轨 B 总览](docs/screenshots/zh/trackB-overview.png) | ![轨 B 详情](docs/screenshots/zh/trackB-detail.png) |
 
 ### 轨 C · 短名单
 
@@ -82,7 +84,7 @@
 
 | 暖水走廊 | 冷端桩 |
 |---|---|
-| ![轨 C 暖水](docs/screenshots/trackC-list.png) | ![轨 C 冷端](docs/screenshots/trackC-filtered.png) |
+| ![轨 C 暖水](docs/screenshots/zh/trackC-list.png) | ![轨 C 冷端](docs/screenshots/zh/trackC-filtered.png) |
 
 ---
 
@@ -90,13 +92,13 @@
 
 | 模块 | 作用 | 示意 |
 |---|---|---|
-| **文献界** | DOI / OpenAlex 元数据与主观重要度。论文里的界不是本船性能 | ![文献](docs/screenshots/lit-links-1280x800.png) |
-| **商用·技术** | 厂家公开目录，以及 UV-C / 超声摘录。厂家表述保持「厂家标称」 | ![商用](docs/screenshots/commercial-links-1280x800.png) |
-| **行业动态** | 按周整理的公开进展（法规、企业、产品、技术） | ![行业](docs/screenshots/industry-1280x800.png) |
-| **学者** | OpenAlex 领域影响的示意排行 | ![学者](docs/screenshots/v3-scholars.png) |
+| **文献界** | DOI / OpenAlex 元数据与主观重要度。论文里的界不是本船性能 | ![文献](docs/screenshots/zh/lit.png) |
+| **商用·技术** | 厂家公开目录，以及 UV-C / 超声摘录。厂家表述保持「厂家标称」 | ![商用](docs/screenshots/zh/commercial.png) |
+| **行业动态** | 按周整理的公开进展（法规、企业、产品、技术） | ![行业](docs/screenshots/zh/industry.png) |
+| **学者** | OpenAlex 领域影响的示意排行 | ![学者](docs/screenshots/zh/scholars.png) |
 | **技术交流** | [GitHub Discussions](https://github.com/hongheting/antifouling-coating-simulator/discussions)：新技术、新配方、新工艺。帖子是作者自述，不是已核验数据。桌面和 Android 0.6.0 另有应用内交流页 | [docs/tech-exchange.md](docs/tech-exchange.md) |
 
-更多截图见 [`docs/screenshots/`](docs/screenshots/)。
+更多截图见 [`docs/screenshots/zh/`](docs/screenshots/zh/)。
 
 ---
 
