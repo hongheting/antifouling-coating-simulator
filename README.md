@@ -1,7 +1,7 @@
 # MarineCoatSim · Antifouling Coating Simulator
 
 [![Live demo](https://img.shields.io/badge/live%20demo-simulator.jassyhong.top-0a8f9c)](https://simulator.jassyhong.top)
-[![Web panel](https://img.shields.io/badge/web%20panel-0.6.1-1f6feb)](https://simulator.jassyhong.top)
+[![Web panel](https://img.shields.io/badge/web%20panel-0.6.2-1f6feb)](https://simulator.jassyhong.top)
 [![Desktop / Android](https://img.shields.io/badge/installers-v0.6.0-8b949e)](https://github.com/hongheting/antifouling-coating-simulator/releases/tag/v0.6.0)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/hongheting/antifouling-coating-simulator?style=social)](https://github.com/hongheting/antifouling-coating-simulator/stargazers)
@@ -42,7 +42,7 @@ There is no single magic optimum. The usual path is sandbox or Track A → Track
 
 ## Formulation sandbox
 
-First-class module on the **Interactive simulator** tab (web panel 0.6.1). Move the dose controls and the panel redraws three linked views:
+First-class module on the **Interactive simulator** tab (web panel 0.6.2). Move the dose controls and the panel redraws three linked views:
 
 1. **Dose–response sandbox** — resin family, active filler loading, dispersant level, DFT, and substrate. You get a five-axis radar (adhesion, release continuity, smoothness, barrier, static antifouling), an agglomeration / roughness risk, and the nearest Track A slot.
 2. **Route–speed–idle coupler** — pick one of 12 corridors, then vary steaming speed, port-idle share, docking cycle, and optional UV-C or ultrasound. Technology classes are re-ranked as a *relative fit* under the GCB growth–adhesion frame.
@@ -122,13 +122,13 @@ More images: [`docs/screenshots/en/`](docs/screenshots/en/).
 
 | Platform | What you get |
 |---|---|
-| **Web 0.6.1** | Live panel at [simulator.jassyhong.top](https://simulator.jassyhong.top). Static nginx image `coating-simulator-web:0.6.1` (`web/`). Chinese / English toggle in the header |
+| **Web 0.6.2** | Live panel at [simulator.jassyhong.top](https://simulator.jassyhong.top). Static nginx image `coating-simulator-web:0.6.2` (`web/`). Chinese / English toggle in the header |
 | **Windows 0.6.0** | Electron installer and portable build. Same family of UI as the phone app, plus signed UI hot-update (Ed25519; unsigned bundles are rejected). [Release](https://github.com/hongheting/antifouling-coating-simulator/releases/tag/v0.6.0) |
 | **Android 0.6.0** | Capacitor APK on the same release |
 | **iOS** | Capacitor project in `mobile/`. A signed build needs Xcode on a Mac; there is no App Store binary in v0.6.0 |
 | **WeChat miniprogram** | `miniprogram/` tool build: data bundled, offline, no user-generated posts. Route page includes an offline canvas sketch map |
 
-The **web panel is 0.6.1**. Desktop and Android **installers stay at 0.6.0** until the next app release. This pull request does not rebuild those binaries.
+The **web panel is 0.6.2**. Desktop and Android **installers stay at 0.6.0** until the next app release. This pull request does not rebuild those binaries.
 
 [Setup `.exe`](https://github.com/hongheting/antifouling-coating-simulator/releases/download/v0.6.0/AntifoulingCoatingSimulator-0.6.0-setup-x64.exe) · [Portable `.exe`](https://github.com/hongheting/antifouling-coating-simulator/releases/download/v0.6.0/AntifoulingCoatingSimulator-0.6.0-portable-x64.exe) · [APK](https://github.com/hongheting/antifouling-coating-simulator/releases/download/v0.6.0/coating-simulator-0.6.0.apk)
 
@@ -158,8 +158,8 @@ python3 ui/rebuild-snapshot.py
 Build context is the **repository root** (the image copies only `ui/index.html`, `ui/data-snapshot.js`, and `ui/world-land.js`):
 
 ```bash
-docker build --platform linux/amd64 -f web/Dockerfile -t coating-simulator-web:0.6.1 .
-docker run --rm -p 8080:8080 -e PORT=8080 coating-simulator-web:0.6.1
+docker build --platform linux/amd64 -f web/Dockerfile -t coating-simulator-web:0.6.2 .
+docker run --rm -p 8080:8080 -e PORT=8080 coating-simulator-web:0.6.2
 curl -s http://127.0.0.1:8080/health
 ```
 

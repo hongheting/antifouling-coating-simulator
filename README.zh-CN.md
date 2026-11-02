@@ -1,7 +1,7 @@
 # 防污涂料配方模拟器 · MarineCoatSim
 
 [![在线演示](https://img.shields.io/badge/在线演示-simulator.jassyhong.top-0a8f9c)](https://simulator.jassyhong.top)
-[![网页面板](https://img.shields.io/badge/网页面板-0.6.1-1f6feb)](https://simulator.jassyhong.top)
+[![网页面板](https://img.shields.io/badge/网页面板-0.6.2-1f6feb)](https://simulator.jassyhong.top)
 [![桌面 / Android](https://img.shields.io/badge/安装包-v0.6.0-8b949e)](https://github.com/hongheting/antifouling-coating-simulator/releases/tag/v0.6.0)
 [![许可证 MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/hongheting/antifouling-coating-simulator?style=social)](https://github.com/hongheting/antifouling-coating-simulator/stargazers)
@@ -42,7 +42,7 @@
 
 ## 交互式配方沙盒
 
-网页面板 0.6.1 的一级模块，在「交互模拟 · 计算器」页。拖动剂量控件，三块视图一起更新：
+网页面板 0.6.2 的一级模块，在「交互模拟 · 计算器」页。拖动剂量控件，三块视图一起更新：
 
 1. **配方剂量沙盒** — 树脂体系、活性填料掺量、分散剂、干膜厚度和基材。输出五维雷达（附着力、缓释连续性、平整度、屏障、静态抗污）、团聚 / 粗糙风险，以及最邻近的轨 A 槽位。
 2. **航线—船速—港停耦合** — 在 12 条走廊里选一条，再调航速、港停比例、坞期，以及可选的 UV-C 或超声。各技术路线按 GCB 增长–脱附框架做**相对拟合**重排。
@@ -122,13 +122,13 @@
 
 | 平台 | 内容 |
 |---|---|
-| **网页 0.6.1** | 在线面板 [simulator.jassyhong.top](https://simulator.jassyhong.top)。静态 nginx 镜像 `coating-simulator-web:0.6.1`（`web/`）。页眉可切换中文 / English |
+| **网页 0.6.2** | 在线面板 [simulator.jassyhong.top](https://simulator.jassyhong.top)。静态 nginx 镜像 `coating-simulator-web:0.6.2`（`web/`）。页眉可切换中文 / English |
 | **Windows 0.6.0** | Electron 安装版与便携版。界面与手机应用同一族，并带签名界面热更新（Ed25519，未签名包一律拒绝）。[Release](https://github.com/hongheting/antifouling-coating-simulator/releases/tag/v0.6.0) |
 | **Android 0.6.0** | 同一 Release 中的 Capacitor APK |
 | **iOS** | 工程在 `mobile/`。签名构建需要 Mac 上的 Xcode；v0.6.0 没有 App Store 安装包 |
 | **微信小程序** | `miniprogram/` 工具版：数据内置、离线、无用户发帖。航线页含离线 canvas 示意地图 |
 
-**网页面板是 0.6.1。** 桌面和 Android **安装包仍为 0.6.0**，留到下一次应用发布再更新。这次不同步重建这些二进制文件。
+**网页面板是 0.6.2。** 桌面和 Android **安装包仍为 0.6.0**，留到下一次应用发布再更新。这次不同步重建这些二进制文件。
 
 [安装版 `.exe`](https://github.com/hongheting/antifouling-coating-simulator/releases/download/v0.6.0/AntifoulingCoatingSimulator-0.6.0-setup-x64.exe) · [便携版 `.exe`](https://github.com/hongheting/antifouling-coating-simulator/releases/download/v0.6.0/AntifoulingCoatingSimulator-0.6.0-portable-x64.exe) · [APK](https://github.com/hongheting/antifouling-coating-simulator/releases/download/v0.6.0/coating-simulator-0.6.0.apk)
 
@@ -158,8 +158,8 @@ python3 ui/rebuild-snapshot.py
 构建上下文是**仓库根目录**（镜像只复制 `ui/index.html`、`ui/data-snapshot.js`、`ui/world-land.js`）：
 
 ```bash
-docker build --platform linux/amd64 -f web/Dockerfile -t coating-simulator-web:0.6.1 .
-docker run --rm -p 8080:8080 -e PORT=8080 coating-simulator-web:0.6.1
+docker build --platform linux/amd64 -f web/Dockerfile -t coating-simulator-web:0.6.2 .
+docker run --rm -p 8080:8080 -e PORT=8080 coating-simulator-web:0.6.2
 curl -s http://127.0.0.1:8080/health
 ```
 

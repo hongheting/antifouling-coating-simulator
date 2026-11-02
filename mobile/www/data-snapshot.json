@@ -1,233 +1,784 @@
 {
   "meta": {
     "title": "防污涂料配方模拟器",
-    "version": "V1.0-public",
-    "updated": "2026-10-31",
+    "version": "V1.0-global",
+    "updated": "2026-11-02",
     "honesty": "模拟 ≠ 实测。输出为带标签的区间/相对等级与证据短名单，不是实验室报告值或航次污损率。",
     "safety": "溶剂通风；B 料查 SDS（可能含 NCO）；现配现用；UV-C 护目与皮肤防护。",
-    "industry_weeks": 28,
-    "industry_entries": 99,
-    "industry_latest_week": "2026-10-26",
-    "industry_latest_count": 10,
-    "industry_latest_high": 3,
+    "industry_weeks": 29,
+    "industry_entries": 110,
+    "industry_latest_week": "2026-11-02",
+    "industry_latest_count": 11,
+    "industry_latest_high": 4,
     "counts": {
-      "lab": 8,
+      "lab": 33,
       "routes": 12,
-      "recommendations": 52,
+      "recommendations": 75,
       "literature": 72,
-      "catalog": 4,
+      "catalog": 27,
       "products": 27,
       "researchers": 30
     }
   },
   "lab": [
     {
-      "formulation_id": "EX-OEM-BOUNDARY",
-      "basecoat": "示例双组分环氧（虚构牌号）",
-      "mix_ratio": "5:1（示例）",
-      "filler_wt_pct": "",
-      "dispersant_rel_pct": "",
-      "DFT_um": "50±10（目标）",
-      "substrate": "碳钢试片",
-      "pull_off_MPa": "5.0–7.0",
+      "formulation_id": "JF602-OEM-BOUNDARY",
+      "basecoat": "JF-602",
+      "JF602_A_B_ratio": "5:1（须核实质量或体积）",
+      "CA_MSiO2_wt_pct": "",
+      "BYK_rel_to_particle_pct": "",
+      "DFT_um": "30±5（目标）",
+      "substrate": "6061-Al",
+      "pull_off_MPa": "4.9–6.6",
       "pull_off_tag": "厂家标称",
       "eis_note": "",
       "eis_tag": "",
-      "hplc_analyte_note": "",
+      "hplc_CA_ug_mL_or_flux": "",
       "hplc_tag": "",
       "microcosm_relative_fouling": "",
       "microcosm_tag": "",
-      "uncertainty": "示例数据 / example：虚构厂家标称区间，非任何真实课题样板",
-      "source": "docs/example-data.md",
+      "uncertainty": "厂家技术资料历史区间；非功能化样板实测；配比与适用期以最新 TDS/SDS 为准",
+      "source": "Lab Benchmark KB (2026-10) §5.2",
       "n": "",
-      "note": "仓库演示用原漆边界锚点；不含功能颗粒",
-      "safety_flags": "溶剂通风；按 SDS 施工",
-      "disadvantage_notes": "示例标称不可当作改性涂层实测",
-      "CA_MSiO2_wt_pct": "",
-      "BYK_rel_to_particle_pct": "",
-      "hplc_CA_ug_mL_or_flux": ""
+      "note": "目标干膜约30±5μm；本行仅原漆边界锚点，不含 CA@MSiO₂；混合适用期资料有6h与3h不同描述—保守按3h内",
+      "safety_flags": "溶剂通风；B料查SDS（可能含NCO）；现配现用",
+      "disadvantage_notes": "厂家标称不可移植到改性涂层；A/B 5:1 质量或体积仍待核实；曾误将A+B预混放置导致固化且不可恢复"
     },
     {
-      "formulation_id": "EX-BLANK-CTRL",
-      "basecoat": "示例双组分环氧（虚构牌号）",
-      "mix_ratio": "5:1（示例）",
-      "filler_wt_pct": "0",
-      "dispersant_rel_pct": "",
-      "DFT_um": "50±10（目标）",
-      "substrate": "碳钢试片",
-      "pull_off_MPa": "",
-      "pull_off_tag": "待测",
-      "eis_note": "",
-      "eis_tag": "待测",
-      "hplc_analyte_note": "",
-      "hplc_tag": "待测",
-      "microcosm_relative_fouling": "",
-      "microcosm_tag": "待测",
-      "uncertainty": "示例数据 / example：空白对照槽位，尚无数字",
-      "source": "docs/example-data.md",
-      "n": "",
-      "note": "无功能颗粒对照；性能栏均为待测",
-      "safety_flags": "溶剂通风；现配现用",
-      "disadvantage_notes": "空白不能代表功能化样板",
+      "formulation_id": "JF602-BYK-BLANK-CTRL",
+      "basecoat": "JF-602",
+      "JF602_A_B_ratio": "5:1（须核实）",
       "CA_MSiO2_wt_pct": "0",
       "BYK_rel_to_particle_pct": "",
-      "hplc_CA_ug_mL_or_flux": ""
-    },
-    {
-      "formulation_id": "EX-FILLER-1PCT",
-      "basecoat": "示例双组分环氧（虚构牌号）",
-      "mix_ratio": "5:1（示例）",
-      "filler_wt_pct": "1",
-      "dispersant_rel_pct": "",
-      "DFT_um": "50±10（目标）",
-      "substrate": "碳钢试片",
+      "DFT_um": "30±5（目标）",
+      "substrate": "6061-Al",
       "pull_off_MPa": "",
       "pull_off_tag": "待测",
       "eis_note": "",
       "eis_tag": "待测",
-      "hplc_analyte_note": "",
+      "hplc_CA_ug_mL_or_flux": "",
       "hplc_tag": "待测",
       "microcosm_relative_fouling": "",
       "microcosm_tag": "待测",
-      "uncertainty": "示例数据 / example：1 wt% 功能填料筛选槽",
-      "source": "docs/example-data.md",
+      "uncertainty": "计划对照：无功能颗粒空白；无颗粒时 BYK 用量另定或为0；尚无实测",
+      "source": "Lab Benchmark KB (2026-10) §5.2–5.3",
       "n": "",
-      "note": "填料种类与真实口径未指定——仅演示表格结构",
-      "safety_flags": "溶剂通风；粉体防扬尘",
-      "disadvantage_notes": "待测；禁止把本行当实测",
+      "note": "须与 OEM、CA@MSiO₂+BYK 对照并列；记录破坏模式与 DFT；工艺：保留A料后加B料现配现用",
+      "safety_flags": "溶剂通风；B料查SDS；现配现用",
+      "disadvantage_notes": "无颗粒空白不能代表功能化样板；助剂过量可能影响固化网络—须实测验证"
+    },
+    {
+      "formulation_id": "JF602-CA0-SCREEN-SLOT",
+      "basecoat": "JF-602",
+      "JF602_A_B_ratio": "5:1（须核实）",
+      "CA_MSiO2_wt_pct": "0",
+      "BYK_rel_to_particle_pct": "",
+      "DFT_um": "30±5（目标）",
+      "substrate": "6061-Al",
+      "pull_off_MPa": "",
+      "pull_off_tag": "待测",
+      "eis_note": "",
+      "eis_tag": "待测",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "待测",
+      "microcosm_relative_fouling": "",
+      "microcosm_tag": "待测",
+      "uncertainty": "计划筛选用量槽位；尚无实测",
+      "source": "Lab Benchmark KB (2026-10) §5.2",
+      "n": "",
+      "note": "CA@MSiO₂=0 wt%（相对总固体口径待统一）；BYK 见 BYK 槽位行",
+      "safety_flags": "溶剂通风；B料查SDS；现配现用；粉体称量防扬尘",
+      "disadvantage_notes": "掺量基准（相对总固体）尚未定稿—与1/2/3%比较前须统一分母"
+    },
+    {
+      "formulation_id": "JF602-CA1-SCREEN-SLOT",
+      "basecoat": "JF-602",
+      "JF602_A_B_ratio": "5:1（须核实）",
       "CA_MSiO2_wt_pct": "1",
       "BYK_rel_to_particle_pct": "",
-      "hplc_CA_ug_mL_or_flux": ""
-    },
-    {
-      "formulation_id": "EX-FILLER-3PCT",
-      "basecoat": "示例双组分环氧（虚构牌号）",
-      "mix_ratio": "5:1（示例）",
-      "filler_wt_pct": "3",
-      "dispersant_rel_pct": "",
-      "DFT_um": "50±10（目标）",
-      "substrate": "碳钢试片",
+      "DFT_um": "30±5（目标）",
+      "substrate": "6061-Al",
       "pull_off_MPa": "",
       "pull_off_tag": "待测",
       "eis_note": "",
       "eis_tag": "待测",
-      "hplc_analyte_note": "",
+      "hplc_CA_ug_mL_or_flux": "",
       "hplc_tag": "待测",
       "microcosm_relative_fouling": "",
       "microcosm_tag": "待测",
-      "uncertainty": "示例数据 / example：3 wt% 功能填料筛选槽",
-      "source": "docs/example-data.md",
+      "uncertainty": "计划筛选用量槽位；尚无实测",
+      "source": "Lab Benchmark KB (2026-10) §5.2",
       "n": "",
-      "note": "高掺量粗糙/缺陷风险示意",
-      "safety_flags": "溶剂通风；粉体防扬尘",
-      "disadvantage_notes": "待测",
+      "note": "CA@MSiO₂≈1 wt%；颗粒~5μm可能突出粗糙—先消团聚；双组分致密网络可能阻碍CA释放须HPLC验证",
+      "safety_flags": "溶剂通风；B料查SDS；现配现用；CA挥发/避光",
+      "disadvantage_notes": "致密固化网络可能抑制缓释；附着力升或降均未知—禁止用厂家4.9–6.6 MPa代替；浅埋/梯度覆盖层也可能同时抑制释放"
+    },
+    {
+      "formulation_id": "JF602-CA2-SCREEN-SLOT",
+      "basecoat": "JF-602",
+      "JF602_A_B_ratio": "5:1（须核实）",
+      "CA_MSiO2_wt_pct": "2",
+      "BYK_rel_to_particle_pct": "",
+      "DFT_um": "30±5（目标）",
+      "substrate": "6061-Al",
+      "pull_off_MPa": "",
+      "pull_off_tag": "待测",
+      "eis_note": "",
+      "eis_tag": "待测",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "待测",
+      "microcosm_relative_fouling": "",
+      "microcosm_tag": "待测",
+      "uncertainty": "计划筛选用量槽位；尚无实测",
+      "source": "Lab Benchmark KB (2026-10) §5.2",
+      "n": "",
+      "note": "CA@MSiO₂≈2 wt%；相对总固体口径须与0/1/3统一",
+      "safety_flags": "溶剂通风；B料查SDS；现配现用；CA挥发/避光",
+      "disadvantage_notes": "粗糙/局部缺陷风险随掺量上升；释放与拉拔均待测；预配浓缩料24h/3d/7d沉降不保证长期稳定"
+    },
+    {
+      "formulation_id": "JF602-CA3-SCREEN-SLOT",
+      "basecoat": "JF-602",
+      "JF602_A_B_ratio": "5:1（须核实）",
       "CA_MSiO2_wt_pct": "3",
       "BYK_rel_to_particle_pct": "",
-      "hplc_CA_ug_mL_or_flux": ""
-    },
-    {
-      "formulation_id": "EX-FRC-DEMO",
-      "basecoat": "示例有机硅污损释放（虚构）",
-      "mix_ratio": "—",
-      "filler_wt_pct": "",
-      "dispersant_rel_pct": "",
-      "DFT_um": "150±20（目标）",
-      "substrate": "碳钢试片",
+      "DFT_um": "30±5（目标）",
+      "substrate": "6061-Al",
       "pull_off_MPa": "",
       "pull_off_tag": "待测",
       "eis_note": "",
       "eis_tag": "待测",
-      "hplc_analyte_note": "",
+      "hplc_CA_ug_mL_or_flux": "",
       "hplc_tag": "待测",
-      "microcosm_relative_fouling": "相对洁净（示意叙述）",
-      "microcosm_tag": "相对等级",
-      "uncertainty": "示例数据 / example：示意污损释放漆；非航次实测",
-      "source": "docs/example-data.md",
+      "microcosm_relative_fouling": "",
+      "microcosm_tag": "待测",
+      "uncertainty": "计划筛选用量槽位；尚无实测",
+      "source": "Lab Benchmark KB (2026-10) §5.2",
       "n": "",
-      "note": "仅演示轨 A 表结构与标签",
-      "safety_flags": "按厂家 SDS",
-      "disadvantage_notes": "相对等级≠绝对防污率",
-      "CA_MSiO2_wt_pct": "",
-      "BYK_rel_to_particle_pct": "",
-      "hplc_CA_ug_mL_or_flux": ""
+      "note": "CA@MSiO₂≈3 wt%；高掺量粗糙/缺陷风险更高",
+      "safety_flags": "溶剂通风；B料查SDS；现配现用；CA挥发/避光；粉体防扬尘",
+      "disadvantage_notes": "高掺量突出与团聚风险最大；双组分致密网络+高填可能双重抑制释放—须水中CA定量"
     },
     {
-      "formulation_id": "EX-SPC-DEMO",
-      "basecoat": "示例铜系 SPC（虚构牌号）",
-      "mix_ratio": "—",
-      "filler_wt_pct": "",
-      "dispersant_rel_pct": "",
-      "DFT_um": "100±15（目标）",
-      "substrate": "碳钢试片",
+      "formulation_id": "JF602-BYK5-SLOT",
+      "basecoat": "JF-602",
+      "JF602_A_B_ratio": "5:1（须核实）",
+      "CA_MSiO2_wt_pct": "",
+      "BYK_rel_to_particle_pct": "5",
+      "DFT_um": "30±5（目标）",
+      "substrate": "6061-Al",
       "pull_off_MPa": "",
       "pull_off_tag": "待测",
       "eis_note": "",
       "eis_tag": "待测",
-      "hplc_analyte_note": "",
+      "hplc_CA_ug_mL_or_flux": "",
       "hplc_tag": "待测",
-      "microcosm_relative_fouling": "相对洁净（示意）",
-      "microcosm_tag": "相对等级",
-      "uncertainty": "示例数据 / example：示意自抛光铜系；非现场数据",
-      "source": "docs/example-data.md",
+      "microcosm_relative_fouling": "",
+      "microcosm_tag": "待测",
+      "uncertainty": "BYK-110相对颗粒质量5%筛选槽；例1g颗粒→0.05g BYK；尚无实测",
+      "source": "Lab Benchmark KB (2026-10) §5.2",
       "n": "",
-      "note": "铜系生物杀伤剂法规以当地为准",
-      "safety_flags": "铜粉与溶剂防护",
-      "disadvantage_notes": "不可外推为全球最优",
-      "CA_MSiO2_wt_pct": "",
-      "BYK_rel_to_particle_pct": "",
-      "hplc_CA_ug_mL_or_flux": ""
+      "note": "工艺：A料先加BYK再分批加粉（300–500rpm助剂→500–800rpm粉10–20min），B后加低速约5min",
+      "safety_flags": "溶剂通风；B料查SDS；现配现用",
+      "disadvantage_notes": "须验证对固化/附着力/耐水的影响；与CA掺量矩阵交叉后才可比较"
     },
     {
-      "formulation_id": "EX-HPLC-GEOM",
-      "basecoat": "示例释放几何（通用）",
-      "mix_ratio": "",
-      "filler_wt_pct": "",
-      "dispersant_rel_pct": "",
+      "formulation_id": "JF602-BYK75-SLOT",
+      "basecoat": "JF-602",
+      "JF602_A_B_ratio": "5:1（须核实）",
+      "CA_MSiO2_wt_pct": "",
+      "BYK_rel_to_particle_pct": "7.5",
+      "DFT_um": "30±5（目标）",
+      "substrate": "6061-Al",
+      "pull_off_MPa": "",
+      "pull_off_tag": "待测",
+      "eis_note": "",
+      "eis_tag": "待测",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "待测",
+      "microcosm_relative_fouling": "",
+      "microcosm_tag": "待测",
+      "uncertainty": "BYK-110相对颗粒质量7.5%筛选槽；例1g→0.075g；尚无实测",
+      "source": "Lab Benchmark KB (2026-10) §5.2",
+      "n": "",
+      "note": "预配A+BYK+颗粒浓缩料须查24h/3d/7d沉降黏度团聚",
+      "safety_flags": "溶剂通风；B料查SDS；现配现用",
+      "disadvantage_notes": "不保证长期稳定；勿先A+B再长时间研磨"
+    },
+    {
+      "formulation_id": "JF602-BYK10-SLOT",
+      "basecoat": "JF-602",
+      "JF602_A_B_ratio": "5:1（须核实）",
+      "CA_MSiO2_wt_pct": "",
+      "BYK_rel_to_particle_pct": "10",
+      "DFT_um": "30±5（目标）",
+      "substrate": "6061-Al",
+      "pull_off_MPa": "",
+      "pull_off_tag": "待测",
+      "eis_note": "",
+      "eis_tag": "待测",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "待测",
+      "microcosm_relative_fouling": "",
+      "microcosm_tag": "待测",
+      "uncertainty": "BYK-110相对颗粒质量10%筛选槽；例1g→0.10g；尚无实测",
+      "source": "Lab Benchmark KB (2026-10) §5.2",
+      "n": "",
+      "note": "过量助剂可能影响固化网络—以实测为准",
+      "safety_flags": "溶剂通风；B料查SDS；现配现用",
+      "disadvantage_notes": "助剂偏高时固化/耐水风险上升；须与5%/7.5%并列实测"
+    },
+    {
+      "formulation_id": "HPLC-GEOM-META",
+      "basecoat": "JF-602（或含CA涂层通用）",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "",
+      "BYK_rel_to_particle_pct": "",
       "DFT_um": "",
-      "substrate": "",
+      "substrate": "6061-Al（25×25×5mm）",
       "pull_off_MPa": "",
-      "pull_off_tag": "方案非实测",
+      "pull_off_tag": "",
       "eis_note": "",
       "eis_tag": "",
-      "hplc_analyte_note": "几何示意：暴露面积约 20 cm²；V=100 mL；非浓度结果",
+      "hplc_CA_ug_mL_or_flux": "几何设计：六面涂；暴露面积17.5cm²；V=100.0mL；A/V=0.175cm²/mL；取样1.00mL补液",
       "hplc_tag": "方案非实测",
       "microcosm_relative_fouling": "",
       "microcosm_tag": "",
-      "uncertainty": "示例数据 / example：仅几何示意，无假浓度",
-      "source": "docs/example-data.md",
+      "uncertainty": "设计几何与质量平衡公式；非浓度结果；Q_n仅校正取样带走的CA，不校正挥发/降解/吸附",
+      "source": "Lab Benchmark KB (2026-10) §7",
       "n": "",
-      "note": "正式浓度须 tag=实测",
-      "safety_flags": "避光；容器空白",
-      "disadvantage_notes": "水相检出≠涂层真实累计释放",
-      "CA_MSiO2_wt_pct": "",
-      "BYK_rel_to_particle_pct": "",
-      "hplc_CA_ug_mL_or_flux": "几何示意：暴露面积约 20 cm²；V=100 mL；非浓度结果"
+      "note": "公式 Q_n=C_n×V+V_s×ΣC_i；q_n=Q_n/17.5 μg/cm²；正式浓度行须另建且 tag=实测；PTFE支架六面接水；25±1℃避光；时间点候选0–28d",
+      "safety_flags": "CA挥发/吸附；容器回收空白；避光棕色瓶",
+      "disadvantage_notes": "水相检出质量≠涂层真实累计总释放；挥发/降解/瓶壁吸附可使Q_n偏低；海水盐与基体效应另需回收率"
     },
     {
-      "formulation_id": "EX-EIS-SLOT",
-      "basecoat": "示例 EIS 方法槽",
-      "mix_ratio": "",
-      "filler_wt_pct": "",
-      "dispersant_rel_pct": "",
+      "formulation_id": "EIS-PROTOCOL-SLOT",
+      "basecoat": "JF-602 / 自配 / 对照",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "",
+      "BYK_rel_to_particle_pct": "",
       "DFT_um": "",
-      "substrate": "",
+      "substrate": "6061-Al",
       "pull_off_MPa": "",
-      "pull_off_tag": "待测",
-      "eis_note": "计划：3.5wt%NaCl；OCP+EIS；时间点示意",
+      "pull_off_tag": "",
+      "eis_note": "计划：3.5wt%NaCl；OCP+EIS；关注|Z|0.01Hz、Rcoat、Rct；时间点候选1h及1/3/7/14/28d",
       "eis_tag": "待测",
-      "hplc_analyte_note": "",
+      "hplc_CA_ug_mL_or_flux": "",
       "hplc_tag": "",
       "microcosm_relative_fouling": "",
       "microcosm_tag": "",
-      "uncertainty": "示例数据 / example：方法槽位，无阻抗数字",
-      "source": "docs/example-data.md",
+      "uncertainty": "方法槽位；尚无实测阻抗数字；Q为CPE不可称理想电容；OCP正移≠腐蚀速率下降",
+      "source": "Lab Benchmark KB (2026-10) §8",
       "n": "",
-      "note": "须与裸板/原漆/功能化并列报告",
-      "safety_flags": "含盐废水按规定处置",
-      "disadvantage_notes": "不可用协议描述冒充防腐结论",
+      "note": "须与裸板/原漆/功能化并列；报告等效电路假设 Rs/(Rf Qf)/(Rct Qdl)",
+      "safety_flags": "溶剂废液与含盐废水按规定处置",
+      "disadvantage_notes": "尚无任何实测|Z|或Rct；不可用协议描述冒充防腐优越结论"
+    },
+    {
+      "formulation_id": "MICROCOSM-BARE-6061",
+      "basecoat": "其他（裸基材）",
+      "JF602_A_B_ratio": "",
       "CA_MSiO2_wt_pct": "",
       "BYK_rel_to_particle_pct": "",
-      "hplc_CA_ug_mL_or_flux": ""
+      "DFT_um": "",
+      "substrate": "6061-Al",
+      "pull_off_MPa": "",
+      "pull_off_tag": "",
+      "eis_note": "",
+      "eis_tag": "",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "",
+      "microcosm_relative_fouling": "Day1~5%；Day3 20–25%；Day5 35–45%；Day7 60–70%（早期图像粗略覆盖）",
+      "microcosm_tag": "粗估观察",
+      "uncertainty": "半定量；非严格图像统计；不可作论文真值",
+      "source": "Lab Benchmark KB (2026-10) §6",
+      "n": "",
+      "note": "淡/海水微宇宙；羽纹硅藻样形态未鉴定定属；正式须 n≥3 板×≥5 视野+统一阈值",
+      "safety_flags": "微宇宙生物/藻类操作常规防护",
+      "disadvantage_notes": "仅作相对脏对照锚点；SEM形态完整≠存活证据"
+    },
+    {
+      "formulation_id": "ACRYLIC-SELF-HIST-MICRO",
+      "basecoat": "自配丙烯酸松香",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "",
+      "BYK_rel_to_particle_pct": "",
+      "DFT_um": "",
+      "substrate": "6061-Al",
+      "pull_off_MPa": "",
+      "pull_off_tag": "",
+      "eis_note": "",
+      "eis_tag": "",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "",
+      "microcosm_relative_fouling": "前7天相对洁净（Day1<1%；Day3 1–2%；Day5 3–5%；Day7 6–10%粗估）；Day14明显污损—短期延迟、长期持续不足",
+      "microcosm_tag": "粗估观察",
+      "uncertainty": "半定量；配方历史演变（曾含Cu₂O等）不可假定为最新配方；≠JF-602路线",
+      "source": "Lab Benchmark KB (2026-10) §5.1§6",
+      "n": "",
+      "note": "与Hempel/裸板对照；勿与JF-602混轨；若含Cu₂O不可称纯物理防污",
+      "safety_flags": "二甲苯/乙酸丁酯/正丁醇通风；CA粉体防扬尘",
+      "disadvantage_notes": "【劣势】Day14持续性不足；历史含铜版不可与现行无铜成功配方混读；浸涂曾出现膜薄/流挂/缩孔露底"
+    },
+    {
+      "formulation_id": "HEMPEL-CTRL-MICRO",
+      "basecoat": "其他（Hempel商业防污对照）",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "",
+      "BYK_rel_to_particle_pct": "",
+      "DFT_um": "",
+      "substrate": "6061-Al",
+      "pull_off_MPa": "",
+      "pull_off_tag": "",
+      "eis_note": "",
+      "eis_tag": "",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "",
+      "microcosm_relative_fouling": "前7天较洁净；Day14仍相对洁净（相对自配/裸板的对照观察）",
+      "microcosm_tag": "粗估观察",
+      "uncertainty": "定性相对观察；非航次/热带港停实测；非严格覆盖率统计",
+      "source": "Lab Benchmark KB (2026-10) §6",
+      "n": "",
+      "note": "仅作微宇宙相对对照锚点；商用规格以厂家TDS为准；模拟器轨C排序证据之一",
+      "safety_flags": "按厂家SDS施工防护",
+      "disadvantage_notes": "微宇宙相对洁净≠航次长期性能；不可外推为全球走廊最优证明"
+    },
+    {
+      "formulation_id": "ACRYLIC-CUFREE-OK-1X",
+      "basecoat": "自配丙烯酸松香",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "约3（以2.0g CA@MSiO₂为3wt%基准·待确认）",
+      "BYK_rel_to_particle_pct": "配方固定0.5mL（非按颗粒%）",
+      "DFT_um": "待测DFT",
+      "substrate": "6061-Al",
+      "pull_off_MPa": "",
+      "pull_off_tag": "待测",
+      "eis_note": "",
+      "eis_tag": "待测",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "待测",
+      "microcosm_relative_fouling": "",
+      "microcosm_tag": "待测",
+      "uncertainty": "用户确认一次成膜成功配方（Cu₂O=0）；性能栏均待测",
+      "source": "Lab Experiment Log (2026-10) 2026-10-09；dose-gradient-matrix-2026-10-10.md",
+      "n": "",
+      "note": "树脂：热塑性丙烯酸18g + 氟改性硅氧烷2g（树脂固体）+松香12g；溶剂正丁醇2+二甲苯12+乙酸正丁酯6 mL（两段法）；BYK-110 0.5mL；环氧大豆油0.3g；KH-560 0.3mL；磷酸锌3.0；BaSO₄2.0；滑石粉1.5；Fe₂O₃0.8–1.0；疏水气相SiO₂0.15；CA@MSiO₂2.0g。氟硅最后低剪切；CA预润湿后分散",
+      "safety_flags": "二甲苯/乙酸丁酯/正丁醇通风；KH-560；CA避光；粉体防扬尘",
+      "disadvantage_notes": "【劣势/注意】溶剂敞口长搅易挥发影响成膜；磁力搅拌不足以打散顽固团聚；含氟硅后曾讨论缩孔风险（须测0/5/10%相容）；与JF-602路线勿混；拉拔/EIS/HPLC/防污D14均尚缺实测（notes 2026-10-08现状）"
+    },
+    {
+      "formulation_id": "ACRYLIC-DOSE-0PCT",
+      "basecoat": "自配丙烯酸松香",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "0",
+      "BYK_rel_to_particle_pct": "配方固定0.5mL",
+      "DFT_um": "",
+      "substrate": "6061-Al",
+      "pull_off_MPa": "",
+      "pull_off_tag": "待测",
+      "eis_note": "",
+      "eis_tag": "待测",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "待测",
+      "microcosm_relative_fouling": "",
+      "microcosm_tag": "待测",
+      "uncertainty": "掺量梯度0 wt%槽；BYK固定配方量不随颗粒加减；尚无实测",
+      "source": "Dose Gradient Matrix (2026-10)",
+      "n": "",
+      "note": "固定1×基料同 ACRYLIC-CUFREE-OK-1X；只改 CA@MSiO₂=0；建议先做0%与3%再1%/2%",
+      "safety_flags": "同上溶剂/粉体防护",
+      "disadvantage_notes": "【劣势】无缓释相时防污可能接近历史自配短期延迟上限；正式比较须同工艺同膜厚"
+    },
+    {
+      "formulation_id": "ACRYLIC-DOSE-1PCT",
+      "basecoat": "自配丙烯酸松香",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "1（约0.67g/1×）",
+      "BYK_rel_to_particle_pct": "配方固定0.5mL",
+      "DFT_um": "",
+      "substrate": "6061-Al",
+      "pull_off_MPa": "",
+      "pull_off_tag": "待测",
+      "eis_note": "",
+      "eis_tag": "待测",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "待测",
+      "microcosm_relative_fouling": "",
+      "microcosm_tag": "待测",
+      "uncertainty": "掺量梯度1 wt%槽；颗粒按3wt%=2.0g比例；尚无实测",
+      "source": "Dose Gradient Matrix (2026-10)",
+      "n": "",
+      "note": "CA@MSiO₂≈0.67 g / 1×；3wt%分母若与用户口头定义不同只改称量",
+      "safety_flags": "同上",
+      "disadvantage_notes": "待测；禁止用历史含铜微宇宙覆盖粗估代替本档结果"
+    },
+    {
+      "formulation_id": "ACRYLIC-DOSE-2PCT",
+      "basecoat": "自配丙烯酸松香",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "2（约1.33g/1×）",
+      "BYK_rel_to_particle_pct": "配方固定0.5mL",
+      "DFT_um": "",
+      "substrate": "6061-Al",
+      "pull_off_MPa": "",
+      "pull_off_tag": "待测",
+      "eis_note": "",
+      "eis_tag": "待测",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "待测",
+      "microcosm_relative_fouling": "",
+      "microcosm_tag": "待测",
+      "uncertainty": "掺量梯度2 wt%槽；尚无实测",
+      "source": "Dose Gradient Matrix (2026-10)",
+      "n": "",
+      "note": "CA@MSiO₂≈1.33 g / 1×",
+      "safety_flags": "同上",
+      "disadvantage_notes": "待测；中期叙事写掺量依赖不写空间梯度（决策2026-10-10）"
+    },
+    {
+      "formulation_id": "ACRYLIC-DOSE-3PCT",
+      "basecoat": "自配丙烯酸松香",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "3（2.0g/1×基准）",
+      "BYK_rel_to_particle_pct": "配方固定0.5mL",
+      "DFT_um": "",
+      "substrate": "6061-Al",
+      "pull_off_MPa": "",
+      "pull_off_tag": "待测",
+      "eis_note": "",
+      "eis_tag": "待测",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "待测",
+      "microcosm_relative_fouling": "",
+      "microcosm_tag": "待测",
+      "uncertainty": "掺量梯度3 wt%槽=成功配方颗粒量；尚无实测",
+      "source": "Dose Gradient Matrix (2026-10)",
+      "n": "",
+      "note": "CA@MSiO₂=2.0 g / 1×；2×放大见 ACRYLIC-2X-BATCH",
+      "safety_flags": "同上",
+      "disadvantage_notes": "待确认用户口中3wt%是否即该2.0g；性能待测"
+    },
+    {
+      "formulation_id": "ACRYLIC-2X-BATCH",
+      "basecoat": "自配丙烯酸松香",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "3（4.0g/2×）",
+      "BYK_rel_to_particle_pct": "BYK 1.0mL（随整锅放大）",
+      "DFT_um": "",
+      "substrate": "6061-Al",
+      "pull_off_MPa": "",
+      "pull_off_tag": "待测",
+      "eis_note": "",
+      "eis_tag": "待测",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "待测",
+      "microcosm_relative_fouling": "",
+      "microcosm_tag": "待测",
+      "uncertainty": "2×放大估算体积；配完以瓶内液位为准；非性能实测",
+      "source": "Lab Experiment Log (2026-10) 2026-10-09（2倍放大）",
+      "n": "",
+      "note": "【方案非实测】丙烯酸36；氟硅4；松香24；正丁醇4；二甲苯24；乙酸丁酯12；BYK1.0；大豆油0.6；KH-5600.6；磷酸锌6；BaSO₄4；滑石3；Fe₂O₃1.8；气相SiO₂0.30；CA@MSiO₂4.0。溶剂两段+称重补损",
+      "safety_flags": "溶剂通风；密闭锥形瓶不用橡胶塞",
+      "disadvantage_notes": "【注意】乙醇/溶剂比例改变不可与1×小试直接比动力学；损失>0.5g用预留二甲苯按质量补；本行无性能数字"
+    },
+    {
+      "formulation_id": "ACRYLIC-HIST-Cu-FULL",
+      "basecoat": "自配丙烯酸松香（历史含铜）",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "（历史CA@MSiO₂2g）",
+      "BYK_rel_to_particle_pct": "BYK-110 0.5mL（历史）",
+      "DFT_um": "",
+      "substrate": "6061-Al",
+      "pull_off_MPa": "",
+      "pull_off_tag": "待测",
+      "eis_note": "",
+      "eis_tag": "待测",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "待测",
+      "microcosm_relative_fouling": "见 ACRYLIC-SELF-HIST-MICRO 粗估（若同路线）",
+      "microcosm_tag": "粗估观察",
+      "uncertainty": "历史配方不断演变；不可假设为最新；含Cu₂O",
+      "source": "Lab Benchmark KB (2026-10) §5.1",
+      "n": "",
+      "note": "历史值示例：正丁醇3；二甲苯11；乙酸丁酯5；丙烯酸20；松香14；BYK0.5；大豆油0.5；KH-5600.3；气相SiO₂0.30；CaCO₃3；BaSO₄4；滑石4；Fe₂O₃1.2；Zn(OH)₂0.8；磷酸锌3；Cu₂O5；CA@MSiO₂2；该版无PDMS",
+      "safety_flags": "溶剂+铜粉防护",
+      "disadvantage_notes": "【劣势】Day14持续性不足（微宇宙粗估）；含Cu₂O不可称无杀生剂/纯物理防污；与现行无铜成功配方分开；配方已演变"
+    },
+    {
+      "formulation_id": "ACRYLIC-HIST-Cu-F0",
+      "basecoat": "自配丙烯酸松香（历史含铜筛选）",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "",
+      "BYK_rel_to_particle_pct": "",
+      "DFT_um": "",
+      "substrate": "6061-Al",
+      "pull_off_MPa": "",
+      "pull_off_tag": "待测",
+      "eis_note": "",
+      "eis_tag": "待测",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "方案非实测",
+      "microcosm_relative_fouling": "",
+      "microcosm_tag": "待测",
+      "uncertainty": "历史提高Cu₂O筛选方案；非已验证优选",
+      "source": "Lab Benchmark KB (2026-10) §5.1",
+      "n": "方案非实测",
+      "note": "仅配方筛选讨论；无拉拔/EIS/HPLC/防污正式数",
+      "safety_flags": "铜粉与溶剂防护",
+      "disadvantage_notes": "【劣势】方案未验证；不可当作优选结论"
+    },
+    {
+      "formulation_id": "ACRYLIC-HIST-Cu-F1",
+      "basecoat": "自配丙烯酸松香（历史含铜筛选）",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "",
+      "BYK_rel_to_particle_pct": "",
+      "DFT_um": "",
+      "substrate": "6061-Al",
+      "pull_off_MPa": "",
+      "pull_off_tag": "待测",
+      "eis_note": "",
+      "eis_tag": "待测",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "方案非实测",
+      "microcosm_relative_fouling": "",
+      "microcosm_tag": "待测",
+      "uncertainty": "历史筛选方案；非已验证优选",
+      "source": "Lab Benchmark KB (2026-10) §5.1",
+      "n": "方案非实测",
+      "note": "方案而非已验证优选",
+      "safety_flags": "铜粉与溶剂防护",
+      "disadvantage_notes": "【劣势】方案未验证；高铜不自动等于优防污"
+    },
+    {
+      "formulation_id": "ACRYLIC-HIST-Cu-F2",
+      "basecoat": "自配丙烯酸松香（历史含铜筛选）",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "",
+      "BYK_rel_to_particle_pct": "",
+      "DFT_um": "",
+      "substrate": "6061-Al",
+      "pull_off_MPa": "",
+      "pull_off_tag": "待测",
+      "eis_note": "",
+      "eis_tag": "待测",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "方案非实测",
+      "microcosm_relative_fouling": "",
+      "microcosm_tag": "待测",
+      "uncertainty": "历史筛选方案；非已验证优选",
+      "source": "Lab Benchmark KB (2026-10) §5.1",
+      "n": "方案非实测",
+      "note": "方案而非已验证优选",
+      "safety_flags": "铜粉与溶剂防护",
+      "disadvantage_notes": "【劣势】方案未验证"
+    },
+    {
+      "formulation_id": "CA-POWDER-M0",
+      "basecoat": "CA@MSiO₂粉体（无CA）",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "投料：0.50g MSiO₂ 无CA",
+      "BYK_rel_to_particle_pct": "",
+      "DFT_um": "",
+      "substrate": "粉体",
+      "pull_off_MPa": "",
+      "pull_off_tag": "",
+      "eis_note": "",
+      "eis_tag": "",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "",
+      "microcosm_relative_fouling": "粉体表征：TGA损失1.0912%；BET125.54（见note）",
+      "microcosm_tag": "粗估观察",
+      "uncertainty": "粉体表征历史整理；≠涂层拉拔/EIS/HPLC；TGA非完全验证载药率",
+      "source": "Lab Benchmark KB (2026-10) §3.2§4",
+      "n": "",
+      "note": "TGA最终质量损失1.0912%（粗估观察·表观）；BET 125.54 m²/g；总孔容0.956；FTIR 1695相对吸收约0.00309（1075归一）",
+      "safety_flags": "粉体称量防扬尘；乙醇",
+      "disadvantage_notes": "TGA表观挥发≠精确载药；SEM/EDS不能证明孔内包载；颜色不能证明载药率"
+    },
+    {
+      "formulation_id": "CA-POWDER-M1",
+      "basecoat": "CA@MSiO₂粉体",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "投料：0.50g MSiO₂+0.25g CA",
+      "BYK_rel_to_particle_pct": "",
+      "DFT_um": "",
+      "substrate": "粉体",
+      "pull_off_MPa": "",
+      "pull_off_tag": "",
+      "eis_note": "",
+      "eis_tag": "",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "",
+      "microcosm_relative_fouling": "粉体表征：TGA2.28%；校正表观~1.20%；BET113.42",
+      "microcosm_tag": "粗估观察",
+      "uncertainty": "粉体表征历史整理；≠涂层拉拔/EIS/HPLC；TGA非完全验证载药率",
+      "source": "Lab Benchmark KB (2026-10) §4",
+      "n": "",
+      "note": "TGA最终损失2.2797%；M0校正后表观有机/挥发约1.20%（粗估观察·非完全验证载药率）；BET 113.42；FTIR 1695相对约0.00950",
+      "safety_flags": "CA避光；乙醇；粉尘",
+      "disadvantage_notes": "投料比≠实际负载；EDS C误差大仅半定量；不可把粉体TGA当作涂层HPLC释放"
+    },
+    {
+      "formulation_id": "CA-POWDER-M2",
+      "basecoat": "CA@MSiO₂粉体",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "投料：0.50g+0.50g CA",
+      "BYK_rel_to_particle_pct": "",
+      "DFT_um": "",
+      "substrate": "粉体",
+      "pull_off_MPa": "",
+      "pull_off_tag": "",
+      "eis_note": "",
+      "eis_tag": "",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "",
+      "microcosm_relative_fouling": "粉体表征：TGA4.02%；校正表观~2.96%；BET99.70",
+      "microcosm_tag": "粗估观察",
+      "uncertainty": "粉体表征历史整理；≠涂层拉拔/EIS/HPLC；TGA非完全验证载药率",
+      "source": "Lab Benchmark KB (2026-10) §4",
+      "n": "",
+      "note": "TGA最终4.015844%；校正表观约2.96%；BET 99.70；FTIR 1695相对约0.01293",
+      "safety_flags": "同上",
+      "disadvantage_notes": "总孔容M1/M2先增—严禁写「所有孔容随CA单调降低」"
+    },
+    {
+      "formulation_id": "CA-POWDER-M3",
+      "basecoat": "CA@MSiO₂粉体",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "投料：0.50g+1.00g CA",
+      "BYK_rel_to_particle_pct": "",
+      "DFT_um": "",
+      "substrate": "粉体",
+      "pull_off_MPa": "",
+      "pull_off_tag": "",
+      "eis_note": "",
+      "eis_tag": "",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "",
+      "microcosm_relative_fouling": "粉体表征：TGA9.58%；校正表观~8.59%；BET82.01",
+      "microcosm_tag": "粗估观察",
+      "uncertainty": "粉体表征历史整理；≠涂层拉拔/EIS/HPLC；TGA非完全验证载药率",
+      "source": "Lab Benchmark KB (2026-10) §4",
+      "n": "",
+      "note": "TGA最终9.584%；校正表观约8.59%；BET 82.01（较M0降约34.7%）；<40nm孔容降约26.1%；FTIR 1695相对约0.02827",
+      "safety_flags": "同上",
+      "disadvantage_notes": "BET降低与孔隙占据/孔口阻塞相符但不证明全部CA在孔内；须正交HPLC萃取定量"
+    },
+    {
+      "formulation_id": "CA-POWDER-TGA-SUMMARY",
+      "basecoat": "CA@MSiO₂粉体",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "M0–M3",
+      "BYK_rel_to_particle_pct": "",
+      "DFT_um": "",
+      "substrate": "粉体",
+      "pull_off_MPa": "",
+      "pull_off_tag": "",
+      "eis_note": "",
+      "eis_tag": "",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "",
+      "microcosm_relative_fouling": "TGA表观(M0校正): M1≈1.20%; M2≈2.96%; M3≈8.59%（粉体·非涂层）",
+      "microcosm_tag": "粗估观察",
+      "uncertainty": "非精确CA载药率",
+      "source": "粗估观察",
+      "n": "非经过完全验证的精确CA载药率；受升温程序/残留溶剂/氧化影响",
+      "note": "Lab Benchmark KB (2026-10) §4.3",
+      "safety_flags": "",
+      "disadvantage_notes": "建议相同升温程序+纯CA参比+HPLC萃取正交"
+    },
+    {
+      "formulation_id": "CA-POWDER-BET-SUMMARY",
+      "basecoat": "CA@MSiO₂粉体",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "M0–M3",
+      "BYK_rel_to_particle_pct": "",
+      "DFT_um": "",
+      "substrate": "粉体",
+      "pull_off_MPa": "",
+      "pull_off_tag": "",
+      "eis_note": "",
+      "eis_tag": "",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "",
+      "microcosm_relative_fouling": "BET m²/g: M0 125.54; M1 113.42; M2 99.70; M3 82.01（粉体）",
+      "microcosm_tag": "粗估观察",
+      "uncertainty": "N₂吸附历史整理",
+      "source": "粗估观察",
+      "n": "N₂吸附历史整理；解释须谨慎",
+      "note": "Lab Benchmark KB (2026-10) §4.4",
+      "safety_flags": "",
+      "disadvantage_notes": "微孔指标不全单调；总孔容M1/M2先增"
+    },
+    {
+      "formulation_id": "JF602-PROCESS-META",
+      "basecoat": "JF-602",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "",
+      "BYK_rel_to_particle_pct": "",
+      "DFT_um": "",
+      "substrate": "6061-Al",
+      "pull_off_MPa": "",
+      "pull_off_tag": "",
+      "eis_note": "",
+      "eis_tag": "",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "方案非实测",
+      "microcosm_relative_fouling": "",
+      "microcosm_tag": "",
+      "uncertainty": "工艺元数据非性能",
+      "source": "方案非实测",
+      "n": "Lab Benchmark KB (2026-10) §5.2",
+      "note": "",
+      "safety_flags": "不要先A+B再长时间研磨；曾预混放置固化不可用溶剂/补A恢复",
+      "disadvantage_notes": "溶剂；B料NCO风险；现配现用≤3h保守"
+    },
+    {
+      "formulation_id": "PULL-OFF-METHOD-META",
+      "basecoat": "JF-602 / 自配 / 对照",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "",
+      "BYK_rel_to_particle_pct": "",
+      "DFT_um": "",
+      "substrate": "6061-Al（常见25×25×5–8mm）",
+      "pull_off_MPa": "",
+      "pull_off_tag": "待测",
+      "eis_note": "",
+      "eis_tag": "",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "方案非实测",
+      "microcosm_relative_fouling": "",
+      "microcosm_tag": "",
+      "uncertainty": "方法已设计；KB：尚无可靠最终拉拔结果",
+      "source": "方案非实测",
+      "n": "KB明确：可见记录中尚无可靠最终拉拔结果",
+      "note": "Lab Benchmark KB (2026-10) §5.3§8；research-notes-log 2026-10-08",
+      "safety_flags": "",
+      "disadvantage_notes": "高度依赖打磨/喷砂、脱脂、膜厚、固化、胶粘剂、拉拔头、边缘与破坏模式；n≥3"
+    },
+    {
+      "formulation_id": "UVC-US-PROTOCOL-SLOT",
+      "basecoat": "主动防污（UV-C/超声）",
+      "JF602_A_B_ratio": "",
+      "CA_MSiO2_wt_pct": "",
+      "BYK_rel_to_particle_pct": "",
+      "DFT_um": "",
+      "substrate": "船壳/微宇宙构想",
+      "pull_off_MPa": "",
+      "pull_off_tag": "",
+      "eis_note": "",
+      "eis_tag": "",
+      "hplc_CA_ug_mL_or_flux": "",
+      "hplc_tag": "方案非实测",
+      "microcosm_relative_fouling": "",
+      "microcosm_tag": "",
+      "uncertainty": "构想与假设；非已完成全因子实验",
+      "source": "方案非实测",
+      "n": "商家建议换能器或需300–600V—非已验证安全参数；40kHz/20V曾无明显响应",
+      "note": "Lab Benchmark KB (2026-10) §9",
+      "safety_flags": "",
+      "disadvantage_notes": "汉堡结构/贴片构想；自然能脉冲为拟创新论点≠均已实证"
     }
   ],
   "routes": [
@@ -739,731 +1290,1228 @@
   "recommendations": [
     {
       "rank": "1",
-      "name": "示例铜系 SPC（公开目录示意）",
+      "name": "Hempel 商业防污漆（微宇宙对照语境）",
       "type": "commercial",
       "category_key": "spc_copper",
       "category_zh": "铜系杀生剂 SPC（总称）",
       "matched_track_A_id": "",
       "matched_profile_id": "ROUTE-SHA-SIN-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：按航线相对污损压力做公开品类拟合；非航次实测、非作者课题配方。具体牌号以厂家最新 TDS/SDS 为准。",
-      "note": "暖水/港停段优先考虑持续防再定殖；排序=工况相对拟合，非魔法最优分。 profile=ROUTE-SHA-SIN-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §6;data/climate-route-profile.md §3b ROUTE-SHA-SIN-V0;GCB Route Framework KB (2026-10) route-aware",
+      "evidence_tag": "粗估观察;相对等级;框架推断",
+      "caveats": "KB 仅提供室内微宇宙相对对照：前7天自配与 Hempel 均较干净，第14天自配明显污损而 Hempel 仍较洁净；非航次实测、非 SH-SG 现场数据。禁止外推为商用 TDS 污损率或绝对防污分数。产品具体牌号/DFT/杀生剂体系以用户实际采购与最新 TDS/SDS 为准——本行不编造规格。",
+      "note": "按 SH-SG 高相对压力与新加坡港停峰值：需要长于短期延迟的持续洁净语境；在 KB 已命名选项中，Hempel 是唯一在微宇宙 Day14 仍相对洁净的对照。排序=工况相对拟合，非魔法最优分。",
       "links": []
     },
     {
       "rank": "2",
-      "name": "示例水解型 SPC（公开目录示意）",
-      "type": "commercial",
-      "category_key": "spc_hydrolysis",
-      "category_zh": "水解 / 羧酸盐 SPC",
-      "matched_track_A_id": "",
+      "name": "JF-602 + CA@MSiO₂（研究候选）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "JF602-CA1-SCREEN-SLOT",
       "matched_profile_id": "ROUTE-SHA-SIN-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：温带/季节窗航线示意；非现场数据。",
-      "note": "季节脉冲港停抬升对持续性的要求；无编造规格。 profile=ROUTE-SHA-SIN-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2 §6 §7 §13;data/lab-proxy-table.csv JF602-CA1-SCREEN-SLOT;data/climate-route-profile.md §3b;GCB Route Framework KB (2026-10) §7.1 rapid-turnover / route-aware",
+      "evidence_tag": "待测;方案非实测;框架推断",
+      "caveats": "功能化样板拉拔/EIS/HPLC 释放/微宇宙防污在 KB 中均为待测或方案设计；厂家 4.9–6.6 MPa 不可移植到本候选。双组分致密网络可能阻碍 CA 释放——须水中 CA 定量验证。BYK 与 0/1/2/3 wt% 筛选未完成。溶剂/B 料（可能含 NCO）/现配现用安全常驻。",
+      "note": "假设拟合：暖水港停与 rapid-turnover 再定殖压力需要缓释+表面更新；本候选为课题主路线，证据尚未闭合。matched_track_A_id 指向 1 wt% 筛选槽位（待测空行）；0/2/3 wt% 可并列扩展。",
       "links": []
     },
     {
       "rank": "3",
-      "name": "示例有机硅污损释放（公开目录示意）",
+      "name": "JF-602 原漆（未功能化氟硅重防腐基漆）",
       "type": "commercial",
-      "category_key": "lse_foul_release",
-      "category_zh": "低表面能污损释放",
-      "matched_track_A_id": "",
+      "category_key": "spc_copper",
+      "category_zh": "铜系杀生剂 SPC（总称）",
+      "matched_track_A_id": "JF602-OEM-BOUNDARY",
       "matched_profile_id": "ROUTE-SHA-SIN-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：高速段/清洗维护语境示意；静泊表现因体系而异。",
-      "note": "需结合航速与清洗周期；勿当作无维护方案。 profile=ROUTE-SHA-SIN-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2;data/lab-proxy-table.csv JF602-OEM-BOUNDARY",
+      "evidence_tag": "厂家标称;方案非实测",
+      "caveats": "仅有厂家标称拉拔区间（约 4.9–6.6 MPa）与工艺语境；KB 未将其表述为热带港停防污实测产品。A/B 5:1 须核实质量或体积；适用期保守 3h；B 料查 SDS。不等于功能化样板性能。",
+      "note": "作为机械/成膜平台与轨 A 边界锚点有价值；对 SH-SG 污损压力的防污拟合弱于专用防污对照与已验证缓释方案——故排第 3。",
       "links": []
     },
     {
       "rank": "4",
-      "name": "示例混合 / 低铜方案（公开讨论示意）",
-      "type": "commercial",
-      "category_key": "hybrid",
-      "category_zh": "混合体系",
+      "name": "自配热塑性丙烯酸/松香（历史方案）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
       "matched_track_A_id": "",
       "matched_profile_id": "ROUTE-SHA-SIN-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料;方案非实测",
-      "caveats": "示例数据 / example：法规趋严语境下的公开讨论方向；非已验证优选。",
-      "note": "证据弱于专用已验证体系时仅作对照讨论。 profile=ROUTE-SHA-SIN-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.1 §6;data/climate-route-profile.md §3b",
+      "evidence_tag": "粗估观察;方案非实测;相对等级",
+      "caveats": "微宇宙：前7天相对延迟污损，第14天明显污损（相对 Hempel 持续性不足）。配方不断演变；历史版本曾含 Cu₂O 等——不可默认最新仍无铜或宣称纯物理防污。早期覆盖率为粗估观察不可当论文真值。溶剂烟尘暴露高。",
+      "note": "对全航线高相对压力与赤道港停峰值：仅短期延迟，不适合作为 SH-SG 主选。可作淡水/短暴露或对照轨，勿与 JF-602 路线混淆。",
+      "links": []
+    },
+    {
+      "rank": "1",
+      "name": "Hempel 商业防污漆（微宇宙对照语境）",
+      "type": "commercial",
+      "category_key": "spc_hydrolysis",
+      "category_zh": "水解 / 羧酸盐 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "ROUTE-SHA-PUS-ICN-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §6;data/climate-route-profile.md §3c ROUTE-SHA-PUS-ICN-V0;GCB Route Framework KB (2026-10) §7.2 seasonal opportunists / route-aware",
+      "evidence_tag": "粗估观察;相对等级;框架推断",
+      "caveats": "KB 仅提供室内微宇宙相对对照：前7天自配与 Hempel 均较干净，第14天自配明显污损而 Hempel 仍较洁净；非航次实测、非黄海/釜山/仁川现场数据。禁止外推为商用 TDS 污损率或绝对防污分数。产品具体牌号/DFT/杀生剂体系以用户实际采购与最新 TDS/SDS 为准——本行不编造规格。",
+      "note": "按温带港停季节窗与多季节表现需求：仍需要长于短期延迟的持续洁净语境；在 KB 已命名选项中 Hempel 是唯一 Day14 仍相对洁净的对照。相对 SH-SG：热带峰值压力降低，但季节脉冲港停仍抬升对持续性的要求。排序=工况相对拟合，非魔法最优分。",
+      "links": []
+    },
+    {
+      "rank": "2",
+      "name": "JF-602 + CA@MSiO₂（研究候选）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "JF602-CA1-SCREEN-SLOT",
+      "matched_profile_id": "ROUTE-SHA-PUS-ICN-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2 §6 §7 §13;data/lab-proxy-table.csv JF602-CA1-SCREEN-SLOT;data/climate-route-profile.md §3c;GCB Route Framework KB (2026-10) §7.2",
+      "evidence_tag": "待测;方案非实测;框架推断",
+      "caveats": "功能化样板拉拔/EIS/HPLC 释放/微宇宙防污在 KB 中均为待测或方案设计；厂家 4.9–6.6 MPa 不可移植到本候选。双组分致密网络可能阻碍 CA 释放——须水中 CA 定量验证。BYK 与 0/1/2/3 wt% 筛选未完成。溶剂/B 料（可能含 NCO）/现配现用安全常驻。",
+      "note": "假设拟合：温带季节招募脉冲需要缓释+表面更新以跨多个季节窗；相对 SH-SG 对「持续防 rapid-turnover 再定殖」紧迫度略降，对跨季节窗释放轮廓的匹配权重略升。证据未闭合 → 第 2。matched_track_A_id → 1 wt% 待测槽。",
+      "links": []
+    },
+    {
+      "rank": "3",
+      "name": "JF-602 原漆（未功能化氟硅重防腐基漆）",
+      "type": "commercial",
+      "category_key": "spc_copper",
+      "category_zh": "铜系杀生剂 SPC（总称）",
+      "matched_track_A_id": "JF602-OEM-BOUNDARY",
+      "matched_profile_id": "ROUTE-SHA-PUS-ICN-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2;data/lab-proxy-table.csv JF602-OEM-BOUNDARY",
+      "evidence_tag": "厂家标称;方案非实测",
+      "caveats": "仅有厂家标称拉拔区间（约 4.9–6.6 MPa）与工艺语境；KB 未将其表述为温带港停防污实测产品。A/B 5:1 须核实质量或体积；适用期保守 3h；B 料查 SDS。不等于功能化样板性能。",
+      "note": "作为机械/成膜平台与轨 A 边界锚点有价值；对季节脉冲污损的防污拟合弱于专用防污对照与已验证缓释方案——故排第 3。温带压力低于 SH-SG 不改变「无防污实测宣称」这一证据缺口。",
+      "links": []
+    },
+    {
+      "rank": "4",
+      "name": "自配热塑性丙烯酸/松香（历史方案）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "",
+      "matched_profile_id": "ROUTE-SHA-PUS-ICN-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.1 §6;data/climate-route-profile.md §3c",
+      "evidence_tag": "粗估观察;方案非实测;相对等级",
+      "caveats": "微宇宙：前7天相对延迟污损，第14天明显污损（相对 Hempel 持续性不足）。配方不断演变；历史版本曾含 Cu₂O 等——不可默认最新仍无铜或宣称纯物理防污。早期覆盖率为粗估观察不可当论文真值。溶剂烟尘暴露高。",
+      "note": "相对 SH-SG：温带全线压力较低、无赤道港停峰值，使「短期延迟」在**短暴露/淡季窗**下略更可讨论，但仍不适合作为跨多季节窗或多次港停的主选 → 仍排第 4。可作对照/短暴露，勿与 JF-602 混轨。",
+      "links": []
+    },
+    {
+      "rank": "1",
+      "name": "Hempel 商业防污漆（微宇宙对照语境）",
+      "type": "commercial",
+      "category_key": "spc_hydrolysis",
+      "category_zh": "水解 / 羧酸盐 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "ROUTE-ASIA-EU-SUEZ-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §6;data/climate-route-profile.md §3d ROUTE-ASIA-EU-SUEZ-V0;GCB Route Framework KB (2026-10) route-aware / §4.2",
+      "evidence_tag": "粗估观察;相对等级;框架推断",
+      "caveats": "KB 仅提供室内微宇宙相对对照：前7天自配与 Hempel 均较干净，第14天自配明显污损而 Hempel 仍较洁净；非航次实测、非本走廊现场数据。禁止外推为商用 TDS 污损率或绝对防污分数。产品具体牌号/DFT/杀生剂体系以用户实际采购与最新 TDS/SDS 为准——本行不编造规格。",
+      "note": "按 亚欧经苏伊士（马六甲→Bab→苏伊士→直布罗陀→鹿特丹）：overall 高 / 4；马六甲出口与 Bab–苏伊士低速段抬升；欧洲温带端为季节窗。跨带高压力：马六甲/苏伊士暖–低速峰值需要长于短期延迟的持续洁净；Hempel 为 KB 唯一 Day14 相对洁净对照。排序=工况相对拟合，非魔法最优分。暖段优先抗沉降/防再定殖；欧端提高耐久与抗季节脉冲权重——同一航次须按 sequence 切换，勿单港优化",
+      "links": []
+    },
+    {
+      "rank": "2",
+      "name": "JF-602 + CA@MSiO₂（研究候选）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "JF602-CA1-SCREEN-SLOT",
+      "matched_profile_id": "ROUTE-ASIA-EU-SUEZ-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2 §6 §7 §13;data/lab-proxy-table.csv JF602-CA1-SCREEN-SLOT;data/climate-route-profile.md §3d;GCB Route Framework KB (2026-10) strategy × climate",
+      "evidence_tag": "待测;方案非实测;框架推断",
+      "caveats": "功能化样板拉拔/EIS/HPLC 释放/微宇宙防污在 KB 中均为待测或方案设计；厂家 4.9–6.6 MPa 不可移植到本候选。双组分致密网络可能阻碍 CA 释放——须水中 CA 定量验证。BYK 与 0/1/2/3 wt% 筛选未完成。溶剂/B 料（可能含 NCO）/现配现用安全常驻。",
+      "note": "假设拟合：缓释假设对准暖段再定殖 + 跨带长航次多段暴露；欧端耐久证据仍待测，不因跨带而升级为已验证。证据未闭合 → 第 2。matched_track_A_id → 1 wt% 待测槽。",
+      "links": []
+    },
+    {
+      "rank": "3",
+      "name": "JF-602 原漆（未功能化氟硅重防腐基漆）",
+      "type": "commercial",
+      "category_key": "spc_copper",
+      "category_zh": "铜系杀生剂 SPC（总称）",
+      "matched_track_A_id": "JF602-OEM-BOUNDARY",
+      "matched_profile_id": "ROUTE-ASIA-EU-SUEZ-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2;data/lab-proxy-table.csv JF602-OEM-BOUNDARY",
+      "evidence_tag": "厂家标称;方案非实测",
+      "caveats": "仅有厂家标称拉拔区间（约 4.9–6.6 MPa）与工艺语境；KB 未将其表述为本走廊防污实测产品。A/B 5:1 须核实质量或体积；适用期保守 3h；B 料查 SDS。不等于功能化样板性能。",
+      "note": "成膜/厂家标称附着力锚点；无跨气候带防污实测宣称；欧端耐久需求不填补污损证据缺口。作为机械/成膜平台与轨 A 边界锚点有价值；防污拟合弱于专用对照与已验证缓释 → 第 3。",
+      "links": []
+    },
+    {
+      "rank": "4",
+      "name": "自配热塑性丙烯酸/松香（历史方案）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "",
+      "matched_profile_id": "ROUTE-ASIA-EU-SUEZ-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.1 §6;data/climate-route-profile.md §3d",
+      "evidence_tag": "粗估观察;方案非实测;相对等级",
+      "caveats": "微宇宙：前7天相对延迟污损，第14天明显污损（相对 Hempel 持续性不足）。配方不断演变；历史版本曾含 Cu₂O 等——不可默认最新仍无铜或宣称纯物理防污。早期覆盖率为粗估观察不可当论文真值。溶剂烟尘暴露高。",
+      "note": "Day14 持续性不足；与马六甲–苏伊士高相对压力段严重不匹配；仅可作对照/极短暴露，勿作全航次主选。可作对照/短暴露，勿与 JF-602 混轨。",
+      "links": []
+    },
+    {
+      "rank": "1",
+      "name": "Hempel 商业防污漆（微宇宙对照语境）",
+      "type": "commercial",
+      "category_key": "spc_hydrolysis",
+      "category_zh": "水解 / 羧酸盐 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "ROUTE-ASIA-EU-CAPE-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §6;data/climate-route-profile.md §3e ROUTE-ASIA-EU-CAPE-V0;GCB Route Framework KB (2026-10) route-aware / §4.2",
+      "evidence_tag": "粗估观察;相对等级;框架推断",
+      "caveats": "KB 仅提供室内微宇宙相对对照：前7天自配与 Hempel 均较干净，第14天自配明显污损而 Hempel 仍较洁净；非航次实测、非本走廊现场数据。禁止外推为商用 TDS 污损率或绝对防污分数。产品具体牌号/DFT/杀生剂体系以用户实际采购与最新 TDS/SDS 为准——本行不编造规格。",
+      "note": "按 亚欧经好望角（马六甲→好望角→直布罗陀→鹿特丹）：overall 中–高 / 3–4；马六甲出口仍抬升；缺 Bab–苏伊士低速亚热带峰值；好望角为暖温带扰动枢纽。马六甲出口仍抬升全线；绕开苏伊士后峰值略降，但仍需长于短期延迟——Hempel Day14 对照相对拟合最高。排序=工况相对拟合，非魔法最优分。相对苏伊士线降低对「持续防赤道港停式再定殖」的紧迫度；仍须覆盖马六甲暖出口 + 欧端季节窗/耐久",
+      "links": []
+    },
+    {
+      "rank": "2",
+      "name": "JF-602 + CA@MSiO₂（研究候选）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "JF602-CA1-SCREEN-SLOT",
+      "matched_profile_id": "ROUTE-ASIA-EU-CAPE-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2 §6 §7 §13;data/lab-proxy-table.csv JF602-CA1-SCREEN-SLOT;data/climate-route-profile.md §3e;GCB Route Framework KB (2026-10) strategy × climate",
+      "evidence_tag": "待测;方案非实测;框架推断",
+      "caveats": "功能化样板拉拔/EIS/HPLC 释放/微宇宙防污在 KB 中均为待测或方案设计；厂家 4.9–6.6 MPa 不可移植到本候选。双组分致密网络可能阻碍 CA 释放——须水中 CA 定量验证。BYK 与 0/1/2/3 wt% 筛选未完成。溶剂/B 料（可能含 NCO）/现配现用安全常驻。",
+      "note": "假设拟合：缓释对准马六甲出口再定殖 + 长航次跨带；相对苏伊士线对 Bab–Suez 低速峰值权重下降。证据未闭合 → 第 2。matched_track_A_id → 1 wt% 待测槽。",
+      "links": []
+    },
+    {
+      "rank": "3",
+      "name": "JF-602 原漆（未功能化氟硅重防腐基漆）",
+      "type": "commercial",
+      "category_key": "spc_copper",
+      "category_zh": "铜系杀生剂 SPC（总称）",
+      "matched_track_A_id": "JF602-OEM-BOUNDARY",
+      "matched_profile_id": "ROUTE-ASIA-EU-CAPE-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2;data/lab-proxy-table.csv JF602-OEM-BOUNDARY",
+      "evidence_tag": "厂家标称;方案非实测",
+      "caveats": "仅有厂家标称拉拔区间（约 4.9–6.6 MPa）与工艺语境；KB 未将其表述为本走廊防污实测产品。A/B 5:1 须核实质量或体积；适用期保守 3h；B 料查 SDS。不等于功能化样板性能。",
+      "note": "平台锚点；无好望角/亚欧航次防污实测。作为机械/成膜平台与轨 A 边界锚点有价值；防污拟合弱于专用对照与已验证缓释 → 第 3。",
+      "links": []
+    },
+    {
+      "rank": "4",
+      "name": "自配热塑性丙烯酸/松香（历史方案）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "",
+      "matched_profile_id": "ROUTE-ASIA-EU-CAPE-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.1 §6;data/climate-route-profile.md §3e",
+      "evidence_tag": "粗估观察;方案非实测;相对等级",
+      "caveats": "微宇宙：前7天相对延迟污损，第14天明显污损（相对 Hempel 持续性不足）。配方不断演变；历史版本曾含 Cu₂O 等——不可默认最新仍无铜或宣称纯物理防污。早期覆盖率为粗估观察不可当论文真值。溶剂烟尘暴露高。",
+      "note": "持续性不足；相对苏伊士线略可讨论短暴露，仍不宜作跨带全航次主选。可作对照/短暴露，勿与 JF-602 混轨。",
+      "links": []
+    },
+    {
+      "rank": "1",
+      "name": "Hempel 商业防污漆（微宇宙对照语境）",
+      "type": "commercial",
+      "category_key": "spc_hydrolysis",
+      "category_zh": "水解 / 羧酸盐 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "ROUTE-PANAMA-TRANSIT-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §6;data/climate-route-profile.md §3f ROUTE-PANAMA-TRANSIT-V0;GCB Route Framework KB (2026-10) route-aware / §4.2",
+      "evidence_tag": "粗估观察;相对等级;框架推断",
+      "caveats": "KB 仅提供室内微宇宙相对对照：前7天自配与 Hempel 均较干净，第14天自配明显污损而 Hempel 仍较洁净；非航次实测、非本走廊现场数据。禁止外推为商用 TDS 污损率或绝对防污分数。产品具体牌号/DFT/杀生剂体系以用户实际采购与最新 TDS/SDS 为准——本行不编造规格。",
+      "note": "按 巴拿马跨洋（太平洋侧→运河→大西洋侧）：overall 高 / 4；运河低速/闸区停留为全线相对峰值（高–很高 / 4–5）。运河闸区低速峰值（框架 4–5）需要持续抗沉降与防再定殖；Hempel Day14 对照为 KB 内最贴合选项。排序=工况相对拟合，非魔法最优分。强 anti-settlement / 防再定殖 / 表面更新；运河低速段类比「港停峰值」；目的港气候另计，勿只按大洋航行均值",
+      "links": []
+    },
+    {
+      "rank": "2",
+      "name": "JF-602 + CA@MSiO₂（研究候选）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "JF602-CA1-SCREEN-SLOT",
+      "matched_profile_id": "ROUTE-PANAMA-TRANSIT-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2 §6 §7 §13;data/lab-proxy-table.csv JF602-CA1-SCREEN-SLOT;data/climate-route-profile.md §3f;GCB Route Framework KB (2026-10) strategy × climate",
+      "evidence_tag": "待测;方案非实测;框架推断",
+      "caveats": "功能化样板拉拔/EIS/HPLC 释放/微宇宙防污在 KB 中均为待测或方案设计；厂家 4.9–6.6 MPa 不可移植到本候选。双组分致密网络可能阻碍 CA 释放——须水中 CA 定量验证。BYK 与 0/1/2/3 wt% 筛选未完成。溶剂/B 料（可能含 NCO）/现配现用安全常驻。",
+      "note": "假设拟合：缓释+表面更新假设与热带运河再定殖压力契合；拉拔/释放/防污均待测。证据未闭合 → 第 2。matched_track_A_id → 1 wt% 待测槽。",
+      "links": []
+    },
+    {
+      "rank": "3",
+      "name": "JF-602 原漆（未功能化氟硅重防腐基漆）",
+      "type": "commercial",
+      "category_key": "spc_copper",
+      "category_zh": "铜系杀生剂 SPC（总称）",
+      "matched_track_A_id": "JF602-OEM-BOUNDARY",
+      "matched_profile_id": "ROUTE-PANAMA-TRANSIT-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2;data/lab-proxy-table.csv JF602-OEM-BOUNDARY",
+      "evidence_tag": "厂家标称;方案非实测",
+      "caveats": "仅有厂家标称拉拔区间（约 4.9–6.6 MPa）与工艺语境；KB 未将其表述为本走廊防污实测产品。A/B 5:1 须核实质量或体积；适用期保守 3h；B 料查 SDS。不等于功能化样板性能。",
+      "note": "成膜平台；无巴拿马/热带运河防污实测宣称。作为机械/成膜平台与轨 A 边界锚点有价值；防污拟合弱于专用对照与已验证缓释 → 第 3。",
+      "links": []
+    },
+    {
+      "rank": "4",
+      "name": "自配热塑性丙烯酸/松香（历史方案）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "",
+      "matched_profile_id": "ROUTE-PANAMA-TRANSIT-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.1 §6;data/climate-route-profile.md §3f",
+      "evidence_tag": "粗估观察;方案非实测;相对等级",
+      "caveats": "微宇宙：前7天相对延迟污损，第14天明显污损（相对 Hempel 持续性不足）。配方不断演变；历史版本曾含 Cu₂O 等——不可默认最新仍无铜或宣称纯物理防污。早期覆盖率为粗估观察不可当论文真值。溶剂烟尘暴露高。",
+      "note": "短期延迟 only；与运河高–很高峰值严重不匹配 → 第 4。可作对照/短暴露，勿与 JF-602 混轨。",
+      "links": []
+    },
+    {
+      "rank": "1",
+      "name": "Hempel 商业防污漆（微宇宙对照语境）",
+      "type": "commercial",
+      "category_key": "spc_hydrolysis",
+      "category_zh": "水解 / 羧酸盐 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "ROUTE-REDSEA-MED-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §6;data/climate-route-profile.md §3g ROUTE-REDSEA-MED-V0;GCB Route Framework KB (2026-10) route-aware / §4.2",
+      "evidence_tag": "粗估观察;相对等级;框架推断",
+      "caveats": "KB 仅提供室内微宇宙相对对照：前7天自配与 Hempel 均较干净，第14天自配明显污损而 Hempel 仍较洁净；非航次实测、非本走廊现场数据。禁止外推为商用 TDS 污损率或绝对防污分数。产品具体牌号/DFT/杀生剂体系以用户实际采购与最新 TDS/SDS 为准——本行不编造规格。",
+      "note": "按 红海–地中海（Bab el-Mandeb→苏伊士→博斯普鲁斯/直布罗陀）：overall 高 / 4；Bab–苏伊士暖/低速段主导全线抬升。Bab–苏伊士暖/低速高相对压力需要持续洁净语境；Hempel Day14 对照相对拟合最高。排序=工况相对拟合，非魔法最优分。暖–低速段优先防再定殖；北段提高季节窗与耐久权重；按 sequence 评价",
+      "links": []
+    },
+    {
+      "rank": "2",
+      "name": "JF-602 + CA@MSiO₂（研究候选）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "JF602-CA1-SCREEN-SLOT",
+      "matched_profile_id": "ROUTE-REDSEA-MED-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2 §6 §7 §13;data/lab-proxy-table.csv JF602-CA1-SCREEN-SLOT;data/climate-route-profile.md §3g;GCB Route Framework KB (2026-10) strategy × climate",
+      "evidence_tag": "待测;方案非实测;框架推断",
+      "caveats": "功能化样板拉拔/EIS/HPLC 释放/微宇宙防污在 KB 中均为待测或方案设计；厂家 4.9–6.6 MPa 不可移植到本候选。双组分致密网络可能阻碍 CA 释放——须水中 CA 定量验证。BYK 与 0/1/2/3 wt% 筛选未完成。溶剂/B 料（可能含 NCO）/现配现用安全常驻。",
+      "note": "假设拟合：缓释假设对准红海–苏伊士再定殖；地中海端季节窗证据仍待测。证据未闭合 → 第 2。matched_track_A_id → 1 wt% 待测槽。",
+      "links": []
+    },
+    {
+      "rank": "3",
+      "name": "JF-602 原漆（未功能化氟硅重防腐基漆）",
+      "type": "commercial",
+      "category_key": "spc_copper",
+      "category_zh": "铜系杀生剂 SPC（总称）",
+      "matched_track_A_id": "JF602-OEM-BOUNDARY",
+      "matched_profile_id": "ROUTE-REDSEA-MED-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2;data/lab-proxy-table.csv JF602-OEM-BOUNDARY",
+      "evidence_tag": "厂家标称;方案非实测",
+      "caveats": "仅有厂家标称拉拔区间（约 4.9–6.6 MPa）与工艺语境；KB 未将其表述为本走廊防污实测产品。A/B 5:1 须核实质量或体积；适用期保守 3h；B 料查 SDS。不等于功能化样板性能。",
+      "note": "平台锚点；无红海–地中海航次防污实测。作为机械/成膜平台与轨 A 边界锚点有价值；防污拟合弱于专用对照与已验证缓释 → 第 3。",
+      "links": []
+    },
+    {
+      "rank": "4",
+      "name": "自配热塑性丙烯酸/松香（历史方案）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "",
+      "matched_profile_id": "ROUTE-REDSEA-MED-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.1 §6;data/climate-route-profile.md §3g",
+      "evidence_tag": "粗估观察;方案非实测;相对等级",
+      "caveats": "微宇宙：前7天相对延迟污损，第14天明显污损（相对 Hempel 持续性不足）。配方不断演变；历史版本曾含 Cu₂O 等——不可默认最新仍无铜或宣称纯物理防污。早期覆盖率为粗估观察不可当论文真值。溶剂烟尘暴露高。",
+      "note": "持续性不足；不适合 Bab–Suez 高压力段主选。可作对照/短暴露，勿与 JF-602 混轨。",
+      "links": []
+    },
+    {
+      "rank": "1",
+      "name": "Hempel 商业防污漆（微宇宙对照语境）",
+      "type": "commercial",
+      "category_key": "spc_hydrolysis",
+      "category_zh": "水解 / 羧酸盐 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "ROUTE-NWPAC-HUB-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §6;data/climate-route-profile.md §3h ROUTE-NWPAC-HUB-V0;GCB Route Framework KB (2026-10) route-aware / §4.2",
+      "evidence_tag": "粗估观察;相对等级;框架推断",
+      "caveats": "KB 仅提供室内微宇宙相对对照：前7天自配与 Hempel 均较干净，第14天自配明显污损而 Hempel 仍较洁净；非航次实测、非本走廊现场数据。禁止外推为商用 TDS 污损率或绝对防污分数。产品具体牌号/DFT/杀生剂体系以用户实际采购与最新 TDS/SDS 为准——本行不编造规格。",
+      "note": "按 西北太平洋枢纽链（港深→厦–三亚→釜山/济州→东京湾/横滨）：overall 中–高 / 3–4；南段亚热/热带港停抬升；北段温带季节窗港停；低于马六甲–新加坡赤道峰值。南段港停+北段季节窗仍要求长于短期延迟；Hempel Day14 对照相对拟合最高（紧迫度低于 SHA-SIN）。排序=工况相对拟合，非魔法最优分。南段仍需防再定殖；北段提高季节窗与耐久平衡——低于赤道全线峰值，高于纯温带 SHA-PUS",
+      "links": []
+    },
+    {
+      "rank": "2",
+      "name": "JF-602 + CA@MSiO₂（研究候选）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "JF602-CA1-SCREEN-SLOT",
+      "matched_profile_id": "ROUTE-NWPAC-HUB-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2 §6 §7 §13;data/lab-proxy-table.csv JF602-CA1-SCREEN-SLOT;data/climate-route-profile.md §3h;GCB Route Framework KB (2026-10) strategy × climate",
+      "evidence_tag": "待测;方案非实测;框架推断",
+      "caveats": "功能化样板拉拔/EIS/HPLC 释放/微宇宙防污在 KB 中均为待测或方案设计；厂家 4.9–6.6 MPa 不可移植到本候选。双组分致密网络可能阻碍 CA 释放——须水中 CA 定量验证。BYK 与 0/1/2/3 wt% 筛选未完成。溶剂/B 料（可能含 NCO）/现配现用安全常驻。",
+      "note": "假设拟合：缓释对准南段再定殖 + 北段跨季节窗；相对 SHA-PUS 提高南段暖港停权重。证据未闭合 → 第 2。matched_track_A_id → 1 wt% 待测槽。",
+      "links": []
+    },
+    {
+      "rank": "3",
+      "name": "JF-602 原漆（未功能化氟硅重防腐基漆）",
+      "type": "commercial",
+      "category_key": "spc_copper",
+      "category_zh": "铜系杀生剂 SPC（总称）",
+      "matched_track_A_id": "JF602-OEM-BOUNDARY",
+      "matched_profile_id": "ROUTE-NWPAC-HUB-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2;data/lab-proxy-table.csv JF602-OEM-BOUNDARY",
+      "evidence_tag": "厂家标称;方案非实测",
+      "caveats": "仅有厂家标称拉拔区间（约 4.9–6.6 MPa）与工艺语境；KB 未将其表述为本走廊防污实测产品。A/B 5:1 须核实质量或体积；适用期保守 3h；B 料查 SDS。不等于功能化样板性能。",
+      "note": "平台锚点；无 NW Pacific 全链防污实测。作为机械/成膜平台与轨 A 边界锚点有价值；防污拟合弱于专用对照与已验证缓释 → 第 3。",
+      "links": []
+    },
+    {
+      "rank": "4",
+      "name": "自配热塑性丙烯酸/松香（历史方案）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "",
+      "matched_profile_id": "ROUTE-NWPAC-HUB-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.1 §6;data/climate-route-profile.md §3h",
+      "evidence_tag": "粗估观察;方案非实测;相对等级",
+      "caveats": "微宇宙：前7天相对延迟污损，第14天明显污损（相对 Hempel 持续性不足）。配方不断演变；历史版本曾含 Cu₂O 等——不可默认最新仍无铜或宣称纯物理防污。早期覆盖率为粗估观察不可当论文真值。溶剂烟尘暴露高。",
+      "note": "相对纯温带略更不适合南段暖港停；仍可短暴露/淡季讨论 → 第 4。可作对照/短暴露，勿与 JF-602 混轨。",
+      "links": []
+    },
+    {
+      "rank": "1",
+      "name": "Hempel 商业防污漆（微宇宙对照语境）",
+      "type": "commercial",
+      "category_key": "spc_hydrolysis",
+      "category_zh": "水解 / 羧酸盐 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "ROUTE-TRANSPAC-LA-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §6;data/climate-route-profile.md §3i ROUTE-TRANSPAC-LA-V0;GCB Route Framework KB (2026-10) route-aware / §4.2",
+      "evidence_tag": "粗估观察;相对等级;框架推断",
+      "caveats": "KB 仅提供室内微宇宙相对对照：前7天自配与 Hempel 均较干净，第14天自配明显污损而 Hempel 仍较洁净；非航次实测、非本走廊现场数据。禁止外推为商用 TDS 污损率或绝对防污分数。产品具体牌号/DFT/杀生剂体系以用户实际采购与最新 TDS/SDS 为准——本行不编造规格。",
+      "note": "按 跨太平洋至洛杉矶–长滩（东亚表内起点→LA–LB）：overall 中–高 / 3–4；两端港停（东亚出口 + LA–LB）相对开阔洋航行抬升；LA–LB 暖温带季节窗。两端港停仍需持续洁净；长航剪切不能替代港停防护——Hempel Day14 对照相对拟合最高。排序=工况相对拟合，非魔法最优分。勿按开阔洋低相对压力设计全航次；抵港前暖温带港停仍关键；兼 anti-settlement（出口）与季节窗/耐久（抵港）",
+      "links": []
+    },
+    {
+      "rank": "2",
+      "name": "JF-602 + CA@MSiO₂（研究候选）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "JF602-CA1-SCREEN-SLOT",
+      "matched_profile_id": "ROUTE-TRANSPAC-LA-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2 §6 §7 §13;data/lab-proxy-table.csv JF602-CA1-SCREEN-SLOT;data/climate-route-profile.md §3i;GCB Route Framework KB (2026-10) strategy × climate",
+      "evidence_tag": "待测;方案非实测;框架推断",
+      "caveats": "功能化样板拉拔/EIS/HPLC 释放/微宇宙防污在 KB 中均为待测或方案设计；厂家 4.9–6.6 MPa 不可移植到本候选。双组分致密网络可能阻碍 CA 释放——须水中 CA 定量验证。BYK 与 0/1/2/3 wt% 筛选未完成。溶剂/B 料（可能含 NCO）/现配现用安全常驻。",
+      "note": "假设拟合：缓释对准出口再定殖 + 抵港季节窗；开阔洋段不降低待测证据要求。证据未闭合 → 第 2。matched_track_A_id → 1 wt% 待测槽。",
+      "links": []
+    },
+    {
+      "rank": "3",
+      "name": "JF-602 原漆（未功能化氟硅重防腐基漆）",
+      "type": "commercial",
+      "category_key": "spc_copper",
+      "category_zh": "铜系杀生剂 SPC（总称）",
+      "matched_track_A_id": "JF602-OEM-BOUNDARY",
+      "matched_profile_id": "ROUTE-TRANSPAC-LA-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2;data/lab-proxy-table.csv JF602-OEM-BOUNDARY",
+      "evidence_tag": "厂家标称;方案非实测",
+      "caveats": "仅有厂家标称拉拔区间（约 4.9–6.6 MPa）与工艺语境；KB 未将其表述为本走廊防污实测产品。A/B 5:1 须核实质量或体积；适用期保守 3h；B 料查 SDS。不等于功能化样板性能。",
+      "note": "平台锚点；无跨太平洋航次防污实测。作为机械/成膜平台与轨 A 边界锚点有价值；防污拟合弱于专用对照与已验证缓释 → 第 3。",
+      "links": []
+    },
+    {
+      "rank": "4",
+      "name": "自配热塑性丙烯酸/松香（历史方案）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "",
+      "matched_profile_id": "ROUTE-TRANSPAC-LA-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.1 §6;data/climate-route-profile.md §3i",
+      "evidence_tag": "粗估观察;方案非实测;相对等级",
+      "caveats": "微宇宙：前7天相对延迟污损，第14天明显污损（相对 Hempel 持续性不足）。配方不断演变；历史版本曾含 Cu₂O 等——不可默认最新仍无铜或宣称纯物理防污。早期覆盖率为粗估观察不可当论文真值。溶剂烟尘暴露高。",
+      "note": "长航次两端港停下短期延迟不足；不宜作主选。可作对照/短暴露，勿与 JF-602 混轨。",
+      "links": []
+    },
+    {
+      "rank": "1",
+      "name": "Hempel 商业防污漆（微宇宙对照语境）",
+      "type": "commercial",
+      "category_key": "spc_hydrolysis",
+      "category_zh": "水解 / 羧酸盐 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "ROUTE-SWPAC-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §6;data/climate-route-profile.md §3j ROUTE-SWPAC-V0;GCB Route Framework KB (2026-10) route-aware / §4.2",
+      "evidence_tag": "粗估观察;相对等级;框架推断",
+      "caveats": "KB 仅提供室内微宇宙相对对照：前7天自配与 Hempel 均较干净，第14天自配明显污损而 Hempel 仍较洁净；非航次实测、非本走廊现场数据。禁止外推为商用 TDS 污损率或绝对防污分数。产品具体牌号/DFT/杀生剂体系以用户实际采购与最新 TDS/SDS 为准——本行不编造规格。",
+      "note": "按 西南太平洋（悉尼↔奥克兰）：overall 中 / 3；港停季节窗中–高；无热带/赤道高–很高峰值。温带港停季节窗仍需长于短期延迟；Hempel Day14 对照相对拟合最高（紧迫度接近 SHA-PUS）。排序=工况相对拟合，非魔法最优分。**耐久 / 抗季节脉冲 / 抗扰动**权重高于 anti-settlement 紧迫度；仍非极地高持久污损叙事",
+      "links": []
+    },
+    {
+      "rank": "2",
+      "name": "JF-602 + CA@MSiO₂（研究候选）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "JF602-CA1-SCREEN-SLOT",
+      "matched_profile_id": "ROUTE-SWPAC-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2 §6 §7 §13;data/lab-proxy-table.csv JF602-CA1-SCREEN-SLOT;data/climate-route-profile.md §3j;GCB Route Framework KB (2026-10) strategy × climate",
+      "evidence_tag": "待测;方案非实测;框架推断",
+      "caveats": "功能化样板拉拔/EIS/HPLC 释放/微宇宙防污在 KB 中均为待测或方案设计；厂家 4.9–6.6 MPa 不可移植到本候选。双组分致密网络可能阻碍 CA 释放——须水中 CA 定量验证。BYK 与 0/1/2/3 wt% 筛选未完成。溶剂/B 料（可能含 NCO）/现配现用安全常驻。",
+      "note": "假设拟合：缓释对准跨季节窗；相对热带航线降低防 rapid-turnover 权重，提高耐久与释放轮廓跨季匹配（仍待测）。证据未闭合 → 第 2。matched_track_A_id → 1 wt% 待测槽。",
+      "links": []
+    },
+    {
+      "rank": "3",
+      "name": "JF-602 原漆（未功能化氟硅重防腐基漆）",
+      "type": "commercial",
+      "category_key": "spc_copper",
+      "category_zh": "铜系杀生剂 SPC（总称）",
+      "matched_track_A_id": "JF602-OEM-BOUNDARY",
+      "matched_profile_id": "ROUTE-SWPAC-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2;data/lab-proxy-table.csv JF602-OEM-BOUNDARY",
+      "evidence_tag": "厂家标称;方案非实测",
+      "caveats": "仅有厂家标称拉拔区间（约 4.9–6.6 MPa）与工艺语境；KB 未将其表述为本走廊防污实测产品。A/B 5:1 须核实质量或体积；适用期保守 3h；B 料查 SDS。不等于功能化样板性能。",
+      "note": "平台/附着力锚点对耐久讨论有价值；仍无防污实测宣称 → 第 3。作为机械/成膜平台与轨 A 边界锚点有价值；防污拟合弱于专用对照与已验证缓释 → 第 3。",
+      "links": []
+    },
+    {
+      "rank": "4",
+      "name": "自配热塑性丙烯酸/松香（历史方案）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "",
+      "matched_profile_id": "ROUTE-SWPAC-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.1 §6;data/climate-route-profile.md §3j",
+      "evidence_tag": "粗估观察;方案非实测;相对等级",
+      "caveats": "微宇宙：前7天相对延迟污损，第14天明显污损（相对 Hempel 持续性不足）。配方不断演变；历史版本曾含 Cu₂O 等——不可默认最新仍无铜或宣称纯物理防污。早期覆盖率为粗估观察不可当论文真值。溶剂烟尘暴露高。",
+      "note": "相对热带航线，短暴露/淡季窗略更可讨论；仍不宜多季节窗主选 → 第 4。可作对照/短暴露，勿与 JF-602 混轨。",
+      "links": []
+    },
+    {
+      "rank": "1",
+      "name": "Hempel 商业防污漆（微宇宙对照语境）",
+      "type": "commercial",
+      "category_key": "spc_hydrolysis",
+      "category_zh": "水解 / 羧酸盐 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "ROUTE-SATL-SANTOS-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §6;data/climate-route-profile.md §3k ROUTE-SATL-SANTOS-V0;GCB Route Framework KB (2026-10) route-aware / §4.2",
+      "evidence_tag": "粗估观察;相对等级;框架推断",
+      "caveats": "KB 仅提供室内微宇宙相对对照：前7天自配与 Hempel 均较干净，第14天自配明显污损而 Hempel 仍较洁净；非航次实测、非本走廊现场数据。禁止外推为商用 TDS 污损率或绝对防污分数。产品具体牌号/DFT/杀生剂体系以用户实际采购与最新 TDS/SDS 为准——本行不编造规格。",
+      "note": "按 南大西洋桑托斯枢纽（节点剖面；可接 Cape/Panama）：overall 中–高 / 3–4；桑托斯港停/近岸为节点相对峰值；可衔接好望角或巴拿马走廊。亚热带枢纽港停需要持续洁净语境；Hempel Day14 对照相对拟合最高。排序=工况相对拟合，非魔法最优分。枢纽港停抬升抗沉降与防再定殖；衔接跨洋走廊时按完整 sequence 重评，勿只按单节点",
+      "links": []
+    },
+    {
+      "rank": "2",
+      "name": "JF-602 + CA@MSiO₂（研究候选）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "JF602-CA1-SCREEN-SLOT",
+      "matched_profile_id": "ROUTE-SATL-SANTOS-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2 §6 §7 §13;data/lab-proxy-table.csv JF602-CA1-SCREEN-SLOT;data/climate-route-profile.md §3k;GCB Route Framework KB (2026-10) strategy × climate",
+      "evidence_tag": "待测;方案非实测;框架推断",
+      "caveats": "功能化样板拉拔/EIS/HPLC 释放/微宇宙防污在 KB 中均为待测或方案设计；厂家 4.9–6.6 MPa 不可移植到本候选。双组分致密网络可能阻碍 CA 释放——须水中 CA 定量验证。BYK 与 0/1/2/3 wt% 筛选未完成。溶剂/B 料（可能含 NCO）/现配现用安全常驻。",
+      "note": "假设拟合：缓释假设对准亚热带港停再定殖；节点级证据仍待测，衔接 Cape/Panama 时不自动升级。证据未闭合 → 第 2。matched_track_A_id → 1 wt% 待测槽。",
+      "links": []
+    },
+    {
+      "rank": "3",
+      "name": "JF-602 原漆（未功能化氟硅重防腐基漆）",
+      "type": "commercial",
+      "category_key": "spc_copper",
+      "category_zh": "铜系杀生剂 SPC（总称）",
+      "matched_track_A_id": "JF602-OEM-BOUNDARY",
+      "matched_profile_id": "ROUTE-SATL-SANTOS-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2;data/lab-proxy-table.csv JF602-OEM-BOUNDARY",
+      "evidence_tag": "厂家标称;方案非实测",
+      "caveats": "仅有厂家标称拉拔区间（约 4.9–6.6 MPa）与工艺语境；KB 未将其表述为本走廊防污实测产品。A/B 5:1 须核实质量或体积；适用期保守 3h；B 料查 SDS。不等于功能化样板性能。",
+      "note": "平台锚点；无桑托斯/南大西洋防污实测宣称。作为机械/成膜平台与轨 A 边界锚点有价值；防污拟合弱于专用对照与已验证缓释 → 第 3。",
+      "links": []
+    },
+    {
+      "rank": "4",
+      "name": "自配热塑性丙烯酸/松香（历史方案）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "",
+      "matched_profile_id": "ROUTE-SATL-SANTOS-V0",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.1 §6;data/climate-route-profile.md §3k",
+      "evidence_tag": "粗估观察;方案非实测;相对等级",
+      "caveats": "微宇宙：前7天相对延迟污损，第14天明显污损（相对 Hempel 持续性不足）。配方不断演变；历史版本曾含 Cu₂O 等——不可默认最新仍无铜或宣称纯物理防污。早期覆盖率为粗估观察不可当论文真值。溶剂烟尘暴露高。",
+      "note": "短期延迟；不适合枢纽港停主选。可作对照/短暴露，勿与 JF-602 混轨。",
+      "links": []
+    },
+    {
+      "rank": "1",
+      "name": "Hempel 商业防污漆（微宇宙对照语境）",
+      "type": "commercial",
+      "category_key": "spc_copper",
+      "category_zh": "铜系杀生剂 SPC（总称）",
+      "matched_track_A_id": "",
+      "matched_profile_id": "STUB-CAN-ARCTIC",
+      "evidence_links": "Lab Benchmark KB (2026-10) §6;data/climate-route-profile.md §3l STUB-CAN-ARCTIC;GCB Route Framework KB (2026-10) §7.3 persistence-oriented / §4.2 temperate-to-cold / L929 L1043;data/gcb-route-inventory.md CORRIDOR-COLD-ARCTIC-LIT",
+      "evidence_tag": "粗估观察;相对等级;框架推断;文献点名",
+      "caveats": "KB 仅提供室内微宇宙相对对照：前7天自配与 Hempel 均较干净，第14天自配明显污损而 Hempel 仍较洁净；**非**加拿大北极航次/冰区/磨蚀实测，亦非 Chan et al. 航线现场涂料数据。禁止外推为商用 TDS 污损率、冰区耐磨等级或绝对防污分数。产品具体牌号/DFT/杀生剂体系以用户实际采购与最新 TDS/SDS 为准——本行不编造规格。冷端 overall 相对压力低 / 1–2（框架），**禁止**写成极地高污损。",
+      "note": "按 Canadian Arctic 冷端桩（文献点名 Chan et al. 2016/2022；未入 Table 1）：整体相对压力低，主导 persistence-oriented attachers；§4.2 temperate-to-cold 优先耐久、耐磨/抗冰语境、抗持久附着与降低脱附力，**而非**热带 anti-settlement 紧迫度。在 KB 已命名选项中，Hempel 仍是唯一 Day14 相对洁净对照，作为「一旦定殖需跨航次持续表现」的相对拟合第 1——但微宇宙≠冷水/冰区证据。排序=工况相对拟合，非魔法最优分。",
+      "links": []
+    },
+    {
+      "rank": "2",
+      "name": "JF-602 + CA@MSiO₂（研究候选）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "JF602-CA1-SCREEN-SLOT",
+      "matched_profile_id": "STUB-CAN-ARCTIC",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2 §6 §7 §13;data/lab-proxy-table.csv JF602-CA1-SCREEN-SLOT;data/climate-route-profile.md §3l STUB-CAN-ARCTIC;GCB Route Framework KB (2026-10) §7.3 / temperate-to-cold",
+      "evidence_tag": "待测;方案非实测;框架推断;文献点名",
+      "caveats": "功能化样板拉拔/EIS/HPLC 释放/微宇宙防污在 KB 中均为待测或方案设计；厂家 4.9–6.6 MPa 不可移植到本候选；**无**北极/冰区/磨蚀实测。双组分致密网络可能阻碍 CA 释放——须水中 CA 定量验证。BYK 与 0/1/2/3 wt% 筛选未完成。溶剂/B 料（可能含 NCO）/现配现用安全常驻。",
+      "note": "假设拟合：冷端降低对「持续防 rapid-turnover 再定殖」权重；缓释/表面更新若有助于降低持久大污损脱附力或表面更新，属框架假设，证据未闭合 → 第 2。matched_track_A_id → 1 wt% 待测槽。勿把热带再定殖叙事直接套到北极桩。",
+      "links": []
+    },
+    {
+      "rank": "3",
+      "name": "JF-602 原漆（未功能化氟硅重防腐基漆）",
+      "type": "commercial",
+      "category_key": "spc_copper",
+      "category_zh": "铜系杀生剂 SPC（总称）",
+      "matched_track_A_id": "JF602-OEM-BOUNDARY",
+      "matched_profile_id": "STUB-CAN-ARCTIC",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2;data/lab-proxy-table.csv JF602-OEM-BOUNDARY;data/climate-route-profile.md §3l STUB-CAN-ARCTIC;GCB Route Framework KB (2026-10) temperate-to-cold durability",
+      "evidence_tag": "厂家标称;方案非实测;框架推断;文献点名",
+      "caveats": "仅有厂家标称拉拔区间（约 4.9–6.6 MPa）与工艺语境；KB 未将其表述为北极/冷水防污或耐磨/抗冰实测产品。A/B 5:1 须核实质量或体积；适用期保守 3h；B 料查 SDS。不等于功能化样板性能；**不编造**冰区耐磨或脱附力数据。",
+      "note": "temperate-to-cold 下成膜/标称附着力平台对「耐久讨论」权重相对暖水航线升高，但仍无冷端防污/磨蚀实测宣称 → 第 3。作为轨 A 边界锚点有价值；不因压力低而升级为已验证冷区方案。",
+      "links": []
+    },
+    {
+      "rank": "4",
+      "name": "自配热塑性丙烯酸/松香（历史方案）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "",
+      "matched_profile_id": "STUB-CAN-ARCTIC",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.1 §6;data/climate-route-profile.md §3l STUB-CAN-ARCTIC",
+      "evidence_tag": "粗估观察;方案非实测;相对等级;文献点名",
+      "caveats": "微宇宙：前7天相对延迟污损，第14天明显污损（相对 Hempel 持续性不足）。配方不断演变；历史版本曾含 Cu₂O 等——不可默认最新仍无铜或宣称纯物理防污。早期覆盖率为粗估观察不可当论文真值。溶剂烟尘暴露高。无北极航次数据。",
+      "note": "冷端问题不是高周转招募，而是稀少成功定殖者的持久附着；短期延迟逻辑与 persistence 制度匹配更弱 → 第 4。可作对照/极短暴露，勿与 JF-602 混轨；勿写成「低压所以自配也够用」。",
+      "links": []
+    },
+    {
+      "rank": "1",
+      "name": "Hempel 商业防污漆（微宇宙对照语境）",
+      "type": "commercial",
+      "category_key": "spc_copper",
+      "category_zh": "铜系杀生剂 SPC（总称）",
+      "matched_track_A_id": "",
+      "matched_profile_id": "STUB-ANTARCTICA",
+      "evidence_links": "Lab Benchmark KB (2026-10) §6;data/climate-route-profile.md §3l STUB-ANTARCTICA;GCB Route Framework KB (2026-10) §7.3 persistence-oriented / §4.2 temperate-to-cold / L929 L1043;data/gcb-route-inventory.md CORRIDOR-ANTARCTICA-LIT",
+      "evidence_tag": "粗估观察;相对等级;框架推断;文献点名",
+      "caveats": "KB 仅提供室内微宇宙相对对照：前7天自配与 Hempel 均较干净，第14天自配明显污损而 Hempel 仍较洁净；**非**南极/东南极航次或冰区磨蚀实测，亦非 Barnes 2025 / Holland 2021 / Perry 2026 现场涂料数据。禁止外推为商用 TDS 污损率、极地耐磨等级或绝对防污分数。产品具体牌号/DFT/杀生剂体系以用户实际采购与最新 TDS/SDS 为准——本行不编造规格。冷端 overall 相对压力低 / 1–2（框架），**禁止**写成极地高污损。",
+      "note": "按 Antarctica / East Antarctica 冷端桩（文献点名 Barnes 2025; Holland 2021; Perry 2026；未入 Table 1）：整体相对压力低，主导 persistence-oriented attachers；§4.2 temperate-to-cold 优先耐久、耐磨/抗冰语境、抗持久附着与降低脱附力，**而非**热带 anti-settlement 紧迫度。在 KB 已命名选项中，Hempel 仍是唯一 Day14 相对洁净对照，作为「一旦定殖需跨航次持续表现」的相对拟合第 1——但微宇宙≠南极证据。排序=工况相对拟合，非魔法最优分。",
+      "links": []
+    },
+    {
+      "rank": "2",
+      "name": "JF-602 + CA@MSiO₂（研究候选）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "JF602-CA1-SCREEN-SLOT",
+      "matched_profile_id": "STUB-ANTARCTICA",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2 §6 §7 §13;data/lab-proxy-table.csv JF602-CA1-SCREEN-SLOT;data/climate-route-profile.md §3l STUB-ANTARCTICA;GCB Route Framework KB (2026-10) §7.3 / temperate-to-cold",
+      "evidence_tag": "待测;方案非实测;框架推断;文献点名",
+      "caveats": "功能化样板拉拔/EIS/HPLC 释放/微宇宙防污在 KB 中均为待测或方案设计；厂家 4.9–6.6 MPa 不可移植到本候选；**无**南极/冰区/磨蚀实测。双组分致密网络可能阻碍 CA 释放——须水中 CA 定量验证。BYK 与 0/1/2/3 wt% 筛选未完成。溶剂/B 料（可能含 NCO）/现配现用安全常驻。",
+      "note": "假设拟合：冷端降低对「持续防 rapid-turnover 再定殖」权重；缓释/表面更新若有助于抗持久附着或降低脱附力，属框架假设，证据未闭合 → 第 2。matched_track_A_id → 1 wt% 待测槽。勿把赤道港停叙事套到南极桩。",
+      "links": []
+    },
+    {
+      "rank": "3",
+      "name": "JF-602 原漆（未功能化氟硅重防腐基漆）",
+      "type": "commercial",
+      "category_key": "spc_copper",
+      "category_zh": "铜系杀生剂 SPC（总称）",
+      "matched_track_A_id": "JF602-OEM-BOUNDARY",
+      "matched_profile_id": "STUB-ANTARCTICA",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.2;data/lab-proxy-table.csv JF602-OEM-BOUNDARY;data/climate-route-profile.md §3l STUB-ANTARCTICA;GCB Route Framework KB (2026-10) temperate-to-cold durability",
+      "evidence_tag": "厂家标称;方案非实测;框架推断;文献点名",
+      "caveats": "仅有厂家标称拉拔区间（约 4.9–6.6 MPa）与工艺语境；KB 未将其表述为南极/冷水防污或耐磨/抗冰实测产品。A/B 5:1 须核实质量或体积；适用期保守 3h；B 料查 SDS。不等于功能化样板性能；**不编造**冰区耐磨或脱附力数据。",
+      "note": "temperate-to-cold 下成膜/标称附着力平台对「耐久讨论」权重相对暖水航线升高，但仍无冷端防污/磨蚀实测宣称 → 第 3。作为轨 A 边界锚点有价值；不因压力低而升级为已验证极地方案。",
+      "links": []
+    },
+    {
+      "rank": "4",
+      "name": "自配热塑性丙烯酸/松香（历史方案）",
+      "type": "homemade",
+      "category_key": "",
+      "category_zh": "",
+      "matched_track_A_id": "",
+      "matched_profile_id": "STUB-ANTARCTICA",
+      "evidence_links": "Lab Benchmark KB (2026-10) §5.1 §6;data/climate-route-profile.md §3l STUB-ANTARCTICA",
+      "evidence_tag": "粗估观察;方案非实测;相对等级;文献点名",
+      "caveats": "微宇宙：前7天相对延迟污损，第14天明显污损（相对 Hempel 持续性不足）。配方不断演变；历史版本曾含 Cu₂O 等——不可默认最新仍无铜或宣称纯物理防污。早期覆盖率为粗估观察不可当论文真值。溶剂烟尘暴露高。无南极航次数据。",
+      "note": "冷端问题不是高周转招募，而是稀少成功定殖者的持久附着；短期延迟逻辑与 persistence 制度匹配更弱 → 第 4。可作对照/极短暴露，勿与 JF-602 混轨；勿写成「低压所以自配也够用」。",
       "links": []
     },
     {
       "rank": "5",
-      "name": "示例铜系 SPC（公开目录示意）",
+      "name": "Hempel Dynamic（硅烷化丙烯酸 SPC）",
       "type": "commercial",
-      "category_key": "spc_copper",
-      "category_zh": "铜系杀生剂 SPC（总称）",
+      "category_key": "spc_silyl_acrylate",
+      "category_zh": "硅烷丙烯酸 SPC",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-SHA-PUS-ICN-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：按航线相对污损压力做公开品类拟合；非航次实测、非作者课题配方。具体牌号以厂家最新 TDS/SDS 为准。",
-      "note": "暖水/港停段优先考虑持续防再定殖；排序=工况相对拟合，非魔法最优分。 profile=ROUTE-SHA-PUS-ICN-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §1;https://www.hempel.com/all-products/all-brands/dynamic/explore",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "厂商页称较高航速/活动度、热带水域、docking interval up to 90 months；具体牌号/DFT/杀生剂以最新 TDS/SDS 为准。≠课题微宇宙未鉴定 Hempel 对照；≠航次污损率。",
+      "note": "全球目录候选：暖水高活动航线 SPC 对照；排序仅目录序非航线魔法分。",
+      "links": [
+        {
+          "label": "www.hempel.com/all-products/all-brands/dynamic/explore",
+          "url": "https://www.hempel.com/all-products/all-brands/dynamic/explore",
+          "origin": "已有文件"
+        }
+      ]
     },
     {
       "rank": "6",
-      "name": "示例水解型 SPC（公开目录示意）",
+      "name": "Hempel Globic（慢航/长闲置 SPC）",
       "type": "commercial",
       "category_key": "spc_hydrolysis",
       "category_zh": "水解 / 羧酸盐 SPC",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-SHA-PUS-ICN-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：温带/季节窗航线示意；非现场数据。",
-      "note": "季节脉冲港停抬升对持续性的要求；无编造规格。 profile=ROUTE-SHA-PUS-ICN-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §1;https://www.hempel.com/all-products/all-brands/globic/explore",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "厂商页称慢航与长 idle 仍有效抛光；docking interval up to 90 months。港停峰值走廊可作公开资料对照；无用户航次实测。",
+      "note": "目录候选：高港停/慢航拟合叙事（框架）。",
+      "links": [
+        {
+          "label": "www.hempel.com/all-products/all-brands/globic/explore",
+          "url": "https://www.hempel.com/all-products/all-brands/globic/explore",
+          "origin": "已有文件"
+        }
+      ]
     },
     {
       "rank": "7",
-      "name": "示例有机硅污损释放（公开目录示意）",
+      "name": "Hempel Oceanic Protect+ 7395W",
       "type": "commercial",
-      "category_key": "lse_foul_release",
-      "category_zh": "低表面能污损释放",
+      "category_key": "spc_hydrolysis",
+      "category_zh": "水解 / 羧酸盐 SPC",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-SHA-PUS-ICN-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：高速段/清洗维护语境示意；静泊表现因体系而异。",
-      "note": "需结合航速与清洗周期；勿当作无维护方案。 profile=ROUTE-SHA-PUS-ICN-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §1;Hempel Oceanic+ brochure;PDS 7395W",
+      "evidence_tag": "厂家标称",
+      "caveats": "公开 TDS 摘要：体积固体 64±2%；典型 DFT 约 100 µm（表列 80–175）；服务期手册 60 months；idle 约 28–30 天量级。发行注记以厂家为准。",
+      "note": "目录候选：灵活贸易/中高 idle SPC。",
+      "links": [
+        {
+          "label": "Hempel Oceanic/Oceanic+ 系列页（品牌级）",
+          "url": "https://www.hempel.com/all-products/all-brands/oceanic/explore",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
     },
     {
       "rank": "8",
-      "name": "示例混合 / 低铜方案（公开讨论示意）",
+      "name": "Jotun SeaQuantum Plus S",
       "type": "commercial",
-      "category_key": "hybrid",
-      "category_zh": "混合体系",
+      "category_key": "spc_silyl_acrylate",
+      "category_zh": "硅烷丙烯酸 SPC",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-SHA-PUS-ICN-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料;方案非实测",
-      "caveats": "示例数据 / example：法规趋严语境下的公开讨论方向；非已验证优选。",
-      "note": "证据弱于专用已验证体系时仅作对照讨论。 profile=ROUTE-SHA-PUS-ICN-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §2;Jotun TDS SeaQuantum Plus S (Eng US 2024-06-27)",
+      "evidence_tag": "厂家标称",
+      "caveats": "单组分硅烷丙烯酸 SPC；完整体系可 up to 90 months；DFT 75–175 µm/道；体系 max total DFT 600 µm；IMO AFS+MEPC.331(76)。无污损%实测填入。",
+      "note": "目录候选：高航速中高活动深海 SPC。",
+      "links": [
+        {
+          "label": "Jotun SeaQuantum Plus S 产品页",
+          "url": "https://www.jotun.com/ww-en/products-and-services/products/SeaQuantum-Plus-S",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
     },
     {
       "rank": "9",
-      "name": "示例铜系 SPC（公开目录示意）",
+      "name": "International Intersmooth 7200Si SPC",
       "type": "commercial",
-      "category_key": "spc_copper",
-      "category_zh": "铜系杀生剂 SPC（总称）",
+      "category_key": "spc_silyl_acrylate",
+      "category_zh": "硅烷丙烯酸 SPC",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-ASIA-EU-SUEZ-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：按航线相对污损压力做公开品类拟合；非航次实测、非作者课题配方。具体牌号以厂家最新 TDS/SDS 为准。",
-      "note": "暖水/港停段优先考虑持续防再定殖；排序=工况相对拟合，非魔法最优分。 profile=ROUTE-ASIA-EU-SUEZ-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §3;https://www.international-marine.com/en/products/intersmooth-7200si-spc",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "体积固体 61%；VOC 375 g/L；DFT 75–200 µm；硅基甲基丙烯酸 SPC。燃油节约为厂商相对叙事。",
+      "note": "目录候选：全航线通用硅基 SPC。",
+      "links": [
+        {
+          "label": "www.international-marine.com/en/products/intersmooth-7200si-",
+          "url": "https://www.international-marine.com/en/products/intersmooth-7200si-spc",
+          "origin": "已有文件"
+        }
+      ]
     },
     {
       "rank": "10",
-      "name": "示例水解型 SPC（公开目录示意）",
+      "name": "International Intersmooth 7476Si SPC",
       "type": "commercial",
-      "category_key": "spc_hydrolysis",
-      "category_zh": "水解 / 羧酸盐 SPC",
+      "category_key": "spc_silyl_acrylate",
+      "category_zh": "硅烷丙烯酸 SPC",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-ASIA-EU-SUEZ-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：温带/季节窗航线示意；非现场数据。",
-      "note": "季节脉冲港停抬升对持续性的要求；无编造规格。 profile=ROUTE-ASIA-EU-SUEZ-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §3;international-marine antifoulings page",
+      "evidence_tag": "厂家标称",
+      "caveats": "产品页称 docking cycle 1.4% speed loss（厂商宣称；≠用户实测；≠绝对防污分）。",
+      "note": "目录候选：低速损叙事 SPC。",
+      "links": [
+        {
+          "label": "Intersmooth 7476Si SPC 产品页（ME/SEA/N.Asia）",
+          "url": "https://www.international-marine.com/en/products/intersmooth-7476si-spc-%E2%80%93-me-sea-n-asia",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
     },
     {
       "rank": "11",
-      "name": "示例有机硅污损释放（公开目录示意）",
+      "name": "International Intercept 7000（Lubyon LPP）",
       "type": "commercial",
-      "category_key": "lse_foul_release",
-      "category_zh": "低表面能污损释放",
+      "category_key": "lpp_linear",
+      "category_zh": "线性抛光 LPP",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-ASIA-EU-SUEZ-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：高速段/清洗维护语境示意；静泊表现因体系而异。",
-      "note": "需结合航速与清洗周期；勿当作无维护方案。 profile=ROUTE-ASIA-EU-SUEZ-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §3;Intercept 7000 product PDF",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "线性抛光低摩擦；Lubyon 技术。具体杀生剂/DFT 以最新 TDS 为准。",
+      "note": "目录候选：LPP 低摩擦对照。",
+      "links": [
+        {
+          "label": "Intercept 7000 产品页",
+          "url": "https://www.international-marine.com/en/products/intercept-7000",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
     },
     {
       "rank": "12",
-      "name": "示例混合 / 低铜方案（公开讨论示意）",
+      "name": "International Intersleek 1100SR（无杀生剂 FRC）",
       "type": "commercial",
-      "category_key": "hybrid",
-      "category_zh": "混合体系",
+      "category_key": "frc_fluoro",
+      "category_zh": "氟聚污损释放",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-ASIA-EU-SUEZ-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料;方案非实测",
-      "caveats": "示例数据 / example：法规趋严语境下的公开讨论方向；非已验证优选。",
-      "note": "证据弱于专用已验证体系时仅作对照讨论。 profile=ROUTE-ASIA-EU-SUEZ-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §3;Intersleek brand/product pages",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "氟聚合物 fouling-release；无杀生剂；依赖航行剪切释放；公开 speed loss ~1.2% 量级（宣传）。长港停/闸区须 caveat。",
+      "note": "目录候选：FRC；低速港停拟合弱于 SPC。",
+      "links": [
+        {
+          "label": "Intersleek 1100SR 产品页",
+          "url": "https://www.international-marine.com/en/products/intersleek-1100sr",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
     },
     {
       "rank": "13",
-      "name": "示例铜系 SPC（公开目录示意）",
-      "type": "commercial",
-      "category_key": "spc_copper",
-      "category_zh": "铜系杀生剂 SPC（总称）",
-      "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-ASIA-EU-CAPE-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：按航线相对污损压力做公开品类拟合；非航次实测、非作者课题配方。具体牌号以厂家最新 TDS/SDS 为准。",
-      "note": "暖水/港停段优先考虑持续防再定殖；排序=工况相对拟合，非魔法最优分。 profile=ROUTE-ASIA-EU-CAPE-V0",
-      "links": []
-    },
-    {
-      "rank": "14",
-      "name": "示例水解型 SPC（公开目录示意）",
+      "name": "PPG SIGMA ECOFLEET 290",
       "type": "commercial",
       "category_key": "spc_hydrolysis",
       "category_zh": "水解 / 羧酸盐 SPC",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-ASIA-EU-CAPE-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：温带/季节窗航线示意；非现场数据。",
-      "note": "季节脉冲港停抬升对持续性的要求；无编造规格。 profile=ROUTE-ASIA-EU-CAPE-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §4;PPG Ecofleet 290 brochure",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "TBT-free SPC；中高活动深海；污损控制 up to 60 months；单道 DFT up to 150 µm。",
+      "note": "目录候选：深海中高活动 SPC。",
+      "links": [
+        {
+          "label": "PPG SIGMA ECOFLEET 290 产品页",
+          "url": "https://www.ppg.com/en-US/pmc/product/sigma-ecofleet-290/614004M0402",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
+    },
+    {
+      "rank": "14",
+      "name": "PPG SIGMA ECOFLEET 690",
+      "type": "commercial",
+      "category_key": "spc_hydrolysis",
+      "category_zh": "水解 / 羧酸盐 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §4;https://www.ppg.com/en-US/pmc/product/sigma-ecofleet-690/614004M0408",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "近岸/低活动；极端污损；up to 60 months（视船型与体系）。",
+      "note": "目录候选：近岸高污损压力 SPC。",
+      "links": [
+        {
+          "label": "www.ppg.com/en-US/pmc/product/sigma-ecofleet-690/614004M0408",
+          "url": "https://www.ppg.com/en-US/pmc/product/sigma-ecofleet-690/614004M0408",
+          "origin": "已有文件"
+        }
+      ]
     },
     {
       "rank": "15",
-      "name": "示例有机硅污损释放（公开目录示意）",
+      "name": "PPG SIGMAGLIDE 2390（硅酮 FRC）",
       "type": "commercial",
-      "category_key": "lse_foul_release",
-      "category_zh": "低表面能污损释放",
+      "category_key": "frc_silicone",
+      "category_zh": "硅酮污损释放（FRC）",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-ASIA-EU-CAPE-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：高速段/清洗维护语境示意；静泊表现因体系而异。",
-      "note": "需结合航速与清洗周期；勿当作无维护方案。 profile=ROUTE-ASIA-EU-CAPE-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §4;https://www.ppg.com/en-US/pmc/marine-coatings/ppg-sigmaglide-2390-marine",
+      "evidence_tag": "厂家标称",
+      "caveats": "无杀生剂纯硅酮 FRC；厂商称功率节约 up to 20%*、speed loss <1%*、排放降低 up to 35%*（*依赖船模与工况）。",
+      "note": "目录候选：FRC 能效叙事；港停须 caveat。",
+      "links": [
+        {
+          "label": "www.ppg.com/en-US/pmc/marine-coatings/ppg-sigmaglide-2390-ma",
+          "url": "https://www.ppg.com/en-US/pmc/marine-coatings/ppg-sigmaglide-2390-marine",
+          "origin": "已有文件"
+        }
+      ]
     },
     {
       "rank": "16",
-      "name": "示例混合 / 低铜方案（公开讨论示意）",
+      "name": "CMP SEAFLO NEO / NEO Z",
       "type": "commercial",
-      "category_key": "hybrid",
-      "category_zh": "混合体系",
+      "category_key": "spc_hydrolysis",
+      "category_zh": "水解 / 羧酸盐 SPC",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-ASIA-EU-CAPE-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料;方案非实测",
-      "caveats": "示例数据 / example：法规趋严语境下的公开讨论方向；非已验证优选。",
-      "note": "证据弱于专用已验证体系时仅作对照讨论。 profile=ROUTE-ASIA-EU-CAPE-V0",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §5;cmp.co.jp SEAFLO NEO Z;TOA-Chugoku TDS",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "无锡水解 SPC；NEO TDS：VOC 330 g/L；VS 61±2%；DFT 75–150 µm；NEO Z 系列叙述 max 90 months。",
+      "note": "目录候选：亚洲船厂常见水解 SPC。",
       "links": []
     },
     {
       "rank": "17",
-      "name": "示例铜系 SPC（公开目录示意）",
+      "name": "Nippon Paint A-LF-SEA",
       "type": "commercial",
-      "category_key": "spc_copper",
-      "category_zh": "铜系杀生剂 SPC（总称）",
+      "category_key": "spc_silyl_acrylate",
+      "category_zh": "硅烷丙烯酸 SPC",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-PANAMA-TRANSIT-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：按航线相对污损压力做公开品类拟合；非航次实测、非作者课题配方。具体牌号以厂家最新 TDS/SDS 为准。",
-      "note": "暖水/港停段优先考虑持续防再定殖；排序=工况相对拟合，非魔法最优分。 profile=ROUTE-PANAMA-TRANSIT-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §6;https://www.nipponpaint-marine.com/products/a-lf-sea/",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "铜–硅烷丙烯酸 SPC + 水捕获低摩擦；厂商称应用 >5000 船；摩擦阻力约 -15% → 燃油/CO2 约 -10%（厂商叙述）。",
+      "note": "目录候选：低摩擦铜硅烷 SPC。",
+      "links": [
+        {
+          "label": "www.nipponpaint-marine.com/products/a-lf-sea/",
+          "url": "https://www.nipponpaint-marine.com/products/a-lf-sea/",
+          "origin": "已有文件"
+        }
+      ]
     },
     {
       "rank": "18",
-      "name": "示例水解型 SPC（公开目录示意）",
-      "type": "commercial",
-      "category_key": "spc_hydrolysis",
-      "category_zh": "水解 / 羧酸盐 SPC",
+      "name": "UV-C 局部/niche 防污（辅助技术）",
+      "type": "tech-uvc",
+      "category_key": "tech_uvc",
+      "category_zh": "UV-C 辅助技术",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-PANAMA-TRANSIT-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：温带/季节窗航线示意；非现场数据。",
-      "note": "季节脉冲港停抬升对持续性的要求；无编造规格。 profile=ROUTE-PANAMA-TRANSIT-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/tech-uvc-ultrasound.md §1;10.1016/j.oceaneng.2020.107690",
+      "evidence_tag": "文献界;公开资料",
+      "caveats": "整船外壳未成熟；niche/LED/ROV 试点。阴影、水衰减、光老化、眼皮肤安全。不可替代 SPC 公开 docking 宣称；不可填入 JF-602 实测行。",
+      "note": "目录候选：混合体系局部模块；安全旗 UV-C。",
+      "links": [
+        {
+          "label": "DOI 10.1016/j.oceaneng.2020.107690",
+          "url": "https://doi.org/10.1016/j.oceaneng.2020.107690",
+          "origin": "已有文件"
+        }
+      ]
     },
     {
       "rank": "19",
-      "name": "示例有机硅污损释放（公开目录示意）",
-      "type": "commercial",
-      "category_key": "lse_foul_release",
-      "category_zh": "低表面能污损释放",
+      "name": "超声导波船体防污（辅助技术）",
+      "type": "tech-ultrasound",
+      "category_key": "tech_ultrasound",
+      "category_zh": "超声 / 导波辅助",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-PANAMA-TRANSIT-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：高速段/清洗维护语境示意；静泊表现因体系而异。",
-      "note": "需结合航速与清洗周期；勿当作无维护方案。 profile=ROUTE-PANAMA-TRANSIT-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/tech-uvc-ultrasound.md §2;10.29121/ijetmr.v3.i4.2016.59;Cathelco USP DragGone 产品页",
+      "evidence_tag": "文献界;厂家标称;公开资料",
+      "caveats": "小板海试（如 47 kHz/32 天）支持预防潜力；现场对藻类/粘液结果不一致。布局/频率敏感。≠赤道港停单一方案。",
+      "note": "目录候选：闲置辅助；须与涂层组合表述。",
+      "links": [
+        {
+          "label": "DOI 10.29121/ijetmr.v3.i4.2016.59",
+          "url": "https://doi.org/10.29121/ijetmr.v3.i4.2016.59",
+          "origin": "已有文件"
+        },
+        {
+          "label": "Cathelco USP DragGone™ 产品页（Evac）",
+          "url": "https://evac.com/ultrasonic-antifouling/",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
     },
     {
       "rank": "20",
-      "name": "示例混合 / 低铜方案（公开讨论示意）",
+      "name": "Hempel Hempaguard X7（水凝胶硅酮+杀生剂）",
       "type": "commercial",
-      "category_key": "hybrid",
-      "category_zh": "混合体系",
+      "category_key": "hybrid_hydrogel",
+      "category_zh": "水凝胶硅酮 + 杀生剂",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-PANAMA-TRANSIT-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料;方案非实测",
-      "caveats": "示例数据 / example：法规趋严语境下的公开讨论方向；非已验证优选。",
-      "note": "证据弱于专用已验证体系时仅作对照讨论。 profile=ROUTE-PANAMA-TRANSIT-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §1b;Hempel Hempaguard X7 PIS",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "厂商称 up to 90 months、idle 约 120 days 量级（手册语境）；燃油/排放节约工况依赖。≠课题微宇宙未鉴定 Hempel；≠航次实测。",
+      "note": "目录候选：高 idle hybrid；港停走廊可作公开资料对照。",
+      "links": [
+        {
+          "label": "Hempel Hempaguard 系列页（品牌级，含 X7）",
+          "url": "https://www.hempel.com/all-products/all-brands/hempaguard/explore",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
     },
     {
       "rank": "21",
-      "name": "示例铜系 SPC（公开目录示意）",
+      "name": "Hempel Globic 9000（NAT SPC）",
       "type": "commercial",
-      "category_key": "spc_copper",
-      "category_zh": "铜系杀生剂 SPC（总称）",
+      "category_key": "spc_hydrolysis",
+      "category_zh": "水解 / 羧酸盐 SPC",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-REDSEA-MED-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：按航线相对污损压力做公开品类拟合；非航次实测、非作者课题配方。具体牌号以厂家最新 TDS/SDS 为准。",
-      "note": "暖水/港停段优先考虑持续防再定殖；排序=工况相对拟合，非魔法最优分。 profile=ROUTE-REDSEA-MED-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §1b;Hempel Globic 9000 TDS",
+      "evidence_tag": "厂家标称",
+      "caveats": "慢航/频繁 idle；drydocking up to 90 months；微纤维+NAT。无污损%实测填入。",
+      "note": "目录候选：慢航长闲置 SPC。",
+      "links": [
+        {
+          "label": "Hempel Globic 9000 78900 产品页",
+          "url": "https://www.hempel.com/all-products/hempels-antifouling-globic-9000-78900-78900",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
     },
     {
       "rank": "22",
-      "name": "示例水解型 SPC（公开目录示意）",
+      "name": "Jotun SeaQuantum Ultra S",
       "type": "commercial",
-      "category_key": "spc_hydrolysis",
-      "category_zh": "水解 / 羧酸盐 SPC",
+      "category_key": "spc_silyl_acrylate",
+      "category_zh": "硅烷丙烯酸 SPC",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-REDSEA-MED-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：温带/季节窗航线示意；非现场数据。",
-      "note": "季节脉冲港停抬升对持续性的要求；无编造规格。 profile=ROUTE-REDSEA-MED-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §2b;https://www.jotun.com/ww-en/products-and-services/products/SeaQuantum-Ultra-S",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "低活动/慢航；体系 up to 90 months；idle 约 45–55 days（市场页表述不一，以当地 TDS 为准）；speed loss/燃油节约为厂商 ISO 19030 语境宣称。",
+      "note": "目录候选：低活动高污损区 SPC。",
+      "links": [
+        {
+          "label": "www.jotun.com/ww-en/products-and-services/products/SeaQuantu",
+          "url": "https://www.jotun.com/ww-en/products-and-services/products/SeaQuantum-Ultra-S",
+          "origin": "已有文件"
+        }
+      ]
     },
     {
       "rank": "23",
-      "name": "示例有机硅污损释放（公开目录示意）",
+      "name": "Kansai TAKATA QUANTUM / X-mile",
       "type": "commercial",
-      "category_key": "lse_foul_release",
-      "category_zh": "低表面能污损释放",
+      "category_key": "asian_silyl_spc",
+      "category_zh": "日系硅基 SPC",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-REDSEA-MED-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：高速段/清洗维护语境示意；静泊表现因体系而异。",
-      "note": "需结合航速与清洗周期；勿当作无维护方案。 profile=ROUTE-REDSEA-MED-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §5b;kp-marine.co.jp",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "无锡硅基 SPC；服务期约 60 months 叙事（X-mile 宣传或更长）。具体 DFT/VOC 以当地 TDS 为准。",
+      "note": "目录候选：亚洲船厂硅基 SPC。",
+      "links": [
+        {
+          "label": "Kansai TAKATA QUANTUM 产品页",
+          "url": "https://www.kp-marine.co.jp/en/products/pickup/quantum.html",
+          "origin": "新核验 2026-10-19"
+        },
+        {
+          "label": "Kansai X-mile 目录 PDF",
+          "url": "https://www.kp-marine.co.jp/en/products/catalog/pdf/x-mile.pdf",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
     },
     {
       "rank": "24",
-      "name": "示例混合 / 低铜方案（公开讨论示意）",
+      "name": "Sherwin-Williams SeaVoyage Copper Free",
       "type": "commercial",
-      "category_key": "hybrid",
-      "category_zh": "混合体系",
+      "category_key": "copper_free_ablative",
+      "category_zh": "无铜消融",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-REDSEA-MED-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料;方案非实测",
-      "caveats": "示例数据 / example：法规趋严语境下的公开讨论方向；非已验证优选。",
-      "note": "证据弱于专用已验证体系时仅作对照讨论。 profile=ROUTE-REDSEA-MED-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §6b;sherwin-williams SeaVoyage",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "无铜消融+有机杀生剂；舾装期约 up to 6 months 量级（公开）——≠ 60–90 month 深海 SPC。",
+      "note": "目录候选：无铜工作艇/游艇语境；勿与商船长坞期混比。",
+      "links": [
+        {
+          "label": "Sherwin-Williams SeaVoyage Copper Free 产品页",
+          "url": "https://industrial.sherwin-williams.com/na/us/en/protective-marine/catalog/product/products-by-industry.11543396/seavoyage-copper-free-antifoulant.9752447.html",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
     },
     {
       "rank": "25",
-      "name": "示例铜系 SPC（公开目录示意）",
-      "type": "commercial",
-      "category_key": "spc_copper",
-      "category_zh": "铜系杀生剂 SPC（总称）",
-      "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-NWPAC-HUB-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：按航线相对污损压力做公开品类拟合；非航次实测、非作者课题配方。具体牌号以厂家最新 TDS/SDS 为准。",
-      "note": "暖水/港停段优先考虑持续防再定殖；排序=工况相对拟合，非魔法最优分。 profile=ROUTE-NWPAC-HUB-V0",
-      "links": []
-    },
-    {
-      "rank": "26",
-      "name": "示例水解型 SPC（公开目录示意）",
+      "name": "PPG SIGMA ECOFLEET 530（高活性 SPC）",
       "type": "commercial",
       "category_key": "spc_hydrolysis",
       "category_zh": "水解 / 羧酸盐 SPC",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-NWPAC-HUB-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：温带/季节窗航线示意；非现场数据。",
-      "note": "季节脉冲港停抬升对持续性的要求；无编造规格。 profile=ROUTE-NWPAC-HUB-V0",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §4;ppg.com Ecofleet 530",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "极端污损条件；壳/草控制 up to 60 months（视船型与体系）。",
+      "note": "目录候选：极端污损 SPC。",
+      "links": [
+        {
+          "label": "PPG SIGMA ECOFLEET 530 产品页",
+          "url": "https://www.ppg.com/en-US/pmc/product/sigma-ecofleet-530/614004M0403",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
+    },
+    {
+      "rank": "26",
+      "name": "CMP SEAFLO NEO SL / SL Z",
+      "type": "commercial",
+      "category_key": "asian_silyl_spc",
+      "category_zh": "日系硅基 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §5;TOA-Chugoku TDS",
+      "evidence_tag": "厂家标称",
+      "caveats": "先进硅基水解；VS 约 55±2%；VOC 约 408 g/L（SL）；SL Z 系列耐久叙事。",
+      "note": "目录候选：硅基水解耐久对照。",
       "links": []
     },
     {
       "rank": "27",
-      "name": "示例有机硅污损释放（公开目录示意）",
+      "name": "SEAJET 039 Platinum Mono（游艇 SPC）",
       "type": "commercial",
-      "category_key": "lse_foul_release",
-      "category_zh": "低表面能污损释放",
+      "category_key": "yacht_spc",
+      "category_zh": "游艇 SPC",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-NWPAC-HUB-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：高速段/清洗维护语境示意；静泊表现因体系而异。",
-      "note": "需结合航速与清洗周期；勿当作无维护方案。 profile=ROUTE-NWPAC-HUB-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §5;seajetpaint.com",
+      "evidence_tag": "厂家标称",
+      "caveats": "游艇高污损区；除铝外基材；额外道数叙述 up to 3 years；≠商船 SEAFLO。",
+      "note": "目录候选：游艇线；铝基材禁忌。",
+      "links": [
+        {
+          "label": "SEAJET 039 Platinum Mono 产品页",
+          "url": "https://www.seajetpaint.com/product/seajet-039-platinum-mono/",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
     },
     {
       "rank": "28",
-      "name": "示例混合 / 低铜方案（公开讨论示意）",
-      "type": "commercial",
-      "category_key": "hybrid",
-      "category_zh": "混合体系",
+      "name": "UV-C LED 嵌硅酮瓷砖（实验室/试点）",
+      "type": "tech-uvc",
+      "category_key": "tech_uvc",
+      "category_zh": "UV-C 辅助技术",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-NWPAC-HUB-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料;方案非实测",
-      "caveats": "示例数据 / example：法规趋严语境下的公开讨论方向；非已验证优选。",
-      "note": "证据弱于专用已验证体系时仅作对照讨论。 profile=ROUTE-NWPAC-HUB-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/tech-uvc-ultrasound.md §1;10.3389/fmars.2021.809011;10.1080/08927014.2024.2319178",
+      "evidence_tag": "文献界",
+      "caveats": "Whitworth：低 fluence 抑硅藻；LD90 约 25 J/cm² 量级；嵌瓷砖试点。阴影/衰减/光老化/眼皮肤安全。不可填 JF-602。",
+      "note": "目录候选：LED 瓷砖技术路径；安全旗 UV-C。",
+      "links": [
+        {
+          "label": "DOI 10.3389/fmars.2021.809011",
+          "url": "https://doi.org/10.3389/fmars.2021.809011",
+          "origin": "已有文件"
+        },
+        {
+          "label": "DOI 10.1080/08927014.2024.2319178",
+          "url": "https://doi.org/10.1080/08927014.2024.2319178",
+          "origin": "已有文件"
+        }
+      ]
     },
     {
       "rank": "29",
-      "name": "示例铜系 SPC（公开目录示意）",
-      "type": "commercial",
-      "category_key": "spc_copper",
-      "category_zh": "铜系杀生剂 SPC（总称）",
+      "name": "超声低强度间歇定殖抑制（实验室界）",
+      "type": "tech-ultrasound",
+      "category_key": "tech_ultrasound",
+      "category_zh": "超声 / 导波辅助",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-TRANSPAC-LA-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：按航线相对污损压力做公开品类拟合；非航次实测、非作者课题配方。具体牌号以厂家最新 TDS/SDS 为准。",
-      "note": "暖水/港停段优先考虑持续防再定殖；排序=工况相对拟合，非魔法最优分。 profile=ROUTE-TRANSPAC-LA-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/tech-uvc-ultrasound.md §2;10.1080/08927014.2012.658511;10.1016/j.jembe.2011.09.006",
+      "evidence_tag": "文献界",
+      "caveats": "Guo：23 kHz / 5 kPa；5 on/20 off。藤壶金星幼体实验室界；现场藻类/粘液不一致。≠赤道港停单一方案。",
+      "note": "目录候选：低强度间歇超声证据链。",
+      "links": [
+        {
+          "label": "DOI 10.1080/08927014.2012.658511",
+          "url": "https://doi.org/10.1080/08927014.2012.658511",
+          "origin": "已有文件"
+        },
+        {
+          "label": "DOI 10.1016/j.jembe.2011.09.006",
+          "url": "https://doi.org/10.1016/j.jembe.2011.09.006",
+          "origin": "已有文件"
+        }
+      ]
     },
     {
       "rank": "30",
-      "name": "示例水解型 SPC（公开目录示意）",
-      "type": "commercial",
-      "category_key": "spc_hydrolysis",
-      "category_zh": "水解 / 羧酸盐 SPC",
+      "name": "涂层+UV 协同（船体涂层体系）",
+      "type": "tech-uvc",
+      "category_key": "tech_uvc",
+      "category_zh": "UV-C 辅助技术",
       "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-TRANSPAC-LA-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：温带/季节窗航线示意；非现场数据。",
-      "note": "季节脉冲港停抬升对持续性的要求；无编造规格。 profile=ROUTE-TRANSPAC-LA-V0",
-      "links": []
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/tech-uvc-ultrasound.md §1;10.1080/08927014.2019.1642334;10.3390/jmse9060662",
+      "evidence_tag": "文献界",
+      "caveats": "Hunsucker/Richard：UV 与涂层/表面材料协同。系统方案须分别溯源涂层与 UV 模块。",
+      "note": "目录候选：混合主动；勿当纯涂料 TDS。",
+      "links": [
+        {
+          "label": "DOI 10.1080/08927014.2019.1642334",
+          "url": "https://doi.org/10.1080/08927014.2019.1642334",
+          "origin": "已有文件"
+        },
+        {
+          "label": "DOI 10.3390/jmse9060662",
+          "url": "https://doi.org/10.3390/jmse9060662",
+          "origin": "已有文件"
+        }
+      ]
     },
     {
       "rank": "31",
-      "name": "示例有机硅污损释放（公开目录示意）",
-      "type": "commercial",
-      "category_key": "lse_foul_release",
-      "category_zh": "低表面能污损释放",
-      "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-TRANSPAC-LA-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：高速段/清洗维护语境示意；静泊表现因体系而异。",
-      "note": "需结合航速与清洗周期；勿当作无维护方案。 profile=ROUTE-TRANSPAC-LA-V0",
-      "links": []
-    },
-    {
-      "rank": "32",
-      "name": "示例混合 / 低铜方案（公开讨论示意）",
-      "type": "commercial",
-      "category_key": "hybrid",
-      "category_zh": "混合体系",
-      "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-TRANSPAC-LA-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料;方案非实测",
-      "caveats": "示例数据 / example：法规趋严语境下的公开讨论方向；非已验证优选。",
-      "note": "证据弱于专用已验证体系时仅作对照讨论。 profile=ROUTE-TRANSPAC-LA-V0",
-      "links": []
-    },
-    {
-      "rank": "33",
-      "name": "示例铜系 SPC（公开目录示意）",
-      "type": "commercial",
-      "category_key": "spc_copper",
-      "category_zh": "铜系杀生剂 SPC（总称）",
-      "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-SWPAC-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：按航线相对污损压力做公开品类拟合；非航次实测、非作者课题配方。具体牌号以厂家最新 TDS/SDS 为准。",
-      "note": "暖水/港停段优先考虑持续防再定殖；排序=工况相对拟合，非魔法最优分。 profile=ROUTE-SWPAC-V0",
-      "links": []
-    },
-    {
-      "rank": "34",
-      "name": "示例水解型 SPC（公开目录示意）",
-      "type": "commercial",
-      "category_key": "spc_hydrolysis",
-      "category_zh": "水解 / 羧酸盐 SPC",
-      "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-SWPAC-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：温带/季节窗航线示意；非现场数据。",
-      "note": "季节脉冲港停抬升对持续性的要求；无编造规格。 profile=ROUTE-SWPAC-V0",
-      "links": []
-    },
-    {
-      "rank": "35",
-      "name": "示例有机硅污损释放（公开目录示意）",
-      "type": "commercial",
-      "category_key": "lse_foul_release",
-      "category_zh": "低表面能污损释放",
-      "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-SWPAC-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：高速段/清洗维护语境示意；静泊表现因体系而异。",
-      "note": "需结合航速与清洗周期；勿当作无维护方案。 profile=ROUTE-SWPAC-V0",
-      "links": []
-    },
-    {
-      "rank": "36",
-      "name": "示例混合 / 低铜方案（公开讨论示意）",
-      "type": "commercial",
-      "category_key": "hybrid",
-      "category_zh": "混合体系",
-      "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-SWPAC-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料;方案非实测",
-      "caveats": "示例数据 / example：法规趋严语境下的公开讨论方向；非已验证优选。",
-      "note": "证据弱于专用已验证体系时仅作对照讨论。 profile=ROUTE-SWPAC-V0",
-      "links": []
-    },
-    {
-      "rank": "37",
-      "name": "示例铜系 SPC（公开目录示意）",
-      "type": "commercial",
-      "category_key": "spc_copper",
-      "category_zh": "铜系杀生剂 SPC（总称）",
-      "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-SATL-SANTOS-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：按航线相对污损压力做公开品类拟合；非航次实测、非作者课题配方。具体牌号以厂家最新 TDS/SDS 为准。",
-      "note": "暖水/港停段优先考虑持续防再定殖；排序=工况相对拟合，非魔法最优分。 profile=ROUTE-SATL-SANTOS-V0",
-      "links": []
-    },
-    {
-      "rank": "38",
-      "name": "示例水解型 SPC（公开目录示意）",
-      "type": "commercial",
-      "category_key": "spc_hydrolysis",
-      "category_zh": "水解 / 羧酸盐 SPC",
-      "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-SATL-SANTOS-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：温带/季节窗航线示意；非现场数据。",
-      "note": "季节脉冲港停抬升对持续性的要求；无编造规格。 profile=ROUTE-SATL-SANTOS-V0",
-      "links": []
-    },
-    {
-      "rank": "39",
-      "name": "示例有机硅污损释放（公开目录示意）",
-      "type": "commercial",
-      "category_key": "lse_foul_release",
-      "category_zh": "低表面能污损释放",
-      "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-SATL-SANTOS-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：高速段/清洗维护语境示意；静泊表现因体系而异。",
-      "note": "需结合航速与清洗周期；勿当作无维护方案。 profile=ROUTE-SATL-SANTOS-V0",
-      "links": []
-    },
-    {
-      "rank": "40",
-      "name": "示例混合 / 低铜方案（公开讨论示意）",
-      "type": "commercial",
-      "category_key": "hybrid",
-      "category_zh": "混合体系",
-      "matched_track_A_id": "",
-      "matched_profile_id": "ROUTE-SATL-SANTOS-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料;方案非实测",
-      "caveats": "示例数据 / example：法规趋严语境下的公开讨论方向；非已验证优选。",
-      "note": "证据弱于专用已验证体系时仅作对照讨论。 profile=ROUTE-SATL-SANTOS-V0",
-      "links": []
-    },
-    {
-      "rank": "41",
-      "name": "示例铜系 SPC（公开目录示意）",
-      "type": "commercial",
-      "category_key": "spc_copper",
-      "category_zh": "铜系杀生剂 SPC（总称）",
-      "matched_track_A_id": "",
-      "matched_profile_id": "STUB-CAN-ARCTIC",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：按航线相对污损压力做公开品类拟合；非航次实测、非作者课题配方。具体牌号以厂家最新 TDS/SDS 为准。",
-      "note": "暖水/港停段优先考虑持续防再定殖；排序=工况相对拟合，非魔法最优分。 profile=STUB-CAN-ARCTIC",
-      "links": []
-    },
-    {
-      "rank": "42",
-      "name": "示例水解型 SPC（公开目录示意）",
-      "type": "commercial",
-      "category_key": "spc_hydrolysis",
-      "category_zh": "水解 / 羧酸盐 SPC",
-      "matched_track_A_id": "",
-      "matched_profile_id": "STUB-CAN-ARCTIC",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：温带/季节窗航线示意；非现场数据。",
-      "note": "季节脉冲港停抬升对持续性的要求；无编造规格。 profile=STUB-CAN-ARCTIC",
-      "links": []
-    },
-    {
-      "rank": "43",
-      "name": "示例有机硅污损释放（公开目录示意）",
-      "type": "commercial",
-      "category_key": "lse_foul_release",
-      "category_zh": "低表面能污损释放",
-      "matched_track_A_id": "",
-      "matched_profile_id": "STUB-CAN-ARCTIC",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：高速段/清洗维护语境示意；静泊表现因体系而异。",
-      "note": "需结合航速与清洗周期；勿当作无维护方案。 profile=STUB-CAN-ARCTIC",
-      "links": []
-    },
-    {
-      "rank": "44",
-      "name": "示例混合 / 低铜方案（公开讨论示意）",
-      "type": "commercial",
-      "category_key": "hybrid",
-      "category_zh": "混合体系",
-      "matched_track_A_id": "",
-      "matched_profile_id": "STUB-CAN-ARCTIC",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料;方案非实测",
-      "caveats": "示例数据 / example：法规趋严语境下的公开讨论方向；非已验证优选。",
-      "note": "证据弱于专用已验证体系时仅作对照讨论。 profile=STUB-CAN-ARCTIC",
-      "links": []
-    },
-    {
-      "rank": "45",
-      "name": "示例铜系 SPC（公开目录示意）",
-      "type": "commercial",
-      "category_key": "spc_copper",
-      "category_zh": "铜系杀生剂 SPC（总称）",
-      "matched_track_A_id": "",
-      "matched_profile_id": "STUB-ANTARCTICA",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：按航线相对污损压力做公开品类拟合；非航次实测、非作者课题配方。具体牌号以厂家最新 TDS/SDS 为准。",
-      "note": "暖水/港停段优先考虑持续防再定殖；排序=工况相对拟合，非魔法最优分。 profile=STUB-ANTARCTICA",
-      "links": []
-    },
-    {
-      "rank": "46",
-      "name": "示例水解型 SPC（公开目录示意）",
-      "type": "commercial",
-      "category_key": "spc_hydrolysis",
-      "category_zh": "水解 / 羧酸盐 SPC",
-      "matched_track_A_id": "",
-      "matched_profile_id": "STUB-ANTARCTICA",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：温带/季节窗航线示意；非现场数据。",
-      "note": "季节脉冲港停抬升对持续性的要求；无编造规格。 profile=STUB-ANTARCTICA",
-      "links": []
-    },
-    {
-      "rank": "47",
-      "name": "示例有机硅污损释放（公开目录示意）",
-      "type": "commercial",
-      "category_key": "lse_foul_release",
-      "category_zh": "低表面能污损释放",
-      "matched_track_A_id": "",
-      "matched_profile_id": "STUB-ANTARCTICA",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：高速段/清洗维护语境示意；静泊表现因体系而异。",
-      "note": "需结合航速与清洗周期；勿当作无维护方案。 profile=STUB-ANTARCTICA",
-      "links": []
-    },
-    {
-      "rank": "48",
-      "name": "示例混合 / 低铜方案（公开讨论示意）",
-      "type": "commercial",
-      "category_key": "hybrid",
-      "category_zh": "混合体系",
-      "matched_track_A_id": "",
-      "matched_profile_id": "STUB-ANTARCTICA",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料;方案非实测",
-      "caveats": "示例数据 / example：法规趋严语境下的公开讨论方向；非已验证优选。",
-      "note": "证据弱于专用已验证体系时仅作对照讨论。 profile=STUB-ANTARCTICA",
-      "links": []
-    },
-    {
-      "rank": "49",
-      "name": "示例铜系 SPC（公开目录示意）",
-      "type": "commercial",
-      "category_key": "spc_copper",
-      "category_zh": "铜系杀生剂 SPC（总称）",
+      "name": "聚焦 UVC 系泊传感器防污",
+      "type": "tech-uvc",
+      "category_key": "tech_uvc",
+      "category_zh": "UV-C 辅助技术",
       "matched_track_A_id": "",
       "matched_profile_id": "CATALOG-GLOBAL-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：按航线相对污损压力做公开品类拟合；非航次实测、非作者课题配方。具体牌号以厂家最新 TDS/SDS 为准。",
-      "note": "暖水/港停段优先考虑持续防再定殖；排序=工况相对拟合，非魔法最优分。 profile=CATALOG-GLOBAL-V0",
-      "links": []
-    },
-    {
-      "rank": "50",
-      "name": "示例水解型 SPC（公开目录示意）",
-      "type": "commercial",
-      "category_key": "spc_hydrolysis",
-      "category_zh": "水解 / 羧酸盐 SPC",
-      "matched_track_A_id": "",
-      "matched_profile_id": "CATALOG-GLOBAL-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：温带/季节窗航线示意；非现场数据。",
-      "note": "季节脉冲港停抬升对持续性的要求；无编造规格。 profile=CATALOG-GLOBAL-V0",
-      "links": []
-    },
-    {
-      "rank": "51",
-      "name": "示例有机硅污损释放（公开目录示意）",
-      "type": "commercial",
-      "category_key": "lse_foul_release",
-      "category_zh": "低表面能污损释放",
-      "matched_track_A_id": "",
-      "matched_profile_id": "CATALOG-GLOBAL-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：高速段/清洗维护语境示意；静泊表现因体系而异。",
-      "note": "需结合航速与清洗周期；勿当作无维护方案。 profile=CATALOG-GLOBAL-V0",
-      "links": []
-    },
-    {
-      "rank": "52",
-      "name": "示例混合 / 低铜方案（公开讨论示意）",
-      "type": "commercial",
-      "category_key": "hybrid",
-      "category_zh": "混合体系",
-      "matched_track_A_id": "",
-      "matched_profile_id": "CATALOG-GLOBAL-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料;方案非实测",
-      "caveats": "示例数据 / example：法规趋严语境下的公开讨论方向；非已验证优选。",
-      "note": "证据弱于专用已验证体系时仅作对照讨论。 profile=CATALOG-GLOBAL-V0",
-      "links": []
+      "evidence_links": "data/tech-uvc-ultrasound.md §1;10.3389/fmars.2025.1625587",
+      "evidence_tag": "文献界",
+      "caveats": "波罗的海系泊 CTD 约 237 天电导率在厂规内。niche 传感器 ≠ 商船外壳。",
+      "note": "目录候选：niche/科研仪器。",
+      "links": [
+        {
+          "label": "DOI 10.3389/fmars.2025.1625587",
+          "url": "https://doi.org/10.3389/fmars.2025.1625587",
+          "origin": "已有文件"
+        }
+      ]
     }
   ],
   "literature": [
@@ -1655,7 +2703,7 @@
       "title": "Flawed risk assessment of antifouling paints leads to exceedance of guideline values in Baltic Sea marinas",
       "DOI_or_source": "10.1007/s11356-020-08973-0",
       "year": "2020",
-      "note": "释放率方法影响评估；≠用户 HPLC CA；≠ 示例双组分环氧 实测",
+      "note": "释放率方法影响评估；≠用户 HPLC CA；≠ JF-602 实测",
       "links": [
         {
           "label": "打开 DOI 原文",
@@ -1725,7 +2773,7 @@
       "title": "Release characteristics of reattached barnacles to non-toxic silicone coatings (and related FRC adhesion literature)",
       "DOI_or_source": "公开文献综述转引（模拟器文献界）",
       "year": "2000s–2010s",
-      "note": "藤壶脱附剪切（kPa–0.1 MPa 量级）；≠ ISO 4624 涂层对基材拉拔 MPa；勿与 示例双组分环氧 厂家 4.9–6.6 MPa 混读",
+      "note": "藤壶脱附剪切（kPa–0.1 MPa 量级）；≠ ISO 4624 涂层对基材拉拔 MPa；勿与 JF-602 厂家 4.9–6.6 MPa 混读",
       "links": [],
       "enrich": {
         "bound_id": "LIT-BARNACLE-ADHESION-PDMS",
@@ -1929,7 +2977,7 @@
       "title": "Preparation and Mechanical Properties of Epoxy Modified Polysiloxane Fouling Release Coating",
       "DOI_or_source": "Surface Technology / CN journal 2024 报道摘要",
       "year": "2024",
-      "note": "条件依赖配方；≠ 用户 示例双组分环氧 功能化实测；tag 文献界",
+      "note": "条件依赖配方；≠ 用户 JF-602 功能化实测；tag 文献界",
       "links": [],
       "enrich": {
         "bound_id": "LIT-PULLOFF-EPOXY-SILOXANE",
@@ -1987,7 +3035,7 @@
       "title": "Influence of Epoxy Content on the Properties and Marine Bacterial Adhesion of Epoxy Modified Silicone Coatings",
       "DOI_or_source": "10.3390/coatings10020126",
       "year": "2020",
-      "note": "硅改性有机；≠ 示例双组分环氧 实测拉拔",
+      "note": "硅改性有机；≠ JF-602 实测拉拔",
       "links": [
         {
           "label": "打开 DOI 原文",
@@ -2232,7 +3280,7 @@
       "title": "The application of UVC used in synergy with surface material to prevent marine biofouling",
       "DOI_or_source": "10.3390/jmse9060662",
       "year": "2021",
-      "note": "材料协同；不可填 示例双组分环氧",
+      "note": "材料协同；不可填 JF-602",
       "links": [
         {
           "label": "打开 DOI 原文",
@@ -2547,7 +3595,7 @@
       "title": "Environmental risk assessment of using antifouling paints on pleasure crafts in European Union waters (Chalmers open report lineage)",
       "DOI_or_source": "公开评估报告 / 相关 Lagerström–Ytreberg 工作线（关联 10.1016/j.watres.2020.116383）",
       "year": "2010s–2020s",
-      "note": "方法选择影响监管结局；具体 μg 以原报告为准；≠ 示例双组分环氧",
+      "note": "方法选择影响监管结局；具体 μg 以原报告为准；≠ JF-602",
       "links": [
         {
           "label": "打开 DOI 原文",
@@ -2582,7 +3630,7 @@
       "title": "Laser Cladding of CoCrCuFeNi and CoCrFeNi High-Entropy Alloys on DMR 249A Steel: Corrosion, Wear and Antibacterial Behaviour",
       "DOI_or_source": "10.1007/s11837-023-05861-z",
       "year": "2023",
-      "note": "激光熔覆金属；抗菌/耐蚀界；≠ 有机漆拉拔；≠ 示例双组分环氧",
+      "note": "激光熔覆金属；抗菌/耐蚀界；≠ 有机漆拉拔；≠ JF-602",
       "links": [
         {
           "label": "打开 DOI 原文",
@@ -2687,7 +3735,7 @@
       "title": "Catalytic Cu-ion regulation in laser-directed energy deposited stainless steel coatings for sustainable surface biofouling mitigation",
       "DOI_or_source": "10.1038/s41529-025-00699-z",
       "year": "2025",
-      "note": "增材金属涂层；受控 Cu 释放叙事；≠ 用户 示例功能填料 HPLC",
+      "note": "增材金属涂层；受控 Cu 释放叙事；≠ 用户 CA@MSiO₂ HPLC",
       "links": [
         {
           "label": "打开 DOI 原文",
@@ -2792,7 +3840,7 @@
       "title": "Growth of marine biofilms and macrofouling organisms on biocide-infused, 3D-printed thermoplastics",
       "DOI_or_source": "10.3389/fmars.2023.1172942",
       "year": "2023",
-      "note": "增材热塑+杀生剂；工艺分类归 metal_alloy/3d_print；≠ 示例双组分环氧",
+      "note": "增材热塑+杀生剂；工艺分类归 metal_alloy/3d_print；≠ JF-602",
       "links": [
         {
           "label": "打开 DOI 原文",
@@ -2967,7 +4015,7 @@
       "title": "Sol–gel-derived hard coatings from tetraethoxysilane and organoalkoxysilanes bearing zwitterionic and isothiazolinone groups and their antifouling behaviors",
       "DOI_or_source": "10.1039/D1TB02069B",
       "year": "2022",
-      "note": "溶胶–凝胶硬质亲水/抗菌；归两性离子族；≠ 示例双组分环氧",
+      "note": "溶胶–凝胶硬质亲水/抗菌；归两性离子族；≠ JF-602",
       "links": [
         {
           "label": "打开 DOI 原文",
@@ -3002,7 +4050,7 @@
       "title": "Antifouling and antibacterial behaviors of capsaicin-based pH responsive smart coatings in marine environments",
       "DOI_or_source": "10.1016/j.msec.2019.110361",
       "year": "2020",
-      "note": "天然辣椒素缓释；同族对照课题 CA，**≠** 示例双组分环氧/示例功能填料 实测",
+      "note": "天然辣椒素缓释；同族对照课题 CA，**≠** JF-602/CA@MSiO₂ 实测",
       "links": [
         {
           "label": "打开 DOI 原文",
@@ -3177,7 +4225,7 @@
       "title": "Self-polishing emulsion platforms: Eco-friendly surface engineering of coatings toward water borne marine antifouling",
       "DOI_or_source": "10.1016/j.porgcoat.2020.105945",
       "year": "2020",
-      "note": "水性丙烯酸类 SPC 油漆基体；≠ 示例双组分环氧 实测；≠ 厂家 docking 月数",
+      "note": "水性丙烯酸类 SPC 油漆基体；≠ JF-602 实测；≠ 厂家 docking 月数",
       "links": [
         {
           "label": "打开 DOI 原文",
@@ -3212,7 +4260,7 @@
       "title": "Preparation and evaluation of natural rosin-based zinc resins for marine antifouling",
       "DOI_or_source": "10.1016/j.porgcoat.2021.106270",
       "year": "2021",
-      "note": "松香锌树脂油漆粘合剂；可控水解；≠ 用户 示例功能填料 HPLC",
+      "note": "松香锌树脂油漆粘合剂；可控水解；≠ 用户 CA@MSiO₂ HPLC",
       "links": [
         {
           "label": "打开 DOI 原文",
@@ -3282,7 +4330,7 @@
       "title": "A new antifouling paint based on a zinc acrylate copolymer",
       "DOI_or_source": "10.1016/S0300-9440(01)00157-6",
       "year": "2001",
-      "note": "早期锌丙烯酸油漆文献；≠ 示例双组分环氧",
+      "note": "早期锌丙烯酸油漆文献；≠ JF-602",
       "links": [
         {
           "label": "打开 DOI 原文",
@@ -3352,7 +4400,7 @@
       "title": "Study on the preparation and properties of new environmentally friendly antifouling acrylic metal salt resins containing indole derivative group",
       "DOI_or_source": "10.1016/j.porgcoat.2020.105824",
       "year": "2020",
-      "note": "丙烯酸金属盐油漆树脂；≠ 示例双组分环氧",
+      "note": "丙烯酸金属盐油漆树脂；≠ JF-602",
       "links": [
         {
           "label": "打开 DOI 原文",
@@ -3422,7 +4470,7 @@
       "title": "Surface hydrolysis-anchored eugenol self-polishing marine antifouling coating",
       "DOI_or_source": "10.1016/j.jcis.2023.01.058",
       "year": "2023",
-      "note": "油漆型 SPC；≠ 示例双组分环氧",
+      "note": "油漆型 SPC；≠ JF-602",
       "links": [
         {
           "label": "打开 DOI 原文",
@@ -3457,7 +4505,7 @@
       "title": "Preparation of acrylic metal salt resin containing capsaicin derivative structure and study of anti-fouling properties",
       "DOI_or_source": "10.1016/j.porgcoat.2023.108085",
       "year": "2023",
-      "note": "同族对照课题 CA 路线，**≠** 示例双组分环氧/示例功能填料 实测",
+      "note": "同族对照课题 CA 路线，**≠** JF-602/CA@MSiO₂ 实测",
       "links": [
         {
           "label": "打开 DOI 原文",
@@ -3562,7 +4610,7 @@
       "title": "Sea-water degradable self-polishing epoxy thermosets for antifouling coatings",
       "DOI_or_source": "10.1016/j.porgcoat.2025.109162",
       "year": "2025",
-      "note": "环氧热固油漆 SPC；附着力为文内条件，**≠** 示例双组分环氧 厂家标称/实测混读",
+      "note": "环氧热固油漆 SPC；附着力为文内条件，**≠** JF-602 厂家标称/实测混读",
       "links": [
         {
           "label": "打开 DOI 原文",
@@ -3667,7 +4715,7 @@
       "title": "Migration mechanism of borneol synergistic polyethylene glycol for the construction of silicon-acrylate antifouling coatings",
       "DOI_or_source": "10.1016/j.porgcoat.2023.107946",
       "year": "2023",
-      "note": "硅丙烯酸油漆；≠ 示例双组分环氧",
+      "note": "硅丙烯酸油漆；≠ JF-602",
       "links": [
         {
           "label": "打开 DOI 原文",
@@ -3737,7 +4785,7 @@
       "title": "Silicone fouling-release coatings: effects of the molecular weight of poly(dimethylsiloxane) and tetraethyl orthosilicate on the magnitude of pseudobarnacle adhesion strength",
       "DOI_or_source": "10.1080/08927014.2012.702342",
       "year": "2012",
-      "note": "硅酮油漆 FRC 力学–释放权衡；≠ 示例双组分环氧 拉拔",
+      "note": "硅酮油漆 FRC 力学–释放权衡；≠ JF-602 拉拔",
       "links": [
         {
           "label": "打开 DOI 原文",
@@ -4458,7 +5506,7 @@
       }
     ],
     "honesty": [
-      "厂家标称 / 公开资料 ≠ 用户 示例双组分环氧 实测",
+      "厂家标称 / 公开资料 ≠ 用户 JF-602 实测",
       "docking interval / speed loss % / 燃油节约 % 均为厂商宣称，受船型与工况影响",
       "采购前核最新 TDS/SDS 与当地登记"
     ]
@@ -4733,60 +5781,557 @@
   },
   "catalog": [
     {
-      "rank": "49",
-      "name": "示例铜系 SPC（公开目录示意）",
+      "rank": "5",
+      "name": "Hempel Dynamic（硅烷化丙烯酸 SPC）",
       "type": "commercial",
-      "category_key": "spc_copper",
-      "category_zh": "铜系杀生剂 SPC（总称）",
+      "category_key": "spc_silyl_acrylate",
+      "category_zh": "硅烷丙烯酸 SPC",
       "matched_track_A_id": "",
       "matched_profile_id": "CATALOG-GLOBAL-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：按航线相对污损压力做公开品类拟合；非航次实测、非作者课题配方。具体牌号以厂家最新 TDS/SDS 为准。",
-      "note": "暖水/港停段优先考虑持续防再定殖；排序=工况相对拟合，非魔法最优分。 profile=CATALOG-GLOBAL-V0",
-      "links": []
+      "evidence_links": "data/commercial-products.md §1;https://www.hempel.com/all-products/all-brands/dynamic/explore",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "厂商页称较高航速/活动度、热带水域、docking interval up to 90 months；具体牌号/DFT/杀生剂以最新 TDS/SDS 为准。≠课题微宇宙未鉴定 Hempel 对照；≠航次污损率。",
+      "note": "全球目录候选：暖水高活动航线 SPC 对照；排序仅目录序非航线魔法分。",
+      "links": [
+        {
+          "label": "www.hempel.com/all-products/all-brands/dynamic/explore",
+          "url": "https://www.hempel.com/all-products/all-brands/dynamic/explore",
+          "origin": "已有文件"
+        }
+      ]
     },
     {
-      "rank": "50",
-      "name": "示例水解型 SPC（公开目录示意）",
+      "rank": "6",
+      "name": "Hempel Globic（慢航/长闲置 SPC）",
       "type": "commercial",
       "category_key": "spc_hydrolysis",
       "category_zh": "水解 / 羧酸盐 SPC",
       "matched_track_A_id": "",
       "matched_profile_id": "CATALOG-GLOBAL-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：温带/季节窗航线示意；非现场数据。",
-      "note": "季节脉冲港停抬升对持续性的要求；无编造规格。 profile=CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §1;https://www.hempel.com/all-products/all-brands/globic/explore",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "厂商页称慢航与长 idle 仍有效抛光；docking interval up to 90 months。港停峰值走廊可作公开资料对照；无用户航次实测。",
+      "note": "目录候选：高港停/慢航拟合叙事（框架）。",
+      "links": [
+        {
+          "label": "www.hempel.com/all-products/all-brands/globic/explore",
+          "url": "https://www.hempel.com/all-products/all-brands/globic/explore",
+          "origin": "已有文件"
+        }
+      ]
+    },
+    {
+      "rank": "7",
+      "name": "Hempel Oceanic Protect+ 7395W",
+      "type": "commercial",
+      "category_key": "spc_hydrolysis",
+      "category_zh": "水解 / 羧酸盐 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §1;Hempel Oceanic+ brochure;PDS 7395W",
+      "evidence_tag": "厂家标称",
+      "caveats": "公开 TDS 摘要：体积固体 64±2%；典型 DFT 约 100 µm（表列 80–175）；服务期手册 60 months；idle 约 28–30 天量级。发行注记以厂家为准。",
+      "note": "目录候选：灵活贸易/中高 idle SPC。",
+      "links": [
+        {
+          "label": "Hempel Oceanic/Oceanic+ 系列页（品牌级）",
+          "url": "https://www.hempel.com/all-products/all-brands/oceanic/explore",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
+    },
+    {
+      "rank": "8",
+      "name": "Jotun SeaQuantum Plus S",
+      "type": "commercial",
+      "category_key": "spc_silyl_acrylate",
+      "category_zh": "硅烷丙烯酸 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §2;Jotun TDS SeaQuantum Plus S (Eng US 2024-06-27)",
+      "evidence_tag": "厂家标称",
+      "caveats": "单组分硅烷丙烯酸 SPC；完整体系可 up to 90 months；DFT 75–175 µm/道；体系 max total DFT 600 µm；IMO AFS+MEPC.331(76)。无污损%实测填入。",
+      "note": "目录候选：高航速中高活动深海 SPC。",
+      "links": [
+        {
+          "label": "Jotun SeaQuantum Plus S 产品页",
+          "url": "https://www.jotun.com/ww-en/products-and-services/products/SeaQuantum-Plus-S",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
+    },
+    {
+      "rank": "9",
+      "name": "International Intersmooth 7200Si SPC",
+      "type": "commercial",
+      "category_key": "spc_silyl_acrylate",
+      "category_zh": "硅烷丙烯酸 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §3;https://www.international-marine.com/en/products/intersmooth-7200si-spc",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "体积固体 61%；VOC 375 g/L；DFT 75–200 µm；硅基甲基丙烯酸 SPC。燃油节约为厂商相对叙事。",
+      "note": "目录候选：全航线通用硅基 SPC。",
+      "links": [
+        {
+          "label": "www.international-marine.com/en/products/intersmooth-7200si-",
+          "url": "https://www.international-marine.com/en/products/intersmooth-7200si-spc",
+          "origin": "已有文件"
+        }
+      ]
+    },
+    {
+      "rank": "10",
+      "name": "International Intersmooth 7476Si SPC",
+      "type": "commercial",
+      "category_key": "spc_silyl_acrylate",
+      "category_zh": "硅烷丙烯酸 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §3;international-marine antifoulings page",
+      "evidence_tag": "厂家标称",
+      "caveats": "产品页称 docking cycle 1.4% speed loss（厂商宣称；≠用户实测；≠绝对防污分）。",
+      "note": "目录候选：低速损叙事 SPC。",
+      "links": [
+        {
+          "label": "Intersmooth 7476Si SPC 产品页（ME/SEA/N.Asia）",
+          "url": "https://www.international-marine.com/en/products/intersmooth-7476si-spc-%E2%80%93-me-sea-n-asia",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
+    },
+    {
+      "rank": "11",
+      "name": "International Intercept 7000（Lubyon LPP）",
+      "type": "commercial",
+      "category_key": "lpp_linear",
+      "category_zh": "线性抛光 LPP",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §3;Intercept 7000 product PDF",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "线性抛光低摩擦；Lubyon 技术。具体杀生剂/DFT 以最新 TDS 为准。",
+      "note": "目录候选：LPP 低摩擦对照。",
+      "links": [
+        {
+          "label": "Intercept 7000 产品页",
+          "url": "https://www.international-marine.com/en/products/intercept-7000",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
+    },
+    {
+      "rank": "12",
+      "name": "International Intersleek 1100SR（无杀生剂 FRC）",
+      "type": "commercial",
+      "category_key": "frc_fluoro",
+      "category_zh": "氟聚污损释放",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §3;Intersleek brand/product pages",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "氟聚合物 fouling-release；无杀生剂；依赖航行剪切释放；公开 speed loss ~1.2% 量级（宣传）。长港停/闸区须 caveat。",
+      "note": "目录候选：FRC；低速港停拟合弱于 SPC。",
+      "links": [
+        {
+          "label": "Intersleek 1100SR 产品页",
+          "url": "https://www.international-marine.com/en/products/intersleek-1100sr",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
+    },
+    {
+      "rank": "13",
+      "name": "PPG SIGMA ECOFLEET 290",
+      "type": "commercial",
+      "category_key": "spc_hydrolysis",
+      "category_zh": "水解 / 羧酸盐 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §4;PPG Ecofleet 290 brochure",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "TBT-free SPC；中高活动深海；污损控制 up to 60 months；单道 DFT up to 150 µm。",
+      "note": "目录候选：深海中高活动 SPC。",
+      "links": [
+        {
+          "label": "PPG SIGMA ECOFLEET 290 产品页",
+          "url": "https://www.ppg.com/en-US/pmc/product/sigma-ecofleet-290/614004M0402",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
+    },
+    {
+      "rank": "14",
+      "name": "PPG SIGMA ECOFLEET 690",
+      "type": "commercial",
+      "category_key": "spc_hydrolysis",
+      "category_zh": "水解 / 羧酸盐 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §4;https://www.ppg.com/en-US/pmc/product/sigma-ecofleet-690/614004M0408",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "近岸/低活动；极端污损；up to 60 months（视船型与体系）。",
+      "note": "目录候选：近岸高污损压力 SPC。",
+      "links": [
+        {
+          "label": "www.ppg.com/en-US/pmc/product/sigma-ecofleet-690/614004M0408",
+          "url": "https://www.ppg.com/en-US/pmc/product/sigma-ecofleet-690/614004M0408",
+          "origin": "已有文件"
+        }
+      ]
+    },
+    {
+      "rank": "15",
+      "name": "PPG SIGMAGLIDE 2390（硅酮 FRC）",
+      "type": "commercial",
+      "category_key": "frc_silicone",
+      "category_zh": "硅酮污损释放（FRC）",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §4;https://www.ppg.com/en-US/pmc/marine-coatings/ppg-sigmaglide-2390-marine",
+      "evidence_tag": "厂家标称",
+      "caveats": "无杀生剂纯硅酮 FRC；厂商称功率节约 up to 20%*、speed loss <1%*、排放降低 up to 35%*（*依赖船模与工况）。",
+      "note": "目录候选：FRC 能效叙事；港停须 caveat。",
+      "links": [
+        {
+          "label": "www.ppg.com/en-US/pmc/marine-coatings/ppg-sigmaglide-2390-ma",
+          "url": "https://www.ppg.com/en-US/pmc/marine-coatings/ppg-sigmaglide-2390-marine",
+          "origin": "已有文件"
+        }
+      ]
+    },
+    {
+      "rank": "16",
+      "name": "CMP SEAFLO NEO / NEO Z",
+      "type": "commercial",
+      "category_key": "spc_hydrolysis",
+      "category_zh": "水解 / 羧酸盐 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §5;cmp.co.jp SEAFLO NEO Z;TOA-Chugoku TDS",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "无锡水解 SPC；NEO TDS：VOC 330 g/L；VS 61±2%；DFT 75–150 µm；NEO Z 系列叙述 max 90 months。",
+      "note": "目录候选：亚洲船厂常见水解 SPC。",
       "links": []
     },
     {
-      "rank": "51",
-      "name": "示例有机硅污损释放（公开目录示意）",
+      "rank": "17",
+      "name": "Nippon Paint A-LF-SEA",
       "type": "commercial",
-      "category_key": "lse_foul_release",
-      "category_zh": "低表面能污损释放",
+      "category_key": "spc_silyl_acrylate",
+      "category_zh": "硅烷丙烯酸 SPC",
       "matched_track_A_id": "",
       "matched_profile_id": "CATALOG-GLOBAL-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料",
-      "caveats": "示例数据 / example：高速段/清洗维护语境示意；静泊表现因体系而异。",
-      "note": "需结合航速与清洗周期；勿当作无维护方案。 profile=CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §6;https://www.nipponpaint-marine.com/products/a-lf-sea/",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "铜–硅烷丙烯酸 SPC + 水捕获低摩擦；厂商称应用 >5000 船；摩擦阻力约 -15% → 燃油/CO2 约 -10%（厂商叙述）。",
+      "note": "目录候选：低摩擦铜硅烷 SPC。",
+      "links": [
+        {
+          "label": "www.nipponpaint-marine.com/products/a-lf-sea/",
+          "url": "https://www.nipponpaint-marine.com/products/a-lf-sea/",
+          "origin": "已有文件"
+        }
+      ]
+    },
+    {
+      "rank": "18",
+      "name": "UV-C 局部/niche 防污（辅助技术）",
+      "type": "tech-uvc",
+      "category_key": "tech_uvc",
+      "category_zh": "UV-C 辅助技术",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/tech-uvc-ultrasound.md §1;10.1016/j.oceaneng.2020.107690",
+      "evidence_tag": "文献界;公开资料",
+      "caveats": "整船外壳未成熟；niche/LED/ROV 试点。阴影、水衰减、光老化、眼皮肤安全。不可替代 SPC 公开 docking 宣称；不可填入 JF-602 实测行。",
+      "note": "目录候选：混合体系局部模块；安全旗 UV-C。",
+      "links": [
+        {
+          "label": "DOI 10.1016/j.oceaneng.2020.107690",
+          "url": "https://doi.org/10.1016/j.oceaneng.2020.107690",
+          "origin": "已有文件"
+        }
+      ]
+    },
+    {
+      "rank": "19",
+      "name": "超声导波船体防污（辅助技术）",
+      "type": "tech-ultrasound",
+      "category_key": "tech_ultrasound",
+      "category_zh": "超声 / 导波辅助",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/tech-uvc-ultrasound.md §2;10.29121/ijetmr.v3.i4.2016.59;Cathelco USP DragGone 产品页",
+      "evidence_tag": "文献界;厂家标称;公开资料",
+      "caveats": "小板海试（如 47 kHz/32 天）支持预防潜力；现场对藻类/粘液结果不一致。布局/频率敏感。≠赤道港停单一方案。",
+      "note": "目录候选：闲置辅助；须与涂层组合表述。",
+      "links": [
+        {
+          "label": "DOI 10.29121/ijetmr.v3.i4.2016.59",
+          "url": "https://doi.org/10.29121/ijetmr.v3.i4.2016.59",
+          "origin": "已有文件"
+        },
+        {
+          "label": "Cathelco USP DragGone™ 产品页（Evac）",
+          "url": "https://evac.com/ultrasonic-antifouling/",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
+    },
+    {
+      "rank": "20",
+      "name": "Hempel Hempaguard X7（水凝胶硅酮+杀生剂）",
+      "type": "commercial",
+      "category_key": "hybrid_hydrogel",
+      "category_zh": "水凝胶硅酮 + 杀生剂",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §1b;Hempel Hempaguard X7 PIS",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "厂商称 up to 90 months、idle 约 120 days 量级（手册语境）；燃油/排放节约工况依赖。≠课题微宇宙未鉴定 Hempel；≠航次实测。",
+      "note": "目录候选：高 idle hybrid；港停走廊可作公开资料对照。",
+      "links": [
+        {
+          "label": "Hempel Hempaguard 系列页（品牌级，含 X7）",
+          "url": "https://www.hempel.com/all-products/all-brands/hempaguard/explore",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
+    },
+    {
+      "rank": "21",
+      "name": "Hempel Globic 9000（NAT SPC）",
+      "type": "commercial",
+      "category_key": "spc_hydrolysis",
+      "category_zh": "水解 / 羧酸盐 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §1b;Hempel Globic 9000 TDS",
+      "evidence_tag": "厂家标称",
+      "caveats": "慢航/频繁 idle；drydocking up to 90 months；微纤维+NAT。无污损%实测填入。",
+      "note": "目录候选：慢航长闲置 SPC。",
+      "links": [
+        {
+          "label": "Hempel Globic 9000 78900 产品页",
+          "url": "https://www.hempel.com/all-products/hempels-antifouling-globic-9000-78900-78900",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
+    },
+    {
+      "rank": "22",
+      "name": "Jotun SeaQuantum Ultra S",
+      "type": "commercial",
+      "category_key": "spc_silyl_acrylate",
+      "category_zh": "硅烷丙烯酸 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §2b;https://www.jotun.com/ww-en/products-and-services/products/SeaQuantum-Ultra-S",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "低活动/慢航；体系 up to 90 months；idle 约 45–55 days（市场页表述不一，以当地 TDS 为准）；speed loss/燃油节约为厂商 ISO 19030 语境宣称。",
+      "note": "目录候选：低活动高污损区 SPC。",
+      "links": [
+        {
+          "label": "www.jotun.com/ww-en/products-and-services/products/SeaQuantu",
+          "url": "https://www.jotun.com/ww-en/products-and-services/products/SeaQuantum-Ultra-S",
+          "origin": "已有文件"
+        }
+      ]
+    },
+    {
+      "rank": "23",
+      "name": "Kansai TAKATA QUANTUM / X-mile",
+      "type": "commercial",
+      "category_key": "asian_silyl_spc",
+      "category_zh": "日系硅基 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §5b;kp-marine.co.jp",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "无锡硅基 SPC；服务期约 60 months 叙事（X-mile 宣传或更长）。具体 DFT/VOC 以当地 TDS 为准。",
+      "note": "目录候选：亚洲船厂硅基 SPC。",
+      "links": [
+        {
+          "label": "Kansai TAKATA QUANTUM 产品页",
+          "url": "https://www.kp-marine.co.jp/en/products/pickup/quantum.html",
+          "origin": "新核验 2026-10-19"
+        },
+        {
+          "label": "Kansai X-mile 目录 PDF",
+          "url": "https://www.kp-marine.co.jp/en/products/catalog/pdf/x-mile.pdf",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
+    },
+    {
+      "rank": "24",
+      "name": "Sherwin-Williams SeaVoyage Copper Free",
+      "type": "commercial",
+      "category_key": "copper_free_ablative",
+      "category_zh": "无铜消融",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §6b;sherwin-williams SeaVoyage",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "无铜消融+有机杀生剂；舾装期约 up to 6 months 量级（公开）——≠ 60–90 month 深海 SPC。",
+      "note": "目录候选：无铜工作艇/游艇语境；勿与商船长坞期混比。",
+      "links": [
+        {
+          "label": "Sherwin-Williams SeaVoyage Copper Free 产品页",
+          "url": "https://industrial.sherwin-williams.com/na/us/en/protective-marine/catalog/product/products-by-industry.11543396/seavoyage-copper-free-antifoulant.9752447.html",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
+    },
+    {
+      "rank": "25",
+      "name": "PPG SIGMA ECOFLEET 530（高活性 SPC）",
+      "type": "commercial",
+      "category_key": "spc_hydrolysis",
+      "category_zh": "水解 / 羧酸盐 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §4;ppg.com Ecofleet 530",
+      "evidence_tag": "厂家标称;公开资料",
+      "caveats": "极端污损条件；壳/草控制 up to 60 months（视船型与体系）。",
+      "note": "目录候选：极端污损 SPC。",
+      "links": [
+        {
+          "label": "PPG SIGMA ECOFLEET 530 产品页",
+          "url": "https://www.ppg.com/en-US/pmc/product/sigma-ecofleet-530/614004M0403",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
+    },
+    {
+      "rank": "26",
+      "name": "CMP SEAFLO NEO SL / SL Z",
+      "type": "commercial",
+      "category_key": "asian_silyl_spc",
+      "category_zh": "日系硅基 SPC",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/commercial-products.md §5;TOA-Chugoku TDS",
+      "evidence_tag": "厂家标称",
+      "caveats": "先进硅基水解；VS 约 55±2%；VOC 约 408 g/L（SL）；SL Z 系列耐久叙事。",
+      "note": "目录候选：硅基水解耐久对照。",
       "links": []
     },
     {
-      "rank": "52",
-      "name": "示例混合 / 低铜方案（公开讨论示意）",
+      "rank": "27",
+      "name": "SEAJET 039 Platinum Mono（游艇 SPC）",
       "type": "commercial",
-      "category_key": "hybrid",
-      "category_zh": "混合体系",
+      "category_key": "yacht_spc",
+      "category_zh": "游艇 SPC",
       "matched_track_A_id": "",
       "matched_profile_id": "CATALOG-GLOBAL-V0",
-      "evidence_links": "data/climate-route-profile.md; data/commercial-products.md; docs/example-data.md",
-      "evidence_tag": "相对等级;公开资料;方案非实测",
-      "caveats": "示例数据 / example：法规趋严语境下的公开讨论方向；非已验证优选。",
-      "note": "证据弱于专用已验证体系时仅作对照讨论。 profile=CATALOG-GLOBAL-V0",
-      "links": []
+      "evidence_links": "data/commercial-products.md §5;seajetpaint.com",
+      "evidence_tag": "厂家标称",
+      "caveats": "游艇高污损区；除铝外基材；额外道数叙述 up to 3 years；≠商船 SEAFLO。",
+      "note": "目录候选：游艇线；铝基材禁忌。",
+      "links": [
+        {
+          "label": "SEAJET 039 Platinum Mono 产品页",
+          "url": "https://www.seajetpaint.com/product/seajet-039-platinum-mono/",
+          "origin": "新核验 2026-10-19"
+        }
+      ]
+    },
+    {
+      "rank": "28",
+      "name": "UV-C LED 嵌硅酮瓷砖（实验室/试点）",
+      "type": "tech-uvc",
+      "category_key": "tech_uvc",
+      "category_zh": "UV-C 辅助技术",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/tech-uvc-ultrasound.md §1;10.3389/fmars.2021.809011;10.1080/08927014.2024.2319178",
+      "evidence_tag": "文献界",
+      "caveats": "Whitworth：低 fluence 抑硅藻；LD90 约 25 J/cm² 量级；嵌瓷砖试点。阴影/衰减/光老化/眼皮肤安全。不可填 JF-602。",
+      "note": "目录候选：LED 瓷砖技术路径；安全旗 UV-C。",
+      "links": [
+        {
+          "label": "DOI 10.3389/fmars.2021.809011",
+          "url": "https://doi.org/10.3389/fmars.2021.809011",
+          "origin": "已有文件"
+        },
+        {
+          "label": "DOI 10.1080/08927014.2024.2319178",
+          "url": "https://doi.org/10.1080/08927014.2024.2319178",
+          "origin": "已有文件"
+        }
+      ]
+    },
+    {
+      "rank": "29",
+      "name": "超声低强度间歇定殖抑制（实验室界）",
+      "type": "tech-ultrasound",
+      "category_key": "tech_ultrasound",
+      "category_zh": "超声 / 导波辅助",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/tech-uvc-ultrasound.md §2;10.1080/08927014.2012.658511;10.1016/j.jembe.2011.09.006",
+      "evidence_tag": "文献界",
+      "caveats": "Guo：23 kHz / 5 kPa；5 on/20 off。藤壶金星幼体实验室界；现场藻类/粘液不一致。≠赤道港停单一方案。",
+      "note": "目录候选：低强度间歇超声证据链。",
+      "links": [
+        {
+          "label": "DOI 10.1080/08927014.2012.658511",
+          "url": "https://doi.org/10.1080/08927014.2012.658511",
+          "origin": "已有文件"
+        },
+        {
+          "label": "DOI 10.1016/j.jembe.2011.09.006",
+          "url": "https://doi.org/10.1016/j.jembe.2011.09.006",
+          "origin": "已有文件"
+        }
+      ]
+    },
+    {
+      "rank": "30",
+      "name": "涂层+UV 协同（船体涂层体系）",
+      "type": "tech-uvc",
+      "category_key": "tech_uvc",
+      "category_zh": "UV-C 辅助技术",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/tech-uvc-ultrasound.md §1;10.1080/08927014.2019.1642334;10.3390/jmse9060662",
+      "evidence_tag": "文献界",
+      "caveats": "Hunsucker/Richard：UV 与涂层/表面材料协同。系统方案须分别溯源涂层与 UV 模块。",
+      "note": "目录候选：混合主动；勿当纯涂料 TDS。",
+      "links": [
+        {
+          "label": "DOI 10.1080/08927014.2019.1642334",
+          "url": "https://doi.org/10.1080/08927014.2019.1642334",
+          "origin": "已有文件"
+        },
+        {
+          "label": "DOI 10.3390/jmse9060662",
+          "url": "https://doi.org/10.3390/jmse9060662",
+          "origin": "已有文件"
+        }
+      ]
+    },
+    {
+      "rank": "31",
+      "name": "聚焦 UVC 系泊传感器防污",
+      "type": "tech-uvc",
+      "category_key": "tech_uvc",
+      "category_zh": "UV-C 辅助技术",
+      "matched_track_A_id": "",
+      "matched_profile_id": "CATALOG-GLOBAL-V0",
+      "evidence_links": "data/tech-uvc-ultrasound.md §1;10.3389/fmars.2025.1625587",
+      "evidence_tag": "文献界",
+      "caveats": "波罗的海系泊 CTD 约 237 天电导率在厂规内。niche 传感器 ≠ 商船外壳。",
+      "note": "目录候选：niche/科研仪器。",
+      "links": [
+        {
+          "label": "DOI 10.3389/fmars.2025.1625587",
+          "url": "https://doi.org/10.3389/fmars.2025.1625587",
+          "origin": "已有文件"
+        }
+      ]
     }
   ],
   "literature_taxonomy": {
@@ -4794,63 +6339,52 @@
     "categories": [
       {
         "key": "organic_marine_paint",
-        "zh": "有机船用油漆（丙烯酸/环氧等）",
-        "en": "Organic Marine Paint (Acrylic/Epoxy)"
+        "zh": "有机船用油漆（丙烯酸/环氧等）"
       },
       {
         "key": "metal_alloy",
-        "zh": "金属/合金涂层",
-        "en": "Metal / Alloy Cladding & Spray"
+        "zh": "金属/合金涂层"
       },
       {
         "key": "silicone_mod_organic",
-        "zh": "硅改性有机涂层",
-        "en": "Silicone-Modified Organic"
+        "zh": "硅改性有机涂层"
       },
       {
         "key": "lse_foul_release",
-        "zh": "低表面能 / 污损释放（FRC）",
-        "en": "Low Surface Energy / FRC"
+        "zh": "低表面能 / 污损释放（FRC）"
       },
       {
         "key": "spc_copper",
-        "zh": "SPC / 铜系杀生剂",
-        "en": "SPC / Cu Biocide Systems"
+        "zh": "SPC / 铜系杀生剂"
       },
       {
         "key": "hydrogel_zwitterionic",
-        "zh": "水凝胶 / 两性离子",
-        "en": "Hydrogel / Zwitterionic"
+        "zh": "水凝胶 / 两性离子"
       },
       {
         "key": "uvc_active",
-        "zh": "UV-C 主动防污",
-        "en": "UV-C Active Antifouling"
+        "zh": "UV-C 主动防污"
       },
       {
         "key": "ultrasound",
-        "zh": "超声 / 导波",
-        "en": "Ultrasonic / Guided Wave"
+        "zh": "超声 / 导波"
       },
       {
         "key": "hybrid",
-        "zh": "混合 / 协同体系",
-        "en": "Hybrid / Synergistic Systems"
+        "zh": "混合 / 协同体系"
       },
       {
         "key": "natural_biocide_ca",
-        "zh": "天然杀生剂 / CA@介孔",
-        "en": "Natural Biocide / CA@Mesoporous"
+        "zh": "天然杀生剂 / CA@介孔"
       },
       {
         "key": "regulatory_economic",
-        "zh": "监管 / 经济影响",
-        "en": "Regulatory / Economic Impact"
+        "zh": "监管 / 经济影响"
       }
     ],
     "honesty": [
       "分类便于浏览，不改变证据强度",
-      "natural_biocide_ca ≠ 用户 示例功能化环氧（公开仓库已替换） 实测",
+      "natural_biocide_ca ≠ 用户 JF-602 + CA@MSiO₂ 实测",
       "金属涂层现场防污 ≠ 商船 SPC 等价"
     ],
     "counts": {
@@ -4873,82 +6407,70 @@
     "categories": [
       {
         "key": "spc_silyl_acrylate",
-        "zh": "硅烷丙烯酸 SPC",
-        "en": "Silyl Acrylate SPC"
+        "zh": "硅烷丙烯酸 SPC"
       },
       {
         "key": "spc_hydrolysis",
-        "zh": "水解 / 羧酸盐 SPC",
-        "en": "Hydrolyzing / Carboxylate SPC"
+        "zh": "水解 / 羧酸盐 SPC"
       },
       {
         "key": "spc_copper",
-        "zh": "铜系杀生剂 SPC（总称）",
-        "en": "Cu-Biocide SPC (General)"
+        "zh": "铜系杀生剂 SPC（总称）"
       },
       {
         "key": "frc_silicone",
-        "zh": "硅酮污损释放（FRC）",
-        "en": "Silicone Foul-Release (FRC)"
+        "zh": "硅酮污损释放（FRC）"
       },
       {
         "key": "frc_fluoro",
-        "zh": "氟聚污损释放",
-        "en": "Fluoropolymer Foul-Release"
+        "zh": "氟聚污损释放"
       },
       {
         "key": "hybrid_hydrogel",
-        "zh": "水凝胶硅酮 + 杀生剂",
-        "en": "Hydrogel Silicone + Biocide"
+        "zh": "水凝胶硅酮 + 杀生剂"
       },
       {
         "key": "lpp_linear",
-        "zh": "线性抛光 LPP",
-        "en": "Linear Polishing (LPP)"
+        "zh": "线性抛光 LPP"
       },
       {
         "key": "copper_free_ablative",
-        "zh": "无铜消融",
-        "en": "Cu-Free Ablative"
+        "zh": "无铜消融"
       },
       {
         "key": "yacht_spc",
-        "zh": "游艇 SPC",
-        "en": "Yacht / Leisure SPC"
+        "zh": "游艇 SPC"
       },
       {
         "key": "asian_silyl_spc",
-        "zh": "日系硅基 SPC",
-        "en": "Asian Silyl-Based SPC"
+        "zh": "日系硅基 SPC"
       },
       {
         "key": "tech_uvc",
-        "zh": "UV-C 辅助技术",
-        "en": "UV-C Auxiliary Tech"
+        "zh": "UV-C 辅助技术"
       },
       {
         "key": "tech_ultrasound",
-        "zh": "超声 / 导波辅助",
-        "en": "Ultrasonic / Guided-Wave Aux"
+        "zh": "超声 / 导波辅助"
       }
     ],
     "counts": {
-      "spc_silyl_acrylate": 10,
-      "spc_hydrolysis": 9,
-      "spc_copper": 1,
-      "frc_silicone": 1,
-      "frc_fluoro": 1,
-      "hybrid_hydrogel": 1,
-      "lpp_linear": 1,
-      "copper_free_ablative": 1,
-      "yacht_spc": 1,
-      "asian_silyl_spc": 3,
-      "tech_uvc": 0,
-      "tech_ultrasound": 0
+      "spc_silyl_acrylate": 16,
+      "spc_hydrolysis": 15,
+      "spc_copper": 0,
+      "frc_silicone": 2,
+      "frc_fluoro": 2,
+      "hybrid_hydrogel": 2,
+      "lpp_linear": 2,
+      "copper_free_ablative": 2,
+      "yacht_spc": 2,
+      "asian_silyl_spc": 5,
+      "tech_uvc": 4,
+      "tech_ultrasound": 2
     },
-    "total_catalog": 4,
+    "total_catalog": 27,
     "honesty": [
-      "厂家标称 / 公开资料 ≠ 用户 示例双组分环氧 实测",
+      "厂家标称 / 公开资料 ≠ 用户 JF-602 实测",
       "分类便于筛选，不改变证据强度",
       "课题微宇宙 Hempel 未鉴定牌号"
     ]
@@ -4968,6 +6490,187 @@
       "低"
     ],
     "weeks": [
+      {
+        "week": "2026-11-02",
+        "source_file": "data/industry-feed/2026-11-02.md",
+        "title": "行业进展｜2026-11-02",
+        "coverage": "2026-10-20 至 2026-11-02（北京时间；近 7 天已有条目，轻度放宽补足国际产品动态）",
+        "coverage_start": "2026-10-20",
+        "coverage_end": "2026-11-02",
+        "nature": "行业动态/公开资料，非性能数据。内容摘自「防污行业周报」，均已在原始来源核对日期与内容。",
+        "trend_summary": "清洗侧强调气候足迹可核算与清洗废水零未处理排放；无铜/无杀生剂产品与共价 QSI 粘结剂学术进展并行。国内碳足迹国标把船舶写入清单、工信部双控与科产融合叠加以中试和转化评价——下一阶段更看碳足迹数据、清洗合规证明与无铜配方可验证证据。",
+        "entries": [
+          {
+            "no": 8,
+            "title": "五部门《重点产品碳足迹标准体系建设行动方案（2026—2028年）》",
+            "date": "2026-10-30",
+            "category": "法规",
+            "summary": "部署 100 余项产品碳足迹国标；船舶清单含钢制海洋船舶、电池动力船舶、压载水处理装置；防污漆未单列。",
+            "url": "https://www.samr.gov.cn/xw/zj/art/2026/art_9a87cc1660434645be61321840d8041e.html",
+            "relevance": "高",
+            "relevance_reason": "整船碳足迹国标将倒逼涂装供应链碳因子与低碳防污证据",
+            "note": "",
+            "source_text": "https://www.samr.gov.cn/xw/zj/art/2026/art_9a87cc1660434645be61321840d8041e.html",
+            "week": "2026-11-02",
+            "tag": "公开资料"
+          },
+          {
+            "no": 11,
+            "title": "欧盟 BPR Reality Check 总结结论（软政策）",
+            "date": "2026-10-30",
+            "category": "法规",
+            "summary": "发布 BPR 从业者反馈摘要供法规评估输入；非 PT21 新禁限决定，评估拟 2027 年底前完成。",
+            "url": "https://health.ec.europa.eu/latest-updates/summary-conclusions-reality-check-biocidal-products-regulation-2-october-2026-2026-10-30_en",
+            "relevance": "中",
+            "relevance_reason": "影响含活性物防污漆欧盟准入预期；利好无杀生剂路线跟踪",
+            "note": "待复核（欧盟 BPR 框架复盘可能影响含活性物产品短名单准入预期；未改评级）",
+            "source_text": "https://health.ec.europa.eu/latest-updates/summary-conclusions-reality-check-biocidal-products-regulation-2-october-2026-2026-10-30_en",
+            "week": "2026-11-02",
+            "tag": "公开资料"
+          },
+          {
+            "no": 4,
+            "title": "青岛海洋腐蚀防护大会防污主旨报告综述",
+            "date": "2026-10-28",
+            "category": "技术",
+            "summary": "有机硅减阻防污、多重响应自更新涂层、选择性附着与新一代防污功能设计等报告集中亮相；指标为会议转述。",
+            "url": "http://www.ecorr.org.cn/dhTJDAOHANG/zxzx/huizhandongtai/2026-10-28/199380.html",
+            "relevance": "中",
+            "relevance_reason": "国内有机硅/自更新/仿生防污研发动态，可对照梯度涂层与主动防污联用方向",
+            "note": "",
+            "source_text": "http://www.ecorr.org.cn/dhTJDAOHANG/zxzx/huizhandongtai/2026-10-28/199380.html",
+            "week": "2026-11-02",
+            "tag": "公开资料"
+          },
+          {
+            "no": 5,
+            "title": "POC：共价接枝 QSI 的无铜丙烯酸防污粘结剂",
+            "date": "2026-10-28",
+            "category": "技术",
+            "summary": "Dewas 等将群体感应抑制剂共价接入丙烯酸粘结剂构建无铜防污漆；摘要转述约六个月海水试验生物量低于未改性对照。",
+            "url": "https://doi.org/10.1016/j.porgcoat.2026.110712",
+            "relevance": "高",
+            "relevance_reason": "无铜、非传统杀生剂释放路径与粘结剂分子设计可直接对照配方路线",
+            "note": "",
+            "source_text": "https://doi.org/10.1016/j.porgcoat.2026.110712",
+            "week": "2026-11-02",
+            "tag": "公开资料"
+          },
+          {
+            "no": 3,
+            "title": "德威无溶剂高固 G50/G60/G80 与水下清洗机器人",
+            "date": "2026-10-27",
+            "category": "产品",
+            "summary": "企业论坛推介体积固含约 95% 的防腐+硬质防污体系及配套水下清洗机器人；性能为自述，含 Manila Trader 21 个月实船等表述。",
+            "url": "https://hzeyun.com/detail/2621695",
+            "relevance": "中",
+            "relevance_reason": "硬质防污+主动清洗组合与国产高固低 VOC 路线可对照短名单",
+            "note": "待复核（德威 G60 等未入库；是否纳入 commercial-products.md / 短名单待定；未改评级）",
+            "source_text": "https://hzeyun.com/detail/2621695",
+            "week": "2026-11-02",
+            "tag": "公开资料"
+          },
+          {
+            "no": 1,
+            "title": "Jotun PortPIC：Hull Skating 气候足迹与海箱防污施工",
+            "date": "2026-10-26",
+            "category": "企业",
+            "summary": "Hull Skating（涂层+机器人）安装足迹约 423 t CO₂、25 年约 2,036 t，对照 DNV 验证始终洁净情景避排远高于足迹；海箱受控处理可显著降污损。",
+            "url": "https://www.jotun.com/ww-en/news-and-insights/jotun-insider/clean-hulls-with-proven-gains-showcased-at-portpic",
+            "relevance": "中",
+            "relevance_reason": "影响主动清洗兼容防污体系在碳核算与航线运维中的选型叙事",
+            "note": "待复核（commercial-products.md / 短名单 Jotun SeaQuantum 等与 Hull Skating 兼容体系叙事；未改评级）",
+            "source_text": "https://www.jotun.com/ww-en/news-and-insights/jotun-insider/clean-hulls-with-proven-gains-showcased-at-portpic",
+            "week": "2026-11-02",
+            "tag": "公开资料"
+          },
+          {
+            "no": 2,
+            "title": "Trosvik MultiCleaner ROV 零未处理排放研发启动",
+            "date": "2026-10-26",
+            "category": "技术",
+            "summary": "将水处理集成进无潜水员清洗 ROV，目标捕集并处理清洗水与污损物；项目至 2027-08，已有巴拿马作业单元。",
+            "url": "https://trosvik.no/trosvik-oceantech-aims-to-make-its-multicleaner-rov-completely-emission-free/?lang=en",
+            "relevance": "中",
+            "relevance_reason": "抬升港口清洗捕集标准，影响可清洗型污损释放/硬质涂层与清洗工艺适配",
+            "note": "",
+            "source_text": "https://trosvik.no/trosvik-oceantech-aims-to-make-its-multicleaner-rov-completely-emission-free/?lang=en",
+            "week": "2026-11-02",
+            "tag": "公开资料"
+          },
+          {
+            "no": 9,
+            "title": "工信部工业和信息化领域碳排放双控实施方案（2026—2030年）",
+            "date": "2026-10-21",
+            "category": "法规",
+            "summary": "到 2030 年约 400 项工业产品碳足迹标准、约 500 个国家级零碳工厂/算力；规上工业碳强度与能耗强度双降目标；强调产品碳足迹与企业碳管理。",
+            "url": "https://www.gov.cn/zhengce/zhengceku/202610/content_7083953.htm",
+            "relevance": "高",
+            "relevance_reason": "涂料企业碳管理与产品碳足迹将成为合规与采购门槛",
+            "note": "",
+            "source_text": "https://www.gov.cn/zhengce/zhengceku/202610/content_7083953.htm",
+            "week": "2026-11-02",
+            "tag": "公开资料"
+          },
+          {
+            "no": 10,
+            "title": "中办国办《关于推动科技创新和产业创新深度融合的意见》",
+            "date": "2026-10-21",
+            "category": "法规",
+            "summary": "布局中试验证与概念验证，绿色智能化改造传统产业，实施“人工智能+”，强化成果转化评价与职务成果赋权。",
+            "url": "https://www.gov.cn/zhengce/202610/content_7083930.htm",
+            "relevance": "高",
+            "relevance_reason": "中试平台与转化评价直接关系涂层中试与项目申报口径",
+            "note": "",
+            "source_text": "https://www.gov.cn/zhengce/202610/content_7083930.htm",
+            "week": "2026-11-02",
+            "tag": "公开资料"
+          },
+          {
+            "no": 6,
+            "title": "Propspeed Foulfree Multi-Surface 获 IBEX 创新奖",
+            "date": "2026-10-20",
+            "category": "产品",
+            "summary": "无杀生剂污损释放三步体系覆盖 20+ 类非金水下部件（不含船体），获 2026 IBEX 船艇养护类创新奖。",
+            "url": "https://www.marinebusinessnews.com.au/2026/10/propspeed-foulfree-multi-surface-system-recognized-with-2026-innovation-award/",
+            "relevance": "低",
+            "relevance_reason": "游艇附件端，与商船船体配方选型间接相关",
+            "note": "",
+            "source_text": "https://www.marinebusinessnews.com.au/2026/10/propspeed-foulfree-multi-surface-system-recognized-with-2026-innovation-award/",
+            "week": "2026-11-02",
+            "tag": "公开资料"
+          },
+          {
+            "no": 7,
+            "title": "PPG RightShip 专访：SIGMAGLIDE 2390 / NEXEON 810 + HullNav",
+            "date": "2026-10-20",
+            "category": "企业",
+            "summary": "推广无杀生剂硅基污损释放与无铜超低摩阻防污，并强调污损/航速损失监测数字化工具；非新品首发。",
+            "url": "https://rightship.com/resources/insights/partner-spotlight-ppg-protective-and-marine-coatings-advancing-vessel-efficiency-from-application-to-operation",
+            "relevance": "中",
+            "relevance_reason": "跨航线无铜/无杀生剂商用体系与性能监测可作为选型对照",
+            "note": "待复核（短名单 PPG SIGMAGLIDE 2390 及 NEXEON 推广表述；未改评级）",
+            "source_text": "https://rightship.com/resources/insights/partner-spotlight-ppg-protective-and-marine-coatings-advancing-vessel-efficiency-from-application-to-operation",
+            "week": "2026-11-02",
+            "tag": "公开资料"
+          }
+        ],
+        "backfill": false,
+        "counts": {
+          "total": 11,
+          "by_relevance": {
+            "高": 4,
+            "中": 6,
+            "低": 1
+          },
+          "by_category": {
+            "法规": 4,
+            "企业": 2,
+            "产品": 2,
+            "技术": 3
+          }
+        }
+      },
       {
         "week": "2026-10-26",
         "source_file": "data/industry-feed/2026-10-26.md",
@@ -7703,16 +9406,14 @@
             "lonlat": [
               121.8,
               31.2
-            ],
-            "name_en": "Shanghai"
+            ]
           },
           {
             "name": "新加坡",
             "lonlat": [
               103.85,
               1.25
-            ],
-            "name_en": "Singapore"
+            ]
           }
         ],
         "legs": [
@@ -7801,24 +9502,21 @@
             "lonlat": [
               121.8,
               31.2
-            ],
-            "name_en": "Shanghai"
+            ]
           },
           {
             "name": "釜山",
             "lonlat": [
               129.05,
               35.08
-            ],
-            "name_en": "Busan"
+            ]
           },
           {
             "name": "仁川",
             "lonlat": [
               126.6,
               37.45
-            ],
-            "name_en": "Incheon"
+            ]
           }
         ],
         "legs": [
@@ -7903,32 +9601,28 @@
             "lonlat": [
               121.8,
               31.2
-            ],
-            "name_en": "Shanghai"
+            ]
           },
           {
             "name": "新加坡",
             "lonlat": [
               103.85,
               1.25
-            ],
-            "name_en": "Singapore"
+            ]
           },
           {
             "name": "苏伊士 / 塞得港",
             "lonlat": [
               32.3,
               31.25
-            ],
-            "name_en": "Suez / Port Said"
+            ]
           },
           {
             "name": "鹿特丹",
             "lonlat": [
               4.1,
               51.95
-            ],
-            "name_en": "Rotterdam"
+            ]
           }
         ],
         "legs": [
@@ -8125,24 +9819,21 @@
             "lonlat": [
               103.85,
               1.25
-            ],
-            "name_en": "Singapore"
+            ]
           },
           {
             "name": "好望角",
             "lonlat": [
               18.47,
               -34.36
-            ],
-            "name_en": "Cape of Good Hope"
+            ]
           },
           {
             "name": "鹿特丹",
             "lonlat": [
               4.1,
               51.95
-            ],
-            "name_en": "Rotterdam"
+            ]
           }
         ],
         "legs": [
@@ -8263,16 +9954,14 @@
             "lonlat": [
               -79.55,
               8.9
-            ],
-            "name_en": "Balboa (Pacific)"
+            ]
           },
           {
             "name": "科隆（大西洋侧）",
             "lonlat": [
               -79.9,
               9.36
-            ],
-            "name_en": "Colón (Atlantic)"
+            ]
           }
         ],
         "legs": [
@@ -8333,16 +10022,14 @@
             "lonlat": [
               43.4,
               12.6
-            ],
-            "name_en": "Bab el-Mandeb"
+            ]
           },
           {
             "name": "苏伊士 / 塞得港",
             "lonlat": [
               32.3,
               31.25
-            ],
-            "name_en": "Suez / Port Said"
+            ]
           }
         ],
         "legs": [
@@ -8423,40 +10110,35 @@
             "lonlat": [
               114.15,
               22.25
-            ],
-            "name_en": "Hong Kong / Shenzhen"
+            ]
           },
           {
             "name": "三亚",
             "lonlat": [
               109.5,
               18.2
-            ],
-            "name_en": "Sanya"
+            ]
           },
           {
             "name": "厦门",
             "lonlat": [
               118.1,
               24.4
-            ],
-            "name_en": "Xiamen"
+            ]
           },
           {
             "name": "釜山",
             "lonlat": [
               129.05,
               35.08
-            ],
-            "name_en": "Busan"
+            ]
           },
           {
             "name": "横滨 / 东京湾",
             "lonlat": [
               139.65,
               35.45
-            ],
-            "name_en": "Yokohama / Tokyo Bay"
+            ]
           }
         ],
         "legs": [
@@ -8591,16 +10273,14 @@
             "lonlat": [
               121.8,
               31.2
-            ],
-            "name_en": "Shanghai"
+            ]
           },
           {
             "name": "洛杉矶 – 长滩",
             "lonlat": [
               -118.25,
               33.73
-            ],
-            "name_en": "LA – Long Beach"
+            ]
           }
         ],
         "legs": [
@@ -8685,16 +10365,14 @@
             "lonlat": [
               151.25,
               -33.85
-            ],
-            "name_en": "Sydney"
+            ]
           },
           {
             "name": "奥克兰",
             "lonlat": [
               174.77,
               -36.84
-            ],
-            "name_en": "Auckland"
+            ]
           }
         ],
         "legs": [
@@ -8763,16 +10441,14 @@
             "lonlat": [
               -46.3,
               -23.98
-            ],
-            "name_en": "Santos"
+            ]
           },
           {
             "name": "里约热内卢（沿海方向示意）",
             "lonlat": [
               -43.15,
               -22.95
-            ],
-            "name_en": "Rio de Janeiro"
+            ]
           }
         ],
         "legs": [
@@ -8829,16 +10505,14 @@
             "lonlat": [
               -68.5,
               63.75
-            ],
-            "name_en": "Iqaluit"
+            ]
           },
           {
             "name": "雷索卢特",
             "lonlat": [
               -94.85,
               74.7
-            ],
-            "name_en": "Resolute"
+            ]
           }
         ],
         "legs": [
@@ -8883,16 +10557,14 @@
             "lonlat": [
               147.33,
               -42.88
-            ],
-            "name_en": "Hobart"
+            ]
           },
           {
             "name": "迪蒙·迪维尔站（东南极）",
             "lonlat": [
               140.0,
               -66.66
-            ],
-            "name_en": "Dumont d'Urville"
+            ]
           }
         ],
         "legs": [
