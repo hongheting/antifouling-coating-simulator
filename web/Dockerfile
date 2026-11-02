@@ -1,6 +1,6 @@
 # Antifouling Coating Simulator — static web (nginx)
 # Build from coating-simulator repo root:
-#   docker build --platform linux/amd64 -f web/Dockerfile -t coating-simulator-web:0.6.1 .
+#   docker build --platform linux/amd64 -f web/Dockerfile -t coating-simulator-web:0.6.2 .
 #
 # Runtime: PORT (default 8080), GET /health → JSON ok
 # Copies only UI static assets (no rebuild-snapshot / build-public-feed scripts).
@@ -8,7 +8,7 @@
 FROM nginx:alpine
 
 LABEL org.opencontainers.image.title="coating-simulator-web" \
-      org.opencontainers.image.version="0.6.1" \
+      org.opencontainers.image.version="0.6.2" \
       org.opencontainers.image.description="Static evidence panel for antifouling coating simulator"
 
 # envsubst for PORT injection

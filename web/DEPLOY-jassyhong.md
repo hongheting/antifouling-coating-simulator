@@ -1,7 +1,7 @@
 # 防污配方模拟器 Web — 部署交接（给 Jassy King）
 
 - **时间（Asia/Shanghai）**：2026-10-31
-- **版本**：`0.6.1`（静态证据面板；与手机/桌面同 UI 数据源）
+- **版本**：`0.6.2`（静态证据面板；与手机/桌面同 UI 数据源）
 - **分工**：镜像上下文 / Dockerfile / 本文档 → **防污配方模拟器 bot**；ACR push / `ca-coating-simulator` / 灰云 DNS / 主站卡片 → **Jassy King**
 
 ## 1. 架构（与 ref / tools / journal / protocol 同款）
@@ -13,10 +13,10 @@
 | Container Apps 环境 | `cae-refcheck` |
 | ACR | `refcheck84ed97.azurecr.io` |
 | Container App | `ca-coating-simulator` |
-| 镜像 | `coating-simulator-web:0.6.1`（可再打 `:latest`） |
-| 完整标签 | `refcheck84ed97.azurecr.io/coating-simulator-web:0.6.1` |
+| 镜像 | `coating-simulator-web:0.6.2`（可再打 `:latest`） |
+| 完整标签 | `refcheck84ed97.azurecr.io/coating-simulator-web:0.6.2` |
 | 监听 | `0.0.0.0:$PORT`（默认 **8080**） |
-| 探活 | `GET /health` → JSON `{"ok":true,"service":"coating-simulator-web","version":"0.6.1"}`（免鉴权） |
+| 探活 | `GET /health` → JSON `{"ok":true,"service":"coating-simulator-web","version":"0.6.2"}`（免鉴权） |
 | CPU / 内存 | 0.25–0.5 / 0.5Gi |
 | 副本 | min 0 / max 1 |
 | **自定义域名（已确认）** | **`simulator.jassyhong.top`** |
@@ -28,23 +28,23 @@
 
 ## 2. 构建上下文
 
-- **仓库根**：克隆后的仓库根目录（含 `ui/` 与 `web/`；作者环境里曾为 `/workspace/coating-simulator/`）
-- **Dockerfile**：`web/Dockerfile`（构建上下文必须是 **仓库根目录**，不是 `web/`）
+- **仓库根**：`/workspace/coating-simulator/`
+- **Dockerfile**：`web/Dockerfile`（构建上下文必须是 **coating-simulator 根目录**）
 - **相关文件**：`web/entrypoint.sh`、`web/nginx.conf.template`、`web/.dockerignore`
 - **拷进镜像的静态文件**（仅三件）：`ui/index.html`、`ui/data-snapshot.js`、`ui/world-land.js`
 
 ```bash
 cd /workspace/coating-simulator
-docker build --platform linux/amd64 -f web/Dockerfile -t coating-simulator-web:0.6.1 .
+docker build --platform linux/amd64 -f web/Dockerfile -t coating-simulator-web:0.6.2 .
 # 登录 ACR 后：
-# docker tag coating-simulator-web:0.6.1 refcheck84ed97.azurecr.io/coating-simulator-web:0.6.1
-# docker push refcheck84ed97.azurecr.io/coating-simulator-web:0.6.1
+# docker tag coating-simulator-web:0.6.2 refcheck84ed97.azurecr.io/coating-simulator-web:0.6.2
+# docker push refcheck84ed97.azurecr.io/coating-simulator-web:0.6.2
 ```
 
 本地冒烟（可选）：
 
 ```bash
-docker run --rm -p 8080:8080 -e PORT=8080 coating-simulator-web:0.6.1
+docker run --rm -p 8080:8080 -e PORT=8080 coating-simulator-web:0.6.2
 curl -s http://127.0.0.1:8080/health
 # 浏览器打开 http://127.0.0.1:8080/ ：总览 / 轨 A·B·C / 行业动态可见；页面须保留「模拟 ≠ 实测」诚实标签
 ```
