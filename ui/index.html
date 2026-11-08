@@ -904,6 +904,7 @@
   }
   .footer-links a:hover, .footer-links button:hover { text-decoration: underline; }
 
+#std-table td a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 </style>
 </head>
 <body>
@@ -1509,7 +1510,7 @@
     <div class="ind-banner" role="note">
       <span>📏</span>
       <span><strong>标准目录信息，非标准全文</strong></span>
-      <span class="muted">状态以发布机构官方记录为准 · 核对日期 2026-11-08 · 来源：全国标准信息公共服务平台 / ISO / ASTM / IMO</span>
+      <span class="muted">状态以发布机构官方记录为准 · 核对日期 2026-11-08 · 来源：全国标准信息公共服务平台 / ISO / ASTM / IMO · 点击标准编号前往官方页面查看 / 获取全文</span>
     </div>
     <div class="card">
       <h2>防污标准 · 设计、评价与合规依据</h2>
@@ -1520,21 +1521,21 @@
             <tr><th>标准编号</th><th>标准名称</th><th>类别</th><th>状态</th><th>与本模拟器的关联</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>GB/T 6822-2024</code></td><td>船体防污防锈漆体系</td><td>中国国标</td><td><strong>现行（2025-06-01 实施）</strong></td><td>船体防污漆产品标准的现行版本 — 本模拟器配方设计的目标产品体系；全部代替 GB/T 6822-2014</td></tr>
-            <tr><td><code>GB/T 6822-2014</code></td><td>船体防污防锈漆体系</td><td>中国国标</td><td><span class="muted">已废止（被 GB/T 6822-2024 全部代替）</span></td><td>历史版本，保留备查</td></tr>
-            <tr><td><code>GB/T 5370-2007</code></td><td>防污漆样板浅海浸泡试验方法</td><td>中国国标</td><td><strong>现行</strong></td><td>实海挂板验证：样板 350×250×3 mm、浸泡深度 0.2–2 m、综合评定 ≥85 分 — 模拟结果的最终实测对照方法</td></tr>
-            <tr><td><code>GB/T 7789-2007</code></td><td>船舶防污漆防污性能动态试验方法</td><td>中国国标</td><td><strong>现行</strong></td><td>动态试验：样板线速度 20 节、连续运行 200 h 后移入实海浮筏浸泡 1 个月为一个周期</td></tr>
-            <tr><td><code>GB/T 31409-2015</code></td><td>船舶防污漆总铜含量测定法</td><td>中国国标</td><td><strong>现行</strong></td><td>配方总铜含量的测定方法 — 模拟器铜含量输入的验证依据</td></tr>
-            <tr><td><code>GB/T 31411-2015</code></td><td>船舶防污漆磨蚀率测定法</td><td>中国国标</td><td><strong>现行</strong></td><td>自抛光磨蚀率测定 — 对应模拟器的磨蚀 / 抛光速率模块</td></tr>
-            <tr><td><code>GB/T 25011-2010</code></td><td>船舶防污漆中滴滴涕含量的测试及判定</td><td>中国国标</td><td><strong>现行</strong></td><td>DDT 判定：含量 ≤1000 mg/kg 判定未采用 DDT 作为防污剂</td></tr>
-            <tr><td><code>GB/T 26085-2010</code></td><td>船舶防污漆锡总量的测试及判定</td><td>中国国标</td><td><strong>现行</strong></td><td>总锡判定：干漆样总锡 &lt;2500 mg/kg 判定未采用有机锡作为防污剂</td></tr>
-            <tr><td><code>GB 30981.2-2025</code></td><td>涂料中有害物质限量 第2部分：工业涂料</td><td>中国国标</td><td><strong>现行</strong></td><td>2026-06-01 起全部代替 GB 38469-2019 — 船舶涂料有害物质限量的现行合规依据</td></tr>
-            <tr><td><code>GB 38469-2019</code></td><td>船舶涂料中有害物质限量</td><td>中国国标</td><td><span class="muted">已废止（被 GB 30981.2-2025 代替）</span></td><td>历史限量依据，保留备查</td></tr>
-            <tr><td><code>ISO 15181-1:2007</code></td><td>Paints and varnishes — Determination of release rate of biocides from antifouling paints — Part 1: General method for extraction of biocides</td><td>国际 ISO</td><td><strong>现行</strong></td><td>杀生剂释放率测定的通用萃取方法 — 释放率模块的方法学基础</td></tr>
-            <tr><td><code>ISO 15181-2:2007</code></td><td>Part 2: Determination of copper-ion concentration in the extract and calculation of the release rate（铜离子释放率）</td><td>国际 ISO</td><td><strong>现行</strong></td><td>铜离子释放率标准方法，定量范围 1.8–500 µg·cm⁻²·d⁻¹ — 直接对应模拟器的铜释放率模块</td></tr>
-            <tr><td><code>ISO 15181-3:2007</code></td><td>Part 3: Calculation of the zineb release rate by determination of ethylenethiourea in the extract（代森锌释放率）</td><td>国际 ISO</td><td><strong>现行</strong></td><td>代森锌（zineb）释放率的计算方法</td></tr>
-            <tr><td><code>ASTM D6442</code></td><td>Standard Test Method for Determination of Copper Release Rate from Antifouling Coatings in Substitute Ocean Water（人工海水中铜释放率）</td><td>国际 ASTM</td><td><strong>现行</strong></td><td>铜释放率的 ASTM 对应方法，与 ISO 15181-2 互相参照</td></tr>
-            <tr><td><code>IMO AFS Convention (2001)</code></td><td>控制船舶有害防污底系统国际公约（International Convention on the Control of Harmful Anti-Fouling Systems on Ships）</td><td>国际公约</td><td><strong>现行（含 MEPC.331(76) 等修正案）</strong></td><td>全球禁用有机锡（TBT）防污系统的公约依据 — 配方合规的顶层法规</td></tr>
+            <tr><td><a href="https://std.samr.gov.cn/gb/search/gbDetailed?id=28045D84DA7F9055E06397BE0A0A7C5C" target="_blank" rel="noopener" title="前往官方页面查看"><code>GB/T 6822-2024</code></a></td><td>船体防污防锈漆体系</td><td>中国国标</td><td><strong>现行（2025-06-01 实施）</strong></td><td>船体防污漆产品标准的现行版本 — 本模拟器配方设计的目标产品体系；全部代替 GB/T 6822-2014</td></tr>
+            <tr><td><a href="https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D7EFA8D3A7E05397BE0A0AB82A" target="_blank" rel="noopener" title="前往官方页面查看"><code>GB/T 6822-2014</code></a></td><td>船体防污防锈漆体系</td><td>中国国标</td><td><span class="muted">已废止（被 GB/T 6822-2024 全部代替）</span></td><td>历史版本，保留备查</td></tr>
+            <tr><td><a href="https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D7FC7CD3A7E05397BE0A0AB82A" target="_blank" rel="noopener" title="前往官方页面查看"><code>GB/T 5370-2007</code></a></td><td>防污漆样板浅海浸泡试验方法</td><td>中国国标</td><td><strong>现行</strong></td><td>实海挂板验证：样板 350×250×3 mm、浸泡深度 0.2–2 m、综合评定 ≥85 分 — 模拟结果的最终实测对照方法</td></tr>
+            <tr><td><a href="https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D77E95D3A7E05397BE0A0AB82A" target="_blank" rel="noopener" title="前往官方页面查看"><code>GB/T 7789-2007</code></a></td><td>船舶防污漆防污性能动态试验方法</td><td>中国国标</td><td><strong>现行</strong></td><td>动态试验：样板线速度 20 节、连续运行 200 h 后移入实海浮筏浸泡 1 个月为一个周期</td></tr>
+            <tr><td><a href="https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D805C6D3A7E05397BE0A0AB82A" target="_blank" rel="noopener" title="前往官方页面查看"><code>GB/T 31409-2015</code></a></td><td>船舶防污漆总铜含量测定法</td><td>中国国标</td><td><strong>现行</strong></td><td>配方总铜含量的测定方法 — 模拟器铜含量输入的验证依据</td></tr>
+            <tr><td><a href="https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D805C4D3A7E05397BE0A0AB82A" target="_blank" rel="noopener" title="前往官方页面查看"><code>GB/T 31411-2015</code></a></td><td>船舶防污漆磨蚀率测定法</td><td>中国国标</td><td><strong>现行</strong></td><td>自抛光磨蚀率测定 — 对应模拟器的磨蚀 / 抛光速率模块</td></tr>
+            <tr><td><a href="https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D7FB4AD3A7E05397BE0A0AB82A" target="_blank" rel="noopener" title="前往官方页面查看"><code>GB/T 25011-2010</code></a></td><td>船舶防污漆中滴滴涕含量的测试及判定</td><td>中国国标</td><td><strong>现行</strong></td><td>DDT 判定：含量 ≤1000 mg/kg 判定未采用 DDT 作为防污剂</td></tr>
+            <tr><td><a href="https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D7DA36D3A7E05397BE0A0AB82A" target="_blank" rel="noopener" title="前往官方页面查看"><code>GB/T 26085-2010</code></a></td><td>船舶防污漆锡总量的测试及判定</td><td>中国国标</td><td><strong>现行</strong></td><td>总锡判定：干漆样总锡 &lt;2500 mg/kg 判定未采用有机锡作为防污剂</td></tr>
+            <tr><td><a href="https://std.samr.gov.cn/gb/search/gbDetailed?id=36A29D07E29CD444E06397BE0A0ACC4C" target="_blank" rel="noopener" title="前往官方页面查看"><code>GB 30981.2-2025</code></a></td><td>涂料中有害物质限量 第2部分：工业涂料</td><td>中国国标</td><td><strong>现行</strong></td><td>2026-06-01 起全部代替 GB 38469-2019 — 船舶涂料有害物质限量的现行合规依据</td></tr>
+            <tr><td><a href="https://std.samr.gov.cn/gb/search/gbDetailed?id=9B70DDA94013A80CE05397BE0A0A84AC" target="_blank" rel="noopener" title="前往官方页面查看"><code>GB 38469-2019</code></a></td><td>船舶涂料中有害物质限量</td><td>中国国标</td><td><span class="muted">已废止（被 GB 30981.2-2025 代替）</span></td><td>历史限量依据，保留备查</td></tr>
+            <tr><td><a href="https://www.iso.org/standard/42867.html" target="_blank" rel="noopener" title="前往官方页面查看"><code>ISO 15181-1:2007</code></a></td><td>Paints and varnishes — Determination of release rate of biocides from antifouling paints — Part 1: General method for extraction of biocides</td><td>国际 ISO</td><td><strong>现行</strong></td><td>杀生剂释放率测定的通用萃取方法 — 释放率模块的方法学基础</td></tr>
+            <tr><td><a href="https://www.iso.org/standard/42868.html" target="_blank" rel="noopener" title="前往官方页面查看"><code>ISO 15181-2:2007</code></a></td><td>Part 2: Determination of copper-ion concentration in the extract and calculation of the release rate（铜离子释放率）</td><td>国际 ISO</td><td><strong>现行</strong></td><td>铜离子释放率标准方法，定量范围 1.8–500 µg·cm⁻²·d⁻¹ — 直接对应模拟器的铜释放率模块</td></tr>
+            <tr><td><a href="https://www.iso.org/standard/39164.html" target="_blank" rel="noopener" title="前往官方页面查看"><code>ISO 15181-3:2007</code></a></td><td>Part 3: Calculation of the zineb release rate by determination of ethylenethiourea in the extract（代森锌释放率）</td><td>国际 ISO</td><td><strong>现行</strong></td><td>代森锌（zineb）释放率的计算方法</td></tr>
+            <tr><td><a href="https://www.astm.org/d6442-06.html" target="_blank" rel="noopener" title="前往官方页面查看"><code>ASTM D6442</code></a></td><td>Standard Test Method for Determination of Copper Release Rate from Antifouling Coatings in Substitute Ocean Water（人工海水中铜释放率）</td><td>国际 ASTM</td><td><strong>现行</strong></td><td>铜释放率的 ASTM 对应方法，与 ISO 15181-2 互相参照</td></tr>
+            <tr><td><a href="https://www.imo.org/en/about/conventions/pages/international-convention-on-the-control-of-harmful-anti-fouling-systems-on-ships-(afs).aspx" target="_blank" rel="noopener" title="前往官方页面查看"><code>IMO AFS Convention (2001)</code></a></td><td>控制船舶有害防污底系统国际公约（International Convention on the Control of Harmful Anti-Fouling Systems on Ships）</td><td>国际公约</td><td><strong>现行（含 MEPC.331(76) 等修正案）</strong></td><td>全球禁用有机锡（TBT）防污系统的公约依据 — 配方合规的顶层法规</td></tr>
           </tbody>
         </table>
       </div>
