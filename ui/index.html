@@ -954,6 +954,7 @@
     <button type="button" data-tab="lit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M9 8h6"/></svg><span data-i18n="tab_lit">文献界</span></button>
     <button type="button" data-tab="tech"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M3 11h18M8 7V5h8v2"/></svg><span data-i18n="tab_tech">商用·技术</span></button>
     <button type="button" data-tab="industry"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h13v14H6a2 2 0 0 1-2-2z"/><path d="M17 9h3v8a2 2 0 0 1-2 2"/><path d="M7 9h7M7 13h7M7 16h4"/></svg><span data-i18n="tab_ind">行业动态</span><span class="tab-badge" id="ind-tab-badge"></span></button>
+    <button type="button" data-tab="standards"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6"/><path d="M9.5 13h6M9.5 17h6"/></svg><span data-i18n="tab_std">防污标准</span></button>
     <button type="button" data-tab="scholars"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg><span data-i18n="tab_scholars">防污学者排行</span></button>
   </nav>
 
@@ -1028,7 +1029,7 @@
     <div class="card">
       <h2>怎么用（一页流程）</h2>
       <ol style="margin:8px 0 0 18px; font-size:.9rem; color:var(--text);">
-        <li>打开<strong>轨 A</strong>：按路线芯片看示例配方槽（公开仓库为示例数据，见 docs/example-data.md）；性能空格为待测，不得把空格或模型包络写成实测。</li>
+        <li>打开<strong>轨 A</strong>：按路线芯片看 JF-602 / 自配丙烯酸 / 粉体表征 / UV-C·超声；性能空格为待测，劣势摘自课题 KB。</li>
         <li>打开<strong>轨 B</strong>：点选全球走廊或冷端桩，看相对污损压力（1–5）与策略提示。</li>
         <li>打开<strong>轨 C</strong>：按航线筛选短名单 — 排序是工况拟合，<em>不是</em>魔法最优分。</li>
         <li>打开<strong>文献界</strong>：按技术分类筛选（金属熔覆/喷涂、硅改性、FRC、SPC 铜、水凝胶、UV-C、超声、天然杀生剂等；DOI 可溯源）。</li>
@@ -1255,7 +1256,7 @@
   <section id="panel-lab" class="panel">
     <div class="card">
       <h2><svg class="h-ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="9" cy="10" r="3.2" fill="#0e8a94"/><circle cx="21" cy="7" r="2.6" fill="#0b4a6f"/><circle cx="17" cy="16" r="3" fill="#5fb3bf"/><path d="M9 10 L17 16 L21 7" stroke="#5a7083" stroke-width="1.4" fill="none"/><path class="drip" d="M17 21 c-2.2 3-3 4.6-3 6a3 3 0 0 0 6 0c0-1.4-.8-3-3-6z" fill="#0a8f9c"/></svg>轨 A · 剂量 → 代理性能表</h2>
-      <p class="muted">公开仓库数据来自 <code>data/lab-proxy-table.csv</code>（<strong>示例数据</strong>，见 <code>docs/example-data.md</code>）。空性能格 = 尚无点。<strong>未编造</strong>拉拔/EIS/HPLC 实测数；标签诚实。模拟 ≠ 实测。</p>
+      <p class="muted">数据来自 <code>data/lab-proxy-table.csv</code>（课题 KB + 笔记）。空性能格 = 尚无点。<strong>未编造</strong>拉拔/EIS/HPLC 实测数；劣势摘自 KB，标签诚实。</p>
       <div class="chip-row lab-chips" id="lab-base-chips" aria-label="基漆/路线筛选"></div>
       <div class="toolbar">
         <label>筛选标签
@@ -1345,7 +1346,7 @@
   <section id="panel-lit" class="panel">
     <div class="card">
       <h2>文献界 · 公开数据上下界</h2>
-      <p class="muted">来自 <code>data/literature-bounds.csv</code> + <code>literature-taxonomy.md</code>；作者/机构/概要/被引来自 OpenAlex（<code>data/literature-enrichment.csv</code>，2026-10-20 获取）；「重要度评估（主观）」为透明规则打分，悬停查看依据，<strong>非实测</strong>。全部 tag=<span class="tag tag-文献界">文献界</span> — <strong>≠</strong> 本仓库示例配方的实测，≠ 航次污损率。</p>
+      <p class="muted">来自 <code>data/literature-bounds.csv</code> + <code>literature-taxonomy.md</code>；作者/机构/概要/被引来自 OpenAlex（<code>data/literature-enrichment.csv</code>，2026-10-20 获取）；「重要度评估（主观）」为透明规则打分，悬停查看依据，<strong>非实测</strong>。全部 tag=<span class="tag tag-文献界">文献界</span> — <strong>≠</strong> 用户 JF-602 实测，≠ 航次污损率。</p>
       <div class="chip-row" id="lit-cat-chips" aria-label="技术分类"></div>
       <div class="toolbar">
         <label>指标关键词
@@ -1388,7 +1389,7 @@
   <section id="panel-tech" class="panel">
     <div class="card">
       <h2>商用涂料 · 辅助技术 · 全球目录</h2>
-      <p class="muted">厂家标称 / 公开资料 / 文献界。这些标签不是实测。公开仓库轨 A / 轨 C 为示例数据（<code>docs/example-data.md</code>）。分类见 <code>commercial-taxonomy.md</code>。</p>
+      <p class="muted">厂家标称 / 公开资料 / 文献界。禁止与课题微宇宙「Hempel 对照」或 JF-602 实测混读。分类见 <code>commercial-taxonomy.md</code>。</p>
       <div class="chip-row" id="comm-cat-chips"></div>
       <div class="toolbar" style="margin-top:8px;">
         <label>技术分类
@@ -1502,6 +1503,44 @@
     </div>
   </section>
 
+
+  <!-- Standards -->
+  <section id="panel-standards" class="panel">
+    <div class="ind-banner" role="note">
+      <span>📏</span>
+      <span><strong>标准目录信息，非标准全文</strong></span>
+      <span class="muted">状态以发布机构官方记录为准 · 核对日期 2026-11-08 · 来源：全国标准信息公共服务平台 / ISO / ASTM / IMO</span>
+    </div>
+    <div class="card">
+      <h2>防污标准 · 设计、评价与合规依据</h2>
+      <p class="muted">本页汇总防污涂层配方设计、性能评价与合规所依据的主要标准：中国国家标准、ISO 与 ASTM 方法标准，以及 IMO 国际公约。右列标注每项标准与本模拟器模块的对应关系；模拟器输出为带诚实标签的估计，标准的试验方法才是实测对照（模拟 ≠ 实测）。</p>
+      <div class="table-wrap">
+        <table class="data" id="std-table">
+          <thead>
+            <tr><th>标准编号</th><th>标准名称</th><th>类别</th><th>状态</th><th>与本模拟器的关联</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>GB/T 6822-2024</code></td><td>船体防污防锈漆体系</td><td>中国国标</td><td><strong>现行（2025-06-01 实施）</strong></td><td>船体防污漆产品标准的现行版本 — 本模拟器配方设计的目标产品体系；全部代替 GB/T 6822-2014</td></tr>
+            <tr><td><code>GB/T 6822-2014</code></td><td>船体防污防锈漆体系</td><td>中国国标</td><td><span class="muted">已废止（被 GB/T 6822-2024 全部代替）</span></td><td>历史版本，保留备查</td></tr>
+            <tr><td><code>GB/T 5370-2007</code></td><td>防污漆样板浅海浸泡试验方法</td><td>中国国标</td><td><strong>现行</strong></td><td>实海挂板验证：样板 350×250×3 mm、浸泡深度 0.2–2 m、综合评定 ≥85 分 — 模拟结果的最终实测对照方法</td></tr>
+            <tr><td><code>GB/T 7789-2007</code></td><td>船舶防污漆防污性能动态试验方法</td><td>中国国标</td><td><strong>现行</strong></td><td>动态试验：样板线速度 20 节、连续运行 200 h 后移入实海浮筏浸泡 1 个月为一个周期</td></tr>
+            <tr><td><code>GB/T 31409-2015</code></td><td>船舶防污漆总铜含量测定法</td><td>中国国标</td><td><strong>现行</strong></td><td>配方总铜含量的测定方法 — 模拟器铜含量输入的验证依据</td></tr>
+            <tr><td><code>GB/T 31411-2015</code></td><td>船舶防污漆磨蚀率测定法</td><td>中国国标</td><td><strong>现行</strong></td><td>自抛光磨蚀率测定 — 对应模拟器的磨蚀 / 抛光速率模块</td></tr>
+            <tr><td><code>GB/T 25011-2010</code></td><td>船舶防污漆中滴滴涕含量的测试及判定</td><td>中国国标</td><td><strong>现行</strong></td><td>DDT 判定：含量 ≤1000 mg/kg 判定未采用 DDT 作为防污剂</td></tr>
+            <tr><td><code>GB/T 26085-2010</code></td><td>船舶防污漆锡总量的测试及判定</td><td>中国国标</td><td><strong>现行</strong></td><td>总锡判定：干漆样总锡 &lt;2500 mg/kg 判定未采用有机锡作为防污剂</td></tr>
+            <tr><td><code>GB 30981.2-2025</code></td><td>涂料中有害物质限量 第2部分：工业涂料</td><td>中国国标</td><td><strong>现行</strong></td><td>2026-06-01 起全部代替 GB 38469-2019 — 船舶涂料有害物质限量的现行合规依据</td></tr>
+            <tr><td><code>GB 38469-2019</code></td><td>船舶涂料中有害物质限量</td><td>中国国标</td><td><span class="muted">已废止（被 GB 30981.2-2025 代替）</span></td><td>历史限量依据，保留备查</td></tr>
+            <tr><td><code>ISO 15181-1:2007</code></td><td>Paints and varnishes — Determination of release rate of biocides from antifouling paints — Part 1: General method for extraction of biocides</td><td>国际 ISO</td><td><strong>现行</strong></td><td>杀生剂释放率测定的通用萃取方法 — 释放率模块的方法学基础</td></tr>
+            <tr><td><code>ISO 15181-2:2007</code></td><td>Part 2: Determination of copper-ion concentration in the extract and calculation of the release rate（铜离子释放率）</td><td>国际 ISO</td><td><strong>现行</strong></td><td>铜离子释放率标准方法，定量范围 1.8–500 µg·cm⁻²·d⁻¹ — 直接对应模拟器的铜释放率模块</td></tr>
+            <tr><td><code>ISO 15181-3:2007</code></td><td>Part 3: Calculation of the zineb release rate by determination of ethylenethiourea in the extract（代森锌释放率）</td><td>国际 ISO</td><td><strong>现行</strong></td><td>代森锌（zineb）释放率的计算方法</td></tr>
+            <tr><td><code>ASTM D6442</code></td><td>Standard Test Method for Determination of Copper Release Rate from Antifouling Coatings in Substitute Ocean Water（人工海水中铜释放率）</td><td>国际 ASTM</td><td><strong>现行</strong></td><td>铜释放率的 ASTM 对应方法，与 ISO 15181-2 互相参照</td></tr>
+            <tr><td><code>IMO AFS Convention (2001)</code></td><td>控制船舶有害防污底系统国际公约（International Convention on the Control of Harmful Anti-Fouling Systems on Ships）</td><td>国际公约</td><td><strong>现行（含 MEPC.331(76) 等修正案）</strong></td><td>全球禁用有机锡（TBT）防污系统的公约依据 — 配方合规的顶层法规</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="margin-top:10px;">共 15 项。标准条目的新增与勘误通过「防污模拟器网站管理」维护后同步至本页。</p>
+    </div>
+  </section>
 
   <!-- Scholars -->
   <section id="panel-scholars" class="panel">
@@ -1767,10 +1806,9 @@
   let labBaseActive = '';
   function labBaseKey(basecoat) {
     const b = (basecoat || '');
-    // Public repo rows use example basecoats; private/live panels may still say JF-602.
-    if (b.includes('JF-602') || b.startsWith('JF-602') || b.includes('示例双组分环氧')) return 'jf602';
+    if (b.includes('JF-602') || b.startsWith('JF-602')) return 'jf602';
     if (b.includes('丙烯酸') || b.includes('松香')) return 'acrylic';
-    if (b.includes('粉体') || b.includes('CA@MSiO') || b.includes('填料') || b.includes('EIS') || b.includes('释放几何')) return 'powder';
+    if (b.includes('粉体') || b.includes('CA@MSiO')) return 'powder';
     if (b.includes('UV-C') || b.includes('超声') || b.includes('主动')) return 'active';
     return 'other';
   }
@@ -1786,9 +1824,9 @@
     const en = window.CUR_LANG === 'en';
     const groups = [
       { key: '', zh: en ? 'All Routes' : '全部路线' },
-      { key: 'jf602', zh: en ? 'Example 2K epoxy' : '示例双组分环氧' },
-      { key: 'acrylic', zh: en ? 'Acrylic–rosin' : '自配丙烯酸' },
-      { key: 'powder', zh: en ? 'Example filler / method slots' : '示例填料/方法槽' },
+      { key: 'jf602', zh: en ? 'JF-602 Epoxy' : 'JF-602' },
+      { key: 'acrylic', zh: en ? 'Custom Acrylic' : '自配丙烯酸' },
+      { key: 'powder', zh: en ? 'CA@MSiO₂ Powder' : 'CA@MSiO₂粉体' },
       { key: 'active', zh: en ? 'UV-C / Ultrasound' : 'UV-C/超声' },
       { key: 'other', zh: en ? 'Controls / Other' : '对照/其他' },
     ];
@@ -1830,11 +1868,11 @@
       const meta = [(r.uncertainty || ''), (r.note || '')].filter(Boolean).join(' · ');
       return `<tr>
       <td><div class="id">${escapeHtml(r.formulation_id)}</div>${labBasePill(r.basecoat)}</td>
-      <td>${escapeHtml(r.CA_MSiO2_wt_pct||r.filler_wt_pct||'—')}</td>
-      <td>${escapeHtml(r.BYK_rel_to_particle_pct||r.dispersant_rel_pct||'—')}</td>
+      <td>${escapeHtml(r.CA_MSiO2_wt_pct||'—')}</td>
+      <td>${escapeHtml(r.BYK_rel_to_particle_pct||'—')}</td>
       <td>${cellVal(r.pull_off_MPa, r.pull_off_tag)}</td>
       <td>${cellVal(r.eis_note, r.eis_tag)}</td>
-      <td>${cellVal(r.hplc_CA_ug_mL_or_flux || r.hplc_analyte_note, r.hplc_tag)}</td>
+      <td>${cellVal(r.hplc_CA_ug_mL_or_flux, r.hplc_tag)}</td>
       <td>${cellVal(r.microcosm_relative_fouling, r.microcosm_tag)}</td>
       <td><div class="lab-meta">${escapeHtml(meta)}</div>
           ${disadv ? '<div class="disadv"><strong>劣势/边界：</strong>' + escapeHtml(disadv) + '</div>' : ''}
@@ -2784,10 +2822,10 @@
       const rKey = labBaseKey(r.basecoat);
       let d = 0;
       if ((resin === 'epoxy' && rKey !== 'jf602') || (resin === 'acrylic' && rKey !== 'acrylic')) d += 15;
-      const rCa = parseFloat(r.CA_MSiO2_wt_pct || r.filler_wt_pct);
+      const rCa = parseFloat(r.CA_MSiO2_wt_pct);
       if (!isNaN(rCa)) d += Math.abs(rCa - ca) * 2.5;
       else if (ca > 0) d += 6;
-      const rByk = parseFloat(r.BYK_rel_to_particle_pct || r.dispersant_rel_pct);
+      const rByk = parseFloat(r.BYK_rel_to_particle_pct);
       if (!isNaN(rByk)) d += Math.abs(rByk - byk) * 1.5;
       if (d < bestDist) { bestDist = d; bestRow = r; }
     });
@@ -3216,6 +3254,7 @@
       tab_lit: '文献界',
       tab_tech: '商用·技术',
       tab_ind: '行业动态',
+      tab_std: '防污标准',
       tab_scholars: '防污学者排行',
       ov_sim_title: '⚡ 交互式配方沙盒与防污工程计算器（全球同行通用工具箱）',
       ov_sim_btn: '打开完整交互工作台 →',
@@ -3331,6 +3370,7 @@
       tab_lit: 'Literature Bounds',
       tab_tech: 'Commercial & Tech',
       tab_ind: 'Industry Feed',
+      tab_std: 'Standards',
       tab_scholars: 'Scholar Ranking',
       ov_sim_title: '⚡ Interactive Formulation Sandbox & Engineering Calculators',
       ov_sim_btn: 'Open Full Interactive Workbench →',
