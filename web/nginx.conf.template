@@ -10,7 +10,7 @@ server {
     location = /health {
         default_type application/json;
         add_header Cache-Control "no-store";
-        return 200 '{"ok":true,"service":"coating-simulator-web","version":"0.6.5"}\n';
+        return 200 '{"ok":true,"service":"coating-simulator-web","version":"0.6.6"}\n';
     }
 
     # Static evidence panel (index + snapshot JS)
