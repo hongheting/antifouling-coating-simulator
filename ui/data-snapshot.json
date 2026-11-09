@@ -2,14 +2,14 @@
   "meta": {
     "title": "防污涂料配方模拟器",
     "version": "V1.0-global",
-    "updated": "2026-11-02",
+    "updated": "2026-11-09",
     "honesty": "模拟 ≠ 实测。输出为带标签的区间/相对等级与证据短名单，不是实验室报告值或航次污损率。",
     "safety": "溶剂通风；B 料查 SDS（可能含 NCO）；现配现用；UV-C 护目与皮肤防护。",
-    "industry_weeks": 29,
-    "industry_entries": 110,
-    "industry_latest_week": "2026-11-02",
-    "industry_latest_count": 11,
-    "industry_latest_high": 4,
+    "industry_weeks": 30,
+    "industry_entries": 118,
+    "industry_latest_week": "2026-11-09",
+    "industry_latest_count": 8,
+    "industry_latest_high": 2,
     "counts": {
       "lab": 33,
       "routes": 12,
@@ -6490,6 +6490,145 @@
       "低"
     ],
     "weeks": [
+      {
+        "week": "2026-11-09",
+        "source_file": "data/industry-feed/2026-11-09.md",
+        "title": "行业进展｜2026-11-09",
+        "coverage": "2026-10-27 至 2026-11-09（北京时间；近 7 天为主，国际产品/企业动态轻度放宽至 14 天；其中 1 条仅知刊期为 2026 年 11 月）",
+        "coverage_start": "2026-10-27",
+        "coverage_end": "2026-11-09",
+        "nature": "行业动态/公开资料，非性能数据。内容摘自「防污行业周报」，均已在原始来源核对日期与内容。",
+        "trend_summary": "机器人清洗进入大船东实船验证阶段，嘉吉与 Neptune 的新加坡试验把清洗效率、涂层兼容与节油实测绑在一起；欧盟 Selektope 不予续批与美国加州硅氧烷限用双线收紧含杀生剂与有机硅路线的合规空间；无铜生物基涂层论文显示实验室抑藻与实海效果之间仍有落差。头部厂商船舶涂料销量延续增长，国产配套认证扩容——下一阶段更看清洗实测数据、含活性物产品的区域准入变化与无铜配方的实海证据。",
+        "entries": [
+          {
+            "no": 5,
+            "title": "美国南加州 SCAQMD 拟修 Rule 1106 收紧船舶涂料 VOC 与硅氧烷",
+            "date": "2026-11-06",
+            "category": "法规",
+            "summary": "南加州空气质量管理区（South Coast AQMD）就修订船舶与游艇涂料规则 Rule 1106 提交 CEQA 豁免公告：拟分阶段禁用含对氯三氟甲苯（pCBtF）、叔丁基乙酸酯（t-BAc）超痕量的涂料，并禁止销售使用含完全甲基化硅氧烷超痕量的涂料，另设 VOC 限值与记录标签要求；预计每日减排 VOC 23.9 磅。",
+            "url": "https://ceqanet.lci.ca.gov/2026110264",
+            "relevance": "中",
+            "relevance_reason": "甲基化硅氧烷限用直接触及有机硅污损释放涂料配方，VOC 收紧影响溶剂型体系",
+            "note": "",
+            "source_text": "https://ceqanet.lci.ca.gov/2026110264",
+            "week": "2026-11-09",
+            "tag": "公开资料"
+          },
+          {
+            "no": 7,
+            "title": "Orkla Q3：Jotun 销售额增长 13%",
+            "date": "2026-11-06",
+            "category": "企业",
+            "summary": "Orkla 公布 2026 年 Q3 业绩，来自 Jotun 的利润 5.63 亿挪威克朗（同比-6.6%）；剔除汇率影响后，Jotun 销售额增长 13%、营业利润增长 1.3%。",
+            "url": "https://mfn.se/a/orkla/orkla-reports-results-for-the-third-quarter",
+            "relevance": "低",
+            "relevance_reason": "母公司层面业绩，无产品与细分市场明细",
+            "note": "",
+            "source_text": "https://mfn.se/a/orkla/orkla-reports-results-for-the-third-quarter",
+            "week": "2026-11-09",
+            "tag": "公开资料"
+          },
+          {
+            "no": 2,
+            "title": "欧盟成员国支持 Selektope（medetomidine）不予续批",
+            "date": "2026-11-03",
+            "category": "法规",
+            "summary": "欧盟成员国投票支持欧委会不予续批 Selektope（活性物 medetomidine）作为 PT21 防污杀生剂的提案；正式决定公布后预计有 180 天过渡期，其间含 Selektope 涂料仍可在欧盟供应与施工，之后不得再投放欧盟市场，已涂装船舶不受影响；I-Tech 称约 95% 的全球商船队仍可继续使用，欧盟直接敞口约占其营收 4%，并表示将从科学、法规与法律渠道提出异议。",
+            "url": "https://storage.mfn.se/0cbf4c2d-555a-4994-ba5f-4ff032888d23/eu-member-states-support-non-renewal-of-selektope-approval-limited-commercial-impact-expected.pdf",
+            "relevance": "高",
+            "relevance_reason": "直接影响含 Selektope 的商用防污漆在欧盟的准入，利好无杀生剂路线跟踪",
+            "note": "待复核（CMP Sea Premier 等含 Selektope 产品在短名单 / commercial-products.md 中的欧盟准入表述；未改评级）",
+            "source_text": "https://storage.mfn.se/0cbf4c2d-555a-4994-ba5f-4ff032888d23/eu-member-states-support-non-renewal-of-selektope-approval-limited-commercial-impact-expected.pdf",
+            "week": "2026-11-09",
+            "tag": "公开资料"
+          },
+          {
+            "no": 1,
+            "title": "Cargill × Neptune Robotics 新加坡机器人船体清洗试验",
+            "date": "2026-11-02",
+            "category": "技术",
+            "summary": "嘉吉与 Neptune Robotics 启动 18 个月合作，在新加坡海事及港务管理局（MPA）水下船体检查与清洗创新计划下，以 AI 遥控清洗机器人（旗舰 MAGNETO）为嘉吉挂靠船舶做水下清洗与检查，并做清洗前后性能对比测算节油；企业称其系统可 24 小时内清洗满载好望角型船、覆盖新中 61 个港口；节油结果尚未公布，属待实测。",
+            "url": "https://en.prnasia.com/releases/apac/cargill-and-neptune-robotics-advance-robotic-hull-cleaning-in-singapore-554200.shtml",
+            "relevance": "高",
+            "relevance_reason": "大船东实船验证机器人清洗与涂层兼容性，直接关系可清洗型防污体系选型",
+            "note": "",
+            "source_text": "https://en.prnasia.com/releases/apac/cargill-and-neptune-robotics-advance-robotic-hull-cleaning-in-singapore-554200.shtml",
+            "week": "2026-11-09",
+            "tag": "公开资料"
+          },
+          {
+            "no": 3,
+            "title": "北新灯塔 14 款船舶涂料获 CCS 认证",
+            "date": "2026-11-02",
+            "category": "产品",
+            "summary": "北新灯塔 14 款船舶涂料新产品完成中国船级社（CCS）认证，覆盖船体防锈、油舱、货舱三大场景，包括低表面处理环氧漆 DC-H950D、醇酸底面合一漆 DC-C40Y、厚浆型环氧云铁漆 DC-H500Z 等；企业称全线产品符合 IMO 环保标准，主打高固体分、无溶剂配方。",
+            "url": "https://www.27580.cn/news/207681.html",
+            "relevance": "中",
+            "relevance_reason": "国产船舶涂料成套配套能力扩容，可对照短名单国产体系",
+            "note": "待复核（北新灯塔产品未入库；是否纳入 commercial-products.md 待定；未改评级）",
+            "source_text": "https://www.27580.cn/news/207681.html",
+            "week": "2026-11-09",
+            "tag": "公开资料"
+          },
+          {
+            "no": 4,
+            "title": "Nippon Paint India 推出低锌车间底漆 NIPPON CERAMO",
+            "date": "2026-11-02",
+            "category": "产品",
+            "summary": "Nippon Paint India 将低锌无机车间底漆 NIPPON CERAMO 引入印度船舶涂料市场，用于钢材加工前防护，企业称可耐 800°C、减少焊接切割损伤与锌烟产生，并有 IMO MSC.215(82)/MSC.288(87) 相关合规文件；为该公司进入印度船舶涂料业务的切入点。",
+            "url": "https://b2bpurchase.com/nippon-paint-india-to-introduce-low-zinc-marine-coating-for-shipbuilding/",
+            "relevance": "低",
+            "relevance_reason": "车间底漆属造船前处理环节，与船体防污配方选型间接相关",
+            "note": "",
+            "source_text": "https://b2bpurchase.com/nippon-paint-india-to-introduce-low-zinc-marine-coating-for-shipbuilding/",
+            "week": "2026-11-09",
+            "tag": "公开资料"
+          },
+          {
+            "no": 8,
+            "title": "生物基两亲聚合物防污涂层论文刊出",
+            "date": "2026-11",
+            "category": "技术",
+            "summary": "Marine Pollution Bulletin 2026 年 11 月刊（232 卷，文章号 120083）刊出生物基两亲聚合物防污涂层研究：以可再生平台化学品经避免使用有害溶剂的自由基聚合制备涂层，调节亲疏水平衡；实验室试验中疏水为主配方对硅藻附着抑制超 90%，对卤虫无可检出急性毒性；但静态实海挂板中两亲配方未能阻止污损累积，提示仍需优化。刊期仅知 2026 年 11 月，精确上线日未公布。",
+            "url": "https://doi.org/10.1016/j.marpolbul.2026.120083",
+            "relevance": "中",
+            "relevance_reason": "无铜生物基防污粘结剂设计思路，可对照无杀生剂配方路线；实海效果未达预期是重要限定",
+            "note": "",
+            "source_text": "https://doi.org/10.1016/j.marpolbul.2026.120083",
+            "week": "2026-11-09",
+            "tag": "公开资料"
+          },
+          {
+            "no": 6,
+            "title": "PPG 2026 年 Q3：防护与船舶涂料有机销售高个位数增长",
+            "date": "2026-10-27",
+            "category": "企业",
+            "summary": "PPG 发布 2026 年 Q3 财报，集团净销售额 43.53 亿美元（同比+7%）；防护与船舶涂料有机销售额同比高个位数增长，实现连续第 14 个季度销量增长，其中亚太船舶涂料销量增速高于市场。",
+            "url": "https://www.businesswire.com/news/home/20261027259558/en/PPG-reports-record-third-quarter-2026-EPS-and-raises-midpoint-of-full-year-EPS-guidance",
+            "relevance": "中",
+            "relevance_reason": "头部厂商船舶涂料需求侧景气，可对照 SIGMAGLIDE / NEXEON 推广节奏",
+            "note": "待复核（短名单 PPG SIGMAGLIDE 2390 及 NEXEON 推广表述；未改评级）",
+            "source_text": "https://www.businesswire.com/news/home/20261027259558/en/PPG-reports-record-third-quarter-2026-EPS-and-raises-midpoint-of-full-year-EPS-guidance",
+            "week": "2026-11-09",
+            "tag": "公开资料"
+          }
+        ],
+        "backfill": false,
+        "counts": {
+          "total": 8,
+          "by_relevance": {
+            "高": 2,
+            "中": 4,
+            "低": 2
+          },
+          "by_category": {
+            "法规": 2,
+            "企业": 2,
+            "产品": 2,
+            "技术": 2
+          }
+        }
+      },
       {
         "week": "2026-11-02",
         "source_file": "data/industry-feed/2026-11-02.md",
