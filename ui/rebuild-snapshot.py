@@ -21,17 +21,6 @@ snap = json.loads(prev.read_text(encoding="utf-8"))
 with open(DATA / "lab-proxy-table.csv", encoding="utf-8") as f:
     snap["lab"] = list(csv.DictReader(f))
 
-# 0.6.1 UI reads CA_MSiO2_wt_pct / BYK_rel_to_particle_pct / hplc_CA_ug_mL_or_flux.
-# Public example CSV keeps filler_wt_pct / dispersant_rel_pct / hplc_analyte_note.
-# Copy across; never invent a number that is not already in the row.
-for row in snap["lab"]:
-    if not (row.get("CA_MSiO2_wt_pct") or "").strip():
-        row["CA_MSiO2_wt_pct"] = row.get("filler_wt_pct") or ""
-    if not (row.get("BYK_rel_to_particle_pct") or "").strip():
-        row["BYK_rel_to_particle_pct"] = row.get("dispersant_rel_pct") or ""
-    if not (row.get("hplc_CA_ug_mL_or_flux") or "").strip():
-        row["hplc_CA_ug_mL_or_flux"] = row.get("hplc_analyte_note") or ""
-
 with open(DATA / "recommendation-shortlist.csv", encoding="utf-8") as f:
     snap["recommendations"] = list(csv.DictReader(f))
 
@@ -69,25 +58,12 @@ primary_order = [
     "regulatory_economic",
 ]
 cat_map = {c["key"]: c["zh"] for c in categories}
-LIT_EN = {
-    "organic_marine_paint": "Organic Marine Paint (Acrylic/Epoxy)",
-    "metal_alloy": "Metal / Alloy Cladding & Spray",
-    "silicone_mod_organic": "Silicone-Modified Organic",
-    "lse_foul_release": "Low Surface Energy / FRC",
-    "spc_copper": "SPC / Cu Biocide Systems",
-    "hydrogel_zwitterionic": "Hydrogel / Zwitterionic",
-    "uvc_active": "UV-C Active Antifouling",
-    "ultrasound": "Ultrasonic / Guided Wave",
-    "hybrid": "Hybrid / Synergistic Systems",
-    "natural_biocide_ca": "Natural Biocide / CA@Mesoporous",
-    "regulatory_economic": "Regulatory / Economic Impact",
-}
 snap["literature_taxonomy"] = {
     "source": "data/literature-taxonomy.md",
-    "categories": [{"key": k, "zh": cat_map.get(k, k), "en": LIT_EN.get(k, k)} for k in primary_order],
+    "categories": [{"key": k, "zh": cat_map.get(k, k)} for k in primary_order],
     "honesty": [
         "分类便于浏览，不改变证据强度",
-        "natural_biocide_ca ≠ 用户 示例功能化环氧（公开仓库已替换） 实测",
+        "natural_biocide_ca ≠ 用户 JF-602 + CA@MSiO₂ 实测",
         "金属涂层现场防污 ≠ 商船 SPC 等价",
     ],
 }
@@ -216,7 +192,7 @@ snap["commercial_products"] = {
     "brands": brands,
     "type_lookup": type_lookup,
     "honesty": [
-        "厂家标称 / 公开资料 ≠ 用户 示例双组分环氧 实测",
+        "厂家标称 / 公开资料 ≠ 用户 JF-602 实测",
         "docking interval / speed loss % / 燃油节约 % 均为厂商宣称，受船型与工况影响",
         "采购前核最新 TDS/SDS 与当地登记",
     ],
@@ -338,20 +314,6 @@ comm_primary = [
     "tech_ultrasound",
 ]
 comm_map = {c["key"]: c["zh"] for c in comm_categories}
-COMM_EN = {
-    "spc_silyl_acrylate": "Silyl Acrylate SPC",
-    "spc_hydrolysis": "Hydrolyzing / Carboxylate SPC",
-    "spc_copper": "Cu-Biocide SPC (General)",
-    "frc_silicone": "Silicone Foul-Release (FRC)",
-    "frc_fluoro": "Fluoropolymer Foul-Release",
-    "hybrid_hydrogel": "Hydrogel Silicone + Biocide",
-    "lpp_linear": "Linear Polishing (LPP)",
-    "copper_free_ablative": "Cu-Free Ablative",
-    "yacht_spc": "Yacht / Leisure SPC",
-    "asian_silyl_spc": "Asian Silyl-Based SPC",
-    "tech_uvc": "UV-C Auxiliary Tech",
-    "tech_ultrasound": "Ultrasonic / Guided-Wave Aux",
-}
 # counts from catalog + brand items
 comm_cc = Counter()
 for r in snap["recommendations"]:
@@ -363,11 +325,11 @@ for b in snap.get("commercial_products", {}).get("brands", []):
             comm_cc[it["category_key"]] += 1
 snap["commercial_taxonomy"] = {
     "source": "data/commercial-taxonomy.md",
-    "categories": [{"key": k, "zh": comm_map.get(k, k), "en": COMM_EN.get(k, k)} for k in comm_primary],
+    "categories": [{"key": k, "zh": comm_map.get(k, k)} for k in comm_primary],
     "counts": {k: comm_cc.get(k, 0) for k in comm_primary},
     "total_catalog": len([r for r in snap["recommendations"] if r.get("matched_profile_id") == "CATALOG-GLOBAL-V0"]),
     "honesty": [
-        "厂家标称 / 公开资料 ≠ 用户 示例双组分环氧 实测",
+        "厂家标称 / 公开资料 ≠ 用户 JF-602 实测",
         "分类便于筛选，不改变证据强度",
         "课题微宇宙 Hempel 未鉴定牌号",
     ],
@@ -442,8 +404,10 @@ snap["catalog"] = [
 
 # --- industry feed (防污行业周报 · read-only input folder) ---
 INDUSTRY_DIR = DATA / "industry-feed"
-INDUSTRY_CATS = ["法规", "企业", "产品", "技术"]
-INDUSTRY_RELS = ["高", "中", "低"]
+INDUSTRY_CATS = ["Regulation", "Company", "Product", "Technology"]
+INDUSTRY_RELS = ["High", "Medium", "Low"]
+CAT_MAP = {"法规": "Regulation", "企业": "Company", "产品": "Product", "技术": "Technology"}
+REL_MAP = {"高": "High", "中": "Medium", "低": "Low"}
 industry_warnings = []
 
 
@@ -482,7 +446,7 @@ def parse_industry_file(path: pathlib.Path):
             continue
         if h2:
             title = h2.group(1).strip()
-            if "趋势" in title:
+            if "趋势" in title or "takeaway" in title.lower() or "trend" in title.lower():
                 section = "trend"
                 cur = None
                 continue
@@ -497,7 +461,7 @@ def parse_industry_file(path: pathlib.Path):
             section = "entry"
             continue
         if section == "head":
-            m = re.match(r"^\s*覆盖窗口\s*[：:]\s*(.*)$", line)
+            m = re.match(r"^\s*(?:覆盖窗口|Coverage window)\s*[：:]\s*(.*)$", line)
             if m:
                 issue["coverage"] = m.group(1).strip()
                 ds = re.findall(r"\d{4}-\d{2}-\d{2}", issue["coverage"])
@@ -505,7 +469,7 @@ def parse_industry_file(path: pathlib.Path):
                     issue["coverage_start"] = ds[0]
                     issue["coverage_end"] = ds[-1]
                 continue
-            m = re.match(r"^\s*来源性质\s*[：:]\s*(.*)$", line)
+            m = re.match(r"^\s*(?:来源性质|Source note)\s*[：:]\s*(.*)$", line)
             if m:
                 issue["nature"] = m.group(1).strip()
                 continue
@@ -513,45 +477,45 @@ def parse_industry_file(path: pathlib.Path):
             if line.strip():
                 trend_lines.append(line.strip())
         elif section == "entry" and cur is not None:
-            v = _field(["日期"], line)
+            v = _field(["日期", "Date"], line)
             if v is not None:
                 cur["date"] = v
                 continue
-            v = _field(["类别", "分类"], line)
+            v = _field(["类别", "分类", "Category"], line)
             if v is not None:
-                cur["category"] = v
+                cur["category"] = CAT_MAP.get(v, v)
                 continue
-            v = _field(["摘要"], line)
+            v = _field(["摘要", "Summary"], line)
             if v is not None:
                 cur["summary"] = v
                 continue
-            v = _field(["来源", "链接", "来源链接"], line)
+            v = _field(["来源", "链接", "来源链接", "Source", "Link"], line)
             if v is not None:
                 um = re.search(r"https?://[^\s)）<>\]]+", v)
                 cur["url"] = um.group(0) if um else ""
                 cur["source_text"] = v
                 continue
-            v = _field(["相关度", "相关性"], line)
+            v = _field(["相关度", "相关性", "Relevance"], line)
             if v is not None:
-                rm = re.match(r"^\s*([高中低])\s*[（(]\s*(.*?)\s*[）)]?\s*$", v)
+                rm = re.match(r"^\s*(高|中|低|High|Medium|Low)\s*[（(]\s*(.*?)\s*[）)]?\s*$", v)
                 if rm:
-                    cur["relevance"] = rm.group(1)
+                    cur["relevance"] = REL_MAP.get(rm.group(1), rm.group(1))
                     cur["relevance_reason"] = rm.group(2)
                 else:
-                    rm2 = re.match(r"^\s*([高中低])\s*[：:—\-–·,，]?\s*(.*)$", v)
-                    cur["relevance"] = rm2.group(1) if rm2 else ""
+                    rm2 = re.match(r"^\s*(高|中|低|High|Medium|Low)\s*[：:—\-–·,，]?\s*(.*)$", v)
+                    cur["relevance"] = REL_MAP.get(rm2.group(1), rm2.group(1)) if rm2 else ""
                     cur["relevance_reason"] = (rm2.group(2) if rm2 else v).strip()
                 continue
-            v = _field(["备注", "说明"], line)
+            v = _field(["备注", "说明", "Note"], line)
             if v is not None:
                 cur["note"] = v
                 continue
     issue["trend_summary"] = "\n".join(trend_lines)
     head_text = text.split("\n## ", 1)[0]
-    issue["backfill"] = "回溯补录" in head_text
+    issue["backfill"] = ("回溯补录" in head_text) or ("Backfilled" in head_text)
     for e in issue["entries"]:
         e["week"] = week
-        e["tag"] = "公开资料"
+        e["tag"] = "Public sources"
         if e["category"] not in INDUSTRY_CATS:
             industry_warnings.append(f"{path.name} #{e['no']}: 未知类别 {e['category']!r}")
         if e["relevance"] not in INDUSTRY_RELS:
@@ -583,8 +547,8 @@ if INDUSTRY_DIR.is_dir():
             industry_warnings.append(f"{fp.name}: 解析失败 {exc}")
 industry_weeks.sort(key=lambda w: w["week"], reverse=True)
 snap["industry"] = {
-    "source": "data/industry-feed/（防污行业周报，每周一份；本脚本只读）",
-    "honesty": "行业动态/公开资料，非性能数据",
+    "source": "data/industry-feed/ (weekly antifouling industry brief, one file per week; read-only input)",
+    "honesty": "Industry news / public sources - not performance data",
     "categories": INDUSTRY_CATS,
     "relevance_levels": INDUSTRY_RELS,
     "weeks": industry_weeks,
@@ -615,7 +579,7 @@ snap["meta"]["industry_entries"] = sum(len(w["entries"]) for w in industry_weeks
 snap["meta"]["industry_latest_week"] = industry_weeks[0]["week"] if industry_weeks else ""
 snap["meta"]["industry_latest_count"] = len(industry_weeks[0]["entries"]) if industry_weeks else 0
 snap["meta"]["industry_latest_high"] = (
-    industry_weeks[0]["counts"]["by_relevance"]["高"] if industry_weeks else 0
+    industry_weeks[0]["counts"]["by_relevance"]["High"] if industry_weeks else 0
 )
 
 
