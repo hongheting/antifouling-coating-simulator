@@ -1469,18 +1469,18 @@
   <section id="panel-industry" class="panel">
     <div class="ind-banner" role="note">
       <span>📰</span>
-      <span><strong>Industry news / public sources — not performance data</strong></span>
-      <span class="muted">Entries come from the weekly antifouling industry brief. They never feed Track A/B/C values or rankings — always verify against the original source before citing.</span>
+      <span><strong id="ind-banner-strong">行业动态/公开资料，非性能数据</strong></span>
+      <span class="muted" id="ind-banner-note">条目来自「防污行业周报」，不进入轨 A/B/C 的数值或排序；引用前请回到原始来源核对。</span>
     </div>
     <div class="card">
-      <h2><svg class="h-ico spin-slow" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12" fill="#e0f4f2" stroke="#0a8f9c" stroke-width="1.6"/><circle cx="16" cy="16" r="5" fill="none" stroke="#0a8f9c" stroke-width="1.4"/><path d="M16 4v7M16 21v7M4 16h7M21 16h7M7.5 7.5l5 5M19.5 19.5l5 5M24.5 7.5l-5 5M12.5 19.5l-5 5" stroke="#0a8f9c" stroke-width="1.1"/></svg>Industry Feed · Weekly Progress</h2>
-      <p class="muted" id="ind-meta">Data from <code>data/industry-feed/</code> (one file per week, named by that week’s Monday).</p>
+      <h2><svg class="h-ico spin-slow" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12" fill="#e0f4f2" stroke="#0a8f9c" stroke-width="1.6"/><circle cx="16" cy="16" r="5" fill="none" stroke="#0a8f9c" stroke-width="1.4"/><path d="M16 4v7M16 21v7M4 16h7M21 16h7M7.5 7.5l5 5M19.5 19.5l5 5M24.5 7.5l-5 5M12.5 19.5l-5 5" stroke="#0a8f9c" stroke-width="1.1"/></svg>行业动态 · 每周进展</h2>
+      <p class="muted" id="ind-meta">数据来自 <code>data/industry-feed/</code>（每周一份，文件名为当周周一）。</p>
       <div class="wk-chart" id="ind-chart"></div>
       <div class="ind-layout">
         <aside class="ind-side">
           <div class="ind-mode" id="ind-mode">
-            <button type="button" class="active" data-mode="week">By week</button>
-            <button type="button" data-mode="all">All weeks</button>
+            <button type="button" class="active" data-mode="week">按周</button>
+            <button type="button" data-mode="all">全部周次</button>
           </div>
           <div id="ind-weeklist"></div>
           <select id="ind-week" style="display:none" aria-hidden="true"></select>
@@ -1488,16 +1488,16 @@
         <div>
           <div class="chip-row" id="ind-cat-chips" aria-label="Category filter"></div>
           <div class="toolbar" style="margin-top:8px;">
-            <label>Relevance
+            <label><span id="ind-rel-label">相关度</span>
               <select id="ind-rel">
-                <option value="">All relevance</option>
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
+                <option value="">全部相关度</option>
+                <option value="High">高</option>
+                <option value="Medium">中</option>
+                <option value="Low">低</option>
               </select>
             </label>
-            <label>Search
-              <input type="search" id="ind-search" placeholder="Title / summary / source / reason…" />
+            <label><span id="ind-search-label">搜索</span>
+              <input type="search" id="ind-search" placeholder="标题 / 摘要 / 来源 / 理由…" />
             </label>
           </div>
           <p class="muted" id="ind-count" style="margin-bottom:10px;"></p>
@@ -2338,6 +2338,15 @@
   const IND = D.industry || { weeks: [], categories: ['Regulation','Company','Product','Technology'] };
   const IND_WEEKS = IND.weeks || [];
   const IND_CATS = IND.categories || ['Regulation','Company','Product','Technology'];
+  const IND_CAT_ZH = { Regulation: '法规', Company: '企业', Product: '产品', Technology: '技术' };
+  const IND_REL_ZH = { High: '高', Medium: '中', Low: '低' };
+  const indEn = () => window.CUR_LANG === 'en';
+  const eTitle = e => (indEn() && e.title_en) ? e.title_en : (e.title || '');
+  const eSummary = e => (indEn() && e.summary_en) ? e.summary_en : (e.summary || '');
+  const eReason = e => (indEn() && e.relevance_reason_en) ? e.relevance_reason_en : (e.relevance_reason || '');
+  const eNote = e => (indEn() && e.note_en) ? e.note_en : (e.note || '');
+  const catLabel = c => indEn() ? (c || 'Uncategorized') : (IND_CAT_ZH[c] || c || '未分类');
+  const relLabel = r => indEn() ? (r || '') : (IND_REL_ZH[r] || r || '');
   let indCatActive = '';
   function safeHttpUrl(u) {
     try {
@@ -2346,19 +2355,19 @@
     } catch (_) { return ''; }
   }
   function relBadge(r) {
-    return r ? '<span class="rel-badge r-' + escapeHtml(r) + '">Relevance ' + escapeHtml(r) + '</span>' : '';
+    return r ? '<span class="rel-badge r-' + escapeHtml(r) + '">' + (indEn() ? 'Relevance ' : '相关度 ') + escapeHtml(relLabel(r)) + '</span>' : '';
   }
   function catBadge(c) {
     const cls = IND_CATS.includes(c) ? 'cat-' + c : 'tag-default';
-    return '<span class="cat-badge ' + cls + '">' + escapeHtml(c || 'Uncategorized') + '</span>';
+    return '<span class="cat-badge ' + cls + '">' + escapeHtml(catLabel(c)) + '</span>';
   }
   function linkHtml(e) {
     const u = safeHttpUrl(e.url);
-    if (!u) return '<span class="muted" style="font-size:.76rem;">Source: ' + escapeHtml(e.source_text || '—') + '</span>';
+    if (!u) return '<span class="muted" style="font-size:.76rem;">' + (indEn() ? 'Source: ' : '来源：') + escapeHtml((indEn() && e.source_text_en) ? e.source_text_en : (e.source_text || '—')) + '</span>';
     let host = u;
     try { host = new URL(u).hostname.replace(/^www\./, ''); } catch (_) {}
     return '<a class="ind-link" href="' + escapeHtml(u) + '" target="_blank" rel="noopener noreferrer" title="' +
-      escapeHtml(u) + '">Source: ' + escapeHtml(host) + ' ↗</a>';
+      escapeHtml(u) + '">' + (indEn() ? 'Source: ' : '来源：') + escapeHtml(host) + ' ↗</a>';
   }
   const indWeekSel = document.getElementById('ind-week');
   const indRelSel = document.getElementById('ind-rel');
@@ -2367,7 +2376,8 @@
   IND_WEEKS.forEach((w, i) => {
     const o = document.createElement('option');
     o.value = w.week;
-    o.textContent = 'Week of ' + w.week + (i === 0 ? ' (latest)' : '') + ' · ' + (w.entries || []).length + ' items';
+    o.textContent = indEn() ? ('Week of ' + w.week + (i === 0 ? ' (latest)' : '') + ' · ' + (w.entries || []).length + ' items')
+      : (w.week + ' 周' + (i === 0 ? '（最新）' : '') + ' · ' + (w.entries || []).length + ' 条');
     indWeekSel.appendChild(o);
   });
   function currentIndWeek() {
@@ -2381,20 +2391,20 @@
   function highOf(w) { return (w.entries || []).filter(e => e.relevance === 'High').length; }
   function buildWeekList() {
     const box = document.getElementById('ind-weeklist');
-    if (!IND_WEEKS.length) { box.innerHTML = '<p class="muted">No weekly briefs yet</p>'; return; }
+    if (!IND_WEEKS.length) { box.innerHTML = '<p class="muted">' + (indEn() ? 'No weekly briefs yet' : '暂无周报') + '</p>'; return; }
     let html = '', lastM = '';
     IND_WEEKS.forEach((w, i) => {
       const m = (w.week || '').slice(0, 7);
       if (m !== lastM) {
         const [y, mm] = m.split('-');
-        html += '<div class="wk-month">' + escapeHtml(['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][Number(mm) - 1] + ' ' + y) + '</div>';
+        html += '<div class="wk-month">' + escapeHtml(indEn() ? (['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][Number(mm) - 1] + ' ' + y) : (y + ' 年 ' + Number(mm) + ' 月')) + '</div>';
         lastM = m;
       }
       const act = indMode === 'week' && w.week === (currentIndWeek() || {}).week ? ' active' : '';
       const h = highOf(w);
       html += '<button type="button" class="wk-btn' + act + '" data-week="' + escapeHtml(w.week) + '"><span>' +
-        escapeHtml(w.week.slice(5)) + (i === 0 ? ' (latest)' : '') + (w.backfill ? ' <span class="bf-badge">Backfilled</span>' : '') + '</span><span class="wk-n">' +
-        (w.entries || []).length + ' items' + (h ? ' · <span class="wk-h">High ' + h + '</span>' : '') + '</span></button>';
+        escapeHtml(w.week.slice(5)) + (indEn() ? '' : ' 周') + (i === 0 ? (indEn() ? ' (latest)' : '（最新）') : '') + (w.backfill ? ' <span class="bf-badge">' + (indEn() ? 'Backfilled' : '回溯补录') + '</span>' : '') + '</span><span class="wk-n">' +
+        (w.entries || []).length + (indEn() ? ' items' : ' 条') + (h ? ' · <span class="wk-h">' + (indEn() ? 'High ' : '高 ') + h + '</span>' : '') + '</span></button>';
     });
     box.innerHTML = html;
   }
@@ -2407,13 +2417,13 @@
     const slot = (W - pad * 2) / ws.length;
     const bw = Math.min(28, slot * 0.7);
     const cur = indMode === 'week' ? (currentIndWeek() || {}).week : '';
-    let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" role="img" aria-label="Entries per week">';
+    let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" role="img" aria-label="' + (indEn() ? 'Entries per week' : '每周条目数') + '">';
     svg += '<line x1="0" y1="' + base + '" x2="' + W + '" y2="' + base + '" stroke="#d5e2ec"/>';
     ws.forEach((w, i) => {
       const n = (w.entries || []).length, h = highOf(w);
       const x = pad + i * slot + (slot - bw) / 2;
       const bh = (n / max) * (base - 14), hh = (h / max) * (base - 14);
-      svg += '<g data-week="' + escapeHtml(w.week) + '" style="cursor:pointer"><title>' + escapeHtml(w.week) + ': ' + n + ' items (' + h + ' high relevance)</title>' +
+      svg += '<g data-week="' + escapeHtml(w.week) + '" style="cursor:pointer"><title>' + escapeHtml(w.week) + (indEn() ? (': ' + n + ' items (' + h + ' high relevance)') : (' 周：' + n + ' 条（高相关 ' + h + '）')) + '</title>' +
         '<rect class="bar' + (w.week === cur ? ' sel' : '') + '" x="' + x + '" y="' + (base - bh) + '" width="' + bw + '" height="' + bh + '" rx="3"/>' +
         (hh ? '<rect class="bar hi" x="' + x + '" y="' + (base - hh) + '" width="' + bw + '" height="' + hh + '" rx="3"/>' : '') +
         '<text x="' + (x + bw / 2) + '" y="' + (base - bh - 3) + '" font-size="10" text-anchor="middle" fill="#5a7083">' + n + '</text>' +
@@ -2421,8 +2431,8 @@
         '</g>';
     });
     svg += '</svg>';
-    box.innerHTML = '<div class="wk-legend"><span><i style="background:#9fd4da"></i>Entries per week</span><span><i style="background:#c53b3b;opacity:.8"></i>of which high relevance</span><span><i style="background:#0a8f9c"></i>Selected week</span><span>' +
-      IND_WEEKS.length + ' weeks · click a bar to switch week</span></div>' + svg;
+    box.innerHTML = '<div class="wk-legend"><span><i style="background:#9fd4da"></i>' + (indEn() ? 'Entries per week' : '每周条目数') + '</span><span><i style="background:#c53b3b;opacity:.8"></i>' + (indEn() ? 'of which high relevance' : '其中高相关') + '</span><span><i style="background:#0a8f9c"></i>' + (indEn() ? 'Selected week' : '当前选中周') + '</span><span>' +
+      (indEn() ? (IND_WEEKS.length + ' weeks · click a bar to switch week') : ('共 ' + IND_WEEKS.length + ' 周 · 点击柱子切换周次')) + '</span></div>' + svg;
   }
   function selectWeek(wk) {
     indWeekSel.value = wk; indMode = 'week';
@@ -2446,8 +2456,8 @@
     const counts = {};
     entries.forEach(e => { counts[e.category] = (counts[e.category] || 0) + 1; });
     const chips = document.getElementById('ind-cat-chips');
-    chips.innerHTML = [{ key: '', zh: 'All categories', n: entries.length }]
-      .concat(IND_CATS.map(c => ({ key: c, zh: c, n: counts[c] || 0 })))
+    chips.innerHTML = [{ key: '', zh: indEn() ? 'All categories' : '全部类别', n: entries.length }]
+      .concat(IND_CATS.map(c => ({ key: c, zh: catLabel(c), n: counts[c] || 0 })))
       .map(c => '<button type="button" class="chip' + (indCatActive === c.key ? ' active' : '') +
         '" data-key="' + escapeHtml(c.key) + '">' + escapeHtml(c.zh) + '<span class="cnt">' + c.n + '</span></button>')
       .join('');
@@ -2462,11 +2472,11 @@
   function cardHtml(e) {
     return `
       <article class="ind-card rel-${escapeHtml(e.relevance || '')}">
-        <div class="ind-top">${catBadge(e.category)}<span>${escapeHtml(e.date || '')}</span>${relBadge(e.relevance)}<span class="tag tag-public">Public sources</span></div>
-        <div class="ind-title">${escapeHtml(e.title || '')}</div>
-        <div class="ind-sum">${escapeHtml(e.summary || '')}</div>
-        <div class="ind-rel"><strong>Relevance to formulation / selection: ${escapeHtml(e.relevance || '—')}</strong>${e.relevance_reason ? ' · ' + escapeHtml(e.relevance_reason) : ''}</div>
-        ${e.note ? '<div class="ind-rel" style="color:var(--warn);"><strong>Note:</strong>' + escapeHtml(e.note) + '</div>' : ''}
+        <div class="ind-top">${catBadge(e.category)}<span>${escapeHtml(e.date || '')}</span>${relBadge(e.relevance)}<span class="tag tag-public">${indEn() ? 'Public sources' : '公开资料'}</span></div>
+        <div class="ind-title">${escapeHtml(eTitle(e))}</div>
+        <div class="ind-sum">${escapeHtml(eSummary(e))}</div>
+        <div class="ind-rel"><strong>${indEn() ? 'Relevance to formulation / selection: ' : '与配方/选型相关度：'}${escapeHtml(relLabel(e.relevance) || '—')}</strong>${eReason(e) ? ' · ' + escapeHtml(eReason(e)) : ''}</div>
+        ${eNote(e) ? '<div class="ind-rel" style="color:var(--warn);"><strong>' + (indEn() ? 'Note:' : '备注：') + '</strong>' + escapeHtml(eNote(e)) + '</div>' : ''}
         ${linkHtml(e)}
       </article>`;
   }
@@ -2477,9 +2487,9 @@
     const trend = document.getElementById('ind-trend');
     const countEl = document.getElementById('ind-count');
     if (!w) {
-      meta.innerHTML = 'Data from <code>data/industry-feed/</code> — no weekly brief available yet.';
-      list.innerHTML = '<p class="empty">No industry entries yet. Add a weekly brief and re-run <code>ui/rebuild-snapshot.py</code>.</p>';
-      trend.innerHTML = '<strong>Weekly takeaway</strong><span class="muted">—</span>';
+      meta.innerHTML = indEn() ? 'Data from <code>data/industry-feed/</code> — no weekly brief available yet.' : '数据来自 <code>data/industry-feed/</code>，当前暂无周报。';
+      list.innerHTML = '<p class="empty">' + (indEn() ? 'No industry entries yet. Add a weekly brief and re-run <code>ui/rebuild-snapshot.py</code>.' : '暂无行业动态。防污行业周报写入后重新运行 <code>ui/rebuild-snapshot.py</code> 即可。') + '</p>';
+      trend.innerHTML = '<strong>' + (indEn() ? 'Weekly takeaway' : '本周趋势小结') + '</strong><span class="muted">—</span>';
       countEl.textContent = '';
       return;
     }
@@ -2489,7 +2499,7 @@
       if (indCatActive && e.category !== indCatActive) return false;
       if (rel && e.relevance !== rel) return false;
       if (q) {
-        const hay = [e.title, e.summary, e.url, e.relevance_reason, e.note, e.category, e.date].join(' ').toLowerCase();
+        const hay = [e.title, e.title_en, e.summary, e.summary_en, e.url, e.relevance_reason, e.relevance_reason_en, e.note, e.note_en, e.category, e.date].join(' ').toLowerCase();
         if (!hay.includes(q)) return false;
       }
       return true;
@@ -2497,27 +2507,31 @@
     if (indMode === 'all') {
       const total = IND_WEEKS.reduce((n, x) => n + (x.entries || []).length, 0);
       const first = IND_WEEKS[IND_WEEKS.length - 1], last = IND_WEEKS[0];
-      meta.innerHTML = 'All weeks: ' + IND_WEEKS.length + ' weeks (' + escapeHtml(first.coverage_start || first.week) + ' to ' +
-        escapeHtml(last.coverage_end || last.week) + ') | Source directory: <code>data/industry-feed/</code>';
+      meta.innerHTML = indEn() ? ('All weeks: ' + IND_WEEKS.length + ' weeks (' + escapeHtml(first.coverage_start || first.week) + ' to ' +
+        escapeHtml(last.coverage_end || last.week) + ') | Source directory: <code>data/industry-feed/</code>')
+        : ('全部周次：' + IND_WEEKS.length + ' 周（' + escapeHtml(first.coverage_start || first.week) + ' 至 ' +
+        escapeHtml(last.coverage_end || last.week) + '）　|　来源目录：<code>data/industry-feed/</code>');
       let shown = 0, html = '';
       IND_WEEKS.forEach(x => {
         const rows = (x.entries || []).filter(match);
         if (!rows.length) return;
         shown += rows.length;
-        html += '<div class="ind-weekhead">' + 'Week of ' + escapeHtml(x.week) + (x.backfill ? ' <span class="bf-badge">Backfilled</span>' : '') + ' · ' + escapeHtml(x.coverage || '') + ' · ' + rows.length + ' items</div>' + rows.map(cardHtml).join('');
+        html += '<div class="ind-weekhead">' + (indEn() ? ('Week of ' + escapeHtml(x.week)) : (escapeHtml(x.week) + ' 周')) + (x.backfill ? ' <span class="bf-badge">' + (indEn() ? 'Backfilled' : '回溯补录') + '</span>' : '') + ' · ' + escapeHtml((indEn() && x.coverage_en) ? x.coverage_en : (x.coverage || '')) + ' · ' + rows.length + (indEn() ? ' items' : ' 条') + '</div>' + rows.map(cardHtml).join('');
       });
-      countEl.textContent = 'Showing ' + shown + ' / ' + total + ' items (all weeks, newest first)';
-      list.innerHTML = html || '<p class="empty">No matching entries (try widening the filters).</p>';
-      trend.innerHTML = '<strong>Weekly takeaway</strong><span class="muted">Select a week on the left to view its takeaway.</span>';
+      countEl.textContent = indEn() ? ('Showing ' + shown + ' / ' + total + ' items (all weeks, newest first)') : ('显示 ' + shown + ' / ' + total + ' 条（跨全部周次，按周由新到旧）');
+      list.innerHTML = html || '<p class="empty">' + (indEn() ? 'No matching entries (try widening the filters).' : '无匹配条目（试试放宽筛选）。') + '</p>';
+      trend.innerHTML = '<strong>' + (indEn() ? 'Weekly takeaway' : '趋势小结') + '</strong><span class="muted">' + (indEn() ? 'Select a week on the left to view its takeaway.' : '请在左侧选择某一周查看该周趋势小结。') + '</span>';
       return;
     }
-    meta.innerHTML = (w.backfill ? '<span class="bf-badge">Backfilled</span> ' : '') + 'Coverage window: ' + escapeHtml(w.coverage || (w.coverage_start + ' to ' + w.coverage_end)) +
-      ' | Source file: <code>' + escapeHtml(w.source_file || '') + '</code>';
+    meta.innerHTML = (w.backfill ? '<span class="bf-badge">' + (indEn() ? 'Backfilled' : '回溯补录') + '</span> ' : '') + (indEn()
+      ? ('Coverage window: ' + escapeHtml((w.coverage_en || w.coverage) || (w.coverage_start + ' to ' + w.coverage_end)) + ' | Source file: <code>' + escapeHtml(w.source_file || '') + '</code>')
+      : ('覆盖窗口：' + escapeHtml(w.coverage || (w.coverage_start + ' 至 ' + w.coverage_end)) + '　|　来源文件：<code>' + escapeHtml(w.source_file || '') + '</code>'));
     const rows = (w.entries || []).filter(match);
-    countEl.textContent = 'Showing ' + rows.length + ' / ' + (w.entries || []).length + ' items (newest first)';
-    list.innerHTML = rows.map(cardHtml).join('') || '<p class="empty">No matching entries (try widening the filters).</p>';
-    trend.innerHTML = '<strong>Weekly takeaway (week of ' + escapeHtml(w.week) + ')</strong>' +
-      (w.trend_summary ? escapeHtml(w.trend_summary).replace(/\n/g, '<br>') : '<span class="muted">No takeaway provided for this week.</span>');
+    countEl.textContent = indEn() ? ('Showing ' + rows.length + ' / ' + (w.entries || []).length + ' items (newest first)') : ('显示 ' + rows.length + ' / ' + (w.entries || []).length + ' 条（按日期由新到旧）');
+    list.innerHTML = rows.map(cardHtml).join('') || '<p class="empty">' + (indEn() ? 'No matching entries (try widening the filters).' : '无匹配条目（试试放宽筛选）。') + '</p>';
+    const trendTxt = (indEn() && w.trend_summary_en) ? w.trend_summary_en : w.trend_summary;
+    trend.innerHTML = '<strong>' + (indEn() ? ('Weekly takeaway (week of ' + escapeHtml(w.week) + ')') : ('本周趋势小结（' + escapeHtml(w.week) + ' 周）')) + '</strong>' +
+      (trendTxt ? escapeHtml(trendTxt).replace(/\n/g, '<br>') : '<span class="muted">' + (indEn() ? 'No takeaway provided for this week.' : '本期未提供趋势小结。') + '</span>');
   }
   function refreshIndAll() { buildWeekList(); buildChart(); buildIndChips(); renderIndustry(); }
   indRelSel.addEventListener('change', renderIndustry);
@@ -2651,7 +2665,7 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
   /* Overview card: latest week */
-  (function renderOverviewIndustry() {
+  function renderOverviewIndustry() {
     const w = IND_WEEKS[0];
     const badge = document.getElementById('ind-tab-badge');
     const metaEl = document.getElementById('ov-ind-meta');
@@ -2659,20 +2673,24 @@
     document.getElementById('ov-ind-goto').addEventListener('click', () => goTab('industry'));
     if (!w) {
       badge.style.display = 'none';
-      metaEl.textContent = 'No weekly brief data yet (data/industry-feed/ is empty).';
+      metaEl.textContent = indEn() ? 'No weekly brief data yet (data/industry-feed/ is empty).' : '暂无周报数据（data/industry-feed/ 为空）。';
       ul.innerHTML = '';
       return;
     }
     const entries = w.entries || [];
     const high = entries.filter(e => e.relevance === 'High');
     badge.textContent = entries.length;
-    metaEl.innerHTML = escapeHtml(w.week) + ' · <strong>' + entries.length + '</strong> items · <strong>' +
-      high.length + '</strong> high relevance · Coverage ' + escapeHtml(w.coverage || '') +
-      '　<span class="tag tag-public">Industry news / public sources — not performance data</span>';
-    ul.innerHTML = high.map(e => '<li>' + catBadge(e.category) + '<span>' + escapeHtml(e.title) +
-      ' <span class="muted">(' + escapeHtml(e.date || '') + ')</span></span></li>').join('') ||
-      '<li class="muted">No high-relevance entries this week.</li>';
-  })();
+    metaEl.innerHTML = indEn() ? (escapeHtml(w.week) + ' · <strong>' + entries.length + '</strong> items · <strong>' +
+      high.length + '</strong> high relevance · Coverage ' + escapeHtml(w.coverage_en || w.coverage || '') +
+      '　<span class="tag tag-public">Industry news / public sources — not performance data</span>')
+      : (escapeHtml(w.week) + ' 周 · 共 <strong>' + entries.length + '</strong> 条 · 高相关 <strong>' +
+      high.length + '</strong> 条 · 覆盖 ' + escapeHtml(w.coverage || '') +
+      '　<span class="tag tag-public">行业动态/公开资料，非性能数据</span>');
+    ul.innerHTML = high.map(e => '<li>' + catBadge(e.category) + '<span>' + escapeHtml(eTitle(e)) +
+      ' <span class="muted">' + (indEn() ? '(' : '（') + escapeHtml(e.date || '') + (indEn() ? ')' : '）') + '</span></span></li>').join('') ||
+      '<li class="muted">' + (indEn() ? 'No high-relevance entries this week.' : '本周无高相关条目。') + '</li>';
+  }
+  renderOverviewIndustry();
 
 
   /* ============================================================================
@@ -3531,7 +3549,7 @@
       [en ? 'Literature Bounds' : '文献界', mv('literature', litN), SI.lit],
       [en ? 'Global Catalog' : '目录候选', mv('catalog', catN), SI.cat],
       [en ? 'Commercial Lines' : '商用产品线', mv('products', brandN), SI.prod],
-      [en ? ('Industry Feed (' + ((D.meta && D.meta.industry_weeks) || 0) + ' wks)') : ('Industry Feed (' + ((D.meta && D.meta.industry_weeks) || 0) + ' weeks)'), (D.meta && D.meta.industry_entries) || 0, SI.ind],
+      [en ? ('Industry Feed (' + ((D.meta && D.meta.industry_weeks) || 0) + ' weeks)') : ('行业动态（' + ((D.meta && D.meta.industry_weeks) || 0) + ' 周）'), (D.meta && D.meta.industry_entries) || 0, SI.ind],
       [en ? 'Pending Lab Slots' : '待测槽（约）', pending, SI.pend],
     ].map(([l,n,svg]) => '<div class="stat">' + svg + '<div><div class="n">' + n + '</div><div class="l">' + escapeHtml(l) + '</div></div></div>').join('');
 
@@ -3619,6 +3637,18 @@
       if (el) el.textContent = en ? enTxt : zh;
     };
     setTxt('#ov-industry h2', '行业动态 · 本周', 'Weekly Industry Intelligence · Latest Issue');
+    setTxt('#ind-banner-strong', '行业动态/公开资料，非性能数据', 'Industry news / public sources — not performance data');
+    setTxt('#ind-banner-note', '条目来自「防污行业周报」，不进入轨 A/B/C 的数值或排序；引用前请回到原始来源核对。', 'Entries come from the weekly antifouling industry brief. They never feed Track A/B/C values or rankings — always verify against the original source before citing.');
+    setTxt('#ind-rel-label', '相关度', 'Relevance');
+    setTxt('#ind-search-label', '搜索', 'Search');
+    const indH2 = document.querySelector('#panel-industry .card h2');
+    if (indH2) indH2.childNodes.forEach(n => { if (n.nodeType === 3 && n.textContent.trim()) n.textContent = en ? 'Industry Feed · Weekly Progress' : '行业动态 · 每周进展'; });
+    const indRel = document.getElementById('ind-rel');
+    if (indRel) { const keepRel = indRel.value; indRel.innerHTML = '<option value="">' + (en ? 'All relevance' : '全部相关度') + '</option><option value="High">' + (en ? 'High' : '高') + '</option><option value="Medium">' + (en ? 'Medium' : '中') + '</option><option value="Low">' + (en ? 'Low' : '低') + '</option>'; indRel.value = keepRel; }
+    const indSearchEl = document.getElementById('ind-search');
+    if (indSearchEl) indSearchEl.placeholder = en ? 'Title / summary / source / reason…' : '标题 / 摘要 / 来源 / 理由…';
+    if (typeof refreshIndAll === 'function') refreshIndAll();
+    if (typeof renderOverviewIndustry === 'function') renderOverviewIndustry();
     setTxt('#ov-ind-goto', '查看全部行业动态 →', 'View All Weekly Briefings →');
     setTxt('#goto-rec', '查看该航线短名单 →', 'View Shortlist for This Route →');
     setTxt('#panel-rec .card h2', '轨 C · 推荐短名单（按航线）', 'Track C · Route-Matched Evidence Shortlists');
