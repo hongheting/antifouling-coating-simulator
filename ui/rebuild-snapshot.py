@@ -419,7 +419,7 @@ def _field(key_variants, text):
     return None
 
 
-def parse_industry_file(path: pathlib.Path):
+def parse_industry_file(path: pathlib.Path, collect_warnings: bool = True):
     text = path.read_text(encoding="utf-8-sig")
     week = path.stem
     lines = text.splitlines()
@@ -516,6 +516,8 @@ def parse_industry_file(path: pathlib.Path):
     for e in issue["entries"]:
         e["week"] = week
         e["tag"] = "Public sources"
+        if not collect_warnings:
+            continue
         if e["category"] not in INDUSTRY_CATS:
             industry_warnings.append(f"{path.name} #{e['no']}: 未知类别 {e['category']!r}")
         if e["relevance"] not in INDUSTRY_RELS:
@@ -542,12 +544,30 @@ if INDUSTRY_DIR.is_dir():
         if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", fp.stem):
             continue
         try:
-            industry_weeks.append(parse_industry_file(fp))
+            week_issue = parse_industry_file(fp)
+            en_fp = INDUSTRY_DIR / (fp.stem + ".en.md")
+            if en_fp.is_file():
+                en_issue = parse_industry_file(en_fp, collect_warnings=False)
+                week_issue["title_en"] = en_issue["title"]
+                week_issue["coverage_en"] = en_issue["coverage"]
+                week_issue["nature_en"] = en_issue["nature"]
+                week_issue["trend_summary_en"] = en_issue["trend_summary"]
+                week_issue["source_file_en"] = "data/industry-feed/" + en_fp.name
+                en_by_no = {e["no"]: e for e in en_issue["entries"]}
+                for e in week_issue["entries"]:
+                    ee = en_by_no.get(e["no"])
+                    if ee:
+                        e["title_en"] = ee["title"]
+                        e["summary_en"] = ee["summary"]
+                        e["relevance_reason_en"] = ee["relevance_reason"]
+                        e["note_en"] = ee["note"]
+                        e["source_text_en"] = ee.get("source_text", "")
+            industry_weeks.append(week_issue)
         except Exception as exc:  # never break the whole build on one bad week
             industry_warnings.append(f"{fp.name}: 解析失败 {exc}")
 industry_weeks.sort(key=lambda w: w["week"], reverse=True)
 snap["industry"] = {
-    "source": "data/industry-feed/ (weekly antifouling industry brief, one file per week; read-only input)",
+    "source": "data/industry-feed/ (weekly antifouling industry brief; Chinese <date>.md + English <date>.en.md per week; read-only input)",
     "honesty": "Industry news / public sources - not performance data",
     "categories": INDUSTRY_CATS,
     "relevance_levels": INDUSTRY_RELS,
